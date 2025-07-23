@@ -1,0 +1,637 @@
+﻿ @page
+@model BinMonitorAppService.Pages.BinManager.ViewBMCreateBatchModel
+
+@{
+    ViewData["Title"] = "Create New Batch";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+}
+
+
+
+
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Page Create BinMonitor Batch will refresh in &nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+<h1 class="text-center">Create BinMonitor Batch</h1>
+<p class="p-0">
+    @if ((Model.BinRegProcModelActiveBins != null) && (Model.BinRegProcModelActiveBins.Count > 0))
+    {
+        <h3 class="text-center text-info">@Model.BinRegProcModelActiveBins.Count.ToString() LabReqs in BinID @Model.BinRegProcModelActiveBins.ElementAt(0).Value.BinID Max LabReqs per Bin @Model.MaxPerBin</h3>
+    }
+    else
+    {
+        <h3 class="text-center text-info">0 LabReqs  Max LabReqs per Bin @Model.MaxPerBin</h3>
+    }
+</p>
+<div style="background-color:white" class="overflow-auto">
+
+
+
+    <p class="p-0"></p>
+    <div class="container-fluid border align-content-center text-center marginTop">
+        <p class="text-center">Batch Details</p>
+        <form method="get" id="fNewBatch">
+            <div class="form-group">
+                <div class="flexrow">
+                    <div class="flexcolumn">
+                        @if (Model.SpectrumMonitorMenuRightsModel.TransFerBins)
+                        {
+                            <button type="button" class="align-text-bottom btn-outline-dark" id="btnTF" name="btnTF">Transfer Bin</button>
+
+                        }
+                        @*
+                            <input type="hidden" id="oldBinID" name="oldBinID" />
+                            <input type="hidden" id="newBinID" name="newBinID" />
+
+
+                        *@
+                        <input type="hidden" id="currentLabReqs" name="currentLabReqs" value="@Model.LabReqNum" />
+                        <input type="hidden" value="notaudo" id="audioSubmit" name="audioSubmit" />
+                        <p class="p-1" />
+                        @*
+                            <text class="text-black-50 board" id="txtTF" name="txtTF">Transfer from</text>
+                            <p class="p-1" />
+                        *@
+                        @Html.DisplayNameFor(modelItem => modelItem.Cwid)
+                        <text class="form-control text-info" readonly="readonly">@Html.DisplayFor(model => Model.Cwid, Model.Cwid)</text>
+                        <p class="p-1" />
+
+                        <label asp-for="BinRegistorModel.CategoryName" class="control-label text-nowrap"></label>
+                        <select id="selCatName" name="selCatName">
+                            <option></option>
+                            @foreach (string catName in Model.CategoryName)
+                            {
+                                if (!(string.IsNullOrWhiteSpace(catName)))
+                                {
+                                    if (string.Compare(@catName, Model.SelCatName, true) == 0)
+                                    {
+                                        <option selected>@catName</option>
+                                    }
+                                    else
+                                    {
+                                        <option>@catName</option>
+                                    }
+
+                                }
+
+                            }
+                        </select>
+                        @*
+                            @Html.DropDownListFor(m => m.CategoryName, new SelectList(Model.CategoryName, Model.BinRegistorModel.CategoryName), new { @class = "form-conrol" })
+                        *@
+                        @Html.ValidationMessage("CategoryName", new { @class = "text-danger" })
+                        <p class="p-1" />
+                        <label asp-for="BinRegistorModel.BinID" class="control-label text-nowrap">Bin ID</label>
+                        <select id="selBinId" name="selBinId">
+                            <option></option>
+                            @foreach (string bID in Model.BinID)
+                            {
+
+                                if (!(string.IsNullOrWhiteSpace(bID)))
+                                {
+                                    if (string.Compare(@bID, Model.SelBinId, true) == 0)
+                                    {
+                                        <option selected>@bID</option>
+                                    }
+                                    else
+                                    {
+                                        <option>@bID</option>
+                                    }
+                                }
+                            }
+                        </select>
+                        @*
+                            @Html.DropDownListFor(m => m.BinID, new SelectList(Model.BinID, Model.BinID), new { @class = "form-conrol" })
+                        *@
+                        @Html.ValidationMessage("BinID", new { @class = "text-danger" })
+                        <p class="p-1" />
+                        <label asp-for="BinRegistorModel.LabRecNumber" class="control-label text-nowrap  ">Req#</label>
+                        @*
+                            <textarea data-toggle="tooltip" title="Afer Entering LabReq Number Press F8 or Enter to Add LabReq" class="form-control" rows="1" cols="20" asp-for="BinRegistorModel.LabRecNumber">@Html.DisplayFor(model => Model.BinRegistorModel.LabRecNumber,Model.BinRegistorModel.LabRecNumber)</textarea>
+                        *@
+                        <textarea data-toggle="tooltip" title="Afer Entering LabReq Number Press F8 or Enter to Add LabReq" class="form-control" rows="1" cols="20" id="BinRegistorModel_LabRecNumber" name="BinRegistorModel_LabRecNumber"></textarea>
+                        @Html.ValidationMessage("LabRecNumber", new { @class = "text-danger" })
+                        <p class="p-1 text-left">
+                        <input id="autoSub" name="autoSub" type="checkbox" checked="checked" data-toggle="tooltip" title="Submits Form Automatic after LabReq Number is Added." />
+                        <label for="autoSub" class="text-info">Submit Form Automatically</label>
+                        <br />
+                        <input type="checkbox" id="unassignedCwid" name="unassignedCwid" checked="@Model.CwidUnassigned" data-toggle="tooltip" title="Assign Bin to CWID UNASSIGNED" />
+                        <label for="unassignedCwid" class="text-info">Assign Bin to CWID UNASSIGNED</label>
+                    </p>
+
+                    </div>
+                    <div class="flexcolumn">
+                        <label class="text-nowrap inlineblock">Contents</label>
+                        <input type="text" size="50" class="col-md board" id="contentsBin" />
+
+                        <p class="p-1" />
+                        <textarea rows="5" cols="1" class="form-control" id="BinContents" name="BinContents" readonly="readonly" asp-for="BinRegistorModel.BinContents">@Html.DisplayFor(model => Model.BinRegistorModel.BinContents, Model.BinRegistorModel.BinContents)</textarea>
+                        <p class="p-1" />
+                        <button type="button" class="align-text-bottom btn-outline-dark inlineblock" id="btnAddContents">Add Contents</button>
+                        <button type="button" class="align-text-bottom btn-outline-danger inlineblock" id="btnRemoveContents">Remove Contents</button>
+
+
+                    </div>
+                    <div class="flexcolumn">
+                        <label class="text-nowrap inlineblock">Comments</label>
+                        <input type="text" size="50" class="col-md board" id="commentsBin" name="commentsBin" />
+
+                        <p class="p-1" />
+                        <textarea rows="5" cols="1" class="form-control" id="BinComments" name="BinComments" readonly="readonly" asp-for="BinRegistorModel.BinComments">@Html.DisplayFor(model => Model.BinRegistorModel.BinComments,Model.BinRegistorModel.BinComments)</textarea>
+                        <p class="p-1" />
+                        <button type="button" class="align-text-bottom btn-outline-dark inlineblock" id="btnAddComments">Add Comments</button>
+                        <button type="button" class="align-text-bottom  btn-outline-danger inlineblock" name="btnRemoveComments" id="btnRemoveComments">Remove Comments</button>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <p class="p-0" />
+            <div class="form-group d-md-inline-flex">
+                @if ((Model.BinRegProcModelActiveBins != null) && (Model.BinRegProcModelActiveBins.Count > 0))
+                {
+                    @if (string.Compare(Model.MaxPerBin, Model.BinRegProcModelActiveBins.Count.ToString(), false) != 0)
+                    {
+                        <input type="submit" value="Submit" class="btn btn-outline-dark" id="subcrbatch" name="subcrbatch" onclick="DisbleBtn()" />
+                    }
+
+
+                }
+                else
+                {
+                    <input type="submit" value="Submit" class="btn btn-outline-dark" id="subcrbatch" name="subcrbatch" onclick="DisbleBtn()" />
+                }
+
+
+                <a asp-area="" asp-page="/BinManager/ViewBMCreateBatch"><input type="button" value="Clear" class="btn btn-outline-dark" id="reset" /></a>
+                <a asp-area="" asp-page="/BinManager/ViewManagerHome"><input type="button" value="Exit" id="exitcrb" class="btn btn-outline-dark" /></a>
+            </div>
+        </form>
+
+        @if (string.Compare(Model.MaxPerBin, Model.BinRegProcModelActiveBins.Count.ToString(), false) == 0)
+        {
+            <p class="text-center text-info">Max LabReqs reached</p>
+        }
+
+        <p class="p-2"></p>
+        @if ((Model.BinRegProcModelActiveBins != null) && (Model.BinRegProcModelActiveBins.Count > 0))
+        {
+            <p class="p1"></p>
+            <div class="container-fluid ">
+
+                @if (@Model.BinRegProcModelActiveBins.Count <= 15)
+                {
+                    <div class="row justify-content-center small">
+                        <div class="col-auto">
+                            <table class="table-bordered table-hover table-primary text-center" style="background-color: #f0f0f0;">
+                                <thead>
+                                    <tr>
+                                        <th>Bin ID</th>
+                                        <th>Lab Req #</th>
+                                        <th>Category</th>
+                                        <th>Manage Batch</th>
+                                        <th>Delete Batch</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in (Model.BinRegProcModelActiveBins))
+                                    {
+                                        <tr>
+                                            <td>@item.Value.BinID</td>
+                                            <td>@item.Value.LabRecNumber</td>
+                                            <td>@item.Value.CategoryName</td>
+                                            <td>
+
+                                                <span>&nbsp<a href="/BinManager/ViewManageBatch?BatchId=@item.Value.BatchID" class="btn btn-info" role="button" target="_self">Manage</a></span>
+                                            </td>
+                                            <td>
+
+                                                <span>&nbsp<a href="/Partial_Pages/DelSpecLabReqs?labReq=@item.Value.LabRecNumber&bindID=@item.Value.BinID&selCatName=@Model.SelCatName&returnurl=/BinManager/ViewBMCreateBatch?selBinId=@item.Value.BinID" class="btn btn-danger" role="button" target="_self" onclick="return DelLabReq('@item.Value.LabRecNumber');">Delete Labreq</a></span>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                }
+
+                else
+                {
+                    <div class="overflow-auto">
+                        <table class="table-bordered table-hover overflow-auto" style="background-color: #f0f0f0;float: left;width: 50%">
+                            <thead>
+                                <tr>
+                                    <th>Bin ID</th>
+                                    <th>Lab Req #</th>
+                                    <th>Category</th>
+                                    <th>Manage Batch</th>
+                                    <th>Delete Batch</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < @Model.BinRegProcModelActiveBins.Count; i++)
+                                {
+
+
+                                    <tr>
+                                        <td>@Model.BinRegProcModelActiveBins.ElementAt(i).Value.BinID</td>
+                                        <td>@Model.BinRegProcModelActiveBins.ElementAt(i).Value.LabRecNumber</td>
+                                        <td>@Model.BinRegProcModelActiveBins.ElementAt(i).Value.CategoryName</td>
+                                        <td>
+
+                                            <span>&nbsp<a href="/BinManager/ViewManageBatch?BatchId=@Model.BinRegProcModelActiveBins.ElementAt(i).Value.BatchID" class="btn btn-info" role="button" target="_self">Manage</a></span>
+                                        </td>
+                                        <td>
+
+                                            <span>&nbsp<a href="href=/Partial_Pages/DelSpecLabReqs?labReq=@Model.BinRegProcModelActiveBins.ElementAt(i).Value.LabRecNumber&bindID=@Model.BinRegProcModelActiveBins.ElementAt(i).Value.BinID&selCatName=@Model.SelCatName&returnurl=/BinManager/ViewBMCreateBatch?selBinId=@Model.BinRegProcModelActiveBins.ElementAt(i).Value.BinID" onclick="return DelLabReq('@Model.BinRegProcModelActiveBins.ElementAt(i).Value.LabRecNumber');" class="btn btn-info" role="button" target="_self">Delete LabReq</a></span>
+                                        </td>
+
+                                    </tr>
+                                    Model.TotalRecordsProc++;
+                                    if (@Model.TotalRecordsProc > @Model.TableDiv)
+                                    {
+                                        break;
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                        @if (@Model.TotalRecordsProc < @Model.BinRegProcModelActiveBins.Count)
+                        {
+
+
+                            <table class="table-bordered table-hover overflow-auto" style="background-color: #f0f0f0;float: left;width: 50%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Bin ID</th>
+                                        <th>Lab Req #</th>
+                                        <th>Category</th>
+                                        <th>Manage Batch</th>
+                                        <th>Delete Batch</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = @Model.TotalRecordsProc; i < @Model.BinRegProcModelActiveBins.Count; i++)
+                                    {
+
+
+                                        <tr>
+                                            <th></th>
+                                            <td>@Model.BinRegProcModelActiveBins.ElementAt(i).Value.BinID</td>
+                                            <td>@Model.BinRegProcModelActiveBins.ElementAt(i).Value.LabRecNumber</td>
+                                            <td>@Model.BinRegProcModelActiveBins.ElementAt(i).Value.CategoryName</td>
+                                            <td>
+
+                                                <span>&nbsp<a href="/BinManager/ViewManageBatch?BatchId=@Model.BinRegProcModelActiveBins.ElementAt(i).Value.BatchID" class="btn btn-info" role="button" target="_self">Manage</a></span>
+                                            </td>
+                                            <td>
+
+                                                <span>&nbsp<a href="href=/Partial_Pages/DelSpecLabReqs?labReq=@Model.BinRegProcModelActiveBins.ElementAt(i).Value.LabRecNumber&bindID=@Model.BinRegProcModelActiveBins.ElementAt(i).Value.BinID&selCatName=@Model.SelCatName&returnurl=/BinManager/ViewBMCreateBatch?selBinId=@Model.BinRegProcModelActiveBins.ElementAt(i).Value.BinID" onclick="return DelLabReq('@Model.BinRegProcModelActiveBins.ElementAt(i).Value.LabRecNumber');" class="btn btn-info" role="button" target="_self">Delete LabReq</a></span>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-center text-info">No Lab Reqs Opened</p>
+        }
+
+        <p class="p-2"></p>
+        <div id="modalTransFrom" class="modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Transfer Bin </h4>
+
+
+
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <img src="~/Images/giphy.gif" id="loadingDataTF" style="display:none;" />
+                        </div>
+                        <div id="showformTF" style="display:block;">
+
+                            <div class="col-md-4">
+                                <input type="hidden" />
+                            </div>
+                            <div id="divTransFrom" name="divTransFrom"></div>
+
+                        </div>
+                        <div class="row" id="showBtnSave" name="showBtnSave">
+                            @* <input type="button" value="Save" class="btn btn-success" id="saveTF" name="saveTF" />
+                                <button class="btn btn-success" id="saveTF" name="saveTF" >Save</button>
+                                                <button class="btn btn-success" id="saveTF" name="saveTF">Save</button>
+                            *@
+                            <button class="btn btn-success" id="saveTF" name="saveTF">Transfer Bin</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="closeTrans" name="closeTrans" class="btn btn-default close" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:none">
+        <p id="parBmUpScreen" name="parCategory" style="position: absolute; top: 30%; left: 45%; color: White;">
+            please wait...<img src="~/Images/ajax-loading.gif">
+        </p>
+    </div>
+
+</div>
+
+@section scripts {
+
+    <script>
+
+        function ChangeStyleHide(nameID) {
+
+            if (document.getElementById(nameID).style.display == 'none')
+                document.getElementById(nameID).style.display = "inline";
+            else {
+                document.getElementById(nameID).style.display = "none";
+                document.getElementById("reset").click();
+            }
+
+
+
+        }
+
+        function DisbleBtn() {
+
+            document.getElementById('subcrbatch').style.display = 'none';
+            document.getElementById('reset').style.display = 'none';
+            document.getElementById('exitcrb').style.display = 'none';
+
+            var message = "Creating Batch  Bin ID" + $('#selBinId').val() + " Category Name " + $('#selCatName').val() + " Lab Req # " + $('#BinRegistorModel_LabRecNumber').val();
+            ShowLoadingDialog(message);
+        }
+
+
+
+
+
+
+        window.onload = function () {
+            document.getElementById("BinRegistorModel_LabRecNumber").focus();
+
+
+        };
+
+        $(document).ready(function () {
+            $("#divLoading").hide();
+            SessionExpireAlert(0);
+            $(this).bind("contextmenu", function (e) {
+                e.preventDefault();
+            });
+            $('#BinRegistorModel_LabRecNumber').val("");
+            if ($('#selCatName').val() == "")
+                $('#selCatName').focus();
+            else
+                $('#BinRegistorModel_LabRecNumber').focus();
+            //BinRegistorModel.LabRecNumber
+            $('#btnAddContents').click(function () {
+                if ($('#contentsBin').val().length != 0) {
+
+                    var dNow = new Date();
+                    var n = dNow.toString();
+                    $('#BinContents').append('{UserName} added on ' + n + ' ' + $('#contentsBin').val() + '\n');
+                    $('#contentsBin').val('');
+
+                }
+                else {
+                    alert('No Contents to add');
+                }
+                $('#BinContents').focus();
+            });
+
+            $('#closeTrans').click(function () {
+                $('#modalTransFrom').css('display', 'none');
+            });
+
+            $('#btnRemoveContents').click(function () {
+                if ($('#BinContents').val().length != 0) {
+                    $('#BinContents').val('');
+                }
+                else {
+                    alert('No contents found');
+                }
+                $('#binContents').focus();
+            });
+
+            $('#btnRemoveComments').click(function () {
+                if ($('#BinComments').val().length != 0) {
+                    $('#BinComments').val('');
+                }
+                else {
+                    alert('No comments found');
+                }
+                $('#commentsBin').focus();
+            });
+
+            $('#btnAddComments').click(function () {
+                if ($('#commentsBin').val().length != 0) {
+                    var dNow = new Date();
+                    var n = dNow.toString();
+                    $('#BinComments').append('{UserName} added on ' + n + ' ' + $('#commentsBin').val() + '\n');
+                    $('#commentsBin').val('');
+
+                }
+                else {
+                    alert('No Comments to add');
+                }
+                $('#commentsBin').focus();
+            });
+
+            //$('#saveTF').click(function () {
+
+            //    $('#tfAddComments').hide();
+            //    if ($('#tfComments').val().length != 0) {
+            //        var message = 'Transfering BinId ' + $('#BinIDTF').val() + ' to BinID ' + $('#BinIDAvailable').val();
+            //        ShowLoadingDialog(message);
+            //        $("#modalTransFrom").css("display", "none")
+            //        var dNow = new Date();
+            //        var bintrdt = dNow.toString();
+            //        $('#BinComments').append('{UserName} transfered binid ' + $('#BinIDTF').val() + ' to BinID' + $('#BinIDAvailable').val() + ' on ' + bintrdt + ' ' + $('#tfComments').val() + '\n');
+            //        //$('#tfComments').val('');
+            //        $('#oldBinID').val($('#BinIDTF').val());
+            //        $('#newBinID').val($('#BinIDAvailable').val());
+            //        //$('#txtTF').text('Transfer from bin ' + $('#BinIDTF').val());
+            //        //$("#btnRemoveComments").hide();
+            //        //$('#modalTransFrom').hide();
+            //       $("<input type='hidden' value='transferBins' />")
+            //        .attr("id", "binsTransFer")
+            //            .attr("name", "binsTransFer")
+            //            .prependTo("#fNewBatch");
+            //        $('#fNewBatch').attr('method','post');
+            //        $('#fNewBatch').submit();
+            //    }
+            //    else {
+            //        $('#tfAddComments').show();
+            //    }
+
+            //});
+
+            $("#selCatName").change(function (e) {
+
+                $("#selBinId").focus();
+            });
+            $("#selBinId").change(function (e) {
+
+                $("#BinRegistorModel_LabRecNumber").focus();
+            });
+            $("#btnTF").click(function (e) {
+                e.preventDefault();
+                window.open("\ViewManagerHome?openDialogtranBins=1", "_blank");
+                return false;
+            });
+
+            //$("#btnTF").click(function (e) {
+            //    e.preventDefault();
+
+            //    ShowHideLoding('loadingDataTF');
+            //    ShowHideLoding('showformTF');
+            //    var pvUrl = "/Partial_Pages/RegisterSpecimensView?modelName=transFrom";
+            //    $.ajax({
+            //        type: "GET",
+            //        url: pvUrl,
+            //        contentType: 'application/html; charset=utf-8',
+            //        dataType: 'html',
+            //        success: function (result) {
+            //            //   alert(result);
+            //            $("#divTransFrom").html(result);
+            //            //    $("#resuts").val(result);
+            //            if (CheckForId("noSPec")) {
+            //                $("#saveTF").hide();
+            //            }
+
+
+
+            //        },
+            //        complete: function () {
+            //            ShowHideLoding('loadingDataTF');
+            //            ShowHideLoding('showformTF');
+            //        },
+            //        error: function (request, status, error) {
+            //            document.getElementById("modalTransFrom").style = "none";
+            //            alert("error");
+            //        }
+            //    });
+            //});
+            $('#BinRegistorModel_LabRecNumber').keydown(function (eventcode) {
+
+                
+                switch (event.keyCode) {
+                    case 13:
+                        if ($('#BinRegistorModel_LabRecNumber').val().length >= 9) {
+                           
+                            $('#subcrbatch').click();
+                        }
+                        break;
+                    case 119:
+                        if ($('#BinRegistorModel_LabRecNumber').val().length >= 9) {
+                           
+                            $('#subcrbatch').click();
+                        }
+                        break;
+                    default:
+
+                        if ($('#audioSubmit').val() != "sttimer") {
+                            $('#audioSubmit').val("sttimer");
+                            if ($('#autoSub').prop('checked')) {
+                                SubmitLabRec(0);
+                            }
+
+
+
+                        }
+                        return;
+                        break;
+                }
+
+
+
+            });
+            //$(document).keypress(function (eventcode) {
+            //    switch (event.keyCode) {
+            //        case 13:
+            //            if ($('#BinRegistorModel_LabRecNumber').val().length > 1) {
+            //                $('#subcrbatch').click();
+            //                }
+            //            break;
+            //        default: return;
+            //            break;
+            //    }
+            //$(document.activeElement).mousemove(function () {
+
+            // $("#BinRegistorModel_LabRecNumber").on("input", function () {
+            //   alert($('#BinRegistorModel_LabRecNumber').val());
+            // });
+            //});
+            //   $("#BinRegistorModel_LabRecNumber").on("input", function() {
+            $("input").on("input", function () {
+                $(document.activeElement).val(this.value);
+
+
+                //  $("#BinRegistorModel_LabRecNumber").val(this.value);
+            });
+
+        });
+
+
+
+    </script>
+
+    @*<script>
+            // Get the button that opens the modal
+            // Get the modal
+            var modalTF = document.getElementById("modalTransFrom");
+
+
+
+            // Get the <span> element that closes the modal
+            var spanTF = document.getElementsByClassName("close")[0];
+
+            var btnTF = document.getElementById("btnTF");
+            // When the user clicks the button, open the modal
+            btnTF.onclick = function () {
+                modalTF.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            spanTF.onclick = function () {
+                modalTF.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modalTF) {
+                    modalTF.style.display = "none";
+
+                }
+            }
+
+        </script>*@
+}

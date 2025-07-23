@@ -1,0 +1,189 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.TrackingSystem.SignOffPickUpModel
+@{
+}
+<div class="container-fluid" id="main">
+    <h1 class="text-center text-dark">e-Docs USA Tracking System Sign Off </h1>
+    <p class="p-0"></p>
+    <a href="#searchOptions" name="sOptions" id="sOptions" class=" btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+    <p class="alert-light" id="showmess" style="display:none">Click to expand/hide Search Options</p>
+    <p class="p-1" />
+
+    <div id="searchOptions" class="collapse">
+        @if ((@Model.EdocsITCustomerIDs != null) && (@Model.EdocsITCustomerIDs.Count() > 0))
+        {
+            <form method="get" name="frmSig" id="frmSig">
+                <div class="container-fluid">
+                    <h3 class="text-center text-info">Select Customer</h3>
+
+                    <div class="row text-center">
+                        <div class="col-*-* text-center" style="margin:0 auto;">
+                            <select id="custName" name="custName">
+                                <option value="Customer Name">Customer Name</option>
+                                @foreach (var id in Model.EdocsITCustomerIDs)
+                                {
+
+
+                                    @if (!(string.IsNullOrWhiteSpace(@Model.TransferCustomerName)))
+                                    {
+                                        @if (string.Compare(@Model.TransferCustomerName, @id.EdocsCustomerName, false) != 0)
+                                        {
+
+                                            <option value="@id.EdocsCustomerName" selected="selected">@id.EdocsCustomerName</option>
+                                            continue;
+                                        }
+                                    }
+
+
+                                    <option value="@id.EdocsCustomerName">@id.EdocsCustomerName</option>
+
+
+                                }
+
+
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+                <p class="p-2"></p>
+
+                <div class="container-fluid">
+                </div>
+                <table class="table table-bordered tablecenter">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Report Begin Date</th>
+                            <th class="text-center">Report End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">
+                                <p style="display:none" id="repErSDate" name="repERSDate" class="alert-danger">Scan Start Date Required</p>
+                                <input type="date" id="repSDate" name="repSDate" />
+                            </td>
+                            <td class="text-center"><input type="date" id="repSEndDate" name="repSEndDate" /></td>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+                <button class="btn btn-primary btn-outline-primary text-center float-left" id="btnSubForm" name="btnSubForm">Get Sent</button>
+                <a type="button" class="btn btn-outline-danger btn-link float-right" id="btnExit" href="/Index" name="btnExit">Exit</a>
+                <p class="p-2"></p>
+            </form>
+
+        }
+    </div>
+    @if ((Model.ITSInventoryTransferSent != null) && (Model.ITSInventoryTransferSent.Count() > 0))
+    {
+        <div class="container-fluid" id="sigRep">
+            <h2 class="text-center text-info">Total Documents Sent <span> @Model.ITSInventoryTransferSent.Count()</span></h2>
+            <table cellspacing="2" style="margin-left:auto;margin-right:auto;border:double" width="100%">
+                <thead>
+                    <tr>
+                        @*  <th class="border text-center">Customer Name</th>*@
+                        <th class="border text-center">Tacking ID</th>
+                        <th class="border text-center">Sent By</th>
+                        <th class="border text-center">Date Sent</th>
+                        <th class="border text-center">Number Boxes / Docs Sent</th>
+                        <th class="border text-center">Scan Type</th>
+                        <th class="border text-center">Delivery Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var items in Model.ITSInventoryTransferSent)
+                    {
+                        <tr onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">
+                            @* <td class="border text-center">@items.Value.EdocsCustomerName</td>*@
+                            <td class="border text-center">@items.Key</td>
+                            <td class="border text-center">@items.Value.UserName</td>
+
+                            <td class="border text-center">@items.Value.DateSent.ToString("MM/dd/yyyy")</td>
+                            <td class="border text-center">@items.Value.NumberDocsSent</td>
+                            <td class="border text-center">@items.Value.ScanType</td>
+                            <td class="border text-center">@items.Value.DeliveryMethod</td>
+
+
+                        </tr>
+                    }
+                <tbody>
+            </table>
+            <p class="p2"></p>
+
+
+            <form method="post" id="frmSigAcct">
+                <p>
+                    <canvas width="500" height="400" id="signature"
+                            style="border:1px solid black"></canvas><br>
+
+                    <button type="button" id="accept"
+                            class="btn btn-primary">
+                        Accept signature
+                    </button>
+
+                    <button type="button" id="clear"
+                            class="btn btn-primary">
+                        Clear
+                    </button><br>
+                    <div style="visibility:hidden">
+                        <img width="500" height="400" id="savetarget"
+                             style="border:1px solid black"><br>
+                        <input type="text" asp-for="@Model.SignatureDataUrl">
+                    </div>
+                </p>
+            </form>
+        </div>
+    }
+</div>
+
+@section scripts {
+
+
+    <script src="~/js/signature_pad.min.js"></script>
+    <script>
+        $(function () {
+
+            var canvas = document.querySelector('#signature');
+            var pad = new SignaturePad(canvas);
+
+            $('#accept').click(function () {
+
+                var data = pad.toDataURL();
+
+                $('#savetarget').attr('src', data);
+                $('#SignatureDataUrl').val(data);
+                pad.off();
+                $("#frmSigAcct").submit();
+            });
+            $('#clear').click(function () {
+                pad.clear();
+                $('#SignatureDataUrl').val("");
+            });
+            $('#btnSubForm').click(function (e) {
+                $("#divLoading").show();
+                //  ShowLoading();
+                $("<input type='hidden'/>")
+                    .attr("value", $("#repSDate").val())
+                    .attr("id", "repSDate")
+                    .attr("name", "repSDate")
+                    .prependTo("#frmSig");
+                $("<input type='hidden'/>")
+                    .attr("value", $("#repSEndDate").val())
+                    .attr("id", "repSEndDate")
+                    .attr("name", "repSEndDate")
+                    .prependTo("#frmSig");
+                $("<input type='hidden'/>")
+                    .attr("value", $("#custName").val())
+                    .attr("id", "custName")
+                    .attr("name", "custName")
+                    .prependTo("#frmSig");
+                $("#frmSig").submit();
+            });
+
+        });
+    </script>
+}

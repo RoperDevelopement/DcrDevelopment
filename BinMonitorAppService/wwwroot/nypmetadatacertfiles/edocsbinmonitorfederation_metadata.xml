@@ -1,0 +1,83 @@
+<md:EntityDescriptor ID="JKIzZckIqN.OyULwzF7AyQJK_Ko" cacheDuration="PT1440M" entityID="fed.nyp.org" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
+  <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+    <ds:SignedInfo>
+      <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+      <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+      <ds:Reference URI="#JKIzZckIqN.OyULwzF7AyQJK_Ko">
+        <ds:Transforms>
+          <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+          <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+        </ds:Transforms>
+        <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+        <ds:DigestValue>MIvDyEg8GBjqKKjaI2qYIFOcBdRpqTXNfO9If4ULBeo=</ds:DigestValue>
+      </ds:Reference>
+    </ds:SignedInfo>
+    <ds:SignatureValue>
+      E5KNNnXBDqUZb5RHzzLQAZ+ZlF2YPqbXrYSZu6vycRhBjUecMP/1sTBWsNqAkzTTSkIx4l4ocGKq
+      uQHNATCGjwGNEUyuwFAudUcyjyGMl/vP1Ym1Z/SqSTUk61LksbXlS0Ir+sISr6PVwR65JaW/sA1W
+      fZ3Me2s6P6B6+CM92SaG7ykpDHguZtGR6k4rc+b+7anmgUkJnYtJFPAM/I6UVD5cOQo1cH5lGjHd
+      eIGAZjp2R/LhidIkJgBhYEZi1B4Ovvco03IofYRR2vqeBFcmrnI3ojuvHA8XOuqO6b8NgoEBKFzA
+      ZKUcegw198JdF4Vrz6aoI5n0xeghwNQrbWfIZA==
+    </ds:SignatureValue>
+    <ds:KeyInfo>
+      <ds:X509Data>
+        <ds:X509Certificate>
+          MIIDzTCCArWgAwIBAgIGAXScg02SMA0GCSqGSIb3DQEBCwUAMIGMMQswCQYDVQQGEwJVUzERMA8G
+          A1UECBMITmV3IFlvcmsxETAPBgNVBAcTCE5ldyBZb3JrMSYwJAYDVQQKEx1OZXdZb3JrLVByZXNi
+          eXRlcmlhbiBIb3NwaXRhbDEdMBsGA1UECxMUSW5mb3JtYXRpb24gU2VydmljZXMxEDAOBgNVBAMT
+          B2ZzdG9rZW4wHhcNMjAwOTE3MTQ0MTI0WhcNMjcwMzE4MTQ0MTI0WjCBjDELMAkGA1UEBhMCVVMx
+          ETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcgWW9yazEmMCQGA1UEChMdTmV3WW9yay1Q
+          cmVzYnl0ZXJpYW4gSG9zcGl0YWwxHTAbBgNVBAsTFEluZm9ybWF0aW9uIFNlcnZpY2VzMRAwDgYD
+          VQQDEwdmc3Rva2VuMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyrJh/B1gYOg6+28c
+          UGBHudQDvOxLWlL1vQ/U6TSNeMPAMfrKIM5vazvdkoiB5m2MblRZ56ku1VQK3V6pvwfGBWOn5lTG
+          wZPW3+TpqZ4L81jwrGqo8AT+GTb02DmXPymCd67jn9e5z29Ns8545TtijG6DENwTQTYyPSMc+u32
+          B9IZqJ8Csh6D//Fx3+vGPHORH0ggKm7EBfDG/KShomWJv/y+URCOFhaZ4Fi9iGvk8NW/Ah18FA3w
+          sIOiKZCmrKn7QoYwQwJHyVUhyV1DUXNQMG23VPYNgD7tZK8IagtSpHWotTcAkj0Y70Mc4AN6xkPn
+          EJUWoeiT3R0kbBzBTAerawIDAQABozMwMTAvBgNVHREEKDAmgg9mc3Rva2VuLm55cC5vcmeCE3d3
+          dy5mc3Rva2VuLm55cC5vcmcwDQYJKoZIhvcNAQELBQADggEBAF8hXltrgM4UPoJTr0VHwpWFfUqB
+          0QFs6OXUnOu83A+pDAdKAnhg9hwIrFGFAFuqm4b2wouf+DaflxnrgrqSIPDMDfCeRZXEpMfQ3DKL
+          /3PCElkKuKzUlYI3e3yLaomdhw6Vj0AhvxgJd4wyCMWKTyubAyNXFGGIDomFecDPzP80wo8P7eNH
+          WeUE15a8M7MeeaA7Al6RE+jRKVO7G/3e7m+QKsoTcNVwUbXECOsbyLewzGgH+tdeDZu2z5eeJtHG
+          sg3z6bkrwYNNR5C+R4QQVpZO2tl+DoapMSBCuZ3ARrZ7FdsDGSAid9U8GIHE7WWF6ZRU5Q5GZSLw
+          QNSNhZqOeRs=
+        </ds:X509Certificate>
+      </ds:X509Data>
+      <ds:KeyValue>
+        <ds:RSAKeyValue>
+          <ds:Modulus>
+            yrJh/B1gYOg6+28cUGBHudQDvOxLWlL1vQ/U6TSNeMPAMfrKIM5vazvdkoiB5m2MblRZ56ku1VQK
+            3V6pvwfGBWOn5lTGwZPW3+TpqZ4L81jwrGqo8AT+GTb02DmXPymCd67jn9e5z29Ns8545TtijG6D
+            ENwTQTYyPSMc+u32B9IZqJ8Csh6D//Fx3+vGPHORH0ggKm7EBfDG/KShomWJv/y+URCOFhaZ4Fi9
+            iGvk8NW/Ah18FA3wsIOiKZCmrKn7QoYwQwJHyVUhyV1DUXNQMG23VPYNgD7tZK8IagtSpHWotTcA
+            kj0Y70Mc4AN6xkPnEJUWoeiT3R0kbBzBTAeraw==
+          </ds:Modulus>
+          <ds:Exponent>AQAB</ds:Exponent>
+        </ds:RSAKeyValue>
+      </ds:KeyValue>
+    </ds:KeyInfo>
+  </ds:Signature>
+  <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" WantAuthnRequestsSigned="true">
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDzTCCArWgAwIBAgIGAXScg02SMA0GCSqGSIb3DQEBCwUAMIGMMQswCQYDVQQGEwJVUzERMA8GA1UECBMITmV3IFlvcmsxETAPBgNVBAcTCE5ldyBZb3JrMSYwJAYDVQQKEx1OZXdZb3JrLVByZXNieXRlcmlhbiBIb3NwaXRhbDEdMBsGA1UECxMUSW5mb3JtYXRpb24gU2VydmljZXMxEDAOBgNVBAMTB2ZzdG9rZW4wHhcNMjAwOTE3MTQ0MTI0WhcNMjcwMzE4MTQ0MTI0WjCBjDELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcgWW9yazEmMCQGA1UEChMdTmV3WW9yay1QcmVzYnl0ZXJpYW4gSG9zcGl0YWwxHTAbBgNVBAsTFEluZm9ybWF0aW9uIFNlcnZpY2VzMRAwDgYDVQQDEwdmc3Rva2VuMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyrJh/B1gYOg6+28cUGBHudQDvOxLWlL1vQ/U6TSNeMPAMfrKIM5vazvdkoiB5m2MblRZ56ku1VQK3V6pvwfGBWOn5lTGwZPW3+TpqZ4L81jwrGqo8AT+GTb02DmXPymCd67jn9e5z29Ns8545TtijG6DENwTQTYyPSMc+u32B9IZqJ8Csh6D//Fx3+vGPHORH0ggKm7EBfDG/KShomWJv/y+URCOFhaZ4Fi9iGvk8NW/Ah18FA3wsIOiKZCmrKn7QoYwQwJHyVUhyV1DUXNQMG23VPYNgD7tZK8IagtSpHWotTcAkj0Y70Mc4AN6xkPnEJUWoeiT3R0kbBzBTAerawIDAQABozMwMTAvBgNVHREEKDAmgg9mc3Rva2VuLm55cC5vcmeCE3d3dy5mc3Rva2VuLm55cC5vcmcwDQYJKoZIhvcNAQELBQADggEBAF8hXltrgM4UPoJTr0VHwpWFfUqB0QFs6OXUnOu83A+pDAdKAnhg9hwIrFGFAFuqm4b2wouf+DaflxnrgrqSIPDMDfCeRZXEpMfQ3DKL/3PCElkKuKzUlYI3e3yLaomdhw6Vj0AhvxgJd4wyCMWKTyubAyNXFGGIDomFecDPzP80wo8P7eNHWeUE15a8M7MeeaA7Al6RE+jRKVO7G/3e7m+QKsoTcNVwUbXECOsbyLewzGgH+tdeDZu2z5eeJtHGsg3z6bkrwYNNR5C+R4QQVpZO2tl+DoapMSBCuZ3ARrZ7FdsDGSAid9U8GIHE7WWF6ZRU5Q5GZSLwQNSNhZqOeRs=</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://fed.nyp.org/idp/SLO.saml2"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://fed.nyp.org/idp/SLO.saml2"/>
+    <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://fed.nyp.org/idp/SSO.saml2"/>
+    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://fed.nyp.org/idp/SSO.saml2"/>
+    <saml:Attribute Name="firstName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"/>
+    <saml:Attribute Name="lastName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"/>
+    <saml:Attribute Name="mail" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"/>
+  </md:IDPSSODescriptor>
+  <md:ContactPerson contactType="administrative">
+    <md:Company>NewYork-Presbyterian Hospital</md:Company>
+    <md:GivenName>SSO</md:GivenName>
+    <md:SurName>Support</md:SurName>
+    <md:EmailAddress>sso_support@nyp.org</md:EmailAddress>
+    <md:TelephoneNumber>212-746-4357</md:TelephoneNumber>
+  </md:ContactPerson>
+</md:EntityDescriptor>

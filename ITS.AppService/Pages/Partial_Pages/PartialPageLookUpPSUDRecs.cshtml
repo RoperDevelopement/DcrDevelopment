@@ -1,0 +1,49 @@
+﻿@page
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Edocs.ITS.AppService.Pages.Partial_Pages.PartialPageLookUpPSUDRecsModel
+@{
+    Layout = null;
+}
+
+@if ((@Model.Recs != null) && (Model.Recs.Count > 0))
+{
+    <p class="p-1"></p>
+<div style="font-size:small;">
+    <table id="tblFiles" class="table table-hover w-auto table-bordered table-info">
+        <tr>
+            <th style="width:auto">Tracking ID</th>
+            <th style="width:auto">Department</th>
+            <th style="width:auto">Orgination Department</th>
+            <th style="width:auto">Description of Records</th>
+            <th style="width:auto">Method of Filing Document</th>
+            <th style="width:auto">Date of Records</th>
+
+            <th style="width:auto">First Name</th>
+            <th style="width:auto">Last Name</th>
+            <th style="width:auto">Birth Date</th>
+            <th style="width:auto">PDF File</th>
+        </tr>
+
+
+        @foreach (var file in Model.Recs)
+        {
+    <tr>
+
+        <td style="width:auto">@file.Value.TrackingID</td>
+        <td style="width:auto">@file.Value.Department</td>
+        <td style="width:auto">@file.Value.OrginationDepartment</td>
+        <td style="width:auto">@file.Value.DescriptionOfRecords</td>
+        <td style="width:auto">@file.Value.MethOfFiling</td>
+        <td style="width:auto">@file.Value.DateOfRecords</td>
+
+        <td style="width:auto">@file.Value.FirstName</td>
+        <td style="width:auto">@file.Value.LastName</td>
+        <td style="width:auto">@file.Value.DateOfBirth.ToString("MM-dd-yyyy")</td>
+        <td class="CellWithComment"> <a href="/Partial_Pages/DisplayPdfFilePartialView?pdfurl=@file.Value.ID" target="_blank"> <img src="~/img/icpdf.gif" width="20" height="25" /></a>
+
+    </tr>
+        }
+    </table>
+</div>
+    }

@@ -1,0 +1,304 @@
+﻿@page
+@model BinMonitorAppService.Pages.BinMonitor.ViewBinMonitorModel
+@{
+    ViewData["Title"] = "ViewBinMonitor";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Refreshing BinMonitor in &nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+<header>
+    <h1 class="text-center">BinMonitor Batches</h1>
+    <p class="p-0"></p>
+</header>
+<div style="background-color:#ffffff" id="divMain">
+    <input type="hidden" id="expiresSession" value="@Model.SessionExpires" />
+    <input type="hidden" id="srchBinID" value="" />
+    <button style="display:none" id="btnSearch"></button>
+    <div class="container-fluid">
+        <p class="p-lg-1"></p>
+        <div class="row justify-content-center">
+            <div class="col small">
+                <h6 class="text-center">Hover Over Bin to Open Quick View</h6>
+                <table class="table-bordered" style="overflow-x:visible;overflow-y:visible; width:100%">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Bin</th>
+                            <th class="text-center">Category</th>
+                            <th class="text-center">Assigned</th>
+                            <th class="text-center">Started</th>
+                            <th class="text-center">Duration</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var itemBin in Model.IDicBins)
+                        {
+                        @*  var dur = DateTime.Now - Convert.ToDateTime(itemBin.Value.StartTime);
+        var dur = DateTime.Now.AddHours(-5) - Convert.ToDateTime(itemBin.Value.StartTime);
+
+                        
+                             var dur = DateTime.UtcNow.AddHours(-4) - Convert.ToDateTime(itemBin.Value.StartTime);
+                        *@
+                        var dur = Model.CurrentUtcTime  - Convert.ToDateTime(itemBin.Value.StartTime);
+
+                        @if (itemBin.Value.AcvitveBin)
+                            {
+                        @*
+        <tr id="trStatus" style="background-color:@itemBin.Value.CategoryColor;" class="font-weight-bolder" onmouseover="$(this).css('background','white');" onmouseout="$(this).css('background','@itemBin.Value.CategoryColor');">
+                        *@
+                        <tr id="trStatus" style="background-color:@itemBin.Value.CategoryColor;" class="font-weight-bolder" onmouseover="DisplayBinStatus('@itemBin.Value.Bin')">
+                            <td>@Html.DisplayFor(model => itemBin.Value.Bin)</td>
+                            @*
+
+                            *@
+                            <td>@Html.DisplayFor(model => itemBin.Value.Category)</td>
+                            <td class="text-nowrap font-weight-bolder">@Html.DisplayFor(model => itemBin.Value.BinAssignedTo)</td>
+                            <td>@Html.DisplayFor(model => itemBin.Value.StartTime)</td>
+
+
+                            <td>@dur.Hours.ToString("0").PadLeft(2, '0'):@dur.Minutes.ToString().PadLeft(2, '0'):@dur.Seconds.ToString().PadLeft(2, '0')</td>
+
+                        </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+
+            <div class="col small">
+                <div class="border-dark text-nowrap" style="overflow-x:visible;overflow-y:visible;width:100%">
+                    @*
+                        <div class="box-shadow coloropenbin" style="overflow-x:visible;overflow-y:visible;width:100%">
+                    *@
+                    @foreach (var itemBin in Model.IDicBins)
+                    {
+                        Model.LoopCounter++;
+                        @if (itemBin.Value.Category == "Opened")
+                        {
+                            <p class="border inlineblock text-center">@Html.DisplayFor(model => itemBin.Value.Bin, new { @class = "text-center" })<br />&nbsp;&nbsp;@Html.DisplayFor(model => itemBin.Value.Category, new { @class = "text-center" })&nbsp;&nbsp;</p>
+                        }
+                        else
+                        {
+
+                            if (itemBin.Value.Category.Length < 10)
+                            {
+
+                                int newStr = @itemBin.Value.Category.Length;
+                                switch (newStr)
+                                {
+                                    case 2:
+                                        <p class="border inlineblock text-center font-weight-bolder"  style="background-color:@Html.DisplayFor(model => itemBin.Value.CategoryColor)">@Html.DisplayFor(model => itemBin.Value.Bin, new { @class = "text-center" })<br />&nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => itemBin.Value.Category)&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                        break;
+                                    case 3:
+                                        <p class="border inlineblock text-center font-weight-bolder"  style="background-color:@Html.DisplayFor(model => itemBin.Value.CategoryColor)">@Html.DisplayFor(model => itemBin.Value.Bin, new { @class = "text-center" })<br />&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => itemBin.Value.Category)&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+                                        break;
+                                    case 4:
+                                        <p class="border inlineblock text-center font-weight-bolder"  style="background-color:@Html.DisplayFor(model => itemBin.Value.CategoryColor)">@Html.DisplayFor(model => itemBin.Value.Bin, new { @class = "text-center" })<br />&nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => itemBin.Value.Category)&nbsp;&nbsp;&nbsp;</p>
+                                        break;
+                                    case 5:
+                                        <p class="border inlineblock text-center font-weight-bolder"  style="background-color:@Html.DisplayFor(model => itemBin.Value.CategoryColor)">@Html.DisplayFor(model => itemBin.Value.Bin, new { @class = "text-center" })<br />&nbsp;&nbsp;@Html.DisplayFor(model => itemBin.Value.Category)&nbsp;&nbsp;&nbsp;</p>
+                                        break;
+                                    case 6:
+                                        <p class="border inlineblock text-center font-weight-bolder"  style="background-color:@Html.DisplayFor(model => itemBin.Value.CategoryColor)">@Html.DisplayFor(model => itemBin.Value.Bin, new { @class = "text-center" })<br />&nbsp;&nbsp;@Html.DisplayFor(model => itemBin.Value.Category)&nbsp;&nbsp;</p>
+                                        break;
+                                    case 7:
+                                        <p class="border inlineblock text-center font-weight-bolder"  style="background-color:@Html.DisplayFor(model => itemBin.Value.CategoryColor)">@Html.DisplayFor(model => itemBin.Value.Bin, new { @class = "text-center" })<br />&nbsp;@Html.DisplayFor(model => itemBin.Value.Category)&nbsp;&nbsp;</p>
+                                        break;
+                                    case 8:
+                                        <p class="border inlineblock text-center font-weight-bolder"  style="background-color:@Html.DisplayFor(model => itemBin.Value.CategoryColor)">@Html.DisplayFor(model => itemBin.Value.Bin, new { @class = "text-center" })<br />&nbsp;@Html.DisplayFor(model => itemBin.Value.Category)&nbsp;</p>
+                                        break;
+                                    default:
+                                        <p class="border inlineblock text-center font-weight-bolder"  style="background-color:@Html.DisplayFor(model => itemBin.Value.CategoryColor)">@Html.DisplayFor(model => itemBin.Value.Bin, new { @class = "text-center" })<br />@Html.DisplayFor(model => itemBin.Value.Category)&nbsp;</p>
+                                        break;
+                                }
+                                @*
+                                    <p class="border inlineblock text-center font-weight-bolder" style="background-color:@Html.DisplayFor(model => itemBin.Value.CategoryColor)">@Html.DisplayFor(model => itemBin.Value.Bin)<br />@Html.DisplayFor(model => itemBin.Value.Category)@newStr</p>
+                                *@
+                            }
+                            else
+                            {
+                                <p class="border inlineblock text-center font-weight-bolder" style="background-color:@Html.DisplayFor(model => itemBin.Value.CategoryColor)">@Html.DisplayFor(model => itemBin.Value.Bin)<br />@Html.DisplayFor(model => itemBin.Value.Category)&nbsp;&nbsp;</p>
+                            }
+
+                        }
+                        @if ((Model.LoopCounter % 5 == 0))
+                        {
+                            <br />
+                        }
+                    }
+                </div>
+
+            </div>
+            <div class="col small">
+                @if ((Model.ActiveBinIDS != null) && (Model.ActiveBinIDS.Count > 0))
+                {
+
+                    <h6 class="text-left">Open Quick View </h6>
+                    <div class="border-dark text-nowrap " style="overflow-x:visible;overflow-y:visible;width:100%">
+
+                        <select name="quickViewBin" id="quickViewBin">
+                            <option value="Select BinID">Select BinID</option>
+                            @foreach (var actBin in Model.ActiveBinIDS)
+                            {
+                                <option value="@actBin">@actBin</option>
+                            }
+
+                        </select>
+                    </div>
+
+                }
+                else
+                {
+                    <h6 class="text-left text-dark">No Active Bins </h6>
+                }
+            </div>
+        </div>
+        <p class="p-2"></p>
+
+        <table class="table-bordered table-info table-hover" style="overflow-x:visible;overflow-y:visible;margin:auto">
+            <thead>
+                <tr>
+
+
+                    <th class="text-center">Category</th>
+                    <th class="text-center">Completed</th>
+                    <th class="text-center">Open</th>
+
+
+
+                </tr>
+
+
+            </thead>
+            <tbody>
+                @foreach (var itemCategory in Model.IDicCategory)
+                {
+                    <tr style="background-color:@Html.DisplayFor(model => itemCategory.Value.CategoryColor)" onmouseover="$(this).css('background', 'white');" onmouseout="$(this).css('background','@Html.DisplayFor(model => itemCategory.Value.CategoryColor)');">
+
+                        <td class="margionZero border text-center font-weight-bolder">
+                            @Html.DisplayFor(model => itemCategory.Value.CategoryName)
+                        </td>
+                        <td class="margionZero border text-center font-weight-bolder">
+                            @Html.DisplayFor(model => itemCategory.Value.TotalCompleted)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                        </td>
+                        <td class="margionZero border text-center font-weight-bolder">
+                            @Html.DisplayFor(model => itemCategory.Value.TotalOpened)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:none">
+        <p id="parBmUpScreen" name="parCategory" style="position: absolute; top: 30%; left: 45%; color: White;">
+            please wait...<img src="~/Images/ajax-loading.gif">
+        </p>
+    </div>
+    @*Model for  bins status *@
+    <div id="modalBinsStatus" role="dialog" class="modal" style="display:none">
+
+        <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="mTitle"></h4>
+                    <button type="button" class="close btn-danger" data-dismiss="modal" onclick="CloseDialog('modalBinsStatus');">&times;</button>
+
+
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <img src="~/Images/giphy.gif" id="loadingDataBS" style="display:none;" />
+                    </div>
+                    <div id="divShowBinStatus" style="display:block;">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-dark" data-dismiss="modal" onclick="CloseDialog('modalBinsStatus');">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts
+     {
+    @*<script type="text/javascript">
+            setInterval("my_function();", 180000);
+
+            function my_function() {
+                window.location = location.href;
+            }
+        </script>*@
+
+    <script>
+
+        $(document).ready(function () {
+            $("#divLoading").hide();
+            SessionExpireAlert($('#expiresSession').val());
+            $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+
+            });
+            $("#btnSearch").click(function (e) {
+
+                $('#modalBinsStatus').show();
+                ShowHideLoding('loadingDataBS');
+                $('#mTitle').html("Quick View Bin " + $('#srchBinID').val() + " Status");
+
+
+                e.preventDefault();
+                var pvUrl = "/Partial_Pages/RegisterSpecimensView?bindID=" + $('#srchBinID').val();
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    cache: false,
+                    success: function (result) {
+                        $("#divShowBinStatus").html(result);
+
+                        //  $("#resuts").val(result);
+                        $('#usequickkeys').val('no');
+
+                    },
+                    complete: function () {
+                        if ($("#dtBinStatus").length) {
+                            $('#dtBinStatus').DataTable({ "pagingType": "full" });
+                            $('.dataTables_length').addClass('bs-select');
+                        }
+
+                        ShowHideLoding('loadingDataBS');
+                    },
+                    error: function (request, status, error) {
+                        alert('request ' + request + ' status ' + status + ' error ' + error);
+                    }
+                });
+
+            });
+            $("#quickViewBin").change(function (e) {
+                if ($('#quickViewBin').val() == 'Select BinID') {
+                    return;
+                }
+                DisplayBinStatus($('#quickViewBin').val());
+                $('#quickViewBin').val('Select BinID');
+                return false;
+            });
+        });
+
+    </script>
+
+
+}
+
+
+

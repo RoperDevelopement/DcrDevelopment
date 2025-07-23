@@ -1,0 +1,12 @@
+﻿<Complex name="Root" type="DemoArchivers.MedicalRecordsArchiver, DemoArchivers, Version=1.0.4805.15337, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="RootPath" value="C:\Archives\Medical Records" />
+    <Simple name="EnableLogging" value="True" />
+    <Simple name="LogFilePath" value="C:\Archives\Medical Records\ScanquireLog.csv" />
+    <Simple name="CommandReaderName" value="BARCODE DEFAULT" />
+    <Simple name="DocumentBuilderName" value="BARCODE DEFAULT" />
+    <Simple name="FileWriterName" value="DEFAULT" />
+    <Simple name="TextImageBuilderName" value="DEFAULT" />
+    <Simple name="BookmarkImageBuilderName" value="MEDICAL RECORDS" />
+  </Properties>
+</Complex>

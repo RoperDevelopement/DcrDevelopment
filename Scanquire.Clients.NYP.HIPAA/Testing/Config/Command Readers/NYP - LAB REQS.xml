@@ -1,0 +1,5 @@
+﻿<Complex name="Root" type="Scanquire.Clients.NYP.LabReqsCommandReader, Scanquire.Clients.NYP">
+  <Properties>
+    <Simple name="BarcodeReaderName" value="NYP LAB REQS" />
+  </Properties>
+</Complex>

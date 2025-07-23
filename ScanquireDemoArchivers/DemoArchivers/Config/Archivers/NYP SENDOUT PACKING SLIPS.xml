@@ -1,0 +1,13 @@
+﻿<Complex name="Root" type="DemoArchivers.NYPSendoutPackingSlipArchiver, DemoArchivers">
+  <Properties>
+    <Simple name="OutputDir" value="C:\Archives\NYP\Sendout Packing Slips"/>
+    <Simple name="ImportScriptPath" value="C:\Archives\NYP\Sendout Packing Slips\Import Sendout Packing Slips\ImportSendoutPackingSlips.exe"/>
+    <Simple name="ReceiptStation" value="CS"/>
+    <Simple name="EncryptBatchFiles" value="False" />
+    <Null name="ScannerName" />
+    <Null name="ScannerSetting" />
+    <Simple name="CommandReaderName" value="DEFAULT" />
+    <Simple name="FileWriterName" value="TIFF_CCITG4" />
+    <Simple name="CommandImageBuilderName" value="DEFAULT" />
+  </Properties>
+</Complex>

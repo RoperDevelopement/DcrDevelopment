@@ -1,0 +1,176 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.Invoice.CreateCustomInvoiceViewModel
+@using Edocs.ITS.AppService.Models
+@{}
+
+<div class="container-fluid">
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        @if ((@Model.EdocsITSCustomers == null) && (Model.EdocsITCustomerIDs != null))
+        {
+
+
+            <h3 class="text-center text-info">Select Customer</h3>
+
+            <div class="row text-center  form-inline">
+                <div class="col-*-* text-center" style="margin:0 auto;">
+                    <select id="cusID" name="cusID">
+                        <option value="Customer Name">Customer Name</option>
+                        @foreach (var id in Model.EdocsITCustomerIDs)
+                        {
+                            <option value="@id.EdocsCustomerID">@id.EdocsCustomerName</option>
+                        }
+
+
+                    </select>
+
+                </div>
+            </div>
+
+
+        }
+    </div>
+    <div id="printInvoice">
+        @if (@Model.EdocsITSCustomers != null)
+        {
+            <input type="hidden" value=" @Model.EdocsITSCustomers.EdocsCustomerID" id="idCust" />
+            <img align="right" src="@Model.EdocsModel.ImgStr" style="margin:0;width:250px;height:125px;" />
+            <p class="p2"></p>
+            <div id="invNum1">
+                <h1 style="text-align:center;">
+                    Invoice
+                </h1>
+            </div>
+            <h2 style="text-align: left; font-size: medium">
+                e-Docs Usa Inc.
+            </h2>
+            <h4 style="text-align: left;font-size:medium">
+                @Model.EdocsModel.EdocsCustomerAddress
+            </h4>
+            <h4 style="text-align: left; font-size: medium">
+                @Model.EdocsModel.EdocsCustomerCity, @Model.EdocsModel.EdosCustomerState, @Model.EdocsModel.EdocsCustomerZipCode
+            </h4>
+            <h4 style="text-align: left; font-size: medium">
+                Phone:(@Model.EdocsModel.EdocsCustomerPhoneNumber.Substring(0, 3)) @Model.EdocsModel.EdocsCustomerPhoneNumber.Substring(3, 3)-(@Model.EdocsModel.EdocsCustomerPhoneNumber.Substring(6, 4)
+            </h4>
+            <h4 style="text-align: right; font-size: medium">
+                <span style="float: left; font-size: medium"> Email: @Model.EdocsModel.EdocsCustomerEmailAddress</span>
+                Invoice # &nbsp;&nbsp; Date of Invoice
+            </h4>
+
+            <h4 id="invNum" style="float:right; font-size: medium">
+                <span style="float: left; font-size: medium"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@DateTime.Now.ToString("MM-dd-yyyy")
+            </h4>
+
+            <p class="p-1"></p>
+            <img align="left" src="@Model.EdocsITSCustomers.ImgStr" style="margin: 0 auto; width:100px; height:100px;" />
+
+            <p class="p-2"></p>
+            <p class="p-2"></p>
+            <p class="p-2"></p>
+            <p class="p-1"></p>
+            <h2 style="text-align: right; font-size: medium">
+                <span style="float:left">Bill TO</span>
+                CustomerID @Model.EdocsITSCustomers.EdocsCustomerID Terms Net 30 Days
+            </h2>
+            @*
+                <h4 style="text-align: right; font-size: medium">
+                    <span style="float:left">@Model.EdocsITSCustomers.EdosCustomerFirstName @Model.EdocsITSCustomers.EdocsCustomerLastName</span>
+
+                </h4>
+            *@
+            <h4 style="text-align: left;font-size:medium">
+                @Model.EdocsITSCustomers.EdocsCustomerName
+            </h4>
+            <h4 style="text-align: left; font-size: medium">
+                @Model.EdocsITSCustomers.EdocsCustomerAddress
+            </h4>
+            <h4 style="text-align: left; font-size: medium">
+                @Model.EdocsITSCustomers.EdocsCustomerCity, @Model.EdocsITSCustomers.EdosCustomerState, @Model.EdocsITSCustomers.EdocsCustomerZipCode
+            </h4>
+            <h4 style="text-align: left; font-size: medium">
+                Phone:(@Model.EdocsITSCustomers.EdocsCustomerPhoneNumber.Substring(0, 3)) @Model.EdocsITSCustomers.EdocsCustomerPhoneNumber.Substring(3, 3)-@Model.EdocsITSCustomers.EdocsCustomerPhoneNumber.Substring(6, 4)
+
+            </h4>
+            <h4 style="text-align: left; font-size: medium">
+                Email:@Model.EdocsITSCustomers.EdocsCustomerEmailAddress
+            </h4>
+
+            <p class="p-0"></p>
+            <div>
+
+                <input type="hidden" value=" @Model.EdocsITSCustomers.EdocsCustomerID" id="idCust" />
+
+                <table id="tblCustomers" class="table" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th style="width:150px">Date Of Service</th>
+                            <th style="width:150px">Item Quantity</th>
+                            <th style="width:150px">$ Item Cost</th>
+                            <th style="width:150px">Item Description</th>
+                            <th style="width:150px">Item Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if ((@Model.InvoiceModel != null) && (@Model.InvoiceModel.Count() > 0))
+                        {
+
+                            @foreach (CustomInvoiceModel customer in Model.InvoiceModel)
+                            {
+                                <tr>
+                                    <td>@customer.DateofService</td>
+                                    <td>@customer.ItemQuantity</td>
+                                    <td>@customer.ItemCost</td>
+
+                                    <td>@customer.ItemDescription</td>
+                                    <td>@customer.ItemTotal</td>
+                                    <td><input type="button" value="Remove" onclick="Remove(this)" /></td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                    <p class="p-1"></p>
+                    <tfoot>
+                        <tr>
+                            <td><input type="date" id="txtDateofDervice" /></td>
+                            <td><input type="text" id="txtItemQuantity" onfocusout="LostFocous();" /></td>
+                            <td><input type="text" id="txtItemCost" onfocusout="LostFocous();" /></td>
+                            <td><textarea rows="2" cols="25" id="txtItemDescription"></textarea></td>
+                            <td><input type="number" readonly id="txtItemTotal" /></td>
+                            <td><input type="button" id="btnAdd" value="Add" /></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+
+            </div>
+            <br />
+            <input type="button" class="btn btn-primary" id="btnSave" value="Generate Invoice" />
+            <p class="p2">
+
+            </p>
+            <p class="text-info text-right" style="vertical-align:middle">
+                <label style="font-size:medium" for="totalCost">Total Cost:$</label>
+                <textarea style="vertical-align:middle" readonly rows="1" cols="20" id="totalCost">0.00</textarea>
+            </p>
+
+        }
+
+    </div>
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+                    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+                    opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Generation Invoice, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+@section scripts{
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script src="~/js/JQuerCustomInvoice.js"></script>
+
+
+}

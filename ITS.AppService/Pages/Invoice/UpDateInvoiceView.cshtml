@@ -1,0 +1,271 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.Invoice.UpDateInvoiceViewModel
+@{
+}
+<div class="container-fluid">
+
+    <h1 class="text-center text-info">e-Docs USA Tracking System Update Invoice</h1>
+    @if ((@Model.Invoice != null) && (@Model.Invoice.Count() > 0))
+    {
+        <h5 class="text-center text-info" style="font-size:medium">Customer @Model.Invoice[0].EdocsCustomerName</h5>
+    }
+    <p class="p-0"></p>
+    <a href="#searchOptions" name="sOptions" id="sOptions" class=" btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+    <p class="alert-light" id="showmess" style="display:none;font-size:medium">Click to expand/hide Search Options</p>
+    <p class="p-0"></p>
+
+
+    @if ((@Model.CustInvoices != null) && (@Model.CustInvoices.Count() > 0))
+    {
+        <div id="searchOptions" class="collapse">
+            <h3 class="text-center text-info" style="font-size:medium">Select Customer Invoices to Update</h3>
+            <form method="get" id="formInvNum" role="form">
+                <div class="row text-center  form-inline">
+                    <div class="col-*-* text-center" style="margin:0 auto;">
+                        <select id="invNum" name="invNum">
+                            <option value="Customer Name" class="text-dark">Select Customer Name</option>
+                            @foreach (var id in Model.CustInvoices)
+                            {
+                                <option class="text-info" value="@id.EdocsCustomerID">@id.EdocsCustomerName</option>
+                            }
+
+
+                        </select>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    else
+    {
+        <p class="text-info">No Invoice found that are not paid</p>
+    }
+    <p class="p-0"></p>
+    <form id="frmUpdatePayment" method="get">
+
+        <div class="container-fluid" id="printInv">
+
+
+            @if ((@Model.Invoice != null) && (@Model.Invoice.Count() > 0))
+            {
+                <input type="hidden" value="@Model.Invoice[0].EdocsCustomerID" id="IDCUst" />
+                <button class="btn" style="display:none" id="btnUpdateInvAmounts"></button>
+
+                <table class="table table-hover w-auto table-bordered  table-info" style="font-size:medium" id="tableInv">
+
+                    <thead>
+                        <tr class="w-auto" style="background-color: crimson; font-size: medium">
+
+                            <th>Name</th>
+                            <th>Number</th>
+                            <th>Scanning Start Date</th>
+                            <th>Scanning End Date</th>
+                            <th>Paid</th>
+                            <th>Invoice Amount</th>
+                            <th>Amount Owed</th>
+                            <th>Last Payment</th>
+                            <th>Amount Paying</th>
+                            <th>UpDate Invoice</th>
+                            <th>Paid Invoice</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var id in Model.Invoice)
+                        {
+                            var owe = (@id.TotalInvoiceAmount - @id.TotalPaid);
+                            var invoiceID = @id.TotalAmountPaid;
+                            
+                            TimeSpan daysSinceInvoiceSent = (DateTime.Now - id.DateInvoiceSent);
+                        <tr style="font-size:medium">
+
+                            <td>@id.EdocsCustomerName</td>
+                            <td id="invNum_@id.InvoiceNum.ToString()">@id.InvoiceNum</td>
+                            <td>@id.InvoiceStartDate.ToString("MM-dd-yyyy")</td>
+                            <td>@id.InvoiceEndDate.ToString("MM-dd-yyyy")</td>
+                            <td>$<span id="@string.Format("totalPaidAmount_{0}", @id.InvoiceNum)">@string.Format("{0:0.00}", @id.TotalPaid)</span></td>
+                            <td>$<span id="@string.Format("totalAmount_{0}", @id.InvoiceNum)">@string.Format("{0:0.00}", @id.TotalInvoiceAmount)</span></td>
+                            <td>$<span id="@string.Format("owe_{0}", @id.InvoiceNum)">@string.Format("{0:0.00}", @owe)</span></td>
+                            <td>@daysSinceInvoiceSent.Days</td>
+                            <td><textarea style="display:inline-block;" class="text-center" rows="1" cols="6" id="@id.InvoiceNum.ToString().Trim()" onblur="GetInvoiceAmount(this.id);"></textarea><p style="display:none" class="text-danger" id="@string.Format("errorAmount_{0}", @id.InvoiceNum)"></p> </td>
+
+                            @*
+                                  <p style="display:none" class="text-danger" id="@string.Format("errorAmount_{0}", @id.InvoiceNum)"></p>
+                                 <td>$@Html.TextBoxFor(m => @id.TotalAmountPaid, new { @name =@id.InvoiceNum.ToString(), @id =@id.InvoiceNum.ToString(), @class = "text-center", @style = "width:75px;", @numInv = @id.InvoiceNum.ToString(), @onblur = "GetInvoiceAmount(this.id);" })</td>
+                            <td><textarea rows="1" cols="6" id="@id.InvoiceNum.ToString().Trim()"></textarea></td>
+                            @*
+        <td><textarea rows="1" cols="6" id="@string.Format("amountPaidTotal_{0}", @id.InvoiceNum.ToString().Trim())">0.00</textarea></td>
+                                 <td><button id="btn_@id.InvoiceNum.ToString()" class="btn btn-info" type="submit" data_value1="invNum_@id.InvoiceNum.ToString()" data_value2="@string.Format("amountPaidTotal_{0}", @id.InvoiceNum.ToString().Trim())">UpDate</button></td>
+                            *@
+
+                            <td><button id="btn_@id.InvoiceNum.ToString()" class="btn btn-info" type="submit" data_value1="invNum_@id.InvoiceNum.ToString()">UpDate</button></td>
+                            <td><a id="btnPaid_@id.InvoiceNum.ToString()" class="btn btn-info" href="/Invoice/UpDateInvoiceView?custId=@Model.CustNumber&invoiceNumber=@id.InvoiceNum&paidAmount=@string.Format("{0:0.00}", Model.TotalOwed)">Paid</a></td>
+
+                        </tr>
+
+                        }
+                    </tbody>
+                </table>
+                <p class="p-0"></p>
+                <h2 class="text-right" style="font-size:medium;margin-bottom:1px;">Invoice Summary for @Model.Invoice[0].EdocsCustomerName</h2>
+
+                <p class="text-info text-right" style="font-size: medium; margin-bottom:1px;">Date Invoices Last Paid: @Model.DateLastPaid </p>
+                <p class="text-info text-right" style="font-size: medium; margin-bottom:1px;">Total Amount: $<span id="totalAmount">@string.Format("{0:0.00}", @Model.TotalAmount)</span></p>
+                <p class="text-info text-right" style="font-size: medium; margin-bottom:1px;">Total Paid: $<span id="totalPaid">@string.Format("{0:0.00}", @Model.TotalPaid)</span></p>
+                <p class="text-info text-right" style="font-size: medium; margin-bottom:1px;">Total Owe: $<span id="totalOwe">@string.Format("{0:0.00}", @Model.TotalOwed)</span></p>
+
+
+            }
+
+        </div>
+        @*
+            <button id="btnSUb" class="btn btn-info" type="submit" >UpDate</button>
+        *@
+    </form>
+    <p class="p-1">
+
+    <p>
+        <a type="button" class="btn btn-outline-dark btn-link" style="float: right; overflow: auto;" id="btnExit" href="/Index" name="btnExit">Exit</a>
+
+    </p>
+    <p class="p-1">
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+                top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+                opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $(document).on("click", "#tableInv tbody tr td button.btn", function (e) { // any button
+
+                //    //var data = {};
+                var invID = $(this).attr("data_value1");
+                 
+              //   alert(invID);
+              //  var totAmt = $(this).attr("data_value2");
+                //   // alert(totAmt);
+                //   // var iPaid = $(this).attr("date_value3")
+                //    //  var accRej = $(this).attr("data-value2");
+                //   // alert(invID);
+                //   // alert(totAmt);
+                //   // alert(iPaid);
+                //  //  alert(document.getElementById(iPaid).value);
+                //   // if (document.getElementById(iPaid).checked) {
+                //      //  alert("chec");
+                //   // }
+
+                //   // alert($(this).attr("data_value1"));
+                //  //  alert($(this).document.attr("data_value2"));
+                //   // alert($(this).attr("data-value2"));
+                //    //   alert($(this).attr("id"));
+                
+                var numInv = document.getElementById(invID).innerHTML;
+               
+                var totAmtP = document.getElementById(numInv).value;
+                //if (!(IsNumeric(totAmtP, numInv))) {
+                //    alert(totAmtP);
+                //    return false ;
+                //}
+                 
+                //  alert($document.getElementById(totAmt).value);
+                $("<input type='hidden'/>")
+                    .attr("value", $("#IDCUst").val())
+                    .attr("id", "custId")
+                    .attr("name", "custId")
+                    .prependTo("#frmUpdatePayment");
+                $("<input type='hidden'/>")
+                    .attr("value", numInv)
+                    .attr("id", "invoiceNumber")
+                    .attr("name", "invoiceNumber")
+                    .prependTo("#frmUpdatePayment");
+                $("<input type='hidden'/>")
+                    .attr("value", totAmtP)
+                    .attr("id", "paidAmount")
+                    .attr("name", "paidAmount")
+                    .prependTo("#frmUpdatePayment");
+
+
+
+
+                //    var id = "amountPaidTotal" + numInv;
+                //   // alert("id "+id);
+                //    //alert(document.getElementById(id).value);
+                $("#frmUpdatePayment").submit();
+
+
+            });
+
+            $('#invNum').change(function (e) {
+
+                $("#formInvNum").submit();
+            });
+            //$('#invNum').change(function (e) {
+            //    //if (!(CheckEmptyString($("#repSDate").val(), 'Need a Report Begin Date:'))) {
+            //    //    $("#repSDate").focus();
+            //    //    return false;
+            //    //}
+            //    //if (!(CheckEmptyString($("#repSEndDate").val(), 'Need a Report Begin Date:'))) {
+            //    //    $("#repSEndDate").focus();
+            //    //    return false;
+            //    //}
+            //    $("#divLoading").show();
+            //    //  ShowLoading();
+            //    // var getInvoiceDates = "/Invoice/CreateInvoiceView?repSDate=01-01-0001" + "&repSEndDate=01-01-0001" + "&custID=" + $("#cusID").val();
+            //    // window.open(getInvoiceDates, '_self');
+            //    $("#sOptions").click();
+            //    e.preventDefault();
+            //    var getCustInvUri = "/Partial_Pages/PartialPageCustomerInvoice/";
+            //    var strData = "invNum=" + $('#invNum').val()
+            //    $.ajax({
+            //        type: "GET",
+            //        url: getCustInvUri,
+            //        contentType: 'application/html; charset=utf-8',
+            //        data: strData,
+            //        //  data: "invSDate=" + $('#invSDate').val().replace('/', '-')+ "&invEDate=" + $('#invEnd').val().replace('/', '-') + "&custID=" + $('#custID').val(),
+            //        datatype: "html",
+            //        cache: false,
+
+            //        success: function (result) {
+            //            // alert("success");\
+
+
+            //            $("#divInvoice").html(result);
+            //            // SendHtmlPage();
+            //        },
+            //        complete: function () {
+            //            //   CompleteAjaxCall();
+            //            // alert("compl");
+            //            $("#divLoading").hide();
+            //            // $('#dtlUsers').DataTable({ "pagingType": "full" });
+            //            // $('.dataTables_length').addClass('bs-select');
+
+            //        },
+            //        error: function (request, status, error) {
+            //            $("#divLoading").hide();
+            //            alert(error);
+            //            alert(request.getAllResponseHeaders());
+            //            alert(status.show);
+            //        }
+            //    });
+
+            // $("#formCustId").submit();
+
+        });
+                      //  });
+    </script>
+}
+@*
+                            <td>$@Html.TextBoxFor(m => @id.TotalAmountPaid, new { @name = "amountPaidTotal_@id.InvoiceNum.ToString()", @id = "amountPaidTotal_" + @id.InvoiceNum.ToString(), @class = "text-center", @style = "width:75px;", @numInv = @id.InvoiceNum.ToString(), @onblur = "GetInvoiceAmount(this.id);" })</td>
+    <td><textarea rows="1" cols="10" id="@string.Format("amountPaidTotal{0}", @id.InvoiceNum.ToString().Trim())"> @id.TotalAmountPaid</textarea></td>
+*@
+
+@*   <td>
+        <input type="checkbox" id="InvoicePaid_@id.InvoiceNum" value="No" />  <td><button id="btn_@id.InvoiceNum.ToString()" class="btn btn-info" type="submit" data_value1="invNum_@id.InvoiceNum.ToString()" data_value2="@string.Format("amountPaidTotal{0}", @id.InvoiceNum.ToString().Trim())">UpDate</button></td>
+    </td>
+*@

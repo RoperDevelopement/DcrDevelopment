@@ -1,0 +1,134 @@
+﻿@page
+@model BinMonitorAppService.Pages.LookUp.SpecMonitorDurationByCWIDViewModel
+@{
+    ViewData["Title"] = "ViewLookUpBatches";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+
+}
+
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Page BinMonitor Report will refresh in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+<div class="container-fluid small" style="background-color:#ffffff">
+    <p class="p-2" />
+    <header>
+        <h3 class="text-center">Volume/Duration Report By CWID Date Range @Model.UsageRepStDate.ToString("MM-dd-yyyy") - @Model.UsageRepEndDate.ToString("MM-dd-yyyy")</h3>
+    </header>
+    <p class="p-0"></p>
+    <form method="get" id="fmUsgRepDur" name="fmUsgRepDur">
+        <div class="form-group text-center">
+            <div class="row" style="display:table;margin:auto">
+
+                <div class="col">
+                    @Html.LabelFor(model => Model.UsageRepStDate, new { @class = "text-left" })
+                    @Html.EditorFor(m => Model.UsageRepStDate, new { @name = "UsageRepStDate", @id = "UsageRepStDate" })
+                </div>
+                <p class="p-0"></p>
+                <div class="col">
+                    <p asp-for="UsageRepStDate">
+                        @Html.LabelFor(model => Model.UsageRepEndDate, new { @class = "text-left" })
+                        @Html.EditorFor(m => @Model.UsageRepEndDate, new { @name = "UsageRepEndDate", @id = "UsageRepEndDate" })
+                    </p>
+                </div>
+                @*
+                    <p class="p-0"></p>
+                    <div class="col">
+                        @Html.LabelFor(model => Model.ReportType, new { @class = "text-left" })
+                        @Html.DropDownList("ReportType",
+                                             new SelectList(Enum.GetValues(typeof(DropListBinOptionOptions))),
+                                             new { @onclick = "this.submit()" })
+                    </div>
+                *@
+                <p class="p-0"></p>
+                <div class="col">
+                    @Html.LabelFor(model => Model.ActiveUsers, new { @class = "text-left" })
+
+                    @Html.DropDownListFor(m => m.ActiveUsers,
+                 new SelectList(Model.ActiveUsers, "ActiveUsers"), new { @name = "ActiveUsers", @id = "ActiveUsers" })
+
+                </div>
+                <p class="p-0"></p>
+            </div>
+        </div>
+    </form>
+    <div class="text-center">
+
+        <button class="btn btn-outline-primary " id="subcrbatch" name="subcrbatch">Generate Report</button>
+        <button class="btn btn-outline-secondary " id="export" name="export">Export</button>
+
+
+
+        <a href="https://edocsnypbinmonitor.azurewebsites.net/LookUp/SpecMonitorDurationByCWIDView"><input type="button" value="Reset" class="btn btn-outline-warning" id="reset"></a>
+        <a href="https://edocsnypbinmonitor.azurewebsites.net/BinManager/ViewManagerHome"><input type="button" value="Exit" id="exitcrb" class="btn btn-outline-dark"></a>
+    </div>
+    <p class="p-1"></p>
+    @if ((Model.RepDurVol != null) && (Model.RepDurVol.Count > 0))
+    {
+<table class="table table-hover w-auto text-center table-bordered table-info" width="100%" id="dtVolRep" style="margin-left:auto;margin-right:auto;">
+
+    <thead>
+        <tr>
+            <th>CWID</th>
+            <th>Volume</th>
+            <th>Duration</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var items in Model.RepDurVol)
+        {
+            <tr>
+                <td>@items.Value.CWID</td>
+                <td>@items.Value.TotalVolume</td>
+                <td>@items.Value.TotalDur</td>
+            </tr>
+        }
+    </tbody>
+</table>
+        <p class="p-1"></p>
+    }
+
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:block">
+    <p id="parBmUpScreen" name="parCategory" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Loading Reports please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+<link rel="stylesheet" href="~/css/datatables-select.min.css" />
+<link rel="stylesheet" href="~/css/datatables.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="~/lib/datatables/datatables-select.min.js"></script>
+<script src="~/lib/datatables/datatables.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $("#divLoading").hide();
+       
+        SessionExpireAlert(0);
+        $(this).bind("contextmenu", function (e) {
+            e.preventDefault();
+        });
+        $('#subcrbatch').click(function () {
+            $("#divLoading").show();
+            $("<input type = 'hidden' />")
+                .attr("value", "")
+                .attr("id", "export")
+                .attr("name", "export")
+                .prependTo("#fmUsgRepDur");
+            $('#fmUsgRepDur').submit();
+        });
+        $('#export').click(function () {
+
+            $("<input type = 'hidden' /> ")
+                .attr("value", "exportRep")
+                .attr("id", "export")
+                .attr("name", "export")
+                .prependTo("#fmUsgRepDur");
+            $('#fmUsgRepDur').submit();
+        });
+
+    });</script>
+

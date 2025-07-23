@@ -1,0 +1,7 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQDocumentBuilder, Scanquire.Public, Version=1.0.4797.18044">
+  <Properties>
+    <Simple name="CommandReaderName" value="BARCODE DEFAULT" />
+    <Null name="CommandReader" />
+    <Simple name="MaxPageCount" value="0" />
+  </Properties>
+</Complex>

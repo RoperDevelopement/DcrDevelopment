@@ -1,0 +1,33 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQCommandImageBuilder, Scanquire.Public">
+  <Properties>
+    <SingleArray name="Bookmarks">
+      <Items>
+        <Simple value="ADMISSIONS" />
+      </Items>
+    </SingleArray>
+    <Simple name="Header" value="" />
+    <Simple name="Footer" value="" />
+    <Simple name="LogoPath" value="Graphics\logobw.bmp" />
+    <Complex name="LogoSize">
+      <Properties>
+        <Simple name="Width" value="0" />
+        <Simple name="Height" value="0" />
+      </Properties>
+    </Complex>
+    <Simple name="PromptForComments" value="True" />
+    <Simple name="BarcodeEncoderName" value="DEFAULT" />
+    <Simple name="ImageDPI" value="300" />
+    <Simple name="MinImageWidth" value="612" />
+    <Simple name="MinImageHeight" value="792" />
+    <Complex name="ImageMargin">
+      <Properties>
+        <Simple name="All" value="-1" />
+        <Simple name="Bottom" value="36" />
+        <Simple name="Left" value="0" />
+        <Simple name="Right" value="0" />
+        <Simple name="Top" value="36" />
+      </Properties>
+    </Complex>
+    <Simple name="BarcodeRendererName" value="DEFAULT" />
+  </Properties>
+</Complex>

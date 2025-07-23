@@ -1,0 +1,116 @@
+<?xml version="1.0" standalone="yes"?>
+<EASYHL7VENDORS>
+  <xs:schema id="EASYHL7VENDORS" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="EASYHL7VENDORS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="HL7_VENDORS">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Record_ID" type="xs:int" minOccurs="0" />
+                <xs:element name="Vendor" type="xs:string" minOccurs="0" />
+                <xs:element name="Version" type="xs:string" minOccurs="0" />
+                <xs:element name="Description" type="xs:string" minOccurs="0" />
+                <xs:element name="FieldSeparator" type="xs:string" minOccurs="0" />
+                <xs:element name="EncodingChars" type="xs:string" minOccurs="0" />
+                <xs:element name="ItemGUID" type="xs:string" minOccurs="0" />
+                <xs:element name="HasNotes" type="xs:int" minOccurs="0" />
+                <xs:element name="ExtendedChars" type="xs:string" minOccurs="0" />
+                <xs:element name="Notes" type="xs:string" minOccurs="0" />
+                <xs:element name="DefinitionVersion" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <HL7_VENDORS>
+    <Record_ID>0</Record_ID>
+    <Vendor>Default</Vendor>
+    <Version>2.2</Version>
+    <Description>Default EasyHL7 Vendor for Version 2.2</Description>
+    <FieldSeparator>|</FieldSeparator>
+    <EncodingChars>^~\&amp;</EncodingChars>
+    <ItemGUID>8007DA31C3EBCF4BB3B1BB922164E081</ItemGUID>
+    <HasNotes>0</HasNotes>
+    <ExtendedChars>0B|1C,0D|0D</ExtendedChars>
+    <DefinitionVersion>1.0</DefinitionVersion>
+  </HL7_VENDORS>
+  <HL7_VENDORS>
+    <Record_ID>0</Record_ID>
+    <Vendor>Default</Vendor>
+    <Version>2.3</Version>
+    <Description>Default EasyHL7 Vendor for Version 2.3.1</Description>
+    <FieldSeparator>|</FieldSeparator>
+    <EncodingChars>^~\&amp;</EncodingChars>
+    <ItemGUID>63578DEA-9541-4663-B484-111919054FBC</ItemGUID>
+    <HasNotes>0</HasNotes>
+    <ExtendedChars>0B|1C,0D|0D</ExtendedChars>
+    <Notes />
+    <DefinitionVersion>1.0</DefinitionVersion>
+  </HL7_VENDORS>
+  <HL7_VENDORS>
+    <Record_ID>0</Record_ID>
+    <Vendor>Default</Vendor>
+    <Version>2.4</Version>
+    <Description>Default EasyHL7 Vendor for Version 2.4</Description>
+    <FieldSeparator>|</FieldSeparator>
+    <EncodingChars>^~\&amp;</EncodingChars>
+    <ItemGUID>10D80A28-6A2C-4AD3-8080-32924F02F0CE</ItemGUID>
+    <HasNotes>0</HasNotes>
+    <ExtendedChars>0B|1C,0D|0D</ExtendedChars>
+    <DefinitionVersion>1.0</DefinitionVersion>
+  </HL7_VENDORS>
+  <HL7_VENDORS>
+    <Record_ID>0</Record_ID>
+    <Vendor>Default</Vendor>
+    <Version>2.5</Version>
+    <Description>Default EasyHL7 Vendor for Version 2.5</Description>
+    <FieldSeparator>|</FieldSeparator>
+    <EncodingChars>^~\&amp;</EncodingChars>
+    <ItemGUID>6C46969E88EE0B4B93CD89D94185A289</ItemGUID>
+    <HasNotes>0</HasNotes>
+    <ExtendedChars>0B|1C,0D|0D</ExtendedChars>
+    <DefinitionVersion>1.0</DefinitionVersion>
+  </HL7_VENDORS>
+  <HL7_VENDORS>
+    <Record_ID>0</Record_ID>
+    <Vendor>Default</Vendor>
+    <Version>2.5.1</Version>
+    <Description>Default EasyHL7 Vendor for Version 2.5.1</Description>
+    <FieldSeparator>|</FieldSeparator>
+    <EncodingChars>^~\&amp;</EncodingChars>
+    <ItemGUID>F23FA4E1D6D8774DA857D32378F96CBF</ItemGUID>
+    <HasNotes>0</HasNotes>
+    <ExtendedChars>0B|1C,0D|0D</ExtendedChars>
+    <DefinitionVersion>1.0</DefinitionVersion>
+  </HL7_VENDORS>
+  <HL7_VENDORS>
+    <Record_ID>0</Record_ID>
+    <Vendor>Default</Vendor>
+    <Version>2.6</Version>
+    <Description>Default EasyHL7 Vendor for Version 2.6</Description>
+    <FieldSeparator>|</FieldSeparator>
+    <EncodingChars>^~\&amp;</EncodingChars>
+    <ItemGUID>9E630452C35A164CB8FAE0EDE10DA6F7</ItemGUID>
+    <HasNotes>0</HasNotes>
+    <ExtendedChars>0B|1C,0D|0D</ExtendedChars>
+    <DefinitionVersion>1.0</DefinitionVersion>
+  </HL7_VENDORS>
+  <HL7_VENDORS>
+    <Record_ID>0</Record_ID>
+    <Vendor>Custom Vendor</Vendor>
+    <Version>2.3</Version>
+    <Description>Clone of ANSI 2.3</Description>
+    <FieldSeparator>|</FieldSeparator>
+    <EncodingChars>^~\&amp;</EncodingChars>
+    <ItemGUID>2E1026963D7F4D8B9AFA6CEC415DC9ED</ItemGUID>
+    <HasNotes>1</HasNotes>
+    <ExtendedChars>0B|1C,0D|0D</ExtendedChars>
+    <Notes>This custom EasyHL7 Vendor definition was created in the VendorManager. It began as an exact copy of the Default Version 2.3 definition and has since been customized by doing things like adding this annotation.
+
+The annotation can be any size and can document things like special business rules or requirements for the HL7 interface(s) for which it was created.</Notes>
+    <DefinitionVersion>1.0</DefinitionVersion>
+  </HL7_VENDORS>
+</EASYHL7VENDORS>

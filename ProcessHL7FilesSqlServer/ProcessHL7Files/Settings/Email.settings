@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ProcessHL7Files.Settings" GeneratedClassName="Email">
+  <Profiles />
+  <Settings>
+    <Setting Name="SenderUserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AlertSender@edocsusa.com</Value>
+    </Setting>
+    <Setting Name="SenderFrom" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AlertSender@edocsusa.com</Value>
+    </Setting>
+    <Setting Name="EmailOnSuccess" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EmailOnError" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ServerAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.gmail.com</Value>
+    </Setting>
+    <Setting Name="ServerPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+    <Setting Name="SenderPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">6746edocs</Value>
+    </Setting>
+    <Setting Name="Recipients" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dan.roper@edocsusa.com</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

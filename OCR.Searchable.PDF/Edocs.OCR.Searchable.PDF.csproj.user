@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>/ocr:: /inf:"D:\Archives\BSBPublicWorks\OCRImagesBSBPWD\88931c1b-d287-4cfc-b400-b5395966ff3a" /fn:%2a.png /sfn:"D:\Archives\BSBPublicWorks\Water_2020_dadafa\Water_2020_dadafa_ocr.txt"</StartArguments>
+  </PropertyGroup>
+</Project>

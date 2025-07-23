@@ -1,0 +1,405 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.ITSLookUpDocuments.ITSPSUSDLookUpDocViewModel
+@{
+    ViewData["Title"] = "ITS PSUSD Records";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+       
+        .CellWithComment {
+            position: relative;
+        }
+
+        .CellComment {
+            display: none;
+            position: absolute;
+            z-index: 100;
+            border: 1px;
+            background-color: white;
+            border-style: solid;
+            border-width: 1px;
+            border-color: red;
+            padding: 3px;
+            color: red;
+            top: 20px;
+            left: 20px;
+        }
+
+        .CellWithComment:hover span.CellComment {
+            display: block;
+        }
+        .txtArea {
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+        input[type=text] {
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+
+        button:hover {
+            background: #C0C0C0;
+        }
+        
+        button {
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 15px;
+            border: 1px solid grey;
+            border-left: none;
+            cursor: pointer;
+        }
+
+        .align-right {
+            text-align: right;
+            border: 0;
+        }
+    </style>
+}
+ 
+
+<div id="divMain" name="divMain" class="container-fluid">
+
+    @Html.AntiForgeryToken()
+    <h2 class="text-center text-dark">Look Up PSUSD Records</h2>
+    <p class="p-0"></p>
+
+    <p class="p-0"></p>
+    <a href="#searchOptions" name="sOptions" id="sOptions" class=" btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+    <p class="alert-light" id="showmess" style="display:none">Click to expand/hide Search Options</p>
+
+    <div id="searchOptions" class="collapse">
+
+        <div class="class=" container-fluid">
+
+
+            <ul class="navbar-nav flex-grow-1  justify-content-around">
+                <li id="navAdvan" class="nav-item">
+                    <span data-toggle="tooltip" title="Get all records by Date Range of records..">
+                        <button type="button" class="btn btn-default">Advance Search</button>
+                    </span>
+
+
+                </li>
+
+                <li id="navKeyWord" class="nav-item">
+                    <span data-toggle="tooltip" title="Search for records by keywords..">
+                        <button type="button" class="btn btn-default">KeyWord Search</button>
+                    </span>
+                </li>
+
+            </ul>
+
+        </div>
+        <p class="p-0"></p>
+        <div class="container-fluid">
+
+            <form method="get" id="frmDates">
+                <table class="table table-bordered tablecenter">
+                    <thead>
+                        <tr>
+                            <th class="text-center">@Html.LabelFor(model => Model.RepStartDate)</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">
+                                <p style="display:none" id="repErSDate" name="repERSDate" class="alert-danger">Scan Start Date Required</p>
+
+                                @Html.EditorFor(m => @Model.RepStartDate, new { @name = "RepStartDate", @id = "RepStartDate" }) - @Html.EditorFor(m => @Model.RepEndDate, new { @name = "RepEndDate", @id = "RepEndDate" })
+
+
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+
+                </table>
+            </form>
+            <p class="p-0"></p>
+
+            <div class="border-dark">
+                @if ((@Model.DepModel != null) && (@Model.DepModel.Count() > 0))
+                {
+                    <div class="container">
+
+                        <div id="advSearch" style="display:block">
+                            <h4 class="text-center">Advance Search</h4>
+                            <p class="p-0"></p>
+                            <div class="row text-center">
+                                <div class="col-*-* text-center " style="margin:0 auto;">
+                                    <select id="dep" name="dep">
+                                        @foreach (var id in Model.DepModel)
+                                        {
+                                            <option value="@id.Department">@id.Department</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-*-* text-center" style="margin:0 auto;">
+                                    <select id="orgDep" name="dep">
+                                        @foreach (var id in Model.OrgDep)
+                                        {
+                                            <option value="@id.OrginationDepartment">@id.OrginationDepartment</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <p class="p-0"></p>
+
+
+                            @*
+                                <div class="row text-center">
+                                    <div class="col-*-* text-center" style="margin:auto;width:500px;">
+                                        <input type="text" placeholder="Search By First Name..." id="fName" name="fName">
+                                    </div>
+                                    <div class="col-*-* text-center" style="margin:auto;width:500px;">
+                                        <input type="text" placeholder="Search By First Name..." id="lName" name="lName">
+
+                                    </div>
+                                </div>
+                            *@
+
+
+                            <div class="row text-center">
+                                <div class="col-*-* text-center " style="margin:auto;width:500px;">
+                                   <textarea type="text" class="txtArea" placeholder="Search By First Name..." id="fName" name="fName" rows="1" cols="50"></textarea>
+                                </div>
+                                <div class="col-*-* text-center">
+                                   <textarea type="text" class="txtArea"  placeholder="Search By Last Name..." id="lName" name="lName" rows="1" cols="50"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="keywordSesearch" style="display:none" class="text-center">
+                            <h4 class="text-center">KeyWord Search</h4>
+                            <p class="p-0"></p>
+
+                            <div class="row text-center">
+                                <div class="col-*-*" style="margin:auto;">
+                                         <textarea id="searchTxt" class="txtArea" style="margin-left:100px; width: 500px;" name="searchTxt" placeholder="Search Text (To search by phrase in your criteria use a comma.) ex: Find, me" rows="3" cols="100"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+            @*
+                <div style="margin:auto;max-width:300px;">
+                    <input type="text" placeholder="Search By Document Name..." id="fName" name="fName">
+                    <input type="text" placeholder="Search By TrackingID...." id="lName" name="lName">
+                    <p class="p-2"></p>
+                </div>
+            *@
+            <input type="hidden" id="searchType" value="advSearch" />
+            <p class="p-0"></p>
+            <div class="align-right">
+                <button id="psusdRecs" name="psusdRecs" style="width:5%;height:10%"><i class="fa fa-search"></i></button>
+
+                @*
+                      <button class="btn btn-primary btn-outline-primary" id="allIDs" name="allIDs"><i>All Documents</i></button>
+                    <button id="allIDs" style="float:left;width:15%"><i>All Documents</i></button>
+                *@
+                <a type="button" class="btn btn-outline-danger btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+
+
+            </div>
+        </div>
+
+    </div> @*end search options*@
+    <div id="recsPSUSD" name="recsPSUSD"></div>
+</div> @*end divmain*@
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
+        $(document).ready(function () {
+            $("#fName").autocomplete({
+
+                source: function (request, response) {
+                    var strData = request.term + "/FirstName/" + $('#RepStartDate').val() + '/' + $('#RepEndDate').val();
+                    $.ajax({
+                        url: '/Partial_Pages/PartialPagePSUSDFNameLastName',
+                        //data: { "prefix": request.term },
+                        data: { "prefix": strData },
+
+                        type: "POST",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    //  get selected value;
+                    //$("#personNameValue").val(i.item.val);
+                },
+                minLength: 1
+            });
+            $("#lName").autocomplete({
+
+                source: function (request, response) {
+                    
+                    var strData = request.term + "/LastName/" + $('#RepStartDate').val() + '/' + $('#RepEndDate').val();
+                    //alert(strData);
+                    $.ajax({
+                        url: '/Partial_Pages/PartialPagePSUSDFNameLastName',
+                        //data: { "prefix": request.term },
+                        data: { "prefix": strData },
+
+                        type: "POST",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    //  get selected value;
+                    //$("#personNameValue").val(i.item.val);
+                },
+                minLength: 1
+            });
+            $('#navKeyWord').click(function () {
+                $('#searchType').val("keywordSesearch")
+                document.getElementById("advSearch").style.display = "none";
+                document.getElementById("keywordSesearch").style.display = "block";
+            });
+            $('#navAdvan').click(function () {
+                $('#searchType').val("advSearch")
+                document.getElementById("advSearch").style.display = "block";
+                document.getElementById("keywordSesearch").style.display = "none";
+            });
+
+            $('#RepStartDate').change(function () {
+                $("#divLoading").show();
+                $("<input type='hidden'/>")
+                    .attr("value", $("#RepStartDate").val())
+                    .attr("id", "sDate")
+                    .attr("name", "sDate")
+                    .prependTo("#frmDates");
+                $("<input type='hidden'/>")
+                    .attr("value", $("#RepEndDate").val())
+                    .attr("id", "endDate")
+                    .attr("name", "endDate")
+                    .prependTo("#frmDates");
+                $('#frmDates').submit();
+            });
+            $('#RepEndDate').change(function () {
+                $("#divLoading").show();
+                $("<input type='hidden'/>")
+                    .attr("value", $("#RepStartDate").val())
+                    .attr("id", "sDate")
+                    .attr("name", "sDate")
+                    .prependTo("#frmDates");
+                $("<input type='hidden'/>")
+                    .attr("value", $("#RepEndDate").val())
+                    .attr("id", "endDate")
+                    .attr("name", "endDate")
+                    .prependTo("#frmDates");
+                $('#frmDates').submit();
+            });
+            $('#psusdRecs').click(function (e) {
+                $('#sOptions').click();
+                
+                //   $('#sOptions').click();
+                $("#divLoading").show();
+                var tSearch = $("#searchTxt").val();
+                if (tSearch.length > 0) {
+                    tSearch ='"'+ $("#searchTxt").val()+'"';
+                }
+               
+                e.preventDefault();
+
+                // var getUsersProfiles = "/Partial_Pages/PartialPageLookUpPSUDRecs?";
+             //   var strData = "sType=" + $('#searchType').val() + "/sDate=" + $("#RepStartDate").val().replace("/", "-") + "/eDate=" + $("#RepEndDate").val().replace("/", "-") + "/dep=" + $("#dep").val() + "/orgDep=" + $("#orgDep").val() + "/fName=" + $("#fName").val() + "/lName=" + $("#lName").val() + "/stext=" + tSearch
+                var strData = "sType=" + $('#searchType').val() + "&sDate=" + $("#RepStartDate").val().replace("/", "-") + "&eDate=" + $("#RepEndDate").val().replace("/", "-") + "&dep=" + $("#dep").val() + "&orgDep=" + $("#orgDep").val() + "&fName=" + $("#fName").val() + "&lName=" + $("#lName").val() + "&stext=" + tSearch
+
+                var getUsersProfiles = "/Partial_Pages/PartialPageLookUpPSUDRecs?"// + strData;
+                $.ajax({
+                    type: "GET",
+                    url: getUsersProfiles,
+                    contentType: 'application/html;charset=utf-8',
+                     data: strData,
+                    datatype: "html",
+                    cache: false,
+                    success: function (results) {
+
+                        $('#recsPSUSD').show();
+                        //  $('#saveInvoice').hide();
+                        $("#recsPSUSD").html(results);
+                        //Convert Base64 string to Byte Array.
+                        // var bytes = Base64ToBytes(r.Data);
+
+                        //  LoadPdfFromBlob(bytes);
+                    },
+                    complete: function () {
+                        //   CompleteAjaxCall();
+                        // alert("compl");
+                        $("#divLoading").hide();
+                        // $('#dtlUsers').DataTable({ "pagingType": "full" });
+                        // $('.dataTables_length').addClass('bs-select');
+
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+                });
+
+            });
+ 
+
+        });
+    </script>
+
+}

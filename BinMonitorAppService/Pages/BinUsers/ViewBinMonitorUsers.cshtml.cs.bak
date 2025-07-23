@@ -1,0 +1,718 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using BinMonitorAppService.Models;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using BinMonitorAppService.Constants;
+using Microsoft.AspNetCore.Hosting;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Data;
+using System.Data.SqlClient;
+using BinMonitorAppService.ApiClasses;
+using BinMonitorAppService.Logging;
+using System.Text.RegularExpressions;
+using BinMonitor.BinInterfaces;
+
+namespace BinMonitorAppService.Pages.BinUsers
+{
+    public class ViewBinMonitorUsersModel : PageModel
+    {
+        private readonly IEmailSettings emailSettings;
+        private ILog auditLogs;
+
+        private readonly string ValidEmailAdd = @"^([A-Za-z0-9][^'!&\\#*$%^?<>()+=:;`~\[\]{}|/,₹€@ ][a-zA-z0-9-._][^!&\\#*$%^?<>()+=:;`~\[\]{}|/,₹€@ ]*\@[a-zA-Z0-9][^!&@\\#*$%^?<>()+=':;~`.\[\]{}|/,₹€ ]*\.[a-zA-Z]{2,6})$";
+        public string[] CheckBoxStr
+        { get; set; }
+        private string WebApiUrl
+        { get { return configuration.GetValue<string>("BinMonitorApi").ToString(); } }
+        private readonly IConfiguration configuration;
+
+
+        public List<string> Users
+        { get; set; }
+        [BindProperty]
+        public string SelUser
+        { get; set; }
+
+        public string StyleDisPlay
+        { get; set; }
+        [BindProperty]
+        public UsersModel UsersModel
+        { get; set; }
+        public List<string> ProfileRights
+        { get; set; }
+        public List<string> Premissions
+        { get; set; }
+        [BindProperty]
+        public UsersModel UsersModelEdit
+        { get; set; }
+        public IDictionary<string, SpecMonitorUserProfileRights> SpecMonUserRigths
+        { get; set; }
+        public SpectrumMonitorMenuRightsModel SpectrumMonitorMenuRightsModel
+        { get; set; }
+        public string SelectUserProfile
+        {
+            get; set;
+
+        }
+        public SpecMonitorFormUserPre MonitorFormUserPre
+        { get; set; }
+        public ViewBinMonitorUsersModel(IConfiguration config, ILog logConfig, IEmailSettings email)
+        {
+            auditLogs = logConfig;
+            configuration = config;
+            UsersModel = new UsersModel();
+            CheckBoxStr = new string[2];
+            emailSettings = email;
+        }
+        private async Task GetLogInformaiton()
+        {
+
+            auditLogs = InitAuditLogs.LogAsync(auditLogs, HttpContext.Session).ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            try
+            {
+                if (!(User.Identity.IsAuthenticated))
+                {
+                    return Redirect("/BinUsers/LoginView");
+                }
+
+                ViewData["CWID"] = await GetSessionVariables.SessionVarInstance.GetSessionVariable(HttpContext.Session, GetSessionVariables.SessionKeyCwid);
+                if (ViewData["CWID"] == null)
+                    return Redirect("/BinUsers/LoginView");
+                InitAuditLogs.StartStopWatch();
+                GetLogInformaiton().ConfigureAwait(false).GetAwaiter().GetResult();
+                auditLogs.LogInformation("Start ViewBinMonitorUsersModel OnGetAsync");
+                SpectrumMonitorMenuRightsModel = ApiSetUserProfile.UserProfileInstance.GetBMMenuRights(User.Identity.Name, HttpContext.Session, auditLogs, WebApiUrl).ConfigureAwait(false).GetAwaiter().GetResult();
+                StyleDisPlay = "none";
+                var qString = Request.QueryString;
+                MonitorFormUserPre = await GetSessionVariables.SessionVarInstance.GetJsonSessionObject<SpecMonitorFormUserPre>(HttpContext.Session, "ProfileUser");
+                if(MonitorFormUserPre == null)
+                {
+                    ApiSetUserProfile.UserProfileInstance.GetUserProfile(User.Identity.Name, WebApiUrl, auditLogs, HttpContext.Session).ConfigureAwait(false).GetAwaiter().GetResult();
+                    MonitorFormUserPre = await GetSessionVariables.SessionVarInstance.GetJsonSessionObject<SpecMonitorFormUserPre>(HttpContext.Session, "ProfileUser");
+                }
+                GetViewData().ConfigureAwait(true).GetAwaiter().GetResult();
+                SelUser = MonitorFormUserPre.Cwid;
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel current user: {SelUser}");
+                if (qString.HasValue)
+                {
+                    auditLogs.LogInformation($"ViewBinMonitorUsersModel query string: {qString.Value}");
+                   // SelUser = Request.Query["selCatName"].ToString();
+                   string sUser = Request.Query["selCatName"].ToString();
+                    SelectUserProfile = Request.Query["selUserRights"].ToString();
+                    if (!(string.IsNullOrWhiteSpace(sUser)))
+                    {
+                        StyleDisPlay = "block";
+                        SelUser = sUser;
+
+                    }
+
+                }
+
+
+                await Init();
+                string totalQueryTime = InitAuditLogs.StopStopWatch();
+                auditLogs.LogInformation($"End ViewBinMonitorUsersModel total time: {totalQueryTime} ms");
+
+            }
+            catch (Exception ex)
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel {ex.Message}");
+                return new RedirectToPageResult($"/Error?ErrMEss=Model ViewBinMonitorUsersModel OnPostAsync {ex.Message}");
+                
+            }
+            
+            return Page();
+
+        }
+        //private async Task SetPermissions()
+        //{
+        //    //MonitorFormUserPre = new SpecMonitorFormUserPre();
+        //    //  MonitorFormUserPre = await GetSessionVariables.SessionVarInstance.GetJsonSessionObject<SpecMonitorFormUserPre>(HttpContext.Session, "ProfileUser");
+        //    //MonitorFormUserPre.Cwid = string.Empty;
+        //    //MonitorFormUserPre.Admin = false;
+        //    //MonitorFormUserPre.ChangeUsersPasswords = false;
+        //    //MonitorFormUserPre.CreateUsers = false;
+        //    //MonitorFormUserPre.DeleteUsers = false;
+        //    //MonitorFormUserPre.ManageUserProfiles = false;
+        //    //MonitorFormUserPre.CreateNewProfiles = false;
+        //}
+        private async Task GetViewData()
+        {
+            ViewData[SqlConstants.ViewDataChangeCategories] = SpectrumMonitorMenuRightsModel.Categories;
+            ViewData[SqlConstants.ViewDataEmailReports] = SpectrumMonitorMenuRightsModel.EmailReports;
+            ViewData[SqlConstants.ViewDataRunReports] = SpectrumMonitorMenuRightsModel.RunReports;
+
+        }
+        private async Task Init()
+        {
+            auditLogs.LogInformation("Method Init");
+          //  ViewData["UserProfile"] = await GetSessionVariables.SessionVarInstance.GetSessionVariable(HttpContext.Session, GetSessionVariables.SessionKeyUserProfile);
+            string spinfo = string.Format(SqlConstants.ApiUserInformation, SelUser, "NA");
+            auditLogs.LogInformation($"Getting users weburl: {WebApiUrl}{SqlConstants.ApiSpecMonitorUserController} controller:{spinfo}");
+            UsersModelEdit = await GetApis.GetApisInctance.ApiUserProfileInfo(spinfo, $"{WebApiUrl}{SqlConstants.ApiSpecMonitorUserController}", auditLogs);
+
+            await GetUsers();
+
+            if (string.IsNullOrWhiteSpace(SelectUserProfile))
+            {
+                SelectUserProfile = MonitorFormUserPre.ProfileName;
+                auditLogs.LogInformation($"Selected user profile: {SelectUserProfile}");
+            }
+            else
+                auditLogs.LogWarning($"No Selected user profile");
+            await GetPermissions();
+        }
+        private async Task GetUsers()
+        {
+            auditLogs.LogInformation("Method GetUsers");
+            if ((MonitorFormUserPre.Admin) || (MonitorFormUserPre.EditUsers))
+            {
+                auditLogs.LogInformation($"Method GetUsers weburl: {WebApiUrl}{SqlConstants.WebApiBinMonitor} controller : {SqlConstants.SpGetSpectrumMonitorUserCwid} user logged in as admin or can editusers");
+                Users = await BinsInformation.BinsApisInctance.ApiGetSpectrumMonitorCwid($"{WebApiUrl}{SqlConstants.WebApiBinMonitor}", SqlConstants.SpGetSpectrumMonitorUserCwid, auditLogs);
+
+            }
+            else
+            {
+                Users = new List<string>();
+                Users.Add(MonitorFormUserPre.Cwid);
+
+            }
+        }
+        private async Task EmailGeneratedPw(string idcw, string newpw, string emailAddress)
+        {
+            auditLogs.LogInformation($"Method EmailGeneratedPw for cwid: {idcw} send email: {emailAddress}");
+            EmailService emailService = new EmailService();
+            string eMailMess = $"A generated pw has been requested by {idcw} the new password is {newpw}";
+            string eMailSub = $"New password for cwid {idcw} {DateTime.Now.ToString("HH:mm:ss MM:dd:yyyy")}";
+            emailSettings.EmailTo = emailAddress;
+            emailSettings.EmailCC = string.Empty;
+            emailService.SendEmail(eMailMess, eMailSub,false,emailSettings);
+        }
+        public async Task GetPermissions()
+        {
+            auditLogs.LogInformation("Method GetPermissions");
+            ProfileRights = await BinsInformation.BinsApisInctance.ApiGetSpectrumMonitorUserRights($"{WebApiUrl}{SqlConstants.WebApiBinMonitor}", SqlConstants.SpGetSpecUserRights, auditLogs);
+            SpecMonUserRigths = await BinsInformation.BinsApisInctance.ApiGetUserRightsModel($"{WebApiUrl}{SqlConstants.WebApiBinMonitor}", SqlConstants.SpGetSpUserRightsModel, auditLogs);
+            Premissions = new List<string>();
+
+            foreach (KeyValuePair<string, SpecMonitorUserProfileRights> keyValuePair in SpecMonUserRigths)
+            {
+                if (string.Compare(keyValuePair.Key, SelectUserProfile, true) == 0)
+                {
+                    Premissions.Add(keyValuePair.Value.CreateNewProfiles);
+                    Premissions.Add(keyValuePair.Value.ChangeUsersPasswords);
+                    Premissions.Add(keyValuePair.Value.CreateUsers);
+                    Premissions.Add(keyValuePair.Value.DeleteUsers);
+                    Premissions.Add(keyValuePair.Value.EditUsers);
+                    Premissions.Add(keyValuePair.Value.ManageUserProfiles);
+                    Premissions.Add(keyValuePair.Value.RunReports);
+                    Premissions.Add(keyValuePair.Value.TransFerBins);
+                    Premissions.Add(keyValuePair.Value.TransFerCategories);
+                    Premissions.Add(keyValuePair.Value.EmailReports);
+                    Premissions.Add(keyValuePair.Value.Categories);
+
+                    break;
+                }
+            }
+            if (!(MonitorFormUserPre.Admin) || (!(MonitorFormUserPre.ManageUserProfiles)))
+            {
+                List<string> TempList = ProfileRights;
+
+                ProfileRights = TempList.Where(p => p.Equals(SelectUserProfile)).ToList();
+
+            }
+        }
+        public async Task<IActionResult> OnPostAsync(UsersModel UsersModel, UsersModel UsersModelEdit)
+        {
+            try
+            {
+                if (!(User.Identity.IsAuthenticated))
+                {
+                    return Redirect("/BinUsers/LoginView");
+                }
+
+                ViewData["CWID"] = await GetSessionVariables.SessionVarInstance.GetSessionVariable(HttpContext.Session, GetSessionVariables.SessionKeyCwid);
+                if (ViewData["CWID"] == null)
+                    return Redirect("/BinUsers/LoginView");
+                GetLogInformaiton().ConfigureAwait(false).GetAwaiter().GetResult();
+                auditLogs.LogInformation("Start ViewBinMonitorUsersModel onpost");
+                SpectrumMonitorMenuRightsModel = ApiSetUserProfile.UserProfileInstance.GetBMMenuRights(User.Identity.Name, HttpContext.Session, auditLogs, WebApiUrl).ConfigureAwait(false).GetAwaiter().GetResult();
+                GetViewData().ConfigureAwait(true).GetAwaiter().GetResult();
+
+                string updateStatus = Request.Form["updatestatus"];
+
+                
+                if (string.Compare(updateStatus, "exit", true) == 0)
+                {
+                    auditLogs.LogInformation($"Exit ViewBinMonitorUsersModel onpost redirect to /BinManager/ViewManagerHome total time: {InitAuditLogs.StopStopWatch()} ms ");
+                    return Redirect("/BinManager/ViewManagerHome");
+                }
+                else if (string.Compare(updateStatus, "createusers", true) == 0)
+                {
+                    
+                    UsersModel.UserProfile = Request.Form["selURightsCr"];
+                    auditLogs.LogInformation($"ViewBinMonitorUsersModel onpost create user UserProfile: {UsersModel.UserProfile} ");
+                    if (ValiDateUserCwid(UsersModel.UserProfile))
+                    {
+
+
+
+                        UsersModel.UserPW = SqlConstants.NypDefaultBMPW;
+                        UsersModel.FirstName = "NypUserFirstName";
+                        UsersModel.LastName = "NypUserLastName";
+                        UsersModel.EmailAddress = "NypUser@nyp.org";
+                        auditLogs.LogInformation($"ViewBinMonitorUsersModel onpost create user weburl: {WebApiUrl} controller: {SqlConstants.ApiSpecMonitorUserController} new user cwid: {UsersModel.Cwid} ");
+                        await BinsInformation.BinsApisInctance.ApiUpdateUserInfo(UsersModel, WebApiUrl, SqlConstants.ApiSpecMonitorUserController,auditLogs);
+                        auditLogs.LogInformation($"Exit ViewBinMonitorUsersModel onpost redirect to /BinUsers/ViewBinMonitorUsers total time: {InitAuditLogs.StopStopWatch()} ms ");
+                        new RedirectToPageResult("/BinUsers/ViewBinMonitorUsers", "OnGetAsync");
+                    }
+                }
+                else if (string.Compare(updateStatus, "udpateUser", true) == 0)
+                {
+                    SelUser = UsersModelEdit.Cwid;
+                    auditLogs.LogInformation($"ViewBinMonitorUsersModel onpost update user: {UsersModel.Cwid} ");
+                    string cbchangepw = Request.Form["cbchangepw"];
+                    string deluser = Request.Form["deluser"];
+                    string uProfile = Request.Form["selURights"];
+                    string genPw = Request.Form["generatepw"];
+                    if ((!(string.IsNullOrWhiteSpace(deluser))) && (string.Compare(deluser, "on", true) == 0))
+                    {
+                        
+                        string delCwid = string.Format(SqlConstants.ApiUserCwid, UsersModelEdit.Cwid);
+                        auditLogs.LogInformation($"ViewBinMonitorUsersModel onpost deler user: {UsersModel.Cwid} weburl: {WebApiUrl} controller: {SqlConstants.ApiSpecMonitorUserController}{delCwid}");
+                        await BinsInformation.BinsApisInctance.DelSpecMonitorUser($"{SqlConstants.ApiSpecMonitorUserController}{delCwid}", $"{WebApiUrl}",auditLogs);
+                        auditLogs.LogInformation($"Exit ViewBinMonitorUsersModel onpost redirect to /BinUsers/ViewBinMonitorUsers total time: {InitAuditLogs.StopStopWatch()}");
+                        return Redirect("/BinUsers/ViewBinMonitorUsers");
+                    }
+                    else
+                    {
+                        UsersModelEdit.UserProfileName = uProfile;
+                        UsersModelEdit.UserProfile = uProfile;
+                        SelectUserProfile = UsersModelEdit.UserProfileName;
+                        SelUser = UsersModelEdit.Cwid;
+                        auditLogs.LogInformation($"ViewBinMonitorUsersModel onpost change  user password: {UsersModel.Cwid} weburl: {WebApiUrl} controller: {SqlConstants.ApiSpecMonitorUserController}");
+
+                        string retMess = await UpdateuserInfor(UsersModelEdit, cbchangepw, genPw);
+                        if (!(string.IsNullOrWhiteSpace(retMess)))
+                        {
+                            if (!(retMess == "InvalidModel"))
+                            { 
+                                ModelState.AddModelError("ErrorMessage", $"Error updateing user:{UsersModelEdit.Cwid} error message:{retMess}");
+                                auditLogs.LogError($"ViewBinMonitorUsersModel onpost Error updateing user:{UsersModelEdit.Cwid} error message:{retMess}");
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("ErrorMessage", $"PassWord changed for Cwid {UsersModelEdit.Cwid}");
+                            auditLogs.LogInformation($"ViewBinMonitorUsersModel onpost PassWord changed for Cwid {UsersModelEdit.Cwid}");
+                        }
+                    }
+
+                }
+                else if (string.Compare(updateStatus, "updateuserprofiles", true) == 0)
+                {
+                    SelUser = Request.Form["selUserRights"];
+                    string chageUserProfile = Request.Form["checkedProf"];
+                    auditLogs.LogInformation($"ViewBinMonitorUsersModel onpost update user profile selected cwid: {SelUser}");
+                    auditLogs.LogInformation($"ViewBinMonitorUsersModel onpost update user profile change user profile: {UsersModelEdit.UserProfile} to new profile: {chageUserProfile}");
+                    if (string.Compare(SelUser, "ADMIN", true) == 0)
+                    {
+                        ModelState.AddModelError("AdminProf", "Cannot change the admin profile");
+                        auditLogs.LogWarning($"ViewBinMonitorUsersModel onpost update user profile change user profile: {UsersModelEdit.UserProfile} to new profile: {chageUserProfile} Cannot change the admin profile");
+
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(chageUserProfile))
+                        {
+                            auditLogs.LogWarning($"ViewBinMonitorUsersModel onpost create new user profile change user profile cwid: {SelUser}");
+                            await CreateNewProfile(SelUser);
+                        }
+                            
+                        else
+                        {
+                            auditLogs.LogWarning($"ViewBinMonitorUsersModel onpost edit user profile change user profile cwid: {SelUser}");
+                            await EditProfile(SelUser, chageUserProfile);
+                        }
+                        auditLogs.LogInformation($"Exit ViewBinMonitorUsersModel onpost redirect to /BinUsers/ViewBinMonitorUsers total time: {InitAuditLogs.StopStopWatch()}");
+                        return Redirect("/BinUsers/ViewBinMonitorUsers");
+                    }
+                }
+                else if (string.Compare(updateStatus, "crnewprofile", true) == 0)
+                {
+                    string profileName = Request.Form["newprofileName"];
+                    auditLogs.LogInformation($"ViewBinMonitorUsersModel onpost create new profile: {profileName}");
+                    if (string.IsNullOrWhiteSpace(profileName))
+                    {
+                        ModelState.AddModelError("ProfileName", "Profile name required");
+                        ModelState.AddModelError("ErrorMessage", "Profile name required");
+                        auditLogs.LogWarning($"ViewBinMonitorUsersModel onpost create new profile name cannot be empty");
+                    }
+                    else if (profileName.Length > 50)
+                    {
+                        auditLogs.LogWarning($"ViewBinMonitorUsersModel onpost create new profile Profile name {profileName} is limited to 50 chars ");
+                        ModelState.AddModelError("ProfileName", $"Profile name {profileName} is limited to 50 chars");
+                        ModelState.AddModelError("ErrorMessage", $"Profile name {profileName} is limited to 50 chars");
+                    }
+
+                    else
+                    {
+                        await CreateNewProfile(profileName);
+                        auditLogs.LogInformation($"Exit ViewBinMonitorUsersModel onpost redirect to /BinUsers/ViewBinMonitorUsers total time: {InitAuditLogs.StopStopWatch()}");
+                        return Redirect("/BinUsers/ViewBinMonitorUsers");
+                    }
+
+                }
+                else
+                {
+                    auditLogs.LogWarning($"Exit ViewBinMonitorUsersModel onpost Invalid selection: {updateStatus}");
+                    ModelState.AddModelError("ErrorMessage", "Invalid selection" + updateStatus);
+
+                }
+                MonitorFormUserPre = await GetSessionVariables.SessionVarInstance.GetJsonSessionObject<SpecMonitorFormUserPre>(HttpContext.Session, "ProfileUser");
+                if (MonitorFormUserPre == null)
+                {
+                    ApiSetUserProfile.UserProfileInstance.GetUserProfile(User.Identity.Name, WebApiUrl, auditLogs, HttpContext.Session).ConfigureAwait(false).GetAwaiter().GetResult();
+                    MonitorFormUserPre = await GetSessionVariables.SessionVarInstance.GetJsonSessionObject<SpecMonitorFormUserPre>(HttpContext.Session, "ProfileUser");
+                }
+                if (string.IsNullOrWhiteSpace(SelUser))
+                    SelUser = MonitorFormUserPre.Cwid;
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Selected user: {SelUser}");
+                await Init();
+                string totalQueryTime = InitAuditLogs.StopStopWatch();
+                auditLogs.LogInformation($"End ViewBinMonitorUsersModel total time: {totalQueryTime} ms");
+                
+            }
+            catch (Exception ex)
+            {
+                auditLogs.LogError($"End ViewBinMonitorUsersModel total time: {InitAuditLogs.StopStopWatch()} ms");
+                return new RedirectToPageResult($"/Error?ErrMEss=Model ViewBinMonitorUsersModel OnPostAsync {ex.Message}");
+                
+            }
+            
+            return Page();
+
+        }
+        private async Task<string> UpdateuserInfor(UsersModel users, string cbchangepw, string genpw)
+        {
+            string retMessage = string.Empty;
+            string controlParams = string.Format(SqlConstants.ApiSpecMonitorUserUpdateInfo, "Na", "NoPW");
+            auditLogs.LogInformation($"ViewBinMonitorUsersModel Method UpdateuserInfor {users.Cwid} control params: {controlParams}");
+            try
+            {
+                if (!(string.IsNullOrWhiteSpace(cbchangepw)) && (string.Compare(cbchangepw, "ON", true) == 0))
+                {
+                    string oldPw = Request.Form["OldPassWord"];
+                    string newPw = Request.Form["NewPassWordEdit"];
+                    string verifyNewPW = Request.Form["verifyNewPassWordEdit"];
+                    if (!(ValiDateUpDateUser(oldPw, newPw, verifyNewPW)))
+                        return "InvalidModel";
+                    users.UserPW = newPw;
+                    controlParams = string.Format(SqlConstants.ApiSpecMonitorUserUpdateInfo, oldPw, "newpw");
+                    auditLogs.LogInformation($"ViewBinMonitorUsersModel Method UpdateuserInfor change user password {users.Cwid} controller:{controlParams}");
+                }
+                else
+                {
+                    if (!(string.IsNullOrWhiteSpace(genpw)) && (string.Compare(genpw, "ON", true) == 0))
+                    {
+                        string genNewPw = GeneratePassWord.GeneratePassWordInstance.GeneratePw(12);
+                        if (!(ValiDateUpDateUser("12345", genNewPw, genNewPw)))
+                            return "InvalidModel";
+                        genNewPw = genNewPw.Replace("/", "@");
+                        genNewPw = genNewPw.Replace("&", "@");
+                        genNewPw = genNewPw.Replace("=", "@");
+                        users.UserPW = genNewPw;
+                        controlParams = string.Format(SqlConstants.ApiSpecMonitorUserUpdateInfo, genNewPw, "GeneratedPW");
+                        auditLogs.LogInformation($"ViewBinMonitorUsersModel Method UpdateuserInfor generate user password {users.Cwid} send new password to email: {users.EmailAddress} controller:{controlParams}");
+                        await EmailGeneratedPw(users.Cwid, genNewPw, users.EmailAddress);
+
+                    }
+                }
+                //public const string ApiSpecMonitorUserUpdateInfo = "SpecMonitorUser?userPassWord={0}/pwModify={1}";
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method UpdateuserInfor {users.Cwid} weburl: {WebApiUrl} controller:{controlParams}");
+                retMessage = await BinsInformation.BinsApisInctance.UpDateUserInfo(users, WebApiUrl, controlParams,auditLogs);
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method UpdateuserInfor {users.Cwid} weburl: {WebApiUrl} controller:{controlParams} return message: {retMessage}");
+
+            }
+            catch (Exception ex)
+            {
+                retMessage = ex.Message;
+            }
+
+            return retMessage;
+        }
+        private async Task EditProfile(string selProfile, string chageUserProfile)
+        {
+            auditLogs.LogInformation($"ViewBinMonitorUsersModel Method EditProfile selprofile {selProfile} change user profile: {chageUserProfile}");
+            UpdateProfilesModel profilesModel = new UpdateProfilesModel();
+            profilesModel.ProfileName = selProfile;
+            if (Regex.Match(chageUserProfile, "Create New Profiles", RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method EditProfile Create new Profile");
+                profilesModel.CreateNewProfiles = 0;
+            }
+            if (Regex.Match(chageUserProfile, "Change Users Passwords", RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method EditProfile Change Users Passwords");
+                profilesModel.ChangeUsersPasswords = 0;
+            }
+
+            if (Regex.Match(chageUserProfile, "Create Users", RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method EditProfile Create users");
+                profilesModel.CreateUsers = 0;
+            }
+            if (Regex.Match(chageUserProfile, "Delete Users", RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method EditProfile Delete User");
+                profilesModel.DeleteUsers = 0;
+            }
+            if (Regex.Match(chageUserProfile, "Edit Users", RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method EditProfile Edit User");
+                profilesModel.EditUsers = 0;
+            }
+            if (Regex.Match(chageUserProfile, "Manage User Profiles", RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method EditProfile Manage User Profile");
+                profilesModel.ManageUserProfiles = 0;
+            }
+            if (Regex.Match(chageUserProfile, "Run Reports", RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method EditProfile Run Reports");
+                profilesModel.RunReports = 0;
+            }
+            if (Regex.Match(chageUserProfile, "TransFer Bins", RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method Transfer Bins");
+                profilesModel.TransFerBins = 0;
+            }
+            if (Regex.Match(chageUserProfile, "TransFer Categories", RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogInformation($"ViewBinMonitorUsersModel Method EditProfile Transfer categories");
+                profilesModel.TransFerCategories = 0;
+            }
+            auditLogs.LogInformation($"ViewBinMonitorUsersModel Method EditProfile profile Model: {profilesModel} controller: {SqlConstants.ApiUpDateAddUersPermissionsController} weburl: {WebApiUrl}");
+            await BinsInformation.BinsApisInctance.ApiUpdateCreateProfile(profilesModel, WebApiUrl, SqlConstants.ApiUpDateAddUersPermissionsController,auditLogs);
+        }
+        private async Task CreateNewProfile(string profileName)
+        {
+            auditLogs.LogInformation($"ViewBinMonitorUsersModel Method CreateNewProfile profile Name: {profileName}");
+            UpdateProfilesModel profilesModel = new UpdateProfilesModel();
+            profilesModel.ProfileName = profileName;
+            profilesModel.ChangeUsersPasswords = 0;
+            profilesModel.CreateNewProfiles = 0;
+            profilesModel.CreateUsers = 0;
+            profilesModel.DeleteUsers = 0;
+            profilesModel.EditUsers = 0;
+            profilesModel.ManageUserProfiles = 0;
+            profilesModel.RunReports = 0;
+            profilesModel.TransFerBins = 0;
+            profilesModel.TransFerCategories = 0;
+            profilesModel.RunReports = 0;
+            profilesModel.TransFerBins = 0;
+            profilesModel.TransFerCategories = 0;
+            profilesModel.Categories = 0;
+            profilesModel.EmailReports = 0;
+            auditLogs.LogInformation($"ViewBinMonitorUsersModel Method CreateNewProfile profile Name: {profileName} weburl {WebApiUrl} controller: {SqlConstants.ApiUpDateAddUersPermissionsController}");
+            await BinsInformation.BinsApisInctance.ApiUpdateCreateProfile(profilesModel, WebApiUrl, SqlConstants.ApiUpDateAddUersPermissionsController,auditLogs);
+
+
+        }
+        public bool ValiDateUpDateUser(string oldPw, string newPW, string verifyNewPW)
+        {
+
+            StyleDisPlay = "none";
+            auditLogs.LogInformation($"ViewBinMonitorUsersModel Method ValiDateUpDateUser");
+            if (string.IsNullOrWhiteSpace(UsersModelEdit.EmailAddress))
+            {
+                auditLogs.LogWarning($"ViewBinMonitorUsersModel Method ValiDateUpDateUser Email address required");
+                ModelState.AddModelError("ErrorMessage", "Email address required");
+                ModelState.AddModelError("ErrorMessage", "Email address required");
+                return false;
+            }
+            if (Regex.Match(UsersModelEdit.EmailAddress, ValidEmailAdd, RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogWarning($"ViewBinMonitorUsersModel Method ValiDateUpDateUser Invalid email address {UsersModelEdit.EmailAddress}");
+                ModelState.AddModelError("ErrorMessage", $"Invalid email address {UsersModelEdit.EmailAddress}");
+                ModelState.AddModelError("Email", $"Invalid email address {UsersModelEdit.EmailAddress}");
+            }
+            if (string.IsNullOrWhiteSpace(UsersModelEdit.FirstName))
+            {
+                auditLogs.LogWarning($"ViewBinMonitorUsersModel Method ValiDateUpDateUser First Name required");
+                ModelState.AddModelError("ErrorMessage", "First Name required");
+                ModelState.AddModelError("ErrorMessage", "First Name required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(UsersModelEdit.LastName))
+            {
+                auditLogs.LogWarning($"ViewBinMonitorUsersModel Method ValiDateUpDateUser Last Name required");
+                ModelState.AddModelError("ErrorMessage", "Last Name required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(oldPw))
+            {
+                ModelState.AddModelError("ErrorMessage", "Old PassWords required");
+                ModelState.AddModelError("changepwOldPW", "Old PassWords required");
+
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(newPW))
+            {
+                auditLogs.LogWarning($"ViewBinMonitorUsersModel Method ValiDateUpDateUser New PassWords required");
+                ModelState.AddModelError("ErrorMessage", "New PassWords required");
+                ModelState.AddModelError("changepwNewPW", "New PassWords required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(verifyNewPW))
+            {
+                auditLogs.LogWarning($"ViewBinMonitorUsersModel Method ValiDateUpDateUser Verify PassWords required");
+                ModelState.AddModelError("ErrorMessage", "Verify PassWords required");
+                ModelState.AddModelError("changepwNewPWVerify", "Verify PassWords required");
+                return false;
+            }
+            if (string.Compare(newPW, verifyNewPW, false) != 0)
+            {
+                auditLogs.LogWarning($"ViewBinMonitorUsersModel Method ValiDateUpDateUser New PassWord and Verify Password don't match");
+                ModelState.AddModelError("ErrorMessage", "New PassWord and Verify Password don't match");
+                ModelState.AddModelError("changepwNewPW", "New PassWord and Verify Password don't match");
+                ModelState.AddModelError("changepwNewPWVerify", "New PassWord and Verify Password don't match");
+                return false;
+            }
+            if (string.Compare(newPW, oldPw, false) == 0)
+            {
+                auditLogs.LogWarning($"ViewBinMonitorUsersModel Method ValiDateUpDateUser New PassWord and Old Password the same");
+                ModelState.AddModelError("ErrorMessage", "New PassWord and Old Password the same");
+                ModelState.AddModelError("changepwNewPW", "New PassWord and Old Password the same");
+                ModelState.AddModelError("changepwOldPW", "New PassWord and Old Password the same");
+                return false;
+            }
+            string validPw = BinsInformation.BinsApisInctance.ChekcPasword(newPW);
+            if (!(string.IsNullOrEmpty(validPw)))
+            {
+                auditLogs.LogWarning($"ViewBinMonitorUsersModel Method ValiDateUpDateUser New password does not meet standards");
+                ModelState.AddModelError("changepwNewPW", "New password does not meet standards");
+                ModelState.AddModelError("ErrorMessage", "New password does not meet standards");
+            }
+            auditLogs.LogInformation($"ViewBinMonitorUsersModel Method ValiDateUpDateUser update edit user: {UsersModelEdit.Cwid}");
+
+
+            return true;
+        }
+        public bool ValiDateCrUser(string up)
+        {
+            string pw = Request.Form["PassWord"];
+            string VPW = Request.Form["verifyPassWord"];
+            auditLogs.LogInformation($"ViewBinMonitorUsersModel Method ValiDateCrUser new user: {up}");
+            StyleDisPlay = "none";
+            ;
+            if (string.IsNullOrWhiteSpace(UsersModel.Cwid))
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser Cwid required");
+                ModelState.AddModelError("ErrorMessage", "Cwid required");
+                ModelState.AddModelError("Cwid", "Cwid required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(UsersModel.EmailAddress))
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser Emai required");
+                ModelState.AddModelError("ErrorMessage", "Emai required");
+                ModelState.AddModelError("Email", "Email required");
+                return false;
+            }
+            if (Regex.Match(UsersModel.EmailAddress, ValidEmailAdd, RegexOptions.IgnoreCase).Length == 0)
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser Invalid email address {UsersModel.EmailAddress}");
+                ModelState.AddModelError("ErrorMessage", $"Invalid email address {UsersModel.EmailAddress}");
+                ModelState.AddModelError("Email", $"Invalid email address {UsersModel.EmailAddress}");
+            }
+            if (string.IsNullOrWhiteSpace(UsersModel.FirstName))
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser First Name required");
+                ModelState.AddModelError("ErrorMessage", "First Name required");
+                ModelState.AddModelError("FName", "First Name required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(UsersModel.LastName))
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser Last Name required");
+                ModelState.AddModelError("ErrorMessage", "Last Name required");
+                ModelState.AddModelError("LName", "Last Name required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(pw))
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser Password required");
+                ModelState.AddModelError("ErrorMessage", "Password required");
+                ModelState.AddModelError("PW", "PassWord required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(up))
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser User Profile required");
+                ModelState.AddModelError("ErrorMessage", "User Profile required");
+                ModelState.AddModelError("UserPF", "User Profile required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(VPW))
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser Verify Password required");
+                ModelState.AddModelError("ErrorMessage", "Verify Password required");
+                ModelState.AddModelError("VPW", "Verify PassWord required");
+                return false;
+            }
+            if (string.Compare(pw, VPW, false) != 0)
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser Passwords don't match");
+                ModelState.AddModelError("ErrorMessage", "Passwords don't match");
+                ModelState.AddModelError("PW", "PassWords dont match");
+                ModelState.AddModelError("VPW", "PassWords dont match");
+                return false;
+            }
+            string validPw = BinsInformation.BinsApisInctance.ChekcPasword(pw);
+            if (!(string.IsNullOrEmpty(validPw)))
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser New password does not meet the requirments");
+                ModelState.AddModelError("ErrorMessage", "New password does not meet the requirments");
+                ModelState.AddModelError("PW", "New password does not meet the requirments");
+            }
+            auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser create new user cwid:{UsersModel.Cwid}");
+            return true;
+        }
+
+        public bool ValiDateUserCwid(string up)
+        {
+            
+            if (string.IsNullOrWhiteSpace(UsersModel.Cwid))
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser Cwid required");
+                ModelState.AddModelError("ErrorMessage", "Cwid required");
+                ModelState.AddModelError("Cwid", "Cwid required");
+                return false;
+            }
+            
+            
+            
+            if (string.IsNullOrWhiteSpace(up))
+            {
+                auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser User Profile required");
+                ModelState.AddModelError("ErrorMessage", "User Profile required");
+                ModelState.AddModelError("UserPF", "User Profile required");
+                return false;
+            }
+            auditLogs.LogError($"ViewBinMonitorUsersModel Method ValiDateCrUser create new user cwid:{UsersModel.Cwid}");
+            return true;
+        }
+    }
+}

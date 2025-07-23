@@ -1,0 +1,37 @@
+﻿<Complex name="Root" type="Scanquire.Clients.NYP.ComplianceLogCommandReader, Scanquire.Clients.NYP">
+  <Properties>
+    <Simple name="BarcodeReaderName" value="DEFAULT" />
+    <Dictionary name="IndexFieldDefinitions">
+      <Items>
+        <Item>
+          <Simple value="Log_x0020_Station" />
+          <SingleArray>
+            <Items>
+              <Complex>
+                <Properties>
+                  <Simple name="MatchPattern" value="^LGS:" />
+                  <Simple name="ReplacePattern" value="^LGS:" />
+                  <Simple name="ReplaceValue" value="" />
+                </Properties>
+              </Complex>
+            </Items>
+          </SingleArray>
+        </Item>
+        <Item>
+          <Simple value="Log_x0020_Date" />
+          <SingleArray>
+            <Items>
+              <Complex>
+                <Properties>
+                  <Simple name="MatchPattern" value="^LGD:" />
+                  <Simple name="ReplacePattern" value="^LGD:" />
+                  <Simple name="ReplaceValue" value="" />
+                </Properties>
+              </Complex>
+            </Items>
+          </SingleArray>
+        </Item>
+      </Items>
+    </Dictionary>
+  </Properties>
+</Complex>

@@ -1,0 +1,152 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.LogInOut.LoginViewModel
+@{
+    ViewData["Title"] = "LogIn User";
+    Layout = null;
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/site.js"></script>
+    <style>
+        .bg {
+            margin: 0;
+            /* The image used <partial name="_CookieConsentPartial" /> */
+            background-image: url("../wwwroot/img/edocs logo.gif");
+            /* Full height */
+            height: 100%;
+            width: 100%;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .mar {
+            margin: 125px 50px 75px 100px;
+            background-color: whitesmoke;
+            font-family: Arial;
+            font-size: 15px;
+        }
+
+        /*.content {
+            margin: 125px 50px 75px 100px;
+            background: white;
+            padding: 10px;
+
+        }*/
+        .content {
+            margin: 50px 50px 75px 100px;
+            background: white;
+            padding: 10px;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        /* Extra styles for the cancel button */
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="container-fluid">
+            <div class="text-center" style="margin-top:50px">
+
+                <img src="~/img/edocs logo.gif" style="width:250px;height:125px;" />
+
+            </div>
+        </div>
+        <div class="container-fluid content">
+
+
+            <h1 class="text-center">@Model.LoginTitle</h1>
+            <p class="p-2"></p>
+            <div class="container-fluid">
+                @if (string.Compare(@Model.LoginView, "Login", true) == 0)
+                {
+                    <form id="strecordFLName" role="form" method="post">
+                        <table class="center">
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(model => model.Login.UserName, new { @class = "text-nowrap " })&nbsp;
+                                </td>
+
+
+                                <td class="border">
+                                    @Html.TextBoxFor(model => model.Login.UserName, new { @maxlength = "50", @rows = "1", @cols = "250", placeholder = "Enter User Name" })
+                                    @Html.ValidationMessage("InvalidUserName", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(model => model.Login.Password, new { @class = "text-nowrap" })&nbsp;&nbsp;
+                                </td>
+
+                                <td class="border">
+                                    @Html.PasswordFor(model => model.Login.Password, new { @maxlength = "50", @rows = "1", @cols = "250", placeholder = "Enter Password" })
+                                    @Html.ValidationMessage("InvalidPassWord", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                        </table>
+                        <p class="p-0"></p>
+                        <div class="row text-center">
+                            <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+                                <button class="btn-outline-info" style="margin:0 auto;">Login</button>
+
+                            </div>
+                        </div>
+                        <p class="p-0"></p>
+
+                        <div class="row text-center">
+                            <div class="col-*-* float-left" id="formContainer" style="margin:0 auto;">
+
+                                <input type="checkbox" checked="checked" name="remember"> Remember me
+                            </div>
+                        </div>
+
+                        <p class="p-2"></p>
+
+                        <input type="hidden" value="loginuser" id="loginuser" name="loginuser"/>
+
+                    </form>
+
+                    <div class="container" style="background-color:#f1f1f1" id="loginOptons">
+                        <button style="background-color: #f44336;" class="btn" onclick="OpenUrl('https://edocsusa.com/','loginOptons')">Cancel</button>
+                        <span class="psw">Forgot <a href="#">password?</a></span>
+                    </div>
+                    @*
+            <div class="row text-center">
+                <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+                    <a href="" class="btn-link" style="margin:0 auto;">Requess Access</a>
+                </div>
+            </div>
+                    *@
+                }
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

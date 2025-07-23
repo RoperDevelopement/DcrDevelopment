@@ -1,0 +1,270 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.TrackingSystem.InventoryTransferViewModel
+@{
+    ViewData["Title"] = "Transfer Inventory";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div class="container-fluid" id="divMain" name="divMain">
+    @*
+        <h1 class="text-center">Inventory Transfer Company @Model.UserLogin.EdocsCustomerName  </h1>
+    *@
+    <h1 class="text-center">Inventory Transfer</h1>
+    <p class="p-0"></p>
+    <div class="container-fluid">
+        @if ((@Model.EdocsITCustomerIDs != null) && (@Model.EdocsITCustomerIDs.Count() > 0))
+        {
+            <div class="container-fluid">
+                <h3 class="text-center text-info">Select Customer</h3>
+
+                <div class="row text-center">
+                    <div class="col-*-* text-center" style="margin:0 auto;">
+                        <select id="custName" name="custName">
+                            <option value="Customer Name">Customer Name</option>
+                            @foreach (var id in Model.EdocsITCustomerIDs)
+                            {
+
+
+                                @if (!(string.IsNullOrWhiteSpace(@Model.TransferCustomerName)))
+                                {
+                                    @if (string.Compare(@Model.TransferCustomerName.Trim(), @id.EdocsCustomerName.Trim(), true) == 0)
+                                    {
+
+                                        <option value="@id.EdocsCustomerName" selected="selected">@id.EdocsCustomerName</option>
+                                        continue;
+                                    }
+                                }
+
+
+                                <option value="@id.EdocsCustomerName">@id.EdocsCustomerName</option>
+
+
+                            }
+                            
+
+
+                        </select>
+
+                    </div>
+                </div>
+
+            </div>
+            <p class="p-2"></p>
+        }
+        <form id="formInventorTransFer" name="formInventorTransFer" method="post" role="form" style="display:block">
+            <input type="hidden" id="timerStarted" name="timerStarted" value="0" />
+            <input type="hidden" id="nameCust" name="nameCust" value="0" />
+            <div class="row text-center">
+                <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+
+                    <label class="text-nowrap" for="userid">User ID:</label>&nbsp;
+                    <input type="text" size="50" maxlength="50" readonly="readonly" class="border text-nowrap" value="@Model.UserLogin.UserName" />
+                    @*
+                        <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                    *@
+
+                </div>
+            </div>
+            <p class="p-0"></p>
+            <div class="row text-center">
+                <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+
+                    <label class="text-nowrap" for="TrackingID">Tracking ID:</label>&nbsp;
+                    <input type="text" id="TrackingID" name="TrackingID" size="50" maxlength="50" class="border text-nowrap" value="@Model.TrackingID" placeholder="Scan or Type in Tracking ID" />
+                    @Html.ValidationMessage("IDTracking", new { @class = "text-danger" })
+                    @*
+                        <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                    *@
+
+                </div>
+            </div>
+            <p class="p-0"></p>
+            <div class="row text-center">
+                <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+
+                    <label class="text-nowrap" for="DateSent">Date Sent:</label>&nbsp;
+                    @*  <input type="datetime-local" id="DateSent" name="DateSent" class="border text-nowrap" value="@Model.DateSent" />
+        <input type="text" id="DateSent" name="DateSent" class="border text-nowrap" value="@Model.DateSent" /> *@
+                    @Html.EditorFor(m => @Model.DateSent, new {@name = "DateSent", @id = "DateSent" })
+                    @Html.ValidationMessage("SentDate", new { @class = "text-danger" })
+                    @*
+        <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                    *@
+
+                </div>
+            </div>
+
+            <p class="p-0"></p>
+            <div class="row text-center">
+                <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+
+                    <label class="text-nowrap" for="NumDocs">Number Boxes or Files:</label>&nbsp;
+                    <input type="text" id="NumDocs" name="NumDocs" size="10" maxlength="10" class="border text-nowrap" value="@Model.NumDocs" placeholder="Number Files to be Scanned" />
+                    @Html.ValidationMessage("DocsNum", new { @class = "text-danger" })
+                    @*
+                        <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                    *@
+
+                </div>
+            </div>
+            <p class="p-0"></p>
+            <div class="row text-center">
+                <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+
+                    <label for="CboxScanType">Scan Type:</label>
+                    <select id="CboxScanType" name="CboxScanType">
+
+                        @*  <option value="blank" selected="selected">Select Scan Type</option>*@
+                        <option value="Single Page">Singe Page Scanning </option>
+                        <option selected value="Duplex">Duplex Page Scanning </option>
+                        <option value="Duplex-Single Page">Duplex-Single Page</option>
+                        <option value="Microfilm">Microfilm</option>
+                        <option value="Microfiche">Microfiche</option>
+                        <option value="MP3 To Images">MP3 To Image</option>
+
+                    </select>
+                    @Html.ValidationMessage("ScanType", new { @class = "text-danger" })
+
+                    @*
+                        <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                    *@
+
+                </div>
+            </div>
+            <p class="p-0"></p>
+            <div class="row text-center">
+
+                <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+
+                    <label for="CboxDM">Delivery Method:</label>
+
+                    <select id="CboxDM" name="CboxDM">
+
+                        @* <option value="blank" >Select Delivery Method</option>*@
+
+                        <option selected="selected" value="e-Docs USA">e-Docs USA</option>
+                        <option value="Fed Ex">Fed Ex</option>
+                        <option value="UPS">UPS</option>
+                        <option value="Mail">Mail</option>
+                        <option value="Other">Other</option>
+
+                    </select>
+                    @Html.ValidationMessage("DMethod", new { @class = "text-danger" })
+                    @*
+                        <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                    *@
+
+                </div>
+            </div>
+
+
+
+
+        </form>
+        <p class="p-2"></p>
+        @*
+            <div class="row text-center">
+                <div class="col-sm-3 text-center"  style="margin:0 auto;">
+                    <button class="btn-outline-info" id="btnTransInv" name="btnTransInv" style="margin:0 auto;">Transfer Inventory</button>
+                </div>
+            </div>
+            <p class="p-2"></p>
+            <div class="row text-center">
+                <div class="col-sm-3 text-center"  style="margin:0 auto;">
+                    <button class="btn-outline-dark" id="btnExit" name="btnExit "style="margin:0 auto;">Exit</button>
+                </div>
+            </div>
+        *@
+        <div class="row">
+
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-outline-dark btn-block" id="btnTransInv" name="btnTransInv">Transfer Inventory</button>
+            </div>
+            <div class="col-sm-4">
+                <a class="btn btn-outline-warning btn-block btn-link" id="btnReset" href="/TrackingSystem/InventoryTransferView" name="btnReset" role="button">Reset</a>
+
+            </div>
+            <div class="col-sm-4">
+                <a class="btn btn-outline-danger btn-block btn-link" id="btnexit" href="/Index" name="btnexit" role="button">Exit</a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('#TrackingID').focus();
+
+            $("#divLoading").hide();
+            $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+
+            });
+            $('#btnTransInv').click(function (e) {
+              
+                var cName = $("#custName").val();
+               
+                if (cName != 'Customer Name') {
+                    $("#divLoading").show();
+                    $("#nameCust").val($("#custName").val());
+                    $("#formInventorTransFer").submit();
+
+                }
+                else {
+                    alert('Select Customer');
+                    return false;
+                }
+               
+                
+            });
+
+            $('#TrackingID').keydown(function (eventcode) {
+
+
+                switch (event.keyCode) {
+                    case 13:
+                        if ($('#TrackingID').val().length >= 6) {
+                            $('#DateSent').focus();
+                        }
+                        break;
+                    case 119:
+                        alert(event.keyCode);
+                        SubmitForm(0, '#DateSent', '#TrackingID', 'focus');
+                        //if ($('#TrackingID').val().length >= 6) {
+                        //    $('#DateSent').focus();
+                        //}
+                        break;
+                    default:
+                        SubmitForm(0, '#DateSent', '#TrackingID', 'focus');
+
+                        //if ($('#timerStarted').val() == "0") {
+                        //    $('#timerStarted').val("1");
+                        //    SubmitForm(0, '#DateSent', '#TrackingID');
+                        //}
+
+
+
+
+
+
+
+                        return;
+                        break;
+                }
+
+
+
+            });
+        });
+    </script>
+}

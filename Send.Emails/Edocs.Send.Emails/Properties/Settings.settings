@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Edocs.Send.Emails.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="EmailServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.gmail.com</Value>
+    </Setting>
+    <Setting Name="EmailFrom" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AlertSender@edocsusa.com</Value>
+    </Setting>
+    <Setting Name="EmailTo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Dan.Roper@edocsusa.com</Value>
+    </Setting>
+    <Setting Name="EmailPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ln43bTO4BEPnGFTFz8Yfjy9moTuJ2g6tQN9q30Zves8=</Value>
+    </Setting>
+    <Setting Name="EmailPasswordKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1933Utah</Value>
+    </Setting>
+    <Setting Name="EmailPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+    <Setting Name="EmailCC" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EmailSubject" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Process:{ProcessName} {PassFail} on Computer {ComputerName} RunDateTime: {DateTime}</Value>
+    </Setting>
+    <Setting Name="TextTo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">4065653465@vtext.com</Value>
+    </Setting>
+    <Setting Name="TextCc" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">4064908968@vtext.com</Value>
+    </Setting>
+    <Setting Name="TxtSubject" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{ErrorSuccess}  {runDate}</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

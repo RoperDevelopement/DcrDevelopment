@@ -1,0 +1,15 @@
+﻿<Complex name="Root" type="Scanquire.Clients.NYP.LabReqsArchiver, Scanquire.Clients.NYP">
+  <Properties>
+    <Simple name="MetadataSiteUrl" value="https://brnsrvr/" />
+    <Simple name="ReceiptStation" value="CS"/>
+    <Simple name="DefaultCategory" value="" />
+    <Simple name="CommandReaderName" value="NYP - LAB REQS" />
+    <Simple name="ScannerName" value="Canon DR-6030C TWAIN" />
+    <Simple name="ScannerSetting" value="LAB REQS DEFAULT" />
+    <Simple name="FileWriterName" value="TIFF_CCITG4" />
+    <Simple name="CommandImageBuilderName" value="DEFAULT" />
+    <Simple name="OutputDir" value="C:\Archives\Lab_Reqs\"/>
+    <Simple name="ImportScriptPath" value="C:\Archives\Lab_Reqs\ManualIndexingTemp\ManualIndexingTemp.exe"/>
+    <Simple name="RequiresRequisitionNumber" value="false"/>
+  </Properties>
+</Complex>

@@ -1,0 +1,72 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Edocs.Libaray.AzureCloud.Upload.Batches.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ArchivesFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">d:\Archives\NYP\</Value>
+    </Setting>
+    <Setting Name="DeleteBatchOnSuccess" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LogFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{ApplicationDir}\Local\EdocsAzureCloudUploadLogs\</Value>
+    </Setting>
+    <Setting Name="AuditLogs" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DaysToKeepLogFiles" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="EdocsSupport" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Call e-Docs USA support @(406)-565-3465 and tell them batchid:{bid} did not upload to Azure Cloud.</Value>
+    </Setting>
+    <Setting Name="LoopNotifyUser" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="ThreadSleepSeconds" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="SendEmailErrorsOnly" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MakeCopyUploadImage" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UploadedImagesCopyFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">d:\Archives\Lab_Req_Copy\</Value>
+    </Setting>
+    <Setting Name="JsonFilesBackUpFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">d:\Archives\JsonFIlesBackUp\</Value>
+    </Setting>
+    <Setting Name="EdocsWebApi" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:5555/api/</Value>
+    </Setting>
+    <Setting Name="DaysToKeepCopyFolder" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="AzureBlobAccountName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">edocsnypstorage</Value>
+    </Setting>
+    <Setting Name="AzureBlobAccountKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1toPRNfM0KIHHO+jNvgpzYs7vpZGYcCmsFBfzDiTWY7RS2GiPSRbiDZXVNHrVRP1ltHRw06tMETwjgYF60BnSQ==</Value>
+    </Setting>
+    <Setting Name="AzureBlobStorageConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DefaultEndpointsProtocol=https;AccountName=edocsnypstorage;AccountKey=1toPRNfM0KIHHO+jNvgpzYs7vpZGYcCmsFBfzDiTWY7RS2GiPSRbiDZXVNHrVRP1ltHRw06tMETwjgYF60BnSQ==;EndpointSuffix=core.windows.net</Value>
+    </Setting>
+    <Setting Name="DateTimeMins" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">-7</Value>
+    </Setting>
+    <Setting Name="UpLoadAzureCloud" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ThreadSleep" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="LoopRetryUpLoad" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="CompressPDF" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

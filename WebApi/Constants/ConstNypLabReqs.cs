@@ -1,0 +1,339 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace EDocs.Nyp.LabReqs.AppServices.LabReqsConstants
+{
+    public static class ConstNypLabReqs
+    {
+        #region sql sp names
+        #region spec rejection
+        public const string SpNypGetNypRejectionLogsReason = "sp_GetNypRejectionLogsReason";
+        public const string SpNypSpecimenRejectionFromYearByScanDate = "sp_NypSpecimenRejectionFromYearByScanDate";
+        public const string SpNypSpecimenRejectionFromYearByLogDate = "sp_NypSpecimenRejectionFromYearByLogDate";
+        public const string SpNypSpecimenRejectionFromNumberByLogDate = "sp_NypSpecimenRejectionFromNumberByLogDate";
+        public const string SpNypSpecimenRejectionFromNumberByScanDate = "sp_NypSpecimenRejectionFromNumberByScanDate";
+        public const string SpNypSpecimenRejectionFromYearNumberByLogDate = "sp_NypSpecimenRejectionFromYearNumberByLogDate";
+        public const string SpNypSpecimenRejectionFromYearNumberByScanDate = "sp_NypSpecimenRejectionFromYearNumberByScanDate";
+        public const string SpNypSpecimenRejectionLogDate = "sp_NypSpecimenRejectionLogDate";
+        public const string SpNypSpecimenRejectionScanDate = "sp_NypSpecimenRejectionScanDate";
+
+        #endregion
+        #region spec recection reaons
+        public const string SpNypSpecimenRejectionReasonByLogDate = "sp_NypSpecimenRejectionReasonByLogDate";
+        public const string SpNypSpecimenRejectionResonFormNumberByLogDate = "sp_NypSpecimenRejectionResonFormNumberByLogDate";
+        public const string SpNypSpecimenRejectionResonFormNumberByScanDate = "sp_NypSpecimenRejectionResonFormNumberByScanDate";
+        public const string SpNypSpecimenRejectionReasonByScanDate = "sp_NypSpecimenRejectionReasonByScanDate";
+        public const string SpNypSpecimenRejectionResonFormYearByLogDate = "sp_NypSpecimenRejectionResonFormYearByLogDate";
+        public const string SpNypSpecimenRejectionReasonFromYearNumberByScanDate = "sp_NypSpecimenRejectionReasonFromYearNumberByScanDate";
+        public const string SpNypSpecimenRejectionReasonFromYearNumberByLogDate = "sp_NypSpecimenRejectionReasonFromYearNumberByLogDate";
+        public const string SpNypSpecimenRejectionReasonScanOperatorByLogDate = "sp_NypSpecimenRejectionReasonScanOperatorByLogDate";
+        public const string SpNypSpecimenRejectionReasonScanOperatorByScanDate = "sp_NypSpecimenRejectionReasonScanOperatorByScanDate";
+        public const string SpNypSpecimenRejectionReasonScanBatchIdByLogDate = "sp_NypSpecimenRejectionReasonScanBatchIdByLogDate";
+        public const string SpNypSpecimenRejectionReasonScanBatchIdByScanDate = "sp_NypSpecimenRejectionReasonScanBatchIdByScanDate";
+        public const string SpNypNypLabReqGetByID = "sp_NypLabReqGetByID";
+        
+            #endregion
+        #region drcodes
+        public const string SpNypDrCodes = "sp_NypDrCodes";
+
+        #endregion
+        #region GrantRec
+        public const string SpNypGrantReceiptsByDocuemntDate = "sp_NypGrantReceiptsByDocuemntDate";
+
+        #endregion
+        #region Doh
+        public const string SpDOHPerformingLabCodes = "sp_NypDOHPerformingLabCodes";
+        public const string SpNypDohAssessionMrnNumberDateOfService = "sp_NypDohAssessionMrnNumberDateOfService";
+        public const string SpNypDohAssessionMrnNumberScanDate = "sp_NypDohAssessionMrnNumberScanDate";
+        public const string SpNypDohPerFormingLabByDateOfService = "sp_NypDohPerFormingLabByDateOfService";
+        public const string SpNypDohPerFormingLabByScanDate = "sp_NypDohPerFormingLabByScanDate";
+        public const string SpNypDohDateOfService = "sp_NypDohDateOfService";
+        public const string SpNypDohScanDate = "sp_NypDohScanDate";
+        public const string SpNypDOHPerformingLabCodes = "sp_NypDOHPerformingLabCodes";
+        public const string SpNypDohScanOperatorScanDate = "sp_NypDohScanOperatorScanDate";
+        public const string SpNypDohScanOperatorDateOfService = "sp_NypDohScanOperatorDateOfService";
+        #endregion
+        #region MaintenanceLogs
+        public const string SpNypMaintenanceLogStation = "sp_NypMaintenanceLogStation";
+        public const string SpNypMaintenanceLogsByLogDate = "sp_NypMaintenanceLogsByLogDate";
+        public const string SpNypMaintenanceLogsLogDate = "sp_NypMaintenanceLogsLogDate";
+
+        #endregion
+
+        #region missing punch forms
+        public const string SpNypMissingPunchFormsLocation = "sp_NypMissingPunchFormsLocation";
+        public const string SpNypMissingPunchFormsLocationByLogDate = "sp_NypMissingPunchFormsLocationByLogDate";
+        public const string SpNypMissingPunchFormsLogDate = "sp_NypMissingPunchFormsLogDate";
+
+
+
+        #endregion
+        #region nyp lab reqs
+        public const string SpNypLabIndexFinancialandCSNNumber = "sp_NypLabIndexFinancialandCSNNumber";
+        public const string SpNypLabIndexFinancialNumber = "sp_NypLabIndexFinancialNumber";
+        public const string SpNypLabReqsCSNNumber = "sp_NypLabRecsCSNNumber";
+        public const string SpNypLabRequestionNumber = "sp_NypLabRequestionNumber";
+        public const string SpNypLabReqsPatientId = "sp_NypLabReqsPatientId";
+        public const string SpNypLabReqsClientCode = "sp_NypLabReqsClientCode";
+        public const string SpNypLabReqsDrCode = "sp_NypLabReqsDrCode";
+        public const string SpNypLabReqsPatientFirstName = "sp_NypLabReqsPatientFirstName";
+        public const string SpNypLabReqsPatientLastName = "sp_NypLabReqsPatientLastName";
+        public const string SpNypLabReqsDrName = "sp_NypLabReqsDrName";
+        public const string SpNypLabReqsScanOperator = "sp_NypLabReqsScanOperator";
+        public const string SpNypLabReqsScanBatch = "sp_NypLabReqsScanBatch";
+        public const string SpNypLabReqsDosRecScanDate = "sp_NypLabReqsDosRecScanDate";
+        public const string SpNypLabMRNRecDate = "sp_NypLabMRNRecDate";
+        public const string SpNypLabMRNScanDate = "sp_NypLabMRNScanDate";
+        public const string SpNypLabReqsGetPDFSToOCR = "sp_NypLabReqsGetPDFSToOCR";
+        public const string SpUploadLabReqsFullText = "sp_UploadLabReqsFullText";
+        public const string SpUpdateNypLabReqNumber = "sp_UpdateNypLabReqNumber";
+        public const string SpGetLabReqsByFullText = "sp_GetLabReqsByFullText";
+        public const string SpNypLabRecGetByID = "sp_NypLabRecGetByID";
+        public const string SpUpDateLabRecInformation = "sp_UpDateLabRecInformation";
+        public const string NypLabReqsChanged = "sp_NypLabReqsChanged";
+
+
+       
+
+
+
+        #endregion
+        #region COVID-19
+        public const string SpNypCOVID19LabReqsClientCode = "sp_NypCOVID19LabReqsClientCode";
+        public const string SpNypCOVID19LabReqsDosRecScanDate = "sp_NypCOVID19LabReqsDosRecScanDate";
+        public const string SpNypCOVID19LabReqsDrCode = "sp_NypCOVID19LabReqsDrCode";
+        public const string SpNypCOVID19LabReqsDrName = "sp_NypCOVID19LabReqsDrName";
+        public const string SpNypCOVID19LabReqsPatientFirstName = "sp_NypCOVID19LabReqsPatientFirstName";
+        public const string SpNypCOVID19LabReqsPatientId = "sp_NypCOVID19LabReqsPatientId";
+        public const string SpNypCOVID19LabReqsPatientLastName = "sp_NypCOVID19LabReqsPatientLastName";
+        public const string SpNypCOVID19LabReqsRequestionNumber = "sp_NypCOVID19LabReqsRequestionNumber";
+        public const string SpNypCOVID19LabReqsScanBatch = "sp_NypCOVID19LabReqsScanBatch";
+        public const string SpNypCOVID19LabReqsScanOperator = "sp_NypCOVID19LabReqsScanOperator";
+        public const string SpNypCOVID19LabIndexFinancialNumber = "sp_NypCOVID19LabIndexFinancialNumber";
+        public const string SpNypCOVID19StartsWith = "sp_nypcovid19";
+        #endregion
+        #region Employee comp logs
+        public const string SpNypEmployeeComplianceIdNumber = "sp_NypEmployeeComplianceIdNumber";
+        public const string SpNypEmployeeComplianceDepartment = "sp_NypEmployeeComplianceDepartment";
+        public const string SpNypEmployeeComplianceJobTitle = "sp_NypEmployeeComplianceJobTitle";
+        public const string SpNypEmployeeComplianceDocType = "sp_NypEmployeeComplianceDocType";
+        public const string SpNypEmployeeComplianceLogsByScanDate = "sp_NypEmployeeComplianceLogsByScanDate";
+        
+
+        #endregion
+
+        #endregion
+        #region sendoutpacking slips
+        public const string SpNypSendOutPackingSlipsByDateOfService = "sp_NypSendOutPackingSlipsByDateOfService";
+
+        #endregion
+        #region sendoutresults
+        public const string SpSendOutResultsPerformingLabCodes = "sp_NypSendOutResultsPerformingLabCodes";
+        public const string SpNypSendOutResultsByDateOfService = "sp_NypSendOutResultsByDateOfService";
+
+
+        #endregion
+        #region NypInvoice
+        public const string SpNypInvoiceAccount = "sp_NypInvoiceAccount";
+        public const string SpNypInvoiceCategory = "sp_NypInvoiceCategory";
+        public const string SpNypInvoiceDepartment = "sp_NypInvoiceDepartment";
+        public const string SpNypInvoicesByInvoiceDate = "sp_NypInvoicesByInvoiceDate";
+        
+
+
+        #endregion
+        #region sql params
+        public const string SpParmaFromYear = "@FromYear";
+        public const string SpParmaFromNumber = "@FromNumber";
+        public const string SpParmaIndexNumber = "@IndexNumber";
+        public const string SpParmaRequestionNumber = "@RequestionNumber";
+        public const string SpParmaFinancialNumber = "@FinancialNumber";
+        public const string SpParmaStartReceiptDate = "@StartReceiptDate";
+        public const string SpParmaEndReceiptDate = "@EndReceiptDate";
+        public const string SpParmaSearchPartial = "@SearchPartial";
+        public const string SpParmaPatientId = "@PatientId";
+        public const string SpParmaClientCode = "@ClientCode";
+        public const string SpParmaDrCode = "@DrCode";
+        public const string SpParmaPatientFirstName = "@PatientFirstName";
+        public const string SpParmaPatientLastName = "@PatientLastName";
+        public const string SpParmaDrName = "@DrName";
+        public const string SpParmaScanOperator = "@ScanOperator";
+        public const string SpParmaScanBatchId = "@ScanBatchId";
+        public const string SpParmaDosRecScanDate = "@DosRecScanDate";
+        public const string SpParmaRejectionReason = "@RejectionReason";
+        public const string SpParmaDrFirstName = "@DrFirstName";
+        public const string SpParmaDrLastName = "@DrLastName";
+        public const string SpParmaDateReceipteScan = "@DateReceipteScan";
+        public const string SpParmaAccessionNumber = "@AccessionNumber";
+        public const string NA = "N/A";
+        public const string SpParmaPerFormingLabCode = "@PerFormingLabCode";
+        public const string SpParmaLogStation = "@LogStation";
+        public const string SpParmaEmployeeFirstName = "@EmployeeFirstName";
+        public const string SpParmaEmployeeLastLastName = "@EmployeeLastName";
+        public const string SpParmaEmployeeID = "@EmployeeID";
+        public const string SpParmaEmployeeDepartment = "@EmployeeDepartment";
+        public const string SpParmaEmployeeJobTitle = "@EmployeeJobTitle";
+        public const string SpParmaEmployeeDocType = "@EmployeeDocType";
+        public const string SpParmaDepartment = "@Department";
+        public const string SpParmaCategory = "@Category";
+        public const string SpParmaAccount = "@Account";
+        public const string SpParmaReferance = "@Referance";
+        public const string SpParmaMRN = "@MRN";
+        public const string SpParmaJsonFile = "@JsonFile";
+        public const string SpParmaReportUploadSearch = "@ReportUploadSearch";
+        public const string SpParmaTotalJsonFile = "@TotalJsonFile";
+        public const string SpParmaScanStartDate = "@ScanStartDate";
+        public const string SpParmaScanEndDate = "@ScanEndDate";
+        public const string SpParmaPDFFullText = "@PDFFullText";
+        public const string SpParmaDateOfService = "@DateOfService";
+        public const string SpParmaKeyWordSearch = "@KeyWordSearch";
+        public const string SpParmaLabReqID = "@LabReqID";
+        public const string SpParmaUserModified = "@UserModified";
+       
+
+
+
+        #region AuditLogs
+        public const string AuditLogsCloudConnectionString = "AuditLogsCloudConnectionString";
+
+
+
+        #endregion
+        #region labrecs uploaded
+        public const string SpNypNypLabReqsReport = "sp_NypLabReqsReport";
+        public const string SpLabReqsKwyWordSearch = "sp_LabReqsKwyWordSearch";
+      //  public const string SpGetLabReqsByFullText = " sp_GetLabReqsByFullText";
+       
+
+        #endregion
+
+        #endregion
+        #region blobstorageconst
+        public const string JsonKeyAzureStorageBlobSettings = "AzureStorageBlobSettings";
+        public const string JsonKeyAzureStorageBlobAccountKey = "AzureBlobAccountKey";
+        public const string JsonKeyAzureStorageBlobAccountName = "AzureBlobAccountName";
+
+
+        public const string JsonKeyAzureBlobStorageConnectionString = "AzureBlobStorageConnectionString";
+        public const string JsonKeyAzureBlobShareName = "AzureBlobShareLabRecs";
+        public const string JsonKeyAzureBlobShareAuditLogsUpLoad = "AzureBlobShareAuditLogsUpLoad";
+        public const string AppSettingsJsonFileName = "AppSettings.json";
+        public const string JsonKeyAzureBlobShareAuditLogs = "AzureBlobShareAuditLogs";
+        public const string JsonKeyAzureBlobShareManual = "AzureBlobShareManual";
+        
+
+        #endregion
+        #region webapi
+
+        public const string ApiNypLabReqsController = @"NypLabReqs/";
+        public const string ApiSpecimenRejectionController = @"SpecimenRejection/";
+        // public const string ApiNypLabReqsControllerParam = "lreqMod=test";
+        public const string ApiNypLabReqsControllerParam = "labResp={0}";
+        public const string ApiSpecimenRejectionControllerParam = @"storedProcedure={0}";
+        public const string ApiNypDrCodesController = @"NypDrCodes/";
+        public const string ApiNypGrantReceiptsController = @"NypGrantReceipts/";
+        public const string ApiNypDOHController = @"NypDOH/";
+        public const string ApiNypMaintenanceLogsController = @"NypMaintenanceLogs/";
+        public const string ApiSendOutPackingSlipsController = @"SendOutPackingSlips/";
+        public const string ApiNypSendOutResultsController = @"NypSendOutResults/";
+        public const string ApiNypEmployeeComplianceController = @"NypEmployeeCompliance/";
+        public const string ApiNypInvoiceController = @"NypInvoice/";
+        public const string ApiNypLabReqsUsersController = @"NypLabReqsUsers/";
+        //   public const string ApiNypLabReqsUsersParam = "cwid={0}&command={1}";
+        public const string ApiNypLabReqsUsersParam = "{0}/{1}/{2}/{3}/{4}";
+        public const string NANoSlash = "NA";
+        public const string RepStrCwid = "{CWID}";
+        public const string RepStrEmailAddress = "{EmailAdddressNewUser}";
+
+
+
+        #endregion
+
+        #region FormValues
+        public const string NypUserCommandCheckuser = "Checkuser";
+        public const string NypUserCommandUpDateUser = "UpDateUser";
+        public const string NypUserCommandAddUser = "AddUser";
+        public const string NypUserCommandDelUser = "DelUser";
+        public const string NypUserCommandGetUsers = "GetUsers";
+        public const string DoubleQuotes = "\"";
+        public const string SearchParStr = "searchPartial";
+        public const string FormValueSearchBy = "searchby";
+        public const string FormValueSearchByFormYearNum = "searchbyFormYearNum";
+        public const string FormValueSearchByLogScanDate = "searchByLogScanDate";
+        public const string FormValueSearchByLogDate = "searchByLogDate";
+        public const string FormValueSearchRejectResons = "searchRejectResons";
+        public const string FormValueRejectlogreason = "rejectlogreason";
+        public const string FormValueSearchbyScanOperator = "searchbyScanOperator";
+        public const string FormValueSearchbyDosRecdate = "dosrecdate";
+        public const string FormValueSearchbyPerfLab = "searchbyPerfLab";
+        public const string FormValueSearchByEmpID = "searchbyEmpID";
+        public const string FormValueSearchByEmpDep = "searchByEmpDep";
+        public const string FormValueSearchByEmpJobTitle = "searchByEmpJobTitle";
+        public const string FormValueSearchByEmpDocType = "searchByEmpDocType";
+        
+
+        public const string FormValueSearchDohBy = "searchDohby";
+        public const string FormValuePerfLabCode = "perfLabCode";
+        public const string FormValueSearchbyAccessMrnNum = "searchbyAccessMrnNum";
+        
+
+
+
+        public const string FormValueStartSDate = "startSDate";
+        public const string FormValueEndSDate = "endSDate";
+        public const string FormValueFinIndNum = "finIndNum";
+        public const string FormValueReqsNum = "reqsNum";
+        public const string FormValuePatID = "patID";
+        public const string FormValueClientCode = "clientcode";
+        public const string FormValueDeCode = "drCode";
+        public const string FormValuePFName = "pFName";
+        public const string FormValuePLName = "pLName";
+        public const string FormValueDrName = "drName";
+        public const string FormValueScanOperator = "scanOp";
+        public const string FormValueScanBatchId = "scanBatch";
+        public const string FormValueCbSearchPartial = "cbSearchPartial";
+        public const string FormValueInvDep = "invDep";
+        public const string FormValueInvCat = "invCat";
+        public const string FormValueInvAcct = "invAcct";
+        public const string SessionLabRecsUsers = "sessionLabRecsUsers";
+
+
+
+
+
+
+
+
+
+
+
+        public const string FormValueSearchlr = "searchlr";
+        public const string FormValueSearchLabReqs = "searchbylabrec";
+        public const string FormValueSearchByReqNum = "searchbyreqnum";
+        public const string FormValueSearchByPatId = "searchbypatid";
+        public const string FormValueSearchByClientCode = "searchbyclientccode";
+        public const string FormValueSearchByDrCode = "searchbydrcode";
+        public const string FormValueSearchByPatFName = "searchbypatientfname";
+        public const string FormValueSearchByPatLName = "searchbypatientlname";
+        public const string FormValueSearchByDrName = "searchbydrname";
+        public const string FormValueSearchByScanOperator = "searchso";
+        public const string FormValueSearchByBatchId = "searchbatchid";
+        public const string FormValueSearchByRecDate = "searchbyrecdate";
+        public const string FormValueSearchByDosDate = "searchbydosdate";
+        public const string FormValueSearchByScanDate = "searchbyscandate";
+
+        public const string LabRecsCloudConnectionString = "LabRecsCloudConnectionString";
+
+        public const string SessionKeyCwid = "Cwid";
+        public const string SessionKeyUserProfile = "UserProfile";
+        #endregion
+        public static string GetHttpValue(string httpValue,string indexOfStr)
+        {
+            int strIndexOf = httpValue.IndexOf(indexOfStr);
+            return httpValue.Substring(strIndexOf + 1).Trim();
+        }
+    }
+}
+

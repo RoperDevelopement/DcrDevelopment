@@ -1,0 +1,250 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.Pages.LabReqs.EditLabReqsViewModel
+@{
+    ViewData["Title"] = "Edit Lab Reqs";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div id="headingSessionExp" style="display:none">
+        <h3 class="text-center text-danger border">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+    </div>
+    <div id="maindiv" class="container-fluid small" style="background-color:white">
+        <h3 class="text-center">Editing Index Number: @Model.LabReqs.IndexNumber</h3>
+        <h2 class="text-center"> @Html.ValidationMessage("NoChangesFound", new { @class = "text-danger" })</h2>
+        <p class="p-2"></p>
+        <form method="post" id="fUpDateLabReq" name="fUpDateLabReq">
+            <input type="hidden" id="lrid" name="lrid" value="@Model.LabReqs.LabReqID" />
+            <table style="margin:auto">
+                <tbody>
+                    <tr>
+                        <td>
+                            <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-justify">
+                            @Html.LabelFor(model => model.LabReqs.IndexNumber, new { @style = "width:135px" })
+                            @*
+                                <input class="text-box single-line border text-info" type="text" value="@Model.LabReqs.IndexNumber" />
+                                                           <input class="text-box single-line border text-info" type="text" value="@Model.LabReqs.FinancialNumber" />
+                            *@
+                            @Html.EditorFor(m => m.LabReqs.IndexNumber, new { @class = "border  " }) @Html.ValidationMessage("ErrIndexNumber", new { @class = "text-danger" })
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.LabReqs.FinancialNumber, new { @style = "width:135px" })
+
+                            @Html.EditorFor(m => m.LabReqs.FinancialNumber, new { @class = "border" }) @Html.ValidationMessage("ErrFinancialNumber", new { @class = "text-danger" })
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.LabReqs.RequisitionNumber, new { @style = "width:135px" })
+                            @Html.TextAreaFor(m => Model.LabReqs.RequisitionNumber, new { @rows = "1", @cols = "25", @class = "border " }) @Html.ValidationMessage("ErrRequisitionNumber", new { @class = "text-danger" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.LabReqs.MRN, new { @style = "width:135px" })
+                            @Html.TextAreaFor(m => Model.LabReqs.MRN, new { @rows = "1", @style = "display:inline-block", @cols = "25", @class = "border  " })  @Html.ValidationMessage("ErrMRN", new { @class = "text-danger" })
+
+                        </td>
+                    </tr>
+                    <tr style="display:block">
+                        <td>
+                            @Html.LabelFor(model => model.LabReqs.PatientFName, new { @style = "width:135px" })
+                            @Html.TextAreaFor(m => Model.LabReqs.PatientFName, new { @rows = "1", @cols = "25", @class = "border  " })  @Html.ValidationMessage("ErrPatientFName", new { @class = "text-danger" })
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.LabReqs.PatientLName, new { @style = "width:135px" })
+                            @Html.TextAreaFor(m => Model.LabReqs.PatientLName, new { @rows = "1", @cols = "25", @class = "border  " }) @Html.ValidationMessage("ErrPatientLName", new { @class = "text-danger" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.LabReqs.ClientCode, new { @style = "width:135px" })
+                            @Html.TextAreaFor(m => Model.LabReqs.ClientCode, new { @rows = "1", @cols = "25", @class = "border   " }) @Html.ValidationMessage("ErrClientCode", new { @class = "text-danger" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.LabReqs.DrFName, new { @style = "width:135px" })
+                            @Html.TextAreaFor(m => Model.LabReqs.DrFName, new { @rows = "1", @cols = "25", @class = "border  " })  @Html.ValidationMessage("ErrDrFName", new { @class = "text-danger" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.LabReqs.DrLName, new { @style = "width:135px" })
+                            @Html.TextAreaFor(m => Model.LabReqs.DrLName, new { @rows = "1", @cols = "25", @class = "border  " }) @Html.ValidationMessage("ErrDrLName", new { @class = "text-danger" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.LabReqs.DrCode, new { @style = "width:135px" })
+                            @Html.TextAreaFor(m => Model.LabReqs.DrCode, new { @rows = "1", @cols = "25", @class = "border   " }) @Html.ValidationMessage("ErrDrCode", new { @class = "text-danger" })
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="margin:auto" class="table-bordered table-info" width="100%">
+                <thead>
+                    <tr class="text-center">
+                        <th>@Html.LabelFor(model => model.LabReqs.DateUpload)</th>
+                        <th>@Html.LabelFor(model => model.LabReqs.DateOfService)</th>
+                        <th>@Html.LabelFor(model => model.LabReqs.ScanDate)</th>
+                        <th>@Html.LabelFor(model => model.LabReqs.DateModify)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td>@Model.LabReqs.DateUpload</td>
+                        @*
+                            <td><input class="text-box single-line" type="date" data-val="true" id="dateofService" name="dateofService" value="3/3/2015" /></td>
+
+                        *@
+                        <td>@Html.EditorFor(m => m.LabReqs.DateOfService, "{0:MM/dd/yyyy}", new { @class = "form-control", type = "date" })</td>
+                        <td>@Model.LabReqs.ScanDate</td>
+                        <td>@Model.LabReqs.DateModify</td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <p class="p-2"></p>
+            <table style="margin:auto" class="table-bordered table-info" width="100%">
+                <thead>
+                    <tr class="text-center">
+                        <th>Batch ID</th>
+                        <th>Scan Machine</th>
+                        <th>Scan Operator</th>
+                        <th>Modified By</th>
+                        <th>Merged</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td>@Model.LabReqs.ScanBatch</td>
+                        <td>@Model.LabReqs.ScanMachine</td>
+                        <td>@Model.LabReqs.ScanOperator</td>
+                        <td>@Model.LabReqs.ModifyBy</td>
+
+                        @if (Model.LabReqs.Merged == 1)
+                        {
+                            <td>True</td>
+                        }
+                        else
+                        {
+                            <td>False</td>
+                        }
+
+
+
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <p class="p-2"></p>
+        <div class="container-fluid text-center">
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn btn-outline-primary btn-default" id="btnsub" name="btnsub">Update Index Number  @Model.LabReqs.IndexNumber</button>
+                    <a class="btn btn-outline-danger btn-link" id="btnexit" href="https://edocsnyplabreqs.azurewebsites.net/Index" name="btnexit" role="button">Exit</a>
+                </div>
+            </div>
+
+        </div>
+        <p class="p-2"></p>
+    </div>
+    <div id="updateLabReqmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 id="h4" class="modal-title">Update LabReq Number  @Model.LabReqs.IndexNumber</h4>
+
+                    <button id="btndis" type="button" class="close" data-dismiss="modal">×</button>
+
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <button type="button" id="btnyes" class="btn btn-outline-warning" data-dismiss="modal">Yes</button>
+                    <button type="button" id="btno" class="btn btn-danger" data-dismiss="modal">No</button>
+                </div>
+                <div class="modal-footer">
+                </div>
+                <!-- Modal footer -->
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+<script>
+ 
+    $(document).ready(function () {
+        $("#divLoading").hide();
+        $('#LabReqs_IndexNumber').focus();
+        $('#btnsub').click(function () {
+
+            $("#maindiv").fadeOut(100);
+            $('#updateLabReqmodal').css("display", "block");
+            //  $('#updateLabReqmodal').show();
+            //  $("#divLoading").css("display", "none");
+        });
+        $('#btno').click(function () {
+
+            $("#maindiv").fadeIn(100);
+            $('#updateLabReqmodal').css("display", "none");
+            $('#LabReqs_IndexNumber').focus();
+            return false;
+            //  $('#updateLabReqmodal').show();
+            //  $("#divLoading").css("display", "none");
+        });
+        $('#btndis').click(function () {
+
+            $("#maindiv").fadeIn(100);
+            $('#updateLabReqmodal').css("display", "none");
+            $('#LabReqs_IndexNumber').focus();
+            return false;
+            //  $('#updateLabReqmodal').show();
+            //  $("#divLoading").css("display", "none");
+        });
+        $('#btnyes').click(function () {
+
+            $("#maindiv").fadeIn(100);
+            $('#updateLabReqmodal').css("display", "none");
+            $("#divLoading").show();
+            $("#fUpDateLabReq").submit();
+
+            //  $('#updateLabReqmodal').show();
+            //  $("#divLoading").css("display", "none");
+        });
+
+
+
+    });</script>

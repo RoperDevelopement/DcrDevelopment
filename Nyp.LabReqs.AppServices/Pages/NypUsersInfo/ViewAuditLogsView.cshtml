@@ -1,0 +1,85 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.Pages.NypUsersInfo.ViewAuditLogsViewModel
+@{
+    ViewData["Title"] = "ViewAuditLogsView";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger border">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+@*<partial name="Shared/_RecordsNetImage" />*@
+<div id="divMain" name="divMain">
+    <div class="container-fluid">
+        <h1 class="text-center">Viewing Audit Log</h1>
+        <p class="p-0"></p>
+        <h2 class="text-center"> @Model.AuditLogCsvFname</h2>
+        <p class="p-0" />
+        <h5 class="text-center"><a asp-area="" asp-page="/Index"><input type="button" value="&times;" class="btn btn-outline-info" title="Close" /></a></h5>
+        <p class="p-2" />
+        @if ((@Model.LogCsvModels != null))
+        {
+            <div id="divLabReqs">
+
+                <p class="text-left">Total Query Time @Model.TotalQueryTime</p>
+                <p class="p-0" />
+                <table class="table table-hover table-responsive-sm  w-auto pl-sm-5" width="100%" id="dtLabReqs">
+                    <thead>
+                        <tr>
+
+                            <th>Application Name</th>
+                            <th>Log Time</th>
+                            <th>CWID</th>
+                            <th>Log MachineName</th>
+                            <th>Log DomainName</th>
+                            <th>Message Type</th>
+                            <th>Message</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var items in Model.LogCsvModels)
+                        {
+
+                            <tr class="w-25">
+                                @*
+                                    <td> <a href="/Partial_Pages/DisplayPdfFilePartialView?pdfurl=@items.Value.AuditLogUrl" target="_blank"><img src="~/Images/excel.png" width="20" height="25" /></a></td>
+                                *@
+                                <td class="w-100">@items.AuditLogApplicationName</td>
+                                <td class="w-100">@items.AuditLogDate</td>
+                                <td class="w-100">@items.Cwid</td>
+                                <td class="w-100">@items.AuditLogMachine</td>
+                                <td class="w-100">@items.AuditLogDomain</td>
+                                <td class="w-25">@items.AuditLogMessageType</td>
+                                <td class="w-100">@items.AuditLogMessage</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        }
+    </div>
+</div>
+
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:block">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SessionExpireAlert(0);
+            $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+
+            });
+            $("#divLoading").hide();
+            CompleteAjaxCall();
+        });
+    </script>
+}

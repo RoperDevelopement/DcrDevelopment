@@ -1,0 +1,70 @@
+﻿@page
+@model BinMonitorAppService.Pages.BinUsers.ErrorLoggingInViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+
+    <title>Error Logging in</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body  style="background-color:lightblue">
+    <h1 class="text-center">Error Accessing BinMonitor System</h1>
+    <p class="p-0"></p>
+    <div class="text-center">
+        <h2>Your CWID does not have access to the "BinMonitor System".</h2>
+        <h5>The eDocs Administrators have been notified and they will be back in touch monentarily when you are approved.</h5>
+        <p class="p-1"></p>
+        <div class="container text-center">
+            <address>
+                Bryan Deguzman<br />
+                NYP Outreach Lab<br />
+               <strong>NYP Support: </strong><abbr title="Office Phone"> (o:)</abbr>
+                212-746-7639
+                <br />
+               <abbr title="Email"> (e:)</abbr> <a href="mailto:@Model.EmailTo">@Model.EmailTo</a><br />
+            </address>
+            <p class="pb-4"></p>
+            <address>
+                Chris Barrow<br />
+                NYP Outreach Lab<br />
+                <strong>NYP Support: </strong><abbr title="Office Phone">(o:)</abbr>
+                212-746-5640
+                </br>
+                <abbr title="Email"> (e:)</abbr> <a href="mailto:@Model.EmailSecondTo">@Model.EmailSecondTo</a><br />
+
+            </address>
+            <p class="pb-4"></p>
+            <address>
+                Dan Roper<br />
+                e-Docs USA<br />
+                          <strong>e-Docs Support: </strong><abbr title="Support Phone"> (t:)</abbr>
+                406-565-3465
+                </br>
+                @foreach (var emailadd in Model.EmailCc)
+                {
+                    <abbr title="Support Email"> (e:)</abbr> <a href="mailto:@emailadd">@emailadd</a><br />
+                }
+            </address>
+        </div>
+        <p class="p-lg-2"></p>
+        <div class="text-center"><a href="http://edocsusa.com/" target="_blank"> <img align="middle" src="~/Images/logo_black_v2.png" /></a></div>
+
+
+    </div>
+</body>
+</html>

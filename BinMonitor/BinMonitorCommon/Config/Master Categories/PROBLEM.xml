@@ -1,0 +1,5 @@
+﻿<Complex name="Root" type="BinMonitor.Common.MasterCategory, BinMonitor.Common">
+  <Properties>
+    <Simple name="Title" value="PROBLEM" />
+  </Properties>
+</Complex>

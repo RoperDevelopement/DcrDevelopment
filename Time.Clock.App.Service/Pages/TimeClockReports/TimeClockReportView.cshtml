@@ -1,0 +1,447 @@
+﻿@page
+@model Edocs.Employees.Time.Clock.App.Service.Pages.TimeClockReports.TimeClockReportViewModel
+@{
+    ViewData["Title"] = "e-Docs Time Clock Reports";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+ 
+<body style="background-color:#87CEFA ">
+    <div id="divmain" class="container-fluid">
+        @if ((@Model.ClockInDate.Year) > 2021)
+        {
+
+
+        <div class="row">
+            <div class="col-sm-6 col-lg-4">
+                <div class="hidden-xs">
+                    <ul class="nav nav-pills nav-stacked">
+                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Report Options <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><button class="btn btn-link" id="btnGetEmpInHrs" name="btnGetEmpInHrs">Run Reports</button></li>
+                                <li class="divider"></li>
+                                <li><button class="btn btn-link" id="btnAddRecord" name="btnAddRecord">Add Time Entry</button></li>
+                                <li class="divider"></li>
+                                <li><button class="btn btn-link" id="btnExpRep" name="btnExpRep">Export Report</button></li>
+                                <li class="divider"></li>
+                                <li><button class="btn btn-link" id="btnPrintRep" name="btnPrintRep">Print Report</button></li>
+                                <li class="divider"></li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a type="button" class="btn btn-outline-warning btn-link" id="btnReset" href="/TimeClockReports/TimeClockReportView" name="btnReset">Reset</a>
+                                </li>
+                                
+                                <li class="divider"><p class="p-0"></p></li>
+                                <li>
+                                    <a type="button" class="btn btn-outline-danger btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        }
+        <input type="hidden" id="EmpLogInID" name="EmpLogInID" value="@Model.EmpLogInID" />
+        <h1 class="text-center">e-Docs Time Clock Reports</h1>
+        <p class="p-md-0"></p>
+        @*@if ((@Model.ClockInDate.Year) < 2022)*@
+
+        <h1 class="text-center text-info">Select EmpID</h1>
+
+        <form method="get" id="formEmpId" role="form">
+            <div class="row text-center  form-inline">
+                <div class="col-*-* text-center" style="margin:0 auto;">
+                    <select id="empID" name="empID">
+                        @*   <option value="Customer Name">Customer Name</option>*@
+                        @foreach (var id in Model.EmpId)
+                        {
+                            <option value="@id.EmpID">@id.EmpID</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </form>
+        <p class="p-1"></p>
+        @if ((@Model.ClockInDate.Year) > 2021)
+        {
+
+
+            <form id="fRep" name="fRep" method="get">
+                <h3 class="text-center">Time Clock Work Report for EmpID: @Model.EmpLogInID</h3>
+
+                <table class="table table-bordered tablecenter" style="background-color:aqua">
+                    <thead>
+                        <tr>
+
+                            <th class="text-center">@Html.LabelFor(model => Model.ClockInDate)</th>
+                            <th class="text-center">@Html.LabelFor(model => Model.ClockOutDate)</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">
+                                <p style="display:none" id="repErSDate" name="repERSDate" class="alert-danger">Scan Start Date Required</p>
+
+                                @Html.EditorFor(m => @Model.ClockInDate, new { @name = "ClockInDate", @id = "ClockInDate", @class = "text-center" })
+
+                            </td>
+
+
+                            @*
+                            class="text-center"><input type="date" id="repSEndDate" name="repSEndDate" /></td>
+                            *@
+                            <td class="text-center"> @Html.EditorFor(m => @Model.ClockOutDate, new { @name = "ClockOutDate", @id = "ClockOutDate", @class = "text-center" }) </td>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+            </form>
+            @*
+            <div class="container-fluid text-center">
+                <button class="btn btn-primary btn-outline-primary text-center" id="btnGetEmpInHrs" name="btnGetEmpInHrs">Run Report</button>
+                @if (string.Compare(@Model.EmpLogInID, "N/A", true) != 0)
+                {
+                    @*
+                    <button class="btn btn-primary btn-outline-primary text-center float-left" id="btnPrint" name="btnPring" onclick="OpenNewWIndow('/TimeClockReports/TimeClockPrintHoursWorkedView&empId=@Model.EmpLogInID', '_blanlk');">Print Report</button>
+                          <button class="btn btn-primary btn-outline-primary text-center float-left" id="btnPrintRep" name="btnPrintRep" onclick="OpenNewWIndow('/TimeClockReports/TimeClockPrintHoursWorkedView?empid=@Model.EmpLogInID&timeClockStartDate=@Model.ClockInDate.ToString("MM-dd-yyyy")&timeClockEndDate=@Model.ClockOutDate.ToString("MM-dd-yyyy")', '_blanlk');">Print Report</button>
+
+                    <button class="btn btn-primary btn-outline-secondary text-center" id="btnAddRecord" name="btnAddRecord">Add Time Entry</button>
+                    <button class="btn btn-primary btn-outline-secondary text-center" id="btnPrintRep" name="btnPrintRep">Print Report</button>
+                    <button class="btn btn-primary btn-outline-light text-center" id="btnExpRep" name="btnExpRep">Export Report</button>
+
+                }
+                <a type="button" class="btn btn-outline-warning btn-link" id="btnReset" href="/TimeClockReports/TimeClockReportView" name="btnReset">Reset</a>
+
+                <a type="button" class="btn btn-outline-danger btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+            </div>
+            <p class="p-2"></p>
+            *@
+        }
+
+        <p class="p-2"></p>
+        <div id="divEmpRep">
+
+        </div>
+
+
+    </div>
+    <div class="title modal " tabindex="-1" id="addTimeClockInOutRecordModal"
+         data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4>e-Docs Add Time Clock Record for Employee ID @Model.EmpLogInID</h4>
+                    <button type="button" class="close" id="btnCloseTimeClockInOutRecordModal" data-dismiss="modal">×</button>
+
+                </div>
+                <div class="modal-body">
+                    <form method="get" id="fAddTimeClockRecord" name="fAddTimeClockRecord">
+                        <div class="form-group">
+                            @*<input class="form-control" type="text" placeholder="e-Docs Employee ID" id="empId" name="empId" style="display:block" />
+                                <textarea style="display:inline-block;text-align:center;" id="idAddRec" readonly rows="1" cols="10"></textarea>*@
+
+
+
+                            <label for="timeClockStartDate">Clock In Date/Time:</label>
+                            <input type="datetime-local" id="timeClockStartDate" name="timeClockStartDate" />
+                            <p class="p-0"></p>
+                            <label for="timeClockStartDate">Clock Out Date/Time:</label>
+                            <input type="datetime-local" id="timeClockEndDate" name="timeClockEndDate" />
+                        </div>
+                        <div name="retMessage" id="retMessage" style="display:none"></div>
+                        <div class="modal-footer">
+                            @*  <button type="button" class="btn btn-primary col-md-2">Clock In/Out</button>*@
+                            <button type="button" id="btnAddTimeClockRecord" name="btnAddTimeClockRecord" class="btn btn-pill btn-outline-primary">Add Time</button>
+                            <button type="button" id="btnCloseAddTimeClockRecord" name="btnCloseAddTimeClockRecord" class="btn btn-pill btn-outline-danger">Cancel</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cclass="title modal " tabindex="-1" id="delTimeEntrymodal" style="display:none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 id="h4" class="modal-title">Delete Time Entry For UserID:  @Model.EmpLogInID</h4>
+
+                    <button id="btndis" type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <button type="button" id="btnyes" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                    <button type="button" id="btno" class="btn btn-danger" data-dismiss="modal">No</button>
+                </div>
+                <div class="modal-footer">
+                </div>
+                <!-- Modal footer -->
+
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+    <p class="p-2"></p>
+
+    <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+        <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+            Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+        </p>
+    </div>
+ 
+
+@section scripts{
+     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+   
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#divLoading").hide();
+            //$(this).bind("contextmenu", function (e) {
+
+            //    e.preventDefault();
+
+            ////});
+            $('#empID').change(function (e) {
+
+                $("#divLoading").show();
+                $("#formEmpId").submit();
+            });
+            //$('#btnDelCust').click(function (e) {
+            //    $("#h4").text("Delete user " + $("#EdocsITSCustomers_EdocsCustomerName").val());
+            //    $("#btnOpenModel").click();
+            //});
+            //$('#btnUpDateCust').click(function (e) {
+            //    $("#divLoading").show();
+            //    $("#formUpCust").submit();
+            //});
+            //    $('#btnyes').click(function () {
+
+            //        var message = "Deleting Customer " + $('#EdocsITSCustomers_EdocsCustomerName').val();
+            //        document.getElementById("parLoading").val = message;
+            //        $("#divLoading").show();
+            //        $("
+            //            < input type = 'hidden' value = 'delCustomer' /> ")
+            //                .attr("id", "custdel")
+            //                .attr("name", "custdel")
+            //                .prependTo("#formUpCust");
+            //        $('#formUpCust').submit();
+            //    });
+            //});
+             
+            $('#btnCloseAddTimeClockRecord').click(function (e) {
+
+                $("#divmain").fadeIn(100);
+                $('#addTimeClockInOutRecordModal').css("display", "none");
+
+                //   $("#addTimeClockInOutRecordModal").modal('show');
+                //   $('#divmain').focus();
+            });
+            $('#btnCloseTimeClockInOutRecordModal').click(function (e) {
+
+                $("#divmain").fadeIn(100);
+                $('#addTimeClockInOutRecordModal').css("display", "none");
+
+                //   $("#addTimeClockInOutRecordModal").modal('show');
+                //   $('#divmain').focus();
+            });
+            $('#btnAddRecord').click(function (e) {
+                
+              //  document.getElementById('idAddRec').value = 'EmployeeID '+ document.getElementById('EmpLogInID').value;
+                $("#divmain").fadeOut(100);
+                $('#addTimeClockInOutRecordModal').css("display", "block");
+             
+             //   $("#addTimeClockInOutRecordModal").modal('show');
+             //   $('#divmain').focus();
+            });
+            $("#btnPrintRep").click(function (e) {
+                var id = document.getElementById('EmpLogInID').value;
+                var urlLoc = '/TimeClockReports/TimeClockPrintHoursWorkedView?empid=' + id + '&timeClockStartDate=' + $('#ClockInDate').val().replace("/", "-") + "&timeClockEndDate=" + $('#ClockOutDate').val().replace("/", "-");
+
+                OpenNewWIndow(urlLoc, '_blanlk');
+            });
+            $("#btnExpRep").click(function (e) {
+                var id = document.getElementById('EmpLogInID').value;
+                var urlLoc = '/TimeClockReports/TimeClockRepExportView?empid=' + id + '&timeClockStartDate=' + $('#ClockInDate').val().replace("/", "-") + "&timeClockEndDate=" + $('#ClockOutDate').val().replace("/", "-");
+
+                OpenNewWIndow(urlLoc, '_blanlk');
+            });
+            $("#btnGetEmpInHrs").click(function (e) {
+                var id = document.getElementById('EmpLogInID').value;
+                e.preventDefault();
+
+                //if ($('#empId').val().length < 4) {
+
+                //    return false;
+                //}
+                //$("#clockInOutModal").modal('hide');
+                $("#divLoading").show();
+                var empClockInOutUrl = "/Partial_Pages/TimeCLockHrsView/";
+                //  var empClockInOutUrl = "https://www.facebook.com/";
+                //  alert(empClockInOutUrl);
+                // alert($('#empId').val());
+                //   e.preventDefault();
+
+                $.ajax({
+                    type: "GET",
+                    url: empClockInOutUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    // data: "&empId=" + $('#EmpLogInID').val() + "&timeClockStartDate=" + $('#ClockInDate').val() + "&timeClockEndDate=" + $('#ClockOutDate').val(),
+                    // data: "&empId=id" + $('empClock').val() + "&timeClockStartDate=" + $('#ClockInDate').val().replace("/", "-") + "&timeClockEndDate=" + $('#ClockOutDate').val().replace("/", "-"),
+                    data: "&empId=" + id + "&timeClockStartDate=" + $('#ClockInDate').val().replace("/", "-") + "&timeClockEndDate=" + $('#ClockOutDate').val().replace("/", "-"),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        //
+                        // alert(result);
+                        // alert("done");
+                     //   $("#divLoading").hide();
+                        $("#divEmpRep").html(result);
+                        
+                        // $("#sOptions").click();
+                        //  if ($("#dtEmpRep").length) {
+
+
+                     //   $('#dtEmpRep').DataTable({ "pagingType": "full_numbers" });
+                       // $('.dataTables_length').addClass('bs-select');
+                        // }
+                        //    $("#retMessage").html(result);
+                        //  $('#retMessage').attr("style", "display:block");
+                        //  $("#clockInOutModal").modal('show');
+                        //  $('#empId').val("");
+                        //  CheckMessage(result);
+                        //  alert(result);
+                    },
+                    complete: function () {
+
+                        $("#divLoading").hide();
+                       //// CompleteAjaxCall();
+                       // if ($("#dataTableEmpRep").length) {
+
+
+                       //     $('#dataTableEmpRep').DataTable({"pagingType":"full_numbers"});
+                       // $('.dataTables_length').addClass('bs-select');
+                       //  }
+                        // CompleteAjaxCall();
+                        // $("#sOptions").click();
+                        //CheckMessage(result);
+                        //  alert("done");
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+
+                        // $("#clockInOutModal").modal('show');
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+                });
+            });
+
+
+            $("#btnAddTimeClockRecord").click(function (e) {
+                var id = document.getElementById('EmpLogInID').value;
+                e.preventDefault();
+
+                //if ($('#empId').val().length < 4) {
+
+                //    return false;
+                //}
+                //$("#clockInOutModal").modal('hide');
+                $("#divLoading").show();
+                var empClockInOutUrl = "/Partial_Pages/TimeCardAddNewEntryView/";
+                //  var empClockInOutUrl = "https://www.facebook.com/";
+                //  alert(empClockInOutUrl);
+                // alert($('#empId').val());
+                //   e.preventDefault();
+                $("#divmain").fadeIn(100);
+                $('#addTimeClockInOutRecordModal').css("display", "none");
+
+                $.ajax({
+                    type: "GET",
+                    url: empClockInOutUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    // data: "&empId=" + $('#EmpLogInID').val() + "&timeClockStartDate=" + $('#ClockInDate').val() + "&timeClockEndDate=" + $('#ClockOutDate').val(),
+                    // data: "&empId=id" + $('empClock').val() + "&timeClockStartDate=" + $('#ClockInDate').val().replace("/", "-") + "&timeClockEndDate=" + $('#ClockOutDate').val().replace("/", "-"),
+                    data: "&empId=" + id + "&timeClockStartDate=" + $('#timeClockStartDate').val().replace("/", "-") + "&timeClockEndDate=" + $('#timeClockEndDate').val().replace("/", "-"),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        //
+                        // alert(result);
+                        // alert("done");
+                        //   $("#divLoading").hide();
+                        $("#btnGetEmpInHrs").click();
+
+                        // $("#sOptions").click();
+                        //  if ($("#dtEmpRep").length) {
+
+
+                        //   $('#dtEmpRep').DataTable({ "pagingType": "full_numbers" });
+                        // $('.dataTables_length').addClass('bs-select');
+                        // }
+                        //    $("#retMessage").html(result);
+                        //  $('#retMessage').attr("style", "display:block");
+                        //  $("#clockInOutModal").modal('show');
+                        //  $('#empId').val("");
+                        //  CheckMessage(result);
+                        //  alert(result);
+                    },
+                    complete: function () {
+
+                        $("#divLoading").hide();
+                        // CompleteAjaxCall();
+                        //if ($("#dataTableEmpRep").length) {
+
+
+                        //    $('#dataTableEmpRep').DataTable({ "pagingType": "full_numbers" });
+                        //    $('.dataTables_length').addClass('bs-select');
+                        //}
+                        // CompleteAjaxCall();
+                        // $("#sOptions").click();
+                        //CheckMessage(result);
+                        //  alert("done");
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+
+                        // $("#clockInOutModal").modal('show');
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+                });
+            });
+
+
+           
+        });
+    </script>
+}

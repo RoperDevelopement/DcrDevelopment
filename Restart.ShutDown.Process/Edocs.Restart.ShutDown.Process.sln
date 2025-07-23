@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edocs.Restart.ShutDown.Process", "Edocs.Restart.ShutDown.Process.csproj", "{A214B4C9-2F55-4631-B961-7B1CAEF47EAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edocs.Trace.Logger", "..\Edocs.Trace.Logger\Edocs.Trace.Logger\Edocs.Trace.Logger.csproj", "{7715F9AE-F60E-4AF1-82C2-3B13E198A8EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A214B4C9-2F55-4631-B961-7B1CAEF47EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A214B4C9-2F55-4631-B961-7B1CAEF47EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A214B4C9-2F55-4631-B961-7B1CAEF47EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A214B4C9-2F55-4631-B961-7B1CAEF47EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7715F9AE-F60E-4AF1-82C2-3B13E198A8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7715F9AE-F60E-4AF1-82C2-3B13E198A8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7715F9AE-F60E-4AF1-82C2-3B13E198A8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7715F9AE-F60E-4AF1-82C2-3B13E198A8EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {656814E8-471F-4BE2-A2F4-E9687C657A55}
+	EndGlobalSection
+EndGlobal

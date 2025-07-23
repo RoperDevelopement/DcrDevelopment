@@ -1,0 +1,96 @@
+﻿<Complex name="Root" type="BinMonitor.Common.Category, BinMonitor.Common">
+  <Properties>
+    <Simple name="Title" value="ORDERED" />
+    <Complex name="Color">
+      <Properties>
+        <Simple name="Text" value="DarkKhaki" />
+      </Properties>
+    </Complex>
+    <Simple name="MasterCategoryTitle" value="READY" />
+    <Simple name="RequiresRegistration" value="false"/>
+    <Complex name="CheckPoint1Configuration">
+      <Properties>
+        <Simple name="Duration" value="00:15:00" />
+        <Simple name="Flash" value="False" />
+        <Complex name="Color">
+          <Properties>
+            <Simple name="Text" value="Control" />
+          </Properties>
+        </Complex>
+        <Simple name="EmailImmediately" value="False" />
+        <Simple name="EmailUntilComplete" value="False" />
+        <Simple name="EmailFrequency" value="06:00:00" />
+        <Null name="EmailRecipients" />
+      </Properties>
+    </Complex>
+    <Complex name="CheckPoint2Configuration">
+      <Properties>
+        <Simple name="Duration" value="00:30:00" />
+        <Simple name="Flash" value="False" />
+        <Complex name="Color">
+          <Properties>
+            <Simple name="Text" value="Control" />
+          </Properties>
+        </Complex>
+        <Simple name="EmailImmediately" value="False" />
+        <Simple name="EmailUntilComplete" value="False" />
+        <Simple name="EmailFrequency" value="10675199.02:48:05.4775807" />
+        <Null name="EmailRecipients" />
+      </Properties>
+    </Complex>
+    <Complex name="CheckPoint3Configuration">
+      <Properties>
+        <Simple name="Duration" value="00:45:00" />
+        <Simple name="Flash" value="False" />
+        <Complex name="Color">
+          <Properties>
+            <Simple name="Text" value="Control" />
+          </Properties>
+        </Complex>
+        <Simple name="EmailImmediately" value="False" />
+        <Simple name="EmailUntilComplete" value="False" />
+        <Simple name="EmailFrequency" value="10675199.02:48:05.4775807" />
+        <Null name="EmailRecipients" />
+      </Properties>
+    </Complex>
+    <Complex name="CheckPoint4Configuration">
+      <Properties>
+        <Simple name="Duration" value="01:00:00" />
+        <Simple name="Flash" value="True" />
+        <Complex name="Color">
+          <Properties>
+            <Simple name="Text" value="Control" />
+          </Properties>
+        </Complex>
+        <Simple name="EmailImmediately" value="True" />
+        <Simple name="EmailUntilComplete" value="True" />
+        <Simple name="EmailFrequency" value="00:15:00" />
+        <Simple name="EmailRecipients" value="sam.brinly@edocsusa.com" />
+      </Properties>
+    </Complex>
+    <Complex name="CreateConfiguration">
+      <Properties>
+        <Simple name="EmailOnStart" value="False" />
+        <Simple name="EmailOnCompletion" value="False" />
+        <Simple name="IncludeContentsInEmail" value="False" />
+        <Simple name="EmailRecipients" value="sam.brinly@edocsusa.com" />
+      </Properties>
+    </Complex>
+    <Complex name="RegisterConfiguration">
+      <Properties>
+        <Simple name="EmailOnStart" value="False" />
+        <Simple name="EmailOnCompletion" value="False" />
+        <Simple name="IncludeContentsInEmail" value="False" />
+        <Simple name="EmailRecipients" value="sam.brinly@edocsusa.com" />
+      </Properties>
+    </Complex>
+    <Complex name="ProcessConfiguration">
+      <Properties>
+        <Simple name="EmailOnStart" value="False" />
+        <Simple name="EmailOnCompletion" value="False" />
+        <Simple name="IncludeContentsInEmail" value="False" />
+        <Simple name="EmailRecipients" value="sam.brinly@edocsusa.com" />
+      </Properties>
+    </Complex>
+  </Properties>
+</Complex>

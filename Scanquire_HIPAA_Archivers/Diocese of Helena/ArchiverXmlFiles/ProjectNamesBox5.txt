@@ -1,0 +1,59 @@
+ 
+NA;0i1 Basin Pipeline
+NA;Bonneville Power Admin (4)
+NA;Interstate 0il Pipe Line Co.
+NA;Mountain States Telephone
+FHPIC2;Bonneville Power
+FAP 2A;Montana-Dakora Utilieies Co.
+FH 6;Bonneville Power Admin.
+FHP 6M;Thompson Falls Lumber Co.
+FHP8J(4)K(3);Mineral County
+FHP 8N;U.S. Geological Survey
+F9 (3); Bozeman -Norris Telephone Co.
+F9 (4); Bozeman -Norris Telephone Co.
+FHP13F;0akford G. Bain
+F 23;Chinook Telephone Co.
+F 44B;Star-Lite Drive In Theatres,
+FHP45D;John Steffler
+F 47(4);Southeast Electríc, Inc.
+F 48A(2);Southeast Electric Coop
+F 47B; Southeast Electric Coop
+F 48F(4); Southeast Electric Coop
+F 48(5) Conrad Stadel
+S 553(8);NPRR
+F 58B;Richadr P. Easton
+F 60A;J. R. Kaiserman
+F 60E;Shields Canal Co.
+NRM 60G;Clyde Park(City)
+F 63;Ronan (City)
+F 64A;GF Air Force Base(1949)
+F 65-A;Montana Power Co.
+S132(1);Montana Power Co.
+F134A;Interstate 0il Pipeline Co.
+F 134(5);Billings Gas Co.
+F 135E;NPRR
+S 139(1);NPRR
+F 142B; Montana Dakota Utilities
+F 142B;Saco (City)
+F 142(4)lMontana Dakota Utilities
+F 144;Glasgow (City)
+F 148A;August J, Hentz
+F 148A;Montana Dakota Utilities
+F 148A;Marius Larsens&Faraasen
+F 148A;Montana Dakota Utilities
+F 148B;Montana Dakota Utilities
+F 165;Balgrade (City)
+F 180; Great Falls (City)
+F 180;Great Falls Gas Co.
+F 184A;W. A, Noon
+F 184F;Montana Power Co.
+F 187E; Hardin (City)
+F 187 F;Interstate 0il Pipeline Co.
+F 187F;U.S. Geological Survey
+S306 (2) (3); Bound Butte Water Co.
+F 315A;Montana Dakota Utilities Co.
+F 320 (3);Billings Gas Co.
+F 328F;Socony Vacuum 0il Co.
+F 328F;The Texas Co.
+F 328;FI State Water Conservation
+F 334;CDEFGH Shell 0il Co.

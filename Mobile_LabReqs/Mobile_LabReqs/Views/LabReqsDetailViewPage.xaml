@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:local="clr-namespace:Mobile_LabReqs.ViewsModels"
+               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+              ios:Page.UseSafeArea="true"
+             x:Class="Mobile_LabReqs.Views.LabReqsDetailViewPage"
+              Title="{Binding Title}">
+
+
+    <Page.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="bgColor">#F0FFFF</Color>
+            <Color x:Key="fgColor">#606060</Color>
+
+
+
+        </ResourceDictionary>
+    </Page.Resources>
+    <ContentPage.BindingContext>
+        <local:LabReqsDetailPageModel/>
+    </ContentPage.BindingContext>
+    <Grid Padding="50"  BackgroundColor="{DynamicResource bgColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
+        </Grid.RowDefinitions>
+
+       
+        <Label Text="Financial Number" Grid.Row="0"  Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource infoLabelStyle}"/>
+        <Label Text="Index Number" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource infoLabelStyle}"/>
+        <Label Text="PatientID" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource infoLabelStyle}"/>
+        <Label Text="MRN" Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource infoLabelStyle}"/>
+
+        <Label Text="RequisitionNumber" Grid.Row="4" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource infoLabelStyle}"/>
+        <Label Text="PatientName" Grid.Row="5" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource infoLabelStyle}"/>
+        <Label Text="DrName" Grid.Row="6" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource infoLabelStyle}"/>
+        <Label Text="DrCode" Grid.Row="7" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource infoLabelStyle}"/>
+        <Label Text="DateOfService" Grid.Row="8" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource infoLabelStyle}"/>
+        <Label Text="ScanOperator" Grid.Row="9" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource infoLabelStyle}" />
+        <Label Text="{Binding IndexNumber}" Grid.Row="1" Grid.Column="1" Style="{StaticResource baseLabelStyle}"  />
+        <Label Text="{Binding FinancialNumber}" Grid.Row="0"  Grid.Column="1" Style="{StaticResource baseLabelStyle}"/>
+        <!-- 
+        <Label Text="{Binding PatientID}" Grid.Row="2"  Grid.Column="1" Style="{StaticResource baseLabelStyle}" />
+        <Label Text="{Binding MRN}"  Grid.Row="3"  Grid.Column="1" Style="{StaticResource baseLabelStyle}"/>
+        -->
+        <Label Text="123456" Grid.Row="2"  Grid.Column="1" Style="{StaticResource baseLabelStyle}" />
+        <Label Text="123456"  Grid.Row="3"  Grid.Column="1" Style="{StaticResource baseLabelStyle}"/>
+        <Label Text="{Binding RequisitionNumber}"  Grid.Row="4"  Grid.Column="1" Style="{StaticResource baseLabelStyle}"/>
+        <!-- 
+         <Label Text="{Binding PatientName}"  Grid.Row="5"  Grid.Column="1" Style="{StaticResource baseLabelStyle}"/>
+         -->
+        <Label Text="Test Patient"  Grid.Row="5"  Grid.Column="1" Style="{StaticResource baseLabelStyle}"/>
+        <Label Text="{Binding DrName}"  Grid.Row="6"  Grid.Column="1" Style="{StaticResource baseLabelStyle}"/>
+        <Label Text="{Binding DrCode}"  Grid.Row="7"  Grid.Column="1" Style="{StaticResource baseLabelStyle}"/>
+        <Label Text="{Binding DateOfService}"  Grid.Row="8"  Grid.Column="1" Style="{StaticResource baseLabelStyle}"/>
+        <Label Text="{Binding ScanOperator}"  Grid.Row="9"  Grid.Column="1" Style="{StaticResource baseLabelStyle}"/>
+
+    </Grid>
+</ContentPage>

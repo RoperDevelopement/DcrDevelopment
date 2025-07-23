@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edocs.BSB.Planning.Dep.Archiver", "Edocs.BSB.Planning.Dep.Archiver.csproj", "{2ADA32FE-F588-4154-9D3C-A6D81B2C0635}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2ADA32FE-F588-4154-9D3C-A6D81B2C0635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ADA32FE-F588-4154-9D3C-A6D81B2C0635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ADA32FE-F588-4154-9D3C-A6D81B2C0635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ADA32FE-F588-4154-9D3C-A6D81B2C0635}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39D1395C-D6AE-48CB-A4AF-FA8FB1AAE76B}
+	EndGlobalSection
+EndGlobal

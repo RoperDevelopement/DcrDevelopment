@@ -1,0 +1,1340 @@
+﻿@page
+@model BinMonitorAppService.Pages.BinManager.BinManagerHomeModel
+@{
+    ViewData["Title"] = "BinManagerHome";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+
+}
+
+
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Page BinMonitor Batch Manager will refresh&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+@*<div class="container-fluid" style="margin-left:250px" id="divMain"> *@
+
+<div class="justify-content-md-center " style="margin-left:250px" id="divMain">
+    <header>
+        <h1 class="text-center">BinMonitor Batch Manager</h1>
+    </header>
+    <input type="hidden" id="expiresSession" value="@Model.SessionExpires" />
+    <p class="p-3" />
+    <div class="container-fluid border text-center" id="divmainform">
+        <p class="p-1" />
+        <input type="hidden" id="usequickkeys" value="yes" />
+        <div class="row justify-content-sm-center">
+            <div class="col-4">
+                <button class="btn-outline-primary btn-block text-center" id="btnNewBatch">
+                    <p class="margionZero">New</p>
+                    <p class="margionZero">Batch</p>
+                    <p class="margionZero">[N/n]</p>
+                </button>
+            </div>
+
+            <div class="col-4">
+
+                <button class="btn-outline-primary btn-block text-center" id="mBatch">
+
+                    <p class="margionZero">Manage</p>
+                    <p class="margionZero">Batch</p>
+                    <p class="margionZero">[M/m]</p>
+
+                </button>
+
+
+
+            </div>
+
+
+        </div>
+        <p class="p-0" />
+        <div class="row justify-content-sm-center">
+            <div class="col-4">
+                <button class="btn-outline-primary btn-block text-center" id="btnBeginProcessing" name="btnBeginProcessing">
+                    <p class="margionZero">Begin</p>
+                    <p class="margionZero">Processing</p>
+                    <p class="margionZero">[P/p]</p>
+
+                </button>
+            </div>
+
+            <div class="col-4">
+                <button class="btn-outline-primary btn-block text-center" id="btnCloseBatch" name="btnCloseBatch">
+                    <p class="margionZero">Complete Processing</p>
+                    <p class="margionZero">Close Batch</p>
+                    <p class="margionZero">[C/c]</p>
+
+                </button>
+            </div>
+
+        </div>
+        <p class="p-0" />
+
+
+        @if ((Model.SpectrumMonitorMenuRightsModel.TransFerBins) || (Model.SpectrumMonitorMenuRightsModel.TransFerCategories))
+        {
+
+
+            <div class="row justify-content-sm-center">
+                @if (Model.SpectrumMonitorMenuRightsModel.TransFerBins)
+                {
+                    <div class="col-4">
+                        <button class="btn-outline-primary btn-block text-center" id="btnBinsTransfer" name="btnBinsTransfer">
+                            <p class="margionZero">Transfer</p>
+                            <p class="margionZero">Bins</p>
+                            <p class="margionZero">[B/b]</p>
+                        </button>
+                    </div>
+                }
+                @if (Model.SpectrumMonitorMenuRightsModel.TransFerCategories)
+                {
+                    <div class="col-4">
+                        <button class="btn-outline-primary btn-block text-center" id="btnTransferCategories" name="btnTransferCategories">
+                            <p class="margionZero">Transfer</p>
+                            <p class="margionZero">Categories</p>
+                            <p class="margionZero">[T/t]</p>
+
+                        </button>
+
+                    </div>
+                }
+
+            </div>
+        }
+
+        <p class="p-0" />
+        @if (Model.SpectrumMonitorMenuRightsModel.TransFerBins)
+        {
+
+
+            <div class="row justify-content-sm-center">
+                @if (Model.SpectrumMonitorMenuRightsModel.TransFerBins)
+                {
+                    <div class="col-4">
+                        <button class="btn-outline-primary btn-block text-center" id="btnTransProcess">
+                            <p class="margionZero">Transfer</p>
+                            <p class="margionZero">Processing</p>
+                            <p class="margionZero">[F/f]</p>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn-outline-primary btn-block text-center" id="btnTransferLabReqs" name="btnTransferLabReqs">
+                            <p class="margionZero">Transfer</p>
+                            <p class="margionZero">LabReqs</p>
+                            <p class="margionZero">[S/s]</p>
+
+                        </button>
+                    </div>
+
+
+
+
+                }
+            </div>
+        }
+        <p class="p-0" />
+        <div class="row justify-content-sm-center">
+            <div class="col-4">
+                <button class="btn-outline-primary btn-block text-center" id="btnLookupLR" name="btnLookupLR">
+                    <p class="margionZero">Lookup</p>
+                    <p class="margionZero">LabReq</p>
+                    <p class="margionZero">[L/l]</p>
+                </button>
+            </div>
+            <div class="col-4">
+                <button class="btn-outline-primary btn-block text-center" id="btnBinsStatus" name="btnBinsStatus">
+                    <p class="margionZero">Quick View</p>
+                    <p class="margionZero">Bin's Status</p>
+                    <p class="margionZero">[V/v]</p>
+                </button>
+            </div>
+
+        </div>
+
+
+        <p class="p-0" />
+        @if ((Model.SpectrumMonitorMenuRightsModel.TransFerBins) || (Model.SpectrumMonitorMenuRightsModel.RunReports))
+        {
+
+
+            <div class="row justify-content-sm-center">
+                <div class="col-4">
+                    <div style="background-color:white;outline:2px solid #0070ff;" onmouseover="$(this).css('background','blue');" onmouseout="$(this).css('background','white');">
+                        <p class="p-1"></p>
+                        <select id="runReport" style="color: #0070ff;">
+                            <option selected="selected" value="Select Report To Run">Select Report To Run</option>
+                            <option value="BR">Batch Reports</option>
+                            <option value="UR">Usage Reports By CWID</option>
+                            <option value="DL">Deleted LabReq's Report</option>
+                            <option value="CH">LabReq's Charts</option>
+                            <option value="VT">Volume and Total Duration</option>
+                            <option value="TR">Transfers</option>
+
+                        </select>
+                        <p class="p-2"></p>
+                    </div>
+                </div>
+
+                <p class="p-1" />
+
+            </div>
+        }
+        <p class="p-1" />
+    </div>
+    <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:none">
+        <p id="parBmUpScreen" name="parCategory" style="position: absolute; top: 30%; left: 45%; color: White;">
+            please wait...<img src="~/Images/ajax-loading.gif">
+        </p>
+    </div>
+</div>
+
+@*Model for  Complete Specimen Registration*@
+
+<div id="modalCompleteRegistration" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Complete Specimen Registration</h4>
+                <button type="button" class="close  btn-danger" data-dismiss="modal" onclick="CloseDialog('modalCompleteRegistration');">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="~/Images/giphy.gif" id="loadingDataCSR" style="display:none;" />
+                </div>
+                <div id="showformCSR" style="display:block;">
+                    <form method="post" id="fCompReg" name="fCompReg">
+                        <input type='hidden' value='regComp' id="compReg" name="compReg" />
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <input type="hidden" />
+                            </div>
+                            <div id="divCompRegMode" name="divCompRegMode"></div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close0" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*Model for  bins status *@
+<div id="modalBinsStatus" role="dialog" class="modal" style="display:none">
+
+    <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Quick View Bin's Status</h4>
+                <button type="button" class="close btn-danger" data-dismiss="modal" onclick="CloseDialog('modalBinsStatus');">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="~/Images/giphy.gif" id="loadingDataBS" style="display:none;" />
+                </div>
+                <div id="divShowBinStatus" style="display:block;">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-dark" data-dismiss="modal" onclick="CloseDialog('modalBinsStatus');">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@*Model for  transfer bins *@
+<div id="modalBinsTransFer" class="modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Transfer Bin </h4>
+                <button type="button" class="close  btn-danger" data-dismiss="modal" onclick="CloseDialog('modalBinsTransFer');">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="~/Images/giphy.gif" id="loadingDataTFBins" style="display:none;" />
+                </div>
+                <div id="showformTFBins" style="display:block;">
+                    <form method="post" id="subTransferBins" name="subTransferBins" style="display:block;">
+                        <input type="hidden" id="oldTransBinID" name="oldTransBinID" />
+                        <input type="hidden" id="newTransBinID" name="newTransBinID" />
+                        <input type="hidden" id="tfbincomm" name="tfbincomm" />
+                        <div class="col-md-4">
+
+                        </div>
+                        <div id="divTransBinsFrom" name="divTransBinsFrom"></div>
+
+                    </form>
+                    <button class="btn btn-success" id="saveTFBIns" name="saveTFBIns">Transfer Bin</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeTrans" name="closeTransBins" class="btn btn-default close10" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@*Model for  Begin Specimen Processing*@
+
+<div id="modalBeginProcessing" class="modal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Begin Specimen Processing</h4>
+                <button type="button" class="close  btn-danger" data-dismiss="modal" onclick="CloseDialog('modalBeginProcessing');">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="~/Images/giphy.gif" id="loadingDataBSP" style="display:none;" />
+                </div>
+                <div id="showformBSP" style="display:block;">
+                    <form method="post" id="fBegProc" name="fBegProc">
+                        <input type='hidden' value='procBegin' id="beginProc" name="beginProc" />
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <input type="hidden" />
+                            </div>
+
+                            <div id="divBeginProcessMode" name="divBeginProcessMode">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close2" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*Model for  trans Specimen Processing*@
+
+<div id="modalTransProcessing" class="modal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Transfer Specimen Processing</h4>
+                <button type="button" class="close  btn-danger" data-dismiss="modal" onclick="CloseDialog('modalTransProcessing');">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="~/Images/giphy.gif" id="loadingDataTP" style="display:none;" />
+                </div>
+                <div id="showformTP" style="display:block;">
+                    <form method="post" id="fBegTranProc" name="fBegTranProc">
+                        <input type='hidden' value='tranProc' id="tranProc" name="tranProc" />
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <input type="hidden" />
+                            </div>
+
+                            <div id="divTransProcessMode" name="divTranProcessMode">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close9" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@*Model for  transfering categgories*@
+
+<div id="modalTransferCategories" class="modal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Transfer Categories</h4>
+                <button type="button" class="close  btn-danger" data-dismiss="modal" onclick="CloseDialog('modalTransferCategories');">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="~/Images/giphy.gif" id="loadingDataTranCat" style="display:none;" />
+                </div>
+                <div id="showformTFC" style="display:block">
+                    <form method="post" id="fTransCat" name="fTransCat">
+                        <input type='hidden' id="catTrans" name="catTrans" />
+                        <input type='hidden' id="catNewTrans" name="catNewTrans" />
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <input type="hidden" />
+                            </div>
+                            <div id="divTransferCategories" name="divTransferCategories">
+                            </div>
+
+                        </div>
+
+                    </form>
+                    <p class="p-0"></p>
+                    <div class="row" id="showBtnTransFerCat" name="showBtnTransFerCat">
+                        <button class="btn-outline-primary btn-block" id="subTransFerCat">Transfer Category</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close3" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+@*Model for  closing Specimen Processing*@
+<div id="modalCloseBatch" class="modal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Close Specimen Batch</h4>
+                <button type="button" class="close btn-danger" data-dismiss="modal" onclick="CloseDialog('modalCloseBatch');">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="~/Images/giphy.gif" id="loadingDataCSB" style="display:none;" />
+                </div>
+                <div id="showformCSB" style="display:block;">
+                    <form method="post" id="fCloseBatch" name="fCloseBatch">
+                        <input type='hidden' value='closeBatch' id="batchClose" name="batchClose" />
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <input type="hidden" />
+                            </div>
+                            <div id="divCloseBatch" name="divCloseBatch">
+
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close4" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*Model for  LookUp Lab Req*@
+
+<div id="modalLRLookup" class="modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Lookup LabReq</h4>
+                <button type="button" class="close  btn-danger" data-dismiss="modal" onclick="CloseDialog('modalLRLookup');">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="~/Images/giphy.gif" id="loadingDataBSP" style="display:none;" />
+                </div>
+                <div id="showformBSP" style="display:block;">
+                    <form method="post" id="fLookUpLR" name="fLookUpLR">
+
+                        <div class="form-group">
+                            <div class="col-*-*">
+                                <label for="sDate">Start Date:</label>
+                                <input type="date" id="sDate" name="sDate" />
+                            </div>
+                            <div class="col-*-*">
+                                <label for="eDate">End Date:</label>
+                                <input type="date" id="eDate" name="eDate" />
+                            </div>
+                            <div class="col-*-*">
+                                <label for="lrNum">LabReq Number:</label>
+                                <input type="text" maxlength="16" id="lrNum" name="lrNum" />
+                                <p style="display:none" class="text-danger" id="errLRNum" name="errLRNum">Invalid LabReq Number</p>
+                            </div>
+
+                            <div id="divLookUpLRMode" name="divLookUpLRMode">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-default" id="btnlabReqLookup" name="btnlabReqLookup">Lookup</button>
+                <button type="button" class="btn btn-danger close8" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*Model for  tansfer labreqs*@
+<div id="modalTransferLabReqs" class="modal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Transfer LabReqs</h4>
+                <button type="button" class="close  btn-danger" data-dismiss="modal" onclick="CloseDialog('modalTransferLabReqs');">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="~/Images/giphy.gif" id="loadingDataCRBP" style="display:none;" />
+                </div>
+                <div id="showformTransLabReqs" style="display:block;">
+                    <form method="post" id="fTransLabReqs" name="fTransLabReqs">
+                        <input type='hidden' id="TransLabReqsBinID" name="TransLabReqsBinID" />
+                        <input type='hidden' id="TransLabReqsOldLabReqBinID" name="TransLabReqsOldLabReqBinID" />
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <input type="hidden" />
+                            </div>
+                            <div id="divTransLabReqs" name="divTransLabReqs">
+
+                            </div>
+
+
+
+                        </div>
+                    </form>
+                    <p class="p-0"></p>
+                    <div class="row" id="subTransLabReqs" name="subTransLabReqs">
+                        <button class="btn-outline-primary btn-block" id="subTransLabReqs">Transfer LabReqs</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close5" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="modalloding" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <img src="~/Images/giphy.gif" width="300" height="150" />
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parBmUpScreen" name="parCategory" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Loading Reports please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+
+
+
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            SessionExpireAlert($('#expiresSession').val());
+
+            //$('#modalloding').hide();
+
+            $(document).keypress(function (event) {
+
+                if ($('#usequickkeys').val() == 'yes') {
+                    switch (event.key.toLowerCase()) {
+                        case 'r':
+                            window.open('/Lookup/ViewLookUpBatches', '_self');
+                            return false;
+                            break;
+                        case 'm':
+                            window.open('/BinManager/ViewManageBatch', '_self');
+                            return false;
+                            break;
+                        case 'w':
+                            window.open('/BinManager/ViewBMCreateBatchEmailWF', '_self');
+                            return false;
+                            break;
+                        case 'n':
+                            window.open('/BinManager/ViewBMCreateBatch', '_self');
+                            return false;
+                            break;
+                        case 'b':
+                            document.getElementById("btnBinsTransfer").click();
+                            return false;
+                            break;
+                        case 'c':
+                            document.getElementById("btnCloseBatch").click();
+                            return false;
+                            break;
+                        case 'g':
+                            document.getElementById("btnCompleteRegistration").click();
+                            return false;
+                            break;
+                        case 't':
+                            document.getElementById("btnTransferCategories").click();
+                            return false;
+                            break;
+                        case 'p':
+                            document.getElementById("btnBeginProcessing").click();
+                            return false;
+                            break;
+                        case 'v':
+                            document.getElementById("btnBinsStatus").click();
+                            return false;
+                            break;
+                        case 's':
+                            document.getElementById("btnTransferLabReqs").click();
+                            return false;
+                            break;
+                        case 'l':
+                            document.getElementById("btnLookupLR").click();
+                            return false;
+                            break;
+                        case 'f':
+                            document.getElementById("btnTransProcess").click();
+                            return false;
+                            break;
+
+                    }
+                }
+
+            });
+
+
+
+            $('#saveTFBIns').click(function () {
+
+                $('#tfAddComments').hide();
+                //   if ($('#tfComments').val().length != 0) {
+                var message = 'Transfering BinID ' + $('#BinIDTF').val() + ' to BinID ' + $('#BinIDAvailable').val();
+                ShowLoadingDialog(message);
+                $("#modalTransFrom").css("display", "none")
+                var dNow = new Date();
+                var bintrdt = dNow.toString();
+
+                $('#oldTransBinID').val($('#BinIDTF').val());
+                $('#newTransBinID').val($('#BinIDAvailable').val());
+                $('#tfbincomm').val('{UserName} transfered binid ' + $('#oldTransBinID').val() + ' to BinID' + $('#newTransBinID').val() + ' on ' + bintrdt + ' ' + $('#tfComments').val() + '\n');
+
+                $('#usequickkeys').val('yes');
+                $('#subTransferBins').submit();
+                //}
+                // else {
+                $('#tfAddComments').show();
+                //  }
+
+            });
+
+            $("#btnBinsStatus").click(function (e) {
+
+                $('#modalBinsStatus').show();
+                ShowHideLoding('loadingDataBS');
+
+                e.preventDefault();
+                var pvUrl = "/Partial_Pages/RegisterSpecimensView?modelName=binsStatus";
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    cache: false,
+                    success: function (result) {
+                        $("#divShowBinStatus").html(result);
+
+                        //  $("#resuts").val(result);
+                        $('#usequickkeys').val('no');
+
+                    },
+                    complete: function () {
+                        if ($("#dtBinStatus").length) {
+                            $('#dtBinStatus').DataTable({ "pagingType": "full", "pageLength": 100 });
+                            $('.dataTables_length').addClass('bs-select');
+                        }
+
+                        ShowHideLoding('loadingDataBS');
+                    },
+                    error: function (request, status, error) {
+                        alert('request ' + request + ' status ' + status + ' error ' + error);
+                    }
+                });
+
+            });
+
+            $('#btnNewBatchWF').click(function () {
+
+                window.open('/BinManager/ViewBMCreateBatchEmailWF', '_self');
+                return false;
+            });
+            $('#btnLoopUp').click(function () {
+
+                window.open('/Lookup/ViewLookUpBatches', '_self');
+                return false;
+            });
+
+            $('#mBatch').click(function () {
+
+                window.open('/BinManager/ViewManageBatch', '_self');
+                return false;
+            });
+            $('#btnNewBatch').click(function () {
+
+                window.open('/BinManager/ViewBMCreateBatch', '_self');
+                return false;
+            });
+            $('#subCompRegss').click(function () {
+
+                $("<input type='hidden' value='regComp' />")
+                    .attr("id", "compReg")
+                    .attr("name", "compReg")
+                    .prependTo("#fCompReg");
+                $('#usequickkeys').val('yes');
+                $("#fCompReg").submit()
+                return true;
+            });
+
+            $("#btnBeginProcessing").click(function (e) {
+
+
+                ShowHideLoding('loadingDataBSP');
+                ShowHideLoding('showformBSP');
+                e.preventDefault();
+                var pvUrl = "/Partial_Pages/RegisterSpecimensView?modelName=beginProcessing";
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    cache: false,
+                    success: function (result) {
+                        $("#divBeginProcessMode").html(result);
+                        //  $("#resuts").val(result);
+                        $('#usequickkeys').val('no');
+
+                    },
+                    complete: function () {
+                        ShowHideLoding('loadingDataBSP');
+                        ShowHideLoding('showformBSP');
+                    },
+                    error: function (request, status, error) {
+                        alert('request ' + request + ' status ' + status + ' error ' + error);
+                    }
+                });
+            });
+
+
+            $("#btnTransProcess").click(function (e) {
+
+
+                ShowHideLoding('loadingDataTP');
+                ShowHideLoding('showformTP');
+                e.preventDefault();
+                var pvUrl = "/Partial_Pages/RegisterSpecimensView?modelName=transFerProcessing";
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    cache: false,
+                    success: function (result) {
+                        $("#divTransProcessMode").html(result);
+                        //  $("#resuts").val(result);
+                        $('#usequickkeys').val('no');
+
+                    },
+                    complete: function () {
+                        ShowHideLoding('loadingDataTP');
+                        ShowHideLoding('showformTP');
+                    },
+                    error: function (request, status, error) {
+                        alert('request ' + request + ' status ' + status + ' error ' + error);
+                    }
+                });
+            });
+
+            $("#btnBinsTransfer").click(function (e) {
+
+
+
+                ShowHideLoding('loadingDataTFBins');
+                ShowHideLoding('showformTFBins');
+                var pvUrl = "/Partial_Pages/RegisterSpecimensView?modelName=transFrom";
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    success: function (result) {
+                        $("#divTransBinsFrom").html(result);
+                        $('#usequickkeys').val('no');
+                        if ($("#noSPec").length) {
+
+                            $("#saveTFBIns").css('display', 'none')
+                        }
+                        //  ShowHideLoding('loadingDataTranCat');
+
+                    },
+                    complete: function () {
+                        ShowHideLoding('loadingDataTFBins');
+                        //   $('#modalBinsTransFer').css('display', 'block');
+                        ShowHideLoding('showformTFBins');
+                    },
+                    error: function (request, status, error) {
+
+                        alert('request ' + request + ' status ' + status + ' error ' + error);
+                    }
+                });
+
+            });
+
+            $('#subTransFerCat').click(function () {
+                $('#parselnewcat').css('display', 'none');
+                $('#parseloldcat').css('display', 'none');
+                if ($('#selCategoryName').val() == 'string-empty') {
+                    $('#parselnewcat').css('display', 'block');
+                    return false;
+                }
+                if ($('#selNewCategoryName :selected').length == 0) {
+                    $('#parseloldcat').css('display', 'block');
+                    return false;
+
+                }
+                if (CheckTransToFer($('#selCategoryName').val()) == false) {
+                    $('#parseloldcat').css('display', 'block');
+                    return false;
+                } $("#modalTransferCategories").css("display", "none");
+                var message = 'Changing Category ' + $('#selCategoryName').val() + ' to new Category ' + $('#selNewCategoryName').val();
+                ShowLoadingDialog(message);
+                $('#catTrans').val($('#selCategoryName').val());
+                $('#catNewTrans').val($('#selNewCategoryName').val());
+                $('#usequickkeys').val('yes');
+                $('#fTransCat').submit();
+            });
+
+            $('#subTransLabReqs').click(function () {
+                $('parselnewlbbin').css('display', 'none');
+                $('#parseloldlr').css('display', 'none');
+                if ($('#selNewLRBin').val() == 'string-empty') {
+                    $('#parselnewlbbin').css('display', 'block');
+                    return false;
+                }
+                if ($('#selOldLRN :selected').length == 0) {
+                    $('#parseloldlr').css('display', 'block');
+                    return false;
+
+                }
+                if (CheckTransferLabReqs($('#selNewLRBin').val()) == false) {
+                    $('#parseloldlr').css('display', 'block');
+                    return false;
+                }
+                $("#modalTransferLabReqs").css("display", "none")
+                var message = 'Changing selected labreqs to binid ' + $('#TransLabReqsBinID').val();
+                ShowLoadingDialog(message);
+                $('#TransLabReqsBinID').val($('#selNewLRBin').val());
+                $('#TransLabReqsOldLabReqBinID').val($('#selOldLRN').val());
+                $('#usequickkeys').val('yes');
+                $('#fTransLabReqs').submit();
+            });
+
+            $("#btnCompleteRegistration").click(function (e) {
+
+
+                ShowHideLoding('loadingDataCSR');
+                ShowHideLoding('showformCSR');
+                var pvUrl = "/Partial_Pages/RegisterSpecimensView?modelName=completeRegistration";
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    success: function (result) {
+                        $("#divCompRegMode").html(result);
+                        //  $("#resuts").val(result);
+                        $('#usequickkeys').val('no');
+
+                    },
+                    complete: function () {
+                        ShowHideLoding('loadingDataCSR');
+                        ShowHideLoding('showformCSR');
+
+
+                    },
+                    error: function (request, status, error) {
+                        alert('request ' + request + ' status ' + status + ' error ' + error);
+                    }
+                });
+            });
+
+
+            $("#btnTransferLabReqs").click(function (e) {
+
+
+                ShowHideLoding('loadingDataCRBP');
+                ShowHideLoding('showformTransLabReqs');
+                var pvUrl = "/Partial_Pages/TransferPartialView?modelName=transferLabReqs";
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    success: function (result) {
+                        //        alert(result);
+                        $("#divTransLabReqs").html(result);
+                        //  $("#resuts").val(result);
+                        if ($("#nothingtransfer").length) {
+
+                            $("#subTransLabReqs").css('display', 'none')
+                        }
+                        $('#usequickkeys').val('no');
+                    },
+                    complete: function () {
+                        ShowHideLoding('loadingDataCRBP');
+                        ShowHideLoding('showformTransLabReqs');
+                    },
+                    error: function (request, status, error) {
+                        alert('request ' + request + ' status ' + status + ' error ' + error);
+                    }
+                });
+            });
+
+            $("#btnCloseBatch").click(function (e) {
+
+
+                ShowHideLoding('loadingDataCSB');
+                ShowHideLoding('showformCSB');
+                var pvUrl = "/Partial_Pages/RegisterSpecimensView?modelName=closeBatch";
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    success: function (result) {
+                        //   alert(result);
+                        $("#divCloseBatch").html(result);
+                        //  $("#resuts").val(result);
+                        $('#usequickkeys').val('no');
+
+                    },
+                    complete: function () {
+                        ShowHideLoding('loadingDataCSB');
+                        ShowHideLoding('showformCSB');
+                    },
+                    error: function (request, status, error) {
+                        alert('request ' + request + ' status ' + status + ' error ' + error);
+                    }
+                });
+            });
+
+            $("#btnTransferCategories").click(function (e) {
+
+
+                ShowHideLoding('loadingDataTranCat');
+                ShowHideLoding('showformTFC');
+                e.preventDefault();
+                var pvUrl = "/Partial_Pages/TransferPartialView?modelName=transferCategores";
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    success: function (result) {
+                        //   alert(result);
+                        $('#usequickkeys').val('no');
+                        $("#divTransferCategories").html(result);
+                        if ($("#nothingtransfer").length) {
+
+                            $("#subTransFerCat").css('display', 'none')
+                        }
+                        //  $("#resuts").val(result);
+                    },
+                    complete: function () {
+                        ShowHideLoding('loadingDataTranCat');
+                        ShowHideLoding('showformTFC');
+                    },
+                    error: function (request, status, error) {
+                        alert("Error status " + status + " error " + error + " request " + request);
+                    }
+                });
+            });
+
+
+            $('#closeTransBins').click(function () {
+                $('#usequickkeys').val('yes');
+                $('#modalBinsTransFer').css('display', 'none');
+            });
+
+            $('#runReport').change(function () {
+                if ($('#runReport').val() == "BR") {
+                    window.open('/Lookup/ViewLookUpBatches', '_self');
+                }
+                if ($('#runReport').val() == "UR") {
+                    window.open('/Lookup/SpectrumMonitorReportsByCwidView', '_self');
+                }
+                if ($('#runReport').val() == "DL") {
+                    window.open('/Lookup/SpecMonitorDelLabReqsRep', '_self');
+                }
+                if ($('#runReport').val() == "CH") {
+                    window.open('/Lookup/SpecMonitorChartsView', '_self');
+                }
+                if ($('#runReport').val() == "VT") {
+                    window.open('/Lookup/SpecMonitorDurationByCWIDView', '_self');
+                }
+                if ($('#runReport').val() == "TR") {
+                    window.open('/Lookup/TransferReportView', '_self');
+                }
+
+                // $('#runReport').select("Select Report To Run");
+                return false;
+
+
+            });
+            $('#btnlabReqLookup').click(function () {
+                if ($('#lrNum').val().length < 6) {
+                    $('#errLRNum').attr('style', 'display:block');
+                    return false;
+                }
+                $('#modalLRLookup').attr('style', 'display:none');
+                $("#divLoading").attr('style', 'display:block');
+
+                window.open('/Lookup/LookUpLabReqsView?LabReqNumber=' + $('#lrNum').val() + '&StDate=' + $('#sDate').val().replace('/', '-') + '&EndDate=' + $('#eDate').val().replace('/', '-'), '_self');
+                return false;
+            });
+        });//end of jquery
+
+
+
+
+
+
+    </script>
+
+
+    <script>
+        // Get the button that opens the modal
+        // Get the modal
+        var modalTFB = document.getElementById("modalBinsTransFer");
+
+
+
+        // Get the <span> element that closes the modal
+        var spanTF = document.getElementsByClassName("close10")[0];
+
+        var btnTF = document.getElementById("btnBinsTransfer");
+        // When the user clicks the button, open the modal
+        btnTF.onclick = function () {
+            modalTFB.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        spanTF.onclick = function () {
+            $('#usequickkeys').val('yes');
+            modalTFB.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modalTF) {
+                modalTFB.style.display = "none";
+
+            }
+        }
+
+    </script>
+
+    @*<script>
+            // Get the button that opens the modal
+            // Get the modal
+            var modalBinsStatus = document.getElementById("modalBinsStatus");
+
+
+
+            // Get the <span> element that closes the modal
+          //  var spanBinsStatus = document.getElementsByClassName("close11")[0];
+
+            var btnBStatus = document.getElementById("btnBinsStatus");
+            // When the user clicks the button, open the modal
+            btnBStatus.onclick = function () {
+                modalBinsStatus.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            //spanBinsStatus.onclick = function () {
+            //    $('#usequickkeys').val('yes');
+            //    modalBinsStatus.style.display = "none";
+            //}
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modalBinsStatus) {
+                    modalBinsStatusstyle.display = "none";
+
+                }
+            }
+
+        </script>*@
+
+
+    <script>
+        var modalCompReg = document.getElementById("modalCompleteRegistration");
+
+        // Get the button that opens the modal
+        var btnCompReg = document.getElementById("btnCompleteRegistration");
+
+        // Get the <span> element that closes the modal
+        var spanCompReg = document.getElementsByClassName("close0")[0];
+
+        // When the user clicks the button, open the modal
+        btnCompReg.onclick = function () {
+            modalCompReg.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        spanCompReg.onclick = function () {
+            $('#usequickkeys').val('yes');
+            modalCompReg.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+
+        window.onclick = function (event) {
+
+            if (event.target == modalCompReg) {
+                modalCompReg.style.display = "none";
+
+            }
+        }
+
+    </script>
+    <script>
+        // Get the modal
+        var modalbegProc = document.getElementById("modalBeginProcessing");
+
+        // Get the button that opens the modal
+        var btnbegProc = document.getElementById("btnBeginProcessing");
+
+        // Get the <span> element that closes the modal
+        var spanbegProc = document.getElementsByClassName("close2")[0];
+
+        // When the user clicks the button, open the modal
+        btnbegProc.onclick = function () {
+            modalbegProc.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        spanbegProc.onclick = function () {
+            $('#usequickkeys').val('yes');
+            modalbegProc.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target != modalbegProc) {
+                modalbegProc.style.display = "none";
+
+            }
+        }
+    </script>
+    <script>
+        // Get the modal
+        var modalCompProc = document.getElementById("modalTransferCategories");
+
+        // Get the button that opens the modal
+        var btncompProc = document.getElementById("btnTransferCategories");
+
+        // Get the <span> element that closes the modal
+        var spanCompProc = document.getElementsByClassName("close3")[0];
+
+        // When the user clicks the button, open the modal
+        btncompProc.onclick = function () {
+            modalCompProc.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        spanCompProc.onclick = function () {
+            $('#usequickkeys').val('yes');
+            modalCompProc.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modalCompProc) {
+                modalCompProc.style.display = "none";
+
+            }
+        }
+    </script>
+
+    <script>
+        // Get the modal
+        var modalcBatch = document.getElementById("modalCloseBatch");
+
+        // Get the button that opens the modal
+        var btncBatch = document.getElementById("btnCloseBatch");
+
+        // Get the <span> element that closes the modal
+        var spancBatch = document.getElementsByClassName("close4")[0];
+
+        // When the user clicks the button, open the modal
+        btncBatch.onclick = function () {
+            modalcBatch.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        spancBatch.onclick = function () {
+            $('#usequickkeys').val('yes');
+            modalcBatch.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modalcBatch) {
+                modalcBatch.style.display = "none";
+
+            }
+        }
+    </script>
+
+    <script>
+        var modalCompRegStProc = document.getElementById("modalTransferLabReqs");
+
+        // Get the button that opens the modal
+        var btnCompRegStProc = document.getElementById("btnTransferLabReqs");
+
+        // Get the <span> element that closes the modal
+        var spanCompRegStProc = document.getElementsByClassName("close5")[0];
+
+        // When the user clicks the button, open the modal
+        btnCompRegStProc.onclick = function () {
+            modalCompRegStProc.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        spanCompRegStProc.onclick = function () {
+            $('#usequickkeys').val('yes');
+            modalCompRegStProc.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+
+        window.onclick = function (event) {
+
+            if (event.target == modalCompRegStProc) {
+                modalCompRegStProc.style.display = "none";
+
+            }
+        }
+
+    </script>
+    <script>
+        var modalLR = document.getElementById("modalLRLookup");
+
+        // Get the button that opens the modal
+        var btnLR = document.getElementById("btnLookupLR");
+
+        // Get the <span> element that closes the modal
+        var spanLR = document.getElementsByClassName("close8")[0];
+
+        // When the user clicks the button, open the modal
+        btnLR.onclick = function () {
+            GetDate("sDate", "4");
+            GetDate("eDate", "0");
+            modalLR.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        spanLR.onclick = function () {
+            $('#usequickkeys').val('yes');
+            modalLR.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+
+        window.onclick = function (event) {
+
+            if (event.target == modalLR) {
+                modalLR.style.display = "none";
+
+            }
+        }
+
+    </script>
+
+    <script>
+        var modaltLR = document.getElementById("modalTransProcessing");
+
+        // Get the button that opens the modal
+        var btntLR = document.getElementById("btnTransProcess");
+
+        // Get the <span> element that closes the modal
+        var spantLR = document.getElementsByClassName("close9")[0];
+
+        // When the user clicks the button, open the modal
+        btntLR.onclick = function () {
+
+            modaltLR.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        spantLR.onclick = function () {
+            $('#usequickkeys').val('yes');
+            modaltLR.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+
+        window.onclick = function (event) {
+
+            if (event.target == modaltLR) {
+                modaltLR.style.display = "none";
+
+            }
+        }
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

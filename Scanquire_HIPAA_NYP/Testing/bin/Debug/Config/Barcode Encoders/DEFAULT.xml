@@ -1,0 +1,8 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQBarcodeEncoder, Scanquire.Public">
+  <Properties>
+    <Simple name="CommandPrefix" value="SQBC" />
+    <Simple name="CommandIdPadding" value="3" />
+    <Simple name="ValueSeparator" value=":" />
+    <Simple name="IndexFieldSeparator" value=":" />
+  </Properties>
+</Complex>

@@ -1,0 +1,5 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQImageProcessor_RotateFlip, Scanquire.Public, Version=1.0.4835.17046, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="RotateFlipType" value="Rotate90FlipNone" />
+  </Properties>
+</Complex>

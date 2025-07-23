@@ -1,0 +1,83 @@
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Testing.exe.config
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Testing.exe
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Testing.pdb
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Scanquire.Clients.NYP.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Scanquire.Clients.NYP.pdb
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.csprojResolveAssemblyReference.cache
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.exe
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.pdb
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\SampleRecord.pdf
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Scanquire.Public.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\EdocsUSA.Utilities.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - Sendout.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Polenter.SharpSerializer.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Polenter.SharpSerializer.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.IO.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.Runtime.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.Threading.Tasks.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.IO.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.Runtime.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.Threading.Tasks.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.csproj.App.config
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - DOH.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - DR CODE.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - PUNCH FORMS.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - SENDOUT PACKING SLIPS.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - COMPLIANCE LOGS.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - INVOICE.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - LAB REQS - ELECTRONIC ORDERING.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - LAB REQS.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Command Readers\NYP - LAB REQS.xml
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.SharePoint.Client.dll
+C:\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.SharePoint.Client.Runtime.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - COMPLIANCE LOGS.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - DR CODE.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - INVOICE.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - LAB REQS - ELECTRONIC ORDERING.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - LAB REQS.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - PUNCH FORMS.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - SENDOUT PACKING SLIPS.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - SENDOUT.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Archivers\NYP - DOH.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Config\Command Readers\NYP - LAB REQS.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\SampleRecord.pdf
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Testing.exe.config
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Testing.exe
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Testing.pdb
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Polenter.SharpSerializer.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Scanquire.Clients.NYP.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Scanquire.Public.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.IO.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.Runtime.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.Threading.Tasks.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\EdocsUSA.Utilities.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.SharePoint.Client.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.SharePoint.Client.Runtime.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Scanquire.Clients.NYP.pdb
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Scanquire.Clients.NYP.dll.config
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\Polenter.SharpSerializer.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.IO.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.Runtime.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\bin\Debug\System.Threading.Tasks.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.csproj.App.config
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.csprojResolveAssemblyReference.cache
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.csproj.CoreCompileInputs.cache
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.exe
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.pdb
+C:\Edocs\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.csproj.App.config
+C:\Edocs\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.csprojAssemblyReference.cache
+C:\Edocs\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.csproj.CoreCompileInputs.cache
+C:\Edocs\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.exe
+C:\Edocs\Scanquire.Clients.NYP\Testing\obj\Debug\Testing.pdb

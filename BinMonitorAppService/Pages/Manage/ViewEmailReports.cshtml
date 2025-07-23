@@ -1,0 +1,124 @@
+﻿@page
+@model BinMonitorAppService.Pages.Manage.ViewEmailReportsModel
+@{
+    ViewData["Title"] = "ViewEmailReports";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+}
+    <div id="headingSessionExp" style="display:none">
+        <h3 class="text-center text-danger">Page Email Reports will refresh in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+    </div>
+<h1 class="text-center">Email Reports</h1>
+<div style="background-color:white">
+    <input type="hidden" id="expiresSession" value="@Model.SessionExpires" />
+
+
+    <p class="p-2"></p>
+    <div class="container-fluid">
+        <div class="border">
+            <form method="post" class="form-group">
+                <p class="p-2"></p>
+                <div style="margin-left:150px;margin-top:10px">
+                    <div class="row ">
+                        <div class="col-4">
+                            <p class="text-nowrap margionZero">Email To:&nbsp;&nbsp;</p>
+                            @Html.DropDownListFor(m => m.EmailReportModel.EmailTo,
+                                      new SelectList(Model.EmailTo, Model.EmailReportModel.EmailTo), new { @name = "EmailTo", @id = "EmailTo", @class = "inlineblock form-conrol" })
+                            @Html.ValidationMessage("EmailToRep", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="col-4">
+                            <p class="text-nowrap margionZero">Email CC:</p>
+                            <select multiple class="form-control" id="EmailCc" name="EmailCc">
+                                @foreach (string emailCc in Model.EmailReportModel.EmailCC.Split(";"))
+                                {
+                                    if (@emailCc.StartsWith("Select Email To"))
+                                    {
+                                        continue;
+                                    }
+                                    if (string.IsNullOrWhiteSpace(emailCc))
+                                    {
+                                        <option selected>Select Email CC</option>
+                                    }
+                                    else
+                                    {
+                                        <option selected>@emailCc</option>
+                                    }
+                                }
+                                @foreach (var emailcc in Model.EmailCc)
+                                {
+                                    if (emailcc.ToLower().StartsWith("select email to"))
+                                    {
+                                        continue;
+                                    }
+                                    <option>@emailcc</option>
+                                }
+                            </select>
+                            @*
+                                <select asp-for="EmailCc" asp-items="@new SelectList(Model.EmailCc)" multiple class="form-control">
+                                    @foreach (string emailCc in Model.EmailReportModel.EmailCC.Split(";"))
+                                    {
+                                        if (string.IsNullOrWhiteSpace(emailCc))
+                                        {
+                                            <option selected>Select Email CC</option>
+                                        }
+                                        else
+                                        {
+                                            <option selected>@emailCc</option>
+                                        }
+                                    }
+                            *@
+
+                            @Html.ValidationMessage("EmailCCRep", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-4">
+                            <p class="text-nowrap  margionZero">Email Frequency hours:</p>
+                            @Html.TextBox("EmailFrequency", Model.EmailReportModel.EmailFrequency, new { @class = "form-control boarder" })
+                            @Html.ValidationMessage("EmailRepFreq", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <button class="btn btn-outline-primary text-center" id="subEmail" name="subEmail" onclick="DisbleBtn()">Submit Changes</button>
+                @*
+                    <button class="btn btn-outline-dark text-center" id="subexit" name="subexit" onclick="window.open('../BinManager/ViewManagerHome')">Exit</button>
+                *@
+                <a href="../BinManager/ViewManagerHome" class="btn btn-outline-dark" role="button" target="_blank">Exit</a>
+
+
+            </form>
+
+        </div>
+    </div>
+
+    <p class="p-2"></p>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            SessionExpireAlert($('#expiresSession').val());
+
+             $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+               
+            });
+
+        });
+
+        function DisbleBtn() {
+
+            document.getElementById('subEmail').style.display = 'none';
+            document.getElementById('subexit').style.display = 'none';
+            
+            
+
+
+    }
+    </script>
+
+
+}

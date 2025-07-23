@@ -1,0 +1,72 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Scanquire.Properties" GeneratedClassName="Scanquire">
+  <Profiles />
+  <Settings>
+    <Setting Name="SessionRecoveryFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PreviousArchiverName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LOCAL</Value>
+    </Setting>
+    <Setting Name="PortableMode" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DataBase" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InActiveTimeOut" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="ShowTSScannerSettings" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowTSImageOptions" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowTSAutoQA" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShosTSScanOptios" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UserScanSetting" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="UserAutoQASetting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DaysToKeepLogFiles" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="DaysToKeepImageFiles" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="SetEncPasswords" Type="System.String" Scope="User">
+      <Value Profile="(Default)">setpw</Value>
+    </Setting>
+    <Setting Name="BackUpOrgImages" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LabReqsWebSite" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost/</Value>
+    </Setting>
+    <Setting Name="WebBrowser" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files (x86)\Google\Chrome\Application\chrome.exe</Value>
+    </Setting>
+    <Setting Name="AuditLogs" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ConvertViedosImagesExe" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">FFMPEG\Edocs.Convert.Viedos.Images.exe</Value>
+    </Setting>
+    <Setting Name="ImagesConvertedFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\Archives\ScanQuireSavedImages\ImagesVieodConverted</Value>
+    </Setting>
+    <Setting Name="ImagesToConvertedWF" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\Archives\ScanQuireSavedImages\WF</Value>
+    </Setting>
+    <Setting Name="ConvertViedoToImagesMenu" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

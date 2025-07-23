@@ -1,0 +1,22 @@
+I 15-8 (1) 351;TOOLE COUNTY-CITY OF SHELBY
+I 90-2 (31) PAR;13 MISSOULA COUNTY-ANACONDA Co.
+FAP 64 A;U.S.A. Department of the Army
+S 40(2);Gallatin Airport Authorit
+F 64 A; U S A Malmstrom Airforce Base
+I 94—5 (5) Prairie County
+NA;Choteau Airport
+S 193 (7);City of Cut Bank
+S 193 (8);City of Cut Bank
+F 220(lO);City of Cut Bank
+F 239 F;White Sulphur Springs and MagherC
+F 240 (11);Polar Airport
+F 252 (10);Hill County Air Space Easement
+F 82D;Gallatin Field Clear Zone Esmt
+F 44 A&D;Gallatin Field Clear Zone Esmt
+FAP 267D;Lincoln Airport - Lewis & Clark Co
+F 219 (12);Missoula County Airport
+F 253(15);Wolf Point Airport
+RS 235-1(1)5;Bozeman—N-Interchange-West
+RS 235-1(1)7;Bozeman-N 19th Interchange Baxter LN
+ZHVN	
+• Aeu 19	

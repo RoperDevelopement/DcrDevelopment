@@ -1,0 +1,60 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.LoginView
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "LookUp";
+    Layout = null;
+}
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return antiforgery.GetAndStoreTokens(Model.HttpContext).RequestToken;
+    }
+}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Nyp.LabReqs.AppServices</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/datatables-select.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/datatables/datatables-select.min.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>
+
+</head>
+<body>
+    <div class="text-center"><img align="middle" src="~/Images/NYP-Logo.png" /></div>
+    <div class="text-center">
+        <h1 class="display-4">Login NYP Lab Client Services</h1>
+    </div>
+
+    <p class="p-lg-5"></p>
+    <div class="text-center">
+
+        <h2 class="alert-heading text-center">Confidentiality Notice</h2>
+        <p class="p-1"></p>
+        <p class="text-info border text-justify">
+            The information in this system at New York Presbyterian Hospital is confidential and access is restricted to employees only. The information in use is on a need-to-know basis. Unauthorized or improper use of the system or the confidential information may result in dismissal and civil… and/or criminal penalties. Your actions are being monitored while logged in and you are responsible for your actions while logged in. Your user name and password are used to uniquely identify you. You are responsible for any actions taken under your user account.
+        </p>
+    </div>
+    <div class="text-center">
+         
+        <form method="get" id="loginForm" name="loginForm">
+            <button style="position:absolute;top:50%" onclick="(form.submit())">LogIn</button>
+        </form>
+    </div>
+    <p class="p-lg-5"></p>
+    <div class="text-center"><a href="http://edocsusa.com/" target="_blank"> <img align="middle" src="~/Images/logo_black_v2.png" /></a></div>
+</body>
+</html>

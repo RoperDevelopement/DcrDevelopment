@@ -1,0 +1,35 @@
+﻿<?xml version="1.0"?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" validUntil="2020-03-13T19:46:26Z" cacheDuration="PT604800S" entityID="edocsnyplabreqs.azurewebsites.net">
+  <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIENTCCAxygAwIBAgIBADANBgkqhkiG9w0BAQ0FADCBszELMAkGA1UEBhMCdXMxCzAJBgNVBAgMAk1UMRMwEQYDVQQKDAplLURjb3MgVXNhMTYwNAYDVQQDDC1odHRwczovL2Vkb2NzbnlwbGFicmVxc2Rldi5henVyZXdlYnNpdGVzLm5ldC8xDjAMBgNVBAcMBUVkb2NzMRMwEQYDVQQLDAplLURjb3MgVXNhMSUwIwYJKoZIhvcNAQkBFhZkYW4ucm9wZXJAZWRvY3N1c2EuY29tMB4XDTIwMDIxODIxMjMzM1oXDTIxMDUyNDIxMjMzM1owgbMxCzAJBgNVBAYTAnVzMQswCQYDVQQIDAJNVDETMBEGA1UECgwKZS1EY29zIFVzYTE2MDQGA1UEAwwtaHR0cHM6Ly9lZG9jc255cGxhYnJlcXNkZXYuYXp1cmV3ZWJzaXRlcy5uZXQvMQ4wDAYDVQQHDAVFZG9jczETMBEGA1UECwwKZS1EY29zIFVzYTElMCMGCSqGSIb3DQEJARYWZGFuLnJvcGVyQGVkb2NzdXNhLmNvbTCCASMwDQYJKoZIhvcNAQEBBQADggEQADCCAQsCggECAM6USslMNQnl7MD65Q03XckaXW1BvLCVm9BTJJz4nlvqnQfYez15To7m7v88Nx2JgqgqLudo3tAbh7skH26w2/hVsdh0AeA9jLgmnc8buct22XRYnAItd23TqJq42ErLde+V6bfivEX1FwdjlRxFiru5CbI1pwrHHBpq5TTR3IlVpjPPol7tGQfeZMlFPWezpFSoil8nlepJVZyl6TiIjOIwWITv8l9kO8gUWw95cklIOm3FIphj47KY5+2aFWbtNPJiWYdh2JnzZEBzpHiEOACfqLcY0TJN4NkTd75spz0391Pd1TPCHrSYS9axU4QHy49jpwW2OSGTVyTcKPbPDTOzAgMBAAGjUDBOMB0GA1UdDgQWBBTy5FJY3rKgs0/mbs+WnvRSKHAZmDAfBgNVHSMEGDAWgBTy5FJY3rKgs0/mbs+WnvRSKHAZmDAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBDQUAA4IBAgC7dtO1T/Fdd8yxp5aQbjVBYcMy3gpnYtNxymWCWs+8Y1WirJhbSqaUkVQM/0nhHfQHZJkn0i3pHeScJ1qEigq+8ZMhsjTSZs/DC/pRB3cYrTyk5n24fgsaXwQaTKMbIiDFUHaisvaBVMDxZ2HQokME+3UcgkIeQwnUFrLqboS9U9AzwYdlbUWD3gg+4+UlMJjyUbuIjAN1ZkPkPcv6uDcA1FawExdQqgaxCwUIemRSKDwxR2nJmF684XX6S0nanxLC6sdYeJ8O58Agn4Slkt3K/3U6fnzGrgWXGgz6vqmEb249rSvzBlUv7YDcC1wjRC9LzIleWwbETad5E+ZOfTy1cw==</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="encryption">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIENTCCAxygAwIBAgIBADANBgkqhkiG9w0BAQ0FADCBszELMAkGA1UEBhMCdXMxCzAJBgNVBAgMAk1UMRMwEQYDVQQKDAplLURjb3MgVXNhMTYwNAYDVQQDDC1odHRwczovL2Vkb2NzbnlwbGFicmVxc2Rldi5henVyZXdlYnNpdGVzLm5ldC8xDjAMBgNVBAcMBUVkb2NzMRMwEQYDVQQLDAplLURjb3MgVXNhMSUwIwYJKoZIhvcNAQkBFhZkYW4ucm9wZXJAZWRvY3N1c2EuY29tMB4XDTIwMDIxODIxMjMzM1oXDTIxMDUyNDIxMjMzM1owgbMxCzAJBgNVBAYTAnVzMQswCQYDVQQIDAJNVDETMBEGA1UECgwKZS1EY29zIFVzYTE2MDQGA1UEAwwtaHR0cHM6Ly9lZG9jc255cGxhYnJlcXNkZXYuYXp1cmV3ZWJzaXRlcy5uZXQvMQ4wDAYDVQQHDAVFZG9jczETMBEGA1UECwwKZS1EY29zIFVzYTElMCMGCSqGSIb3DQEJARYWZGFuLnJvcGVyQGVkb2NzdXNhLmNvbTCCASMwDQYJKoZIhvcNAQEBBQADggEQADCCAQsCggECAM6USslMNQnl7MD65Q03XckaXW1BvLCVm9BTJJz4nlvqnQfYez15To7m7v88Nx2JgqgqLudo3tAbh7skH26w2/hVsdh0AeA9jLgmnc8buct22XRYnAItd23TqJq42ErLde+V6bfivEX1FwdjlRxFiru5CbI1pwrHHBpq5TTR3IlVpjPPol7tGQfeZMlFPWezpFSoil8nlepJVZyl6TiIjOIwWITv8l9kO8gUWw95cklIOm3FIphj47KY5+2aFWbtNPJiWYdh2JnzZEBzpHiEOACfqLcY0TJN4NkTd75spz0391Pd1TPCHrSYS9axU4QHy49jpwW2OSGTVyTcKPbPDTOzAgMBAAGjUDBOMB0GA1UdDgQWBBTy5FJY3rKgs0/mbs+WnvRSKHAZmDAfBgNVHSMEGDAWgBTy5FJY3rKgs0/mbs+WnvRSKHAZmDAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBDQUAA4IBAgC7dtO1T/Fdd8yxp5aQbjVBYcMy3gpnYtNxymWCWs+8Y1WirJhbSqaUkVQM/0nhHfQHZJkn0i3pHeScJ1qEigq+8ZMhsjTSZs/DC/pRB3cYrTyk5n24fgsaXwQaTKMbIiDFUHaisvaBVMDxZ2HQokME+3UcgkIeQwnUFrLqboS9U9AzwYdlbUWD3gg+4+UlMJjyUbuIjAN1ZkPkPcv6uDcA1FawExdQqgaxCwUIemRSKDwxR2nJmF684XX6S0nanxLC6sdYeJ8O58Agn4Slkt3K/3U6fnzGrgWXGgz6vqmEb249rSvzBlUv7YDcC1wjRC9LzIleWwbETad5E+ZOfTy1cw==</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://edocsnyplabreqs.azurewebsites.net/"/>
+    <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://edocsnyplabreqs.azurewebsites.net/NypUsersInfo/LoginView" index="1"/>
+  </md:SPSSODescriptor>
+  <md:Organization>
+    <md:OrganizationName xml:lang="en-US">e-Dcos Usa</md:OrganizationName>
+    <md:OrganizationDisplayName xml:lang="en-US">e-Dcos Usa</md:OrganizationDisplayName>
+    <md:OrganizationURL xml:lang="en-US">http://edocsusa.com/</md:OrganizationURL>
+  </md:Organization>
+  <md:ContactPerson contactType="technical">
+    <md:GivenName>Dan Roper</md:GivenName>
+    <md:EmailAddress>dan.roper@edocsusa.com</md:EmailAddress>
+  </md:ContactPerson>
+  <md:ContactPerson contactType="support">
+    <md:GivenName>Dan Roper</md:GivenName>
+    <md:EmailAddress>dan.roper@edocsusa.com</md:EmailAddress>
+  </md:ContactPerson>
+</md:EntityDescriptor>

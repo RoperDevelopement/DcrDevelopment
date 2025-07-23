@@ -1,0 +1,37 @@
+﻿@page
+@model BinMonitorAppService.Pages.Partial_Pages.CategoryDurationsPartialViewModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<div class="border" style="display:none" id="divCp" name="divCp">
+
+    <h6 class="text-center">Check Point</h6>
+    <div class="row justify-content-center">
+
+        <div class="col-4 text-center">
+            @Html.CheckBoxFor(model => Model.CategoryCheckPointEmailModel.Flash) Flash
+            <p class="margionZero"></p>
+            @Html.LabelFor(model => Model.CategoryCheckPointEmailModel.Duration) @Html.EditorFor(model => Model.CategoryCheckPointEmailModel.Duration, Model.CategoryCheckPointEmailModel.Duration, new { @class = "border", @maxLength = 5 })
+            <p class="margionZero"></p>
+            @Html.CheckBoxFor(model => Model.CategoryCheckPointEmailModel.EmailAlerts) Send Email ALerts
+            <p class="margionZero"></p>
+            <select multiple id="selemail">
+                @foreach (var em in Model.EmailTo)
+                {
+                    if (string.IsNullOrWhiteSpace(@em))
+                    {
+                        <option selected>@em</option>
+                    }
+                    else
+                    {
+                        <option>@em</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{61A8AB7F-464E-407D-94F1-71187AF12049}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Edocs.Libaray.Upload.Archive.Batches</RootNamespace>
+    <AssemblyName>Edocs.Libaray.Upload.Archive.Batches</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Edocs.Azure.Blob.Storage">
+      <HintPath>..\Assemblies\Edocs.Azure.Blob.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Edocs.Send.Emails">
+      <HintPath>..\Assemblies\Edocs.Send.Emails.dll</HintPath>
+    </Reference>
+    <Reference Include="EdocsUSA.Utilities, Version=1.0.9000.20494, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\EdocsUSA.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeImageNET">
+      <HintPath>..\Edocs.Upload.Batches.AzureCloud\Edocs.Upload.Batches.AzureCloud\Dlls\FreeImageNET.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\Edocs.Upload.Archiver\packages\Newtonsoft.Json.13.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\Edocs.Libaray.AzureCloud.Upload.Batches\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Archivers\BSBPropDepArchiver.cs" />
+    <Compile Include="Archivers\BSBPublicWorksArchiver.cs" />
+    <Compile Include="Archivers\MDTArchiver.cs" />
+    <Compile Include="Archivers\PSUSDArchiver.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="DebenuPdfLibrary915.cs" />
+    <Compile Include="Interfaces\InterfaceArchivers.cs" />
+    <Compile Include="LibarayUploadArchive.cs" />
+    <Compile Include="Models\BSBProdDepSettingsModel.cs" />
+    <Compile Include="Models\BSBPropDepRecordsModel.cs" />
+    <Compile Include="Models\BSBPWDRecords.cs" />
+    <Compile Include="Models\BSBPWDSettingsModel.cs" />
+    <Compile Include="Models\BSPProdDeptUploadSearchTxt.cs" />
+    <Compile Include="Models\DOHRecordsModel.cs" />
+    <Compile Include="Models\DOHSetrtingsModel.cs" />
+    <Compile Include="Models\EdocsITSScanningManModel.cs" />
+    <Compile Include="Models\EdocsITSTrackingIDModel.cs" />
+    <Compile Include="Models\JsonMDTRecordsModel.cs" />
+    <Compile Include="Models\JsonSettingsModelMDT.cs" />
+    <Compile Include="Models\PSUSDFullText.cs" />
+    <Compile Include="Models\PSUSDRecordsModel.cs" />
+    <Compile Include="Models\PSUSDSettingsModel.cs" />
+    <Compile Include="Models\PSUSDUploadRecordsModel.cs" />
+    <Compile Include="Models\UploadBatchRecordsModel.cs" />
+    <Compile Include="Archivers\DOHArchiver.cs" />
+    <Compile Include="Models\UploadJsonFileModel.cs" />
+    <Compile Include="Models\UpLoadMDTrackingModel.cs" />
+    <Compile Include="Models\UploadTrackingByProjectNameModel.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="UploadArchiveBatches.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UploadUtilities.cs" />
+    <Compile Include="WebApi.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DebenuPDFLibraryDLL0915.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetDir)Edocs.Libaray.Upload.Archive.Batches*.*" "L:\EdocsGitHub\Assemblies\*.*"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

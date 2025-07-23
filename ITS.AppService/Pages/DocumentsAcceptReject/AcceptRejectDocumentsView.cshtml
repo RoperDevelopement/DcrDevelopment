@@ -1,0 +1,433 @@
+﻿@page
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Edocs.ITS.AppService.Pages.DocumentsAcceptReject.AcceptRejectDocumentsViewModel
+@{
+    ViewData["Title"] = "Add New Customer";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @*  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">*@
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        input[type=text] {
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+
+        button:hover {
+            background: #C0C0C0;
+        }
+
+        button {
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 15px;
+            border: 1px solid grey;
+            border-left: none;
+            cursor: pointer;
+        }
+
+        .align-right {
+            text-align: right;
+            border: 0;
+        }
+    </style>
+}
+<!DOCTYPE html>
+
+<div class="container-fluid" id="divMain">
+
+    <div style="display:none">
+        <input type="hidden" value="" id="pdfName" />
+
+        <button class="btn btn-info" id="pdfbutt">Save Invoice</button>
+    </div>
+
+    @Html.AntiForgeryToken()
+    <a href="#searchOptions" name="sOptions" id="sOptions" class="btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+    <p class="alert-light" id="showmess" style="display:none">Click to expand/hide Options</p>
+    <p class="p-1" />
+
+    <div id="searchOptions" class="collapse">
+
+        <form id="fRep" name="fRep" method="get">
+
+            <table class="table table-bordered tablecenter">
+                <thead>
+                    <tr>
+                        <th class="text-center">@Html.LabelFor(model => Model.RepStartDate)</th>
+                        <th class="text-center">@Html.LabelFor(model => Model.RepEndDate)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">
+                            <p style="display:none" id="repErSDate" name="repERSDate" class="alert-danger">Scan Start Date Required</p>
+
+                            @Html.EditorFor(m => @Model.RepStartDate, new { @name = "RepStartDate", @id = "RepStartDate" })
+
+
+                        </td>
+                        @*
+                        class="text-center"><input type="date" id="repSEndDate" name="repSEndDate" /></td>
+                        *@
+                        <td> @Html.EditorFor(m => @Model.RepEndDate, new { @name = "RepEndDate", @id = "RepEndDate" }) </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </form>
+        <div style="margin:auto;max-width:300px;">
+            <input type="text" placeholder="Search By Document Name..." id="docName" name="docName">
+            <input type="text" placeholder="Search By TrackingID...." id="trackID" name="trackID">
+            <p class="p-2"></p>
+        </div>
+        <br />
+
+        <div class="align-right">
+            <button id="lookUpDocs" name="lookUpDocs" style="width:5%;height:10%"><i class="fa fa-search"></i></button>
+
+            @*
+              <button class="btn btn-primary btn-outline-primary" id="allIDs" name="allIDs"><i>All Documents</i></button>
+            <button id="allIDs" style="float:left;width:15%"><i>All Documents</i></button>
+            *@
+            <a type="button" class="btn btn-outline-danger btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+
+
+        </div>
+        <br />
+
+
+
+        @if ((@Model.RejectDocumentsModels != null) && (@Model.RejectDocumentsModels.Count() > 0))
+        {
+
+
+            <h2 class="text-center">Viewing @Model.ViewingDocs</h2>
+            <form id="docreview" name="docreview" method="get">
+                <input type="hidden" id="fileID" name="fileID" />
+                <input type="hidden" id="accRej" name="accRej" />
+                <input type="hidden" id="comm" name="comm" />
+                <input type="hidden" id="repStartDate" name="repstartDate" />
+                <input type="hidden" id="repEndDate" name="repEndDate" />
+                <input type="hidden" id="tidDocName" name="tidDocName" value="@Model.DocNameTrackID" />
+                <input type="hidden" id="tids" name="tids" value="@Model.TrackID" />
+
+
+                <table id="tblFiles" class="table table-hover w-auto table-bordered table-info">
+                    <tr>
+                        <th style="width:auto">Document Name</th>
+                        <th style="width:auto">View Document</th>
+                        <th style="width:auto">View Document Browser</th>
+                        <th style="width:auto">Accept Document</th>
+                        <th style="width:auto">Reject Document</th>
+                        <th style="width:auto">Comments</th>
+                    </tr>
+                    @foreach (var file in Model.RejectDocumentsModels)
+                    {
+                        <tr>
+                            <td style="width:auto">@file.TrackingID</td>
+                            <td style="width:auto"><a href="javascript:LoadPdf('@file.FileName');">View</a></td>
+                            <td> <a href="/Partial_Pages/DisplayPdfFilePartialView?pdfurl=@file.FileName" target="_blank">View Browser</a></td>
+                            <td><button data-value1="@file.ID" data-value2="1" data-value3="@file.ID.ToString()_comments" id="@file.ID.ToString()_accept" class="btn   btn-outline-primary">Accept Doc</button></td>
+                            <td><button data-value1="@file.ID" data-value2="0" data-value3="@file.ID.ToString()_comments" data-value4="@file.ID.ToString()_errorS" id="@file.ID.ToString()_reject" class="btn btn-outline-danger btn-block">Reject Doc</button></td>
+                            <td><textarea rows="3" style="display:inline-block" cols="50" class="border" id="@file.ID.ToString()_comments">@file.Comments</textarea> <p class="text-danger" id="@file.ID.ToString()_errorS" name="@file.ID.ToString()_errorS" style="display:none"></td>
+
+
+                        </tr>
+                    }
+                </table>
+            </form>
+            @*
+            <a type="button" class="btn btn-outline-dark btn-link" style="float: right; overflow: auto;" id="btnExit" href="/Index" name="btnExit">Exit</a>
+            *@
+            <p class="p-1"></p>
+
+
+
+
+            @*
+            <div id="pdf_container" style="background: #ccc; text-align: center; display:block; padding: 5px; height: 820px; overflow: auto; ">
+                @*
+                        <embed type="application/pdf" src="~/pdfdocuments/danno.pdf" style="display: block;width:1200px; padding: 5px; height: 820px; overflow: auto; " />;
+              $("#divMain").fadeOut(100);
+                                $('#addComments').css("display", "block");
+            *@
+        }
+        else
+        {
+
+
+            @if (!(string.IsNullOrWhiteSpace(@Model.ViewingDocs)))
+            {
+
+                <h1 class="text-center">No Documents found for @Model.ViewingDocs</h1>
+            }
+            @*  <a type="button" class="btn btn-outline-dark btn-link" style="float: right; overflow: auto;" id="btnExit" href="/Index" name="btnExit">Exit</a> *@
+
+        }
+
+    </div>
+    
+    <div id="pdf_container" style="overflow:auto;">
+    </div>
+    </div>
+
+
+<div tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none" id="addComments">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 id="h4" class="modal-title">Add Comments</h4>
+
+                <button id="btndis" type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-*-* text-center form-inline border-dark">
+                            &nbsp;&nbsp;<label for="commAccRej">Add Comments:</label>&nbsp;
+                            <input type="text" id="commAccRej" />
+                        </div>
+                    </div>
+                    <p class="p-0"></p>
+                    <div class="modal-footer">
+                        <button type="button" id="btnaddComments" name="btnaddComments" class="btn btn-pill btn-outline-primary" data-dismiss="modal">Add</button>
+                        <button type="button" id="btncloseaddComments" name="btncloseaddComments" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+                    </div>
+                    <!-- Modal footer -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+                            top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+                            opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            
+            $('#pdfbutt').click(function (e) {
+                 $('#sOptions').click();
+             //   $('#sOptions').click();
+                $("#divLoading").show();
+                e.preventDefault();
+
+                var getUsersProfiles = "/DocumentsAcceptReject/GetPdfDocView/";
+                var strData = "pdfDocName=" + $('#pdfName').val();
+                $.ajax({
+                    type: "GET",
+                    url: getUsersProfiles,
+                    contentType: 'application/html;charset=utf-8',
+                    data: strData,
+                    datatype: "html",
+                    cache: false,
+                    success: function (results) {
+
+                        $('#pdf_container').show();
+                        //  $('#saveInvoice').hide();
+                        $("#pdf_container").html(results);
+                        //Convert Base64 string to Byte Array.
+                        // var bytes = Base64ToBytes(r.Data);
+
+                        //  LoadPdfFromBlob(bytes);
+                    },
+                    complete: function () {
+                        //   CompleteAjaxCall();
+                        // alert("compl");
+                        $("#divLoading").hide();
+                        // $('#dtlUsers').DataTable({ "pagingType": "full" });
+                        // $('.dataTables_length').addClass('bs-select');
+
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+                });
+
+            });
+            $('#lookUpDocs').click(function (e) {
+                //if (!(CheckEmptyString($("#repSDate").val(), 'Need a Report Begin Date:'))) {
+                //    $("#repSDate").focus();
+                //    return false;
+                //}
+                //if (!(CheckEmptyString($("#repSEndDate").val(), 'Need a Report Begin Date:'))) {
+                //    $("#repSEndDate").focus();
+                //    return false;
+                //}
+               
+                $("#divLoading").show();
+                //  ShowLoading();
+                $("<input type='hidden'/>")
+                    .attr("value", $("#RepStartDate").val())
+                    .attr("id", "repSDate")
+                    .attr("name", "repSDate")
+                    .prependTo("#fRep");
+                $("<input type='hidden'/>")
+                    .attr("value", $("#RepEndDate").val())
+                    .attr("id", "repSEndDate")
+                    .attr("name", "repSEndDate")
+                    .prependTo("#fRep");
+                $("<input type='hidden'/>")
+                    .attr("value", $("#trackID").val())
+                    .attr("id", "trackID")
+                    .attr("name", "trackID")
+                    .prependTo("#fRep");
+                $("<input type='hidden'/>")
+                    .attr("value", $("#docName").val())
+                    .attr("id", "docName")
+                    .attr("name", "docName")
+                    .prependTo("#fRep");
+                $("#fRep").submit();
+            });
+            $(document).on("click", "#tblFiles tbody tr td button.btn", function (e) { // any button
+
+                //var data = {};
+                var Id = $(this).attr("data-value1");
+                var accRej = $(this).attr("data-value2");
+                var comm = $(this).attr("data-value3");
+                document.getElementById('fileID').value = Id;
+                document.getElementById('accRej').value = accRej;
+                document.getElementById('comm').value = document.getElementById(comm).value;
+                $("#repStartDate").val($("#RepStartDate").val().replace("/", "-"));
+                $("#repEndDate").val($("#RepEndDate").val().replace("/", "-"));
+
+                //    $("#tidDocName").val($("#docName").val());
+                // $("#tids").val($("#trackID").val());
+
+                if ((document.getElementById(comm).value == "") && (accRej == 0)) {
+                    var err = $(this).attr("data-value4");
+                    document.getElementById(comm).focus();
+                    document.getElementById(err).innerHTML = "*Rejection reason required";
+                    document.getElementById(err).style.display = "block";
+
+
+                    // $("#divMain").fadeOut(100);
+                    // $('#addComments').css("display", "block");
+                    return false;
+                }
+
+                //    alert(Id + ' ' + accRej + ' ' + ' ' + comm + ' ' + document.getElementById(comm).value);
+                //    $("<input type='hidden'/>")
+                //        .attr("value",id)
+                //        .attr("id", "fileid")
+                //        .attr("name", "id")
+                //        .prependTo("#docreview");
+                //    $("<input type='hidden'/>")
+                //        .attr("value", accRej)
+                //        .attr("id", "accrej")
+                //        .attr("name", "accrej")
+                //        .prependTo("#docreview");
+                //$("<input type='hidden'/>")
+                //    .attr("value", document.getElementById(comm).value)
+                //.attr("id", "comm")
+                //.attr("name", "comm")
+                // .prependTo("#docreview");
+                $("#docreview").submit();
+                document.getElementById('showmess').style.display = 'none';
+            });
+
+            $("#docName").mousedown(function (e) {
+                $('#trackID').val('');
+            });
+            $("#trackID").mousedown(function () {
+                $('#docName').val('');
+            });
+            $("#trackID").autocomplete({
+
+                source: function (request, response) {
+                    $("#tids").val(request.term);
+                    var strData = request.term + "/tid/" + $("#RepStartDate").val().replace("/", "-") + "/" + $("#RepEndDate").val().replace("/", "-");
+                    $.ajax({
+                        url: '/Partial_Pages/GetTackingIDsDocNameAcceptRecject',
+                        //data: { "prefix": request.term },
+                        data: { "prefix": strData },
+
+                        type: "POST",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    //  get selected value;
+                    //$("#personNameValue").val(i.item.val);
+                },
+                minLength: 1
+            });
+            $("#docName").autocomplete({
+
+                source: function (request, response) {
+                    $("#tidDocName").val(request.term);
+                    var strData = request.term + "/dn/" + $("#RepStartDate").val().replace("/", "-") + "/" + $("#RepEndDate").val().replace("/", "-");
+                    $.ajax({
+                        url: '/Partial_Pages/GetTackingIDsDocNameAcceptRecject',
+                        //data: { "prefix": request.term },
+                        data: { "prefix": strData },
+
+                        type: "POST",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    //  get selected value;
+                    //$("#personNameValue").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+    </script>
+}

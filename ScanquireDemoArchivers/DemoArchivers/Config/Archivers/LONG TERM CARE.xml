@@ -1,0 +1,83 @@
+﻿<Complex name="Root" type="DemoArchivers.LongTermCareArchiver, DemoArchivers">
+  <Properties>
+    <Complex name="FilesystemConnector">
+      <Properties>
+        <Simple name="RootPath" value="C:\Archives\Long Term Care\" />
+        <Simple name="ExistingFileAction" value="AskUser" />
+        <Simple name="VersionPrefix" value="_v" />
+        <Simple name="VersionPadding" value="2" />
+        <Simple name="AddVersionInfoToPrimaryVersion" value="True" />
+        <Complex name="OpenFileDialog">
+          <Properties>
+            <Simple name="CheckFileExists" value="True" />
+            <Simple name="Multiselect" value="True" />
+            <Simple name="ReadOnlyChecked" value="False" />
+            <Simple name="ShowReadOnly" value="False" />
+            <Simple name="AddExtension" value="True" />
+            <Simple name="CheckPathExists" value="True" />
+            <Simple name="DefaultExt" value="" />
+            <Simple name="DereferenceLinks" value="True" />
+            <Simple name="FileName" value="" />
+            <Simple name="Filter" value="" />
+            <Simple name="FilterIndex" value="1" />
+            <Simple name="InitialDirectory" value="" />
+            <Simple name="RestoreDirectory" value="True" />
+            <Simple name="ShowHelp" value="False" />
+            <Simple name="SupportMultiDottedExtensions" value="False" />
+            <Simple name="Title" value="" />
+            <Simple name="ValidateNames" value="True" />
+            <Simple name="AutoUpgradeEnabled" value="True" />
+            <Null name="Tag" />
+            <Null name="Site" />
+          </Properties>
+        </Complex>
+        <Simple name="OpenFileDialogRememberLastDirectory" value="True" />
+        <Complex name="SaveFileDialog">
+          <Properties>
+            <Simple name="CreatePrompt" value="False" />
+            <Simple name="OverwritePrompt" value="False" />
+            <Simple name="AddExtension" value="True" />
+            <Simple name="CheckFileExists" value="False" />
+            <Simple name="CheckPathExists" value="True" />
+            <Simple name="DefaultExt" value="" />
+            <Simple name="DereferenceLinks" value="True" />
+            <Simple name="FileName" value="" />
+            <Simple name="Filter" value="" />
+            <Simple name="FilterIndex" value="1" />
+            <Simple name="InitialDirectory" value="" />
+            <Simple name="RestoreDirectory" value="True" />
+            <Simple name="ShowHelp" value="False" />
+            <Simple name="SupportMultiDottedExtensions" value="False" />
+            <Simple name="Title" value="" />
+            <Simple name="ValidateNames" value="True" />
+            <Simple name="AutoUpgradeEnabled" value="True" />
+            <Null name="Tag" />
+            <Null name="Site" />
+          </Properties>
+        </Complex>
+        <Simple name="SaveFileDialogRememberLastDirectory" value="True" />
+        <Complex name="FolderBrowserDialog">
+          <Properties>
+            <Simple name="ShowNewFolderButton" value="True" />
+            <Simple name="SelectedPath" value="" />
+            <Simple name="RootFolder" value="Desktop" />
+            <Simple name="Description" value="" />
+            <Null name="Tag" />
+            <Null name="Site" />
+          </Properties>
+        </Complex>
+      </Properties>
+    </Complex>
+    <Complex name="Log" type="EdocsUSA.Utilities.Logging.JsonFileDictionaryLogger, EdocsUSA.Utilities">
+      <Properties>
+        <Simple name="FilePath" value="C:\Archives\Long Term Care\Long Term Care.log" />
+      </Properties>
+    </Complex>
+    <Simple name="EnableLogging" value="True" />
+    <Null name="ScannerName" />
+    <Null name="ScannerSetting" />
+    <Simple name="CommandReaderName" value="DEFAULT" />
+    <Simple name="FileWriterName" value="PDF" />
+    <Simple name="CommandImageBuilderName" value="DEFAULT" />
+  </Properties>
+</Complex>

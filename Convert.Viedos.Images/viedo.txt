@@ -1,0 +1,5 @@
+L:\EdocsGItHub\Edocs.Convert.Viedos.Images\bin\Debug\bin\x86\ffmpeg.exe -framerate 25  -i "Screenshot*.png" output.mp4
+
+L:\EdocsGItHub\Edocs.Convert.Viedos.Images\bin\Debug\bin\x86\ffmpeg.exe -framerate 1 -pattern_type glob -i "Screenshot 2022-08-29 100424.png"  -c:v libx264 -r 30 -pix_fmt yuv420p output1.mp4
+
+L:\EdocsGItHub\Edocs.Convert.Viedos.Images\bin\Debug\bin\x86\ffmpeg.exe  -f image2 -i "imagestovideo%d.png" imagestovideo.mpg 

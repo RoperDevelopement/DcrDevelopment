@@ -1,0 +1,167 @@
+﻿
+<div class="container-fluid" id="printInvoice">
+    <div id="saveHtml">
+        <img align="right" src="{edocslogo}" style="margin:0 auto;width:250px;height:125px;" />
+        <div id="invNum1">
+            <h1 style="text-align:center;">
+                Invoice
+            </h1>
+        </div>
+
+
+        <p class="p-1"></p>
+        <h2 style="text-align: left; font-size: medium">
+            e-Docs Usa Inc.
+        </h2>
+        <h4 style="text-align: left;font-size:medium">
+            EdocsAddress
+        </h4>
+        <h4 style="text-align: left; font-size: medium">
+            EdocsCity, EdosState, EdocsZipCode
+        </h4>
+        <h4 style="text-align: left; font-size: medium">
+            Phone:EdocsPhoneNumber
+        </h4>
+        <h4 style="text-align: right; font-size: medium">
+            <span style="float: left; font-size: medium"> Email:EmailAddress</span>
+            Invoice# &nbsp;&nbsp; Date of Invoice
+        </h4>
+
+        <h4 id="invNum" style="float:right; font-size: medium">
+            <span style="float: left; font-size: medium"></span>{EdocsInvoice#}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;InvoiceDate
+        </h4>
+
+        <p class="p-1"></p>
+        <img align="left" src="{customerLogo}" style="margin: 0 auto; width:100px; height:100px;" />
+
+
+        <p class="p-2"></p>
+        <p class="p-2"></p>
+        <p class="p-2"></p>
+        <p class="p-1"></p>
+
+        <h2 style="text-align: right; font-size: medium">
+            <span style="float:left">Bill TO</span>
+            CustomerID {EdocsCustomerID} Terms Net 30 Days
+        </h2>
+
+        <h4 style="text-align: left;font-size:medium">
+            EdocsCustomerName
+        </h4>
+        <h4 style="text-align: left; font-size: medium">
+            EdocsCustomerAddress
+        </h4>
+        <h4 style="text-align: left; font-size: medium">
+            EdocsCustomerCity, EdosCustomerState, EdocsCustomerZipCode
+        </h4>
+        <h4 style="text-align: left; font-size: medium">
+            Phone:EdocsCustomerPhoneNumber
+
+        </h4>
+        <h4 style="text-align: left; font-size: medium">
+            Email:{EdocsCustomerEmailAddress}
+        </h4>
+        <h3 class="text-center" style="font-size:medium">Scan Dates </h3>
+        <p class="p-0"></p>
+
+
+
+
+        <table class="table table-hover w-auto table-bordered  table-info" id="dtlScanningCost" style="font-size:medium">
+            <thead>
+
+
+                <tr class="w-auto" style="background-color:cornflowerblue; font-size: medium">
+                    <th style="font-size:medium">Document Name</th>
+                    <th style="font-size:medium">TrackingID</th>
+                    <th style="font-size:medium">Scanned</th>
+                    <th style="font-size:medium">UpLoaded</th>
+                    <th style="font-size:medium">PerDocument Price</th>
+                    <th style="font-size:medium">Cost Documents</th>
+                    <th style="font-size:medium">OCR</th>
+                    <th style="font-size:medium">OCR Price</th>
+                    <th style="font-size:medium">Cost OCR</th>
+                    <th style="font-size:medium">Char Typed</th>
+                    <th style="font-size:medium">Cost Char</th>
+                    <th style="font-size:medium">Char Price</th>
+                    <th style="font-size:medium">Scan Date</th>
+                    <th style="font-size:medium">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+
+                {tableData}
+                <!--
+            <td style="font-size:medium">@items.Value.TrackingID</td>
+            <td style="font-size:medium">@items.Value.Scanned</td>
+            <td style="font-size:medium">@items.Value.Uploaded</td>
+            <td style="font-size:medium">$@string.Format("{0:0.00}", @items.Value.PricePerDocument)</td>
+            <td style="font-size:medium">$@string.Format("{0:0.00}", @items.Value.CostPerDoc)</td>
+            <td style="font-size:medium">@items.Value.DocsOCR</td>
+            <td style="font-size:medium">$@string.Format("{0:0.00}", @items.Value.PriceOCR)</td>
+            <td style="font-size:medium">$@string.Format("{0:0.00}", @items.Value.OcrCost)</td>
+            <td style="font-size:medium">@items.Value.CharTyped</td>
+            <td style="font-size:medium">$@string.Format("{0:0.00}", @items.Value.PriceCharTyped)</td>
+            <td style="font-size:medium">$@string.Format("{0:0.00}", @items.Value.CostPerChar)</td>
+
+            <td style="font-size:medium">@items.Value.ScannDate.ToString("MM-dd-yyyyy")</td>
+            <td style="font-size:medium">$@string.Format("{0:0.00}", @items.Value.CostPerDoc + @items.Value.OcrCost + @items.Value.CostPerChar)</td>
+            -->
+
+
+
+            </tbody>
+            <tfoot style="font-size:medium">
+                <tr style="font-size:medium">
+                    {tablefooterData}
+                    <!--
+                <td style="font-size:medium">Total</td>
+                <td style="font-size:medium">TotalDocuments</td>
+                <td style="font-size:medium">TotalDocuments</td>
+                <td style="font-size:medium">N/A</td>
+                <td style="font-size:medium">TotalDocCost)</td>
+                <td style="font-size:medium">TotalOcr</td>
+                <td style="font-size:medium">N/A</td>
+                <td style="font-size:medium">N/A</td>
+                <td style="font-size:medium">TotalCharTyped</td>
+                <td style="font-size:medium">N/A</td>
+                <td style="font-size:medium">Model.TotalCharCost</td>
+                <td style="font-size:medium">N/A</td>
+                <td style="font-size:medium">Model.TotalCost</td>
+                    -->
+                </tr>
+            </tfoot>
+
+        </table>
+
+        <p class="p-2"></p>
+        <h2 class="text-right" style="font-size:medium">Invoice Summary</h2>
+        <p class="p-0"></p>
+        {invsum}
+        <!--
+    <p class="text-info text-right" style="font-size:medium">Documents Scanned {TotalDocuments}</p>
+    <p class="text-info text-right" style="font-size:medium">Cost Documents Scanned {TotalDocCost}</p>
+    <p class="text-info text-right" style="font-size:medium">Cost Documents OCR {TotalOcrCost}</p>
+    <p class="text-info text-right" style="font-size:medium">Cost Char Typed {TotalCharCost}</p>
+    <p class="text-info text-right" style="font-size:medium">SubTotal {TotalCost})</p>
+    <p class="text-info text-right" style="font-size:medium">Tax Rate 0.00%</p>
+    <p class="text-info text-right" style="font-size:medium">Other Fees $0.00</p>
+    <p class="text-info text-right" style="font-size:medium">Total Cost {TotalCost)</p>
+          -->
+        <p class="p-0"></p>
+        <p class="p-1"></p>
+
+        <div class="text-center">
+            <p class="flex-nowrap" style="text-emphasis-color: blue; margin: 0; padding-top:0;">Thank you for your business</p>
+            <p class="flex-nowrap" style="text-emphasis-color: blue; margin: 0; padding-top: 0;">If you have any questions about this invoice, please contact</p>
+            <p class="flex-nowrap" style="text-emphasis-color:blue">EdosFirstName EdocsLastName EdocsEmailAddress EdocsPhoneNumber</p>
+        </div>
+
+
+
+
+
+    </div>
+</div>

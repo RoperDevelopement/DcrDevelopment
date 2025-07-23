@@ -1,0 +1,249 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.LookUpSendOutPackingSlipsViewModel
+@{
+    ViewData["Title"] = "LookUpSendOutPackingSlipsView";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger border">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+@*
+    <partial name="Shared/_RecordsNetImage" />
+    *@
+    <div id="divMain" name="divMain">
+        <h1 class="text-center">Send Out Packing Slips</h1>
+        <p class="p-1" />
+
+
+        <div class="container-fluid" style="background-color:white;">
+            <p class="p-2" />
+            <a href="#searchOptions" name="sOptions" id="sOptions" class=" btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+            <p class="alert-light" id="showmess" style="display:none">Click to expand/hide Search Options</p>
+
+            <input type="hidden" id="partsearch" name="partsearch" value="" />
+            <div id="searchOptions" class="collapse">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Date of Service Begin Date</th>
+                            <th class="text-center">Date of Service End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center"><input type="date" id="searchStartDate" name="searchStartDate" value="@Model.StartDate" /></td>
+                            <td class="text-center"><input type="date" id="searchEndDate" name="searchEndDate" value="@Model.EndDate" /></td>
+
+
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div id="checkboxSearchDates" style="display:none">
+                    <input type="hidden" id="searchBydate" name="searchBydate" />
+                    <div class="row alert-info">
+                        <div class="col-2">
+                            <p>Search By</p>
+                        </div>
+                        <div class="col-3">
+                            <input type="radio" name="lDate" id="lDate" />&nbsp;Date Of Service
+
+                        </div>
+                        <div class="col-2">
+                            <input type="radio" id="sDate" name="sDate" value="SDate" />&nbsp;Scan Date
+                        </div>
+                    </div>
+                </div>
+                <form id="searchPackingSlips">
+                    <div class="row  text-left">
+                        <p class="text-danger" id="perfLabumberBlank" name="perfLabumberBlank" style="display:none">* Need performing lab</p>
+                        <div class="col-2">
+                            <label class="text-nowrap">Scan Operator Name:</label>
+                            @Html.TextAreaFor(m => m.PackSlipsModel.ScanOperator, new { @maxlength = "50", @rows = "1", @cols = "40", @class = "text-nowrap border", @placeholder = "Enter Scan Opeator " })
+                        </div>
+                    </div>
+
+                    <div class="row text-left">
+                        <div class="col">
+                            @Html.CheckBoxFor(m => m.PackSlipsModel.SearchPartial)
+                            <label class="text-nowrap">Scan Operator Name Starts With</label>
+                        </div>
+                    </div>
+
+                </form>
+                <p class="p-0" />
+                <div class="row">
+
+                    <div class="col" id="colPerLab">
+                        <button type="button" class="btn btn-outline-dark btn-block" id="btnSearchPS" name="btnSearchPS">Search Packing Slips</button>
+                    </div>
+                    <div class="col" ">
+                        <a class="btn btn-outline-warning btn-block btn-link" id="btnReset" href="/LabReqs/LookUpSendOutPackingSlipsView" name="btnReset" role="button">Reset</a>
+
+                    </div>
+                    <div class="col" ">
+                        <a class="btn btn-outline-danger btn-block btn-link" id="btnexit" href="/Index" name="btnexit" role="button">Exit</a>
+
+                    </div>
+
+                </div>
+                <p class="p-2"></p>
+            </div>@*end search options*@
+    </div>
+
+</div>
+@if ((@Model.IDicSendOutPackingSLips != null))
+{
+    <div id="divLabReqs" class="container-fluid">
+        <p class="text-left">Total Query Time @Model.TotalQueryTime</p>
+        <p class="p-0" />
+
+        <table class="table table-hover w-auto" width="100%" id="dtLabReqs">
+            <thead>
+                <tr>
+                    <th>File URL</th>
+                    <th>Date Of Service</th>
+                    <th>Scan Date</th>
+                    <th>Scan Operator</th>
+                    <th>Scan Batch ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var items in Model.IDicSendOutPackingSLips)
+                {
+
+                    <tr>
+
+                        <td> <a href="/Partial_Pages/DisplayPdfFilePartialView?pdfurl=@items.Value.FileUrl" target="_blank"><img src="~/Images/small_export-to-pdf-icon-pdf-export-toolbar-icon.png" width="20" height="25" /></a></td>
+                        <td>@items.Value.DateOfService.ToString("MM/dd/yyyy")</td>
+                        <td>@items.Value.ScanDate</td>
+                        <td>@items.Value.ScanOperator</td>
+                        <td>@items.Value.ScanBatch</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+}
+
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SessionExpireAlert(0);
+            $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+
+            });
+            if ($('#searchStartDate').val() != '') {
+                $('#checkboxSearchDates').css("display", "block");
+                $("#searchBydate").val('searchByLogDate');
+                $('#lDate').prop('checked', true);
+                $('#sDate').prop('checked', false);
+                //   $('#btnlookUpByDateofService').css("display", "block");
+            }
+            $("#divLoading").hide();
+            CompleteAjaxCall();
+            $('#searchStartDate').change(function () {
+
+                if ($('#searchEndDate').val() == '') {
+
+
+                    $('#checkboxSearchDates').css("display", "block");
+                    $("#searchBydate").val('searchByLogDate');
+
+                    //$("#searchBydate").val('searchByLogDate');
+                    $("#lDate").prop('checked', true);
+                    $('#colPerLab').css("display", "block");
+
+                }
+                GetSearchStartEndDate();
+
+            });
+
+
+            $(document).keypress(function (e) {
+                if (e.which == 13) {
+
+                    $('#btnSearchPS').click();
+                    return false;
+
+                }
+
+
+
+                return true;
+            });
+
+
+
+            $('#lDate').change(function () {
+                $("#searchBydate").val('searchByLogDate');
+                $('#sDate').prop('checked', false);
+
+            });
+            $('#sDate').change(function () {
+                $("#lDate").prop('checked', false);
+                $("#searchBydate").val('scanDate');
+
+            });
+            $('#searchEndDate').change(function () {
+
+                if ($('#searchStartDate').val() == '') {
+
+
+                    $('#checkboxSearchDates').css("display", "block");
+                    $("#searchBydate").val('searchByLogDate');
+
+                    //$("#searchBydate").val('searchByLogDate');
+                    $("#lDate").prop('checked', true);
+                    $('#colPerLab').css("display", "block");
+
+                }
+                CheckSearchStartDate();
+
+            });
+            $('#btnSearchPS').click(function () {
+                var message = "Looking up Send Out Packing Slip's ";
+                ShowLoadingDialog(message);
+                $("<input type='hidden'/>")
+                    .attr("value", $('#searchStartDate').val())
+                    .attr("id", "startSDate")
+                    .attr("name", "startSDate")
+                    .prependTo("#searchPackingSlips");
+                $("<input type='hidden'/>")
+                    .attr("value", $('#searchEndDate').val())
+                    .attr("id", "endSDate")
+                    .attr("name", "endSDate")
+                    .prependTo("#searchPackingSlips");
+
+                $("<input type='hidden'/>")
+                    .attr('value', $("#searchBydate").val())
+                    .attr("id", "searchby")
+                    .attr("name", "searchby")
+                    .prependTo("#searchPackingSlips");
+                //  $("<input type='hidden' />")
+                //    .attr('value', $("#scanOpcon").val())
+                //    .attr("id", "searchPartial")
+                //    .attr("name", "searchPartial")
+                //    .prependTo("#searchmaintlogs");
+
+                //   $("<input type='hidden' />")
+                //    .attr('value', $("#scanopr").val())
+                //     .attr("id", "searchbyScanOperator")
+                //.attr("name", "searchbyScanOperator")
+                //   .prependTo("#searchmaintlogs");
+                $("#searchPackingSlips").submit();
+            });
+        });
+    </script>
+}

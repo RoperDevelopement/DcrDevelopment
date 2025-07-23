@@ -1,0 +1,95 @@
+﻿
+<div class="container-fluid" id="printInvoice">
+    <div id="saveHtml">
+        <img align="left" src="{customerLogo}" style="margin:0 auto;width:250px;height:125px;" />
+        <img align="right" src="{edocslogo}" style="margin:0 auto;width:250px;height:125px;" />
+
+        <br />
+        <p class="p-4"></p>
+        <p class="p-4"></p>
+
+
+
+
+        <h2 style="text-align: right; font-size: medium">
+            Customer ID {EdocsCustomerID}
+
+        </h2>
+
+        <h4 style="text-align: left;font-size:medium">
+            EdocsCustomerName
+        </h4>
+        <h4 style="text-align: left; font-size: medium">
+            EdocsCustomerAddress
+        </h4>
+        <h4 style="text-align: left; font-size: medium">
+            EdocsCustomerCity, EdosCustomerState, EdocsCustomerZipCode
+        </h4>
+        <h4 style="text-align: left; font-size: medium">
+            Phone:EdocsCustomerPhoneNumber
+
+        </h4>
+        <h4 style="text-align: left; font-size: medium">
+            Email:{EdocsCustomerEmailAddress}
+        </h4>
+        <h3 class="text-center" style="font-size:medium">Documents Picked Up Date {PDate} </h3>
+        <p class="p-0"></p>
+
+
+        <div style="font-size:medium;margin-left:150px" class="align-content-center text-center">
+
+            <table class="table table-hover w-auto table-bordered  table-info" id="dtlScanningCost">
+                <thead>
+
+
+                    <tr class="w-auto" style="background-color:cornflowerblue; font-size: medium">
+                        <th class="border text-center">Tacking ID</th>
+                        <th class="border text-center">Sent By</th>
+                        <th class="border text-center">Date Sent</th>
+                        <th class="border text-center">Number Docs Sent</th>
+                        <th class="border text-center">Scan Type</th>
+                        <th class="border text-center">Delivery Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+
+                    {tableData}
+
+
+
+
+                </tbody>
+
+
+            </table>
+        </div>
+         
+        <p class="p-2"></p>
+        <h2 class="text-right" style="font-size:medium">Summary</h2>
+        
+        {invsum}
+        </p>
+        
+        <div class="text-center">
+            <p class="flex-nowrap" style="text-emphasis-color: blue; margin: 0; padding-top:0;">Thank you for your business!</p>
+            <p class="flex-nowrap" style="text-emphasis-color: blue; margin: 0; padding-top: 0;">If you have any questions about this, please contact</p>
+            <p class="flex-nowrap" style="text-emphasis-color:blue">EdocsFirstName EdocsLastName,EdocsEmailAddress,EdocsPhoneNumber</p>
+        </div>
+
+        <br />
+        <div style="font-size:medium;">
+            <h2 class="text-center" style="font-size:medium">Signature</h2>
+
+            <img align="left" src="{SignOff}" sstyle="margin:0; auto;width:150px;height:125px;" />
+        </div>
+        <p class="p-0"></p>
+
+
+
+
+
+
+    </div>
+    </div>

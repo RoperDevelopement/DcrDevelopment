@@ -1,0 +1,123 @@
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\database1.mdf
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\database1_log.ldf
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - COMPLIANCE LOGS.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - DR CODE.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - INVOICE.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - LAB REQS - ELECTRONIC ORDERING.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - LAB REQS.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - PUNCH FORMS.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - SENDOUT PACKING SLIPS.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - SENDOUT.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - DOH.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Command Readers\NYP - LAB REQS.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\SampleRecord.pdf
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Testing.exe.config
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Testing.exe
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Testing.pdb
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Clients.NYP.HIPAA.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Public.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.IO.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.Runtime.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.Threading.Tasks.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\EdocsUSA.Utilities.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\FreeImageNET.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\DTK.Barcode.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanquireLogin.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuireSqlCmds.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuire_SendEmails.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Clients.NYP.HIPAA.pdb
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Clients.NYP.HIPAA.dll.config
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Public.pdb
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Public.dll.config
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.IO.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.Runtime.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.Threading.Tasks.xml
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\EdocsUSA.Utilities.pdb
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\EdocsUSA.Utilities.dll.config
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanquireLogin.pdb
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanquireLogin.dll.config
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuireSqlCmds.pdb
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuireSqlCmds.dll.config
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuire_SendEmails.pdb
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuire_SendEmails.dll.config
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.csprojAssemblyReference.cache
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.exe.config
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.csproj.CoreCompileInputs.cache
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.csproj.CopyComplete
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.exe
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.pdb
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Tesseract.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Newtonsoft.Json.dll
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Newtonsoft.Json.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\x86\liblept1753.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\x86\libtesseract3052.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\x64\liblept1753.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\x64\libtesseract3052.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\database1.mdf
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\database1_log.ldf
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - COMPLIANCE LOGS.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - DR CODE.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - INVOICE.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - LAB REQS - ELECTRONIC ORDERING.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - LAB REQS.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - PUNCH FORMS.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - SENDOUT PACKING SLIPS.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - SENDOUT.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Archivers\NYP - DOH.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Config\Command Readers\NYP - LAB REQS.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\SampleRecord.pdf
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Testing.exe.config
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Testing.exe
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Testing.pdb
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.Extensions.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Newtonsoft.Json.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Clients.NYP.HIPAA.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.IO.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.Runtime.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.Threading.Tasks.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Tesseract.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\EdocsUSA.Utilities.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuireIndexing.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\FreeImageNET.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\DTK.Barcode.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.SharePoint.Client.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.SharePoint.Client.Runtime.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanquireLogin.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuireSqlCmds.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuire_SendEmails.dll
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Clients.NYP.HIPAA.pdb
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Clients.NYP.HIPAA.dll.config
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.Extensions.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Newtonsoft.Json.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Public.pdb
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\Scanquire.Public.dll.config
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.IO.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.Runtime.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\System.Threading.Tasks.xml
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\EdocsUSA.Utilities.pdb
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\EdocsUSA.Utilities.dll.config
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuireIndexing.pdb
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuireIndexing.dll.config
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanquireLogin.pdb
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanquireLogin.dll.config
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuireSqlCmds.pdb
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuireSqlCmds.dll.config
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuire_SendEmails.pdb
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\bin\x86\Debug\ScanQuire_SendEmails.dll.config
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.csprojAssemblyReference.cache
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.csproj.CoreCompileInputs.cache
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.csproj.CopyComplete
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.exe
+I:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.pdb
+L:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.csprojAssemblyReference.cache
+L:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Debug\Testing.csproj.CoreCompileInputs.cache

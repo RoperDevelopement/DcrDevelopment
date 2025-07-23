@@ -1,0 +1,71 @@
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.exe.config
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.exe
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.pdb
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.dll
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Public.dll
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Microsoft.Threading.Tasks.dll
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.pdb
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Microsoft.Threading.Tasks.xml
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.csprojResolveAssemblyReference.cache
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.exe
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.pdb
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Microsoft.SharePoint.Client.dll
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Microsoft.SharePoint.Client.Runtime.dll
+C:\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\EdocsUSA.Utilities.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.exe
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.pdb
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.exe.config
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.exe
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.pdb
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\EdocsUSA.Utilities.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Public.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Microsoft.Threading.Tasks.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.pdb
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.dll.config
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Microsoft.Threading.Tasks.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.csprojResolveAssemblyReference.cache
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.csproj.CoreCompileInputs.cache
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.exe.config
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.exe
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.pdb
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.dll
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Public.dll
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Microsoft.Threading.Tasks.dll
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.pdb
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.dll.config
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Microsoft.Threading.Tasks.xml
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.csprojAssemblyReference.cache
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.csproj.CoreCompileInputs.cache
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.csproj.CopyComplete
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.exe
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.pdb
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\database1.mdf
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\database1_log.ldf
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\database1.mdf
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\database1_log.ldf
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.exe.config
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.exe
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\SharepointBatchUploader.pdb
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\EdocsUSA.Utilities.dll
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.dll
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Public.dll
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Microsoft.Threading.Tasks.dll
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\FreeImageNET.dll
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Polenter.SharpSerializer.dll
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\DTK.Barcode.dll
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Newtonsoft.Json.dll
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\DTK.Image.dll
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.pdb
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Clients.NYP.dll.config
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Scanquire.Public.dll.config
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Microsoft.Threading.Tasks.xml
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Newtonsoft.Json.xml
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.csprojAssemblyReference.cache
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.csproj.CoreCompileInputs.cache
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.csproj.CopyComplete
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.exe
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\obj\Release\SharepointBatchUploader.pdb
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\EdocsUSA.Utilities.pdb
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Edocs.Logger.dll
+C:\Edocs\Scanquire.Clients.NYP\SharepointBatchUploader\bin\Release\Edocs.Logger.pdb

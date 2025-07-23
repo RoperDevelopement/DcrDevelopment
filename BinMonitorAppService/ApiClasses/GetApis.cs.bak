@@ -1,0 +1,1447 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using BinMonitorAppService.Models;
+using Newtonsoft;
+using Newtonsoft.Json;
+using BinMonitorAppService.Constants;
+using Microsoft.AspNetCore.Http;
+using BinMonitorAppService.Logging;
+namespace BinMonitorAppService.ApiClasses
+{
+    
+    public class GetApis
+    {
+        private static GetApis instance = null;
+        public static GetApis GetApisInctance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new GetApis();
+                return instance;
+            }
+        }
+        private GetApis()
+        {
+        }
+#pragma warning disable 1998
+        public async Task<IList<string>> ApiBins(string apiUrl, string sqlStoredProcedure, bool allBIns, ILog log)
+        {
+            IList<string> BinID = new List<string>();
+            try
+            {
+                log.LogInformation($"Method ApiBins weburl: {apiUrl} controller:{sqlStoredProcedure} all bins: {allBIns.ToString()}");
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sqlStoredProcedure}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiBins weburl: {apiUrl} controller:{sqlStoredProcedure} all bins: {allBIns.ToString()} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<BinModel[]>();
+                        readTask.Wait();
+                        List<string> tempList = (readTask.Result.Select(p => p.BinID).ToList());
+                        if (allBIns)
+                        {
+                            tempList.Add(" ");
+                            tempList.Sort();
+                        }
+                        BinID = tempList;
+                    }
+                    else
+                        throw new Exception($"Method ApiBins weburl: {apiUrl} controller:{sqlStoredProcedure} all bins: {allBIns.ToString()} results status code: {results.StatusCode}");
+                }
+
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiBins weburl: {apiUrl} controller:{sqlStoredProcedure} all bins: {allBIns.ToString()} {httpex.Message}");
+                throw new Exception($"Metod Method ApiBins weburl: {apiUrl} controller:{sqlStoredProcedure} all bins: {allBIns.ToString()} HttpRequestException {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiBins weburl: {apiUrl} controller:{sqlStoredProcedure} all bins: {allBIns.ToString()} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiBins weburl: {apiUrl} controller:{sqlStoredProcedure} all bins: {allBIns.ToString()} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiBins weburl: {apiUrl} controller:{sqlStoredProcedure} all bins: {allBIns.ToString()}  {ex.Message}");
+                throw new Exception($"ExceptionMethod ApiBins weburl: {apiUrl} controller:{sqlStoredProcedure} all bins: {allBIns.ToString()} {ex.Message}");
+            }
+            return BinID;
+        }
+        public async Task<IList<string>> ApiGetActiveBinsID(string apiUrl, string sqlStoredProcedure, ILog log)
+        {
+            IList<string> BinID = new List<string>();
+            try
+            {
+                log.LogInformation($"Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure}");
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sqlStoredProcedure}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<BinRegProcessModel[]>();
+                        readTask.Wait();
+                        List<string> tempList = (readTask.Result.Select(p => p.BinID).ToList());
+                        tempList.Add(" ");
+                        tempList.Sort();
+                        tempList.Sort();
+                        BinID = tempList;
+                    }
+                    else
+                        throw new Exception($"Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {httpex.Message}");
+                throw new Exception($"Metod  HttpRequestException Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {ag.Message}");
+                throw new Exception($"ArgumentNullException  Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {ex.Message}");
+                throw new Exception($"Exception Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {ex.Message}");
+            }
+            return BinID;
+        }
+
+
+        public async Task<IList<string>> ApiGetActiveBinUsers(string apiUrl, string controller, ILog log)
+        {
+            List<string> cwid = new List<string>();
+
+            try
+            {
+                log.LogInformation($"Method ApiGetActiveBinsID weburl: {apiUrl} controller: {controller}");
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{controller}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiGetActiveBinsID weburl: {apiUrl} controller: {controller} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<CwidModel[]>();
+                        readTask.Wait();
+                        if (readTask.Result.Length > 0)
+                            cwid = readTask.Result.Select(p => p.Cwid).ToList();
+                        cwid.Insert(0, "All Cwid");
+                        // cwid.Sort();
+
+                    }
+                    else
+                        throw new Exception($"Method ApiGetActiveBinsID weburl: {apiUrl} controller: {controller} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiGetActiveBinsID weburl: {apiUrl} controller: {controller} {httpex.Message}");
+                throw new Exception($"Metod  HttpRequestException Method ApiGetActiveBinsID weburl: {apiUrl} controller: {controller} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiGetActiveBinsID weburl: {apiUrl} controller: {controller} {ag.Message}");
+                throw new Exception($"ArgumentNullException  Method ApiGetActiveBinsID weburl: {apiUrl} controller: {controller} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiGetActiveBinsID weburl: {apiUrl} controller: {controller} {ex.Message}");
+                throw new Exception($"Exception Method ApiGetActiveBinsID weburl: {apiUrl} controller: {controller} {ex.Message}");
+            }
+            return cwid;
+        }
+
+        public async Task<int> GetAddTime(string apiUrl, string sp, ILog log, ISession session)
+        {
+            log.LogInformation($"Method GetAddTime weburl: {apiUrl} controller: {sp}");
+            string defTime = "-5";
+            string addTime = GetSessionVariables.SessionVarInstance.GetSessionVariable(session, SqlConstants.CachAddTime).ConfigureAwait(false).GetAwaiter().GetResult();
+            if (string.IsNullOrWhiteSpace(addTime))
+            {
+                SpectrumMonitorSettings monitorSettings = GetSpecumMonitorSettigs(apiUrl, sp, log).ConfigureAwait(false).GetAwaiter().GetResult();
+                if (monitorSettings != null)
+                {
+                    defTime = monitorSettings.AddDateTime.ToString();
+                    GetSessionVariables.SessionVarInstance.SetSessionOjbjectAsJson(session, SqlConstants.CachAddTime, defTime).ConfigureAwait(false).GetAwaiter().GetResult();
+                    log.LogInformation($"Method GetAddTime time set to {defTime}");
+                }
+            }
+            if (int.TryParse(defTime, out var result))
+            {
+                return result;
+            }
+            return int.Parse(defTime.ToString());
+        }
+        public async Task<SpectrumMonitorSettings> GetSpecumMonitorSettigs(string apiUrl, string sp, ILog log)
+        {
+
+            SpectrumMonitorSettings monitorSettings = new SpectrumMonitorSettings();
+
+            try
+            {
+                log.LogInformation($"Method GetSpecumMonitorSettigs weburl: {apiUrl} controller: {sp}");
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method GetSpecumMonitorSettigs weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<SpectrumMonitorSettings[]>();
+                        readTask.Wait();
+                        if (readTask.Result != null)
+                            monitorSettings = readTask.Result[0];
+                        else
+                        {
+
+                            throw new Exception($"No SpectrumMonitorSettings found retuned for apiurlL{apiUrl} for sp:{sp} return code:{results.StatusCode.ToString()}");
+                        }
+                    }
+                    else
+                    {
+
+                        throw new Exception($"No SpectrumMonitorSettings found retuned for apiurlL{apiUrl} for sp:{sp} return code:{results.StatusCode.ToString()}");
+                    }
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method GetSpecumMonitorSettigs weburl: {apiUrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"Metod   GetSpecumMonitorSettigs weburl: {apiUrl} controller: {sp} HttpRequestException {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method GetSpecumMonitorSettigs weburl: {apiUrl} controller: {sp} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method GetSpecumMonitorSettigs weburl: {apiUrl} controller: {sp} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method GetSpecumMonitorSettigs weburl: {apiUrl} controller: {sp} {ex.Message}");
+                throw new Exception($"Exception Method GetSpecumMonitorSettigs weburl: {apiUrl} controller: {sp} {ex.Message}");
+            }
+            return monitorSettings;
+        }
+
+        public async Task<IList<string>> ApiGetIList(string apiUrl, string sqlStoredProcedure, ILog log)
+        {
+            IList<string> BinID = new List<string>();
+            try
+            {
+                log.LogInformation($"Method ApiGetIList weburl: {apiUrl} controller: {sqlStoredProcedure}");
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sqlStoredProcedure}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiGetIList weburl: {apiUrl} controller: {sqlStoredProcedure} results status code:{results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<List<string>>();
+                        readTask.Wait();
+                        BinID = readTask.Result;
+                    }
+                    else
+                        throw new Exception($"Method ApiGetIList weburl: {apiUrl} controller: {sqlStoredProcedure} results status code:{results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiGetIList weburl: {apiUrl} controller: {sqlStoredProcedure}  {httpex.Message}");
+                throw new Exception($"Metod  HttpRequestException Method ApiGetIList weburl: {apiUrl} controller: {sqlStoredProcedure}  {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiGetIList weburl: {apiUrl} controller: {sqlStoredProcedure}  {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiGetIList weburl: {apiUrl} controller: {sqlStoredProcedure}  {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiGetIList weburl: {apiUrl} controller: {sqlStoredProcedure} {ex.Message}");
+                throw new Exception($"Exception {ex.Message}");
+            }
+            return BinID;
+        }
+
+
+        public async Task<IDictionary<string, BinRegProcessModel>> ApiActiveBins(string apiUrl, string sp, bool toList, ILog log)
+        {
+            IDictionary<string, BinRegProcessModel> binRegPro = null;
+            try
+            {
+
+
+                log.LogInformation($"Method ApiGetIList weburl: {apiUrl} controller: {sp} to list: {toList.ToString()}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiGetIList weburl: {apiUrl} controller: {sp} to list: {toList.ToString()} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+
+                        var readTask = results.Content.ReadAsAsync<BinRegProcessModel[]>();
+                        readTask.Wait();
+                        if (toList)
+                        {
+                            binRegPro = new Dictionary<string, BinRegProcessModel>();
+                            IDictionary<Guid, BinRegProcessModel> binRegProList = readTask.Result.ToDictionary(p => p.BatchID);
+                            List<string> binId = readTask.Result.Select(p => p.BinID).ToList();
+                            binId = binId.Distinct().ToList();
+                            foreach (string id in binId)
+                            {
+                                List<Guid> array = binRegProList.Where(x => x.Value.BinID == id).Select(p => p.Key).ToList();
+                                if (array.Count > 0)
+                                {
+
+                                    if (binRegProList.TryGetValue(array[0], out BinRegProcessModel model))
+                                    {
+
+                                        binRegPro.Add(id, model);
+                                    }
+
+
+                                }
+                            }
+                        }
+                        else
+                            binRegPro = readTask.Result.ToDictionary(p => p.BinID);
+
+
+
+                    }
+                    else
+                        throw new Exception($"Method ApiGetIList weburl: {apiUrl} controller: {sp} to list: {toList.ToString()} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiGetIList weburl: {apiUrl} controller: {sp} to list: {toList.ToString()} {httpex.Message}");
+                throw new Exception($"Metod Method ApiGetIList weburl: {apiUrl} controller: {sp} to list: {toList.ToString()} HttpRequestException {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiGetIList weburl: {apiUrl} controller: {sp} to list: {toList.ToString()} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiGetIList weburl: {apiUrl} controller: {sp} to list: {toList.ToString()} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiGetIList weburl: {apiUrl} controller: {sp} to list: {toList.ToString()} {ex.Message}");
+                throw new Exception($"Exception Method ApiGetIList weburl: {apiUrl} controller: {sp} to list: {toList.ToString()} {ex.Message}");
+            }
+            return binRegPro;
+        }
+
+
+
+        public async Task<IDictionary<string, BinRegProcessModel>> ApiActiveBinsByBatchId(string apiUrl, string sp, bool convertToList, ILog log)
+        {
+            IDictionary<string, BinRegProcessModel> binRegPro = null;
+            try
+            {
+
+
+                log.LogInformation($"Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list: {convertToList.ToString()}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list: {convertToList.ToString()} results stats code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+
+                        var readTask = results.Content.ReadAsAsync<BinRegProcessModel[]>();
+                        readTask.Wait();
+                        binRegPro = readTask.Result.ToDictionary(p => p.BatchID.ToString());
+
+
+
+                    }
+                    else
+                        throw new Exception($"Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list: {convertToList.ToString()} results stats code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list: {convertToList.ToString()} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list: {convertToList.ToString()}  {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list: {convertToList.ToString()} results stats code:  {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list: {convertToList.ToString()} results stats code:  {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list: {convertToList.ToString()} results stats code:  {ex.Message}");
+                throw new Exception($"Exception Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list: {convertToList.ToString()} results stats code: {ex.Message}");
+            }
+            return binRegPro;
+        }
+        public async Task<BinRegProcessModel> ApiActiveBinsModel(string apiUrl, string sp, ILog log)
+        {
+            BinRegProcessModel binRegPro = new BinRegProcessModel();
+            try
+            {
+                log.LogInformation($"Method ApiActiveBinsModel weburl: {apiUrl} controller: {sp}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiActiveBinsModel weburl: {apiUrl} controller: {sp} results code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<BinRegProcessModel[]>();
+                        readTask.Wait();
+                        if (readTask.Result.Length > 0)
+                            binRegPro = readTask.Result[0];
+                        else
+                            log.LogWarning($"Method ApiActiveBinsModel weburl: {apiUrl} controller: {sp} no results for BinRegProcessModel ");
+
+                    }
+                    else
+                    {
+                        throw new Exception($"Method ApiActiveBinsModel weburl: {apiUrl} controller: {sp} no results results code {results.StatusCode} ");
+                    }
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"Method ApiActiveBinsModel HttpRequestException  weburl: {apiUrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"Metod ApiOpenBins HttpRequestException {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"Method ApiActiveBinsModel ArgumentNullException  weburl: {apiUrl} controller: {sp} {ag.Message}");
+                throw new Exception($"Metod ApiOpenBins ArgumentNullException {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Method ApiActiveBinsModel Exception  weburl: {apiUrl} controller: {sp} {ex.Message}");
+                throw new Exception($"Method ApiOpenBins bin id {ex.Message}");
+            }
+            return binRegPro;
+
+        }
+
+        public async Task<IDictionary<string, BinRegProcessModel>> ApiGetActiveBinsModel(string apiUrl, string sp, string dicIndex, ILog log)
+        {
+            log.LogInformation($"Getting ApiGetActiveBinsModel model for apiurlL{apiUrl} for sp:{sp}");
+            IDictionary<string, BinRegProcessModel> binRegPro = new Dictionary<string, BinRegProcessModel>();
+            try
+            {
+
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+
+                    if (results.IsSuccessStatusCode)
+                    {
+
+                        var readTask = results.Content.ReadAsAsync<BinRegProcessModel[]>();
+                        readTask.Wait();
+                        if (readTask.Result.Length > 0)
+                        {
+                            if (string.Compare(dicIndex, SqlConstants.BinRegProcessMondelIndexLabReq, true) == 0)
+                            {
+                                binRegPro = readTask.Result.ToDictionary(p => p.LabRecNumber);
+                            }
+                            else if (string.Compare(dicIndex, SqlConstants.BinRegProcessMondelIndexBatchId, true) == 0)
+                                binRegPro = readTask.Result.ToDictionary(p => p.BatchID.ToString());
+                            else if (string.Compare(dicIndex, SqlConstants.BinRegProcessMondelIndexBinID, true) == 0)
+                                binRegPro = readTask.Result.ToDictionary(p => p.BinID);
+                            
+                            else
+                                throw new Exception($"Invalid index {dicIndex}");
+                        }
+
+                        else
+                            log.LogWarning($"No active bins retuned for apiurlL{apiUrl} for sp:{sp}");
+                    }
+                    else
+                    {
+                        log.LogWarning($"Return status code :{results.StatusCode.ToString()} for url {apiUrl} for sp:{sp}");
+                        throw new Exception($"Return status code :{results.StatusCode.ToString()} for url {apiUrl} for sp:{sp}");
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                log.LogError($"For url {apiUrl} for sp:{sp} {ex.Message}");
+                throw new Exception($"For url {apiUrl} for sp:{sp} {ex.Message}");
+            }
+            return binRegPro;
+        }
+        public async Task<CategoryCheckPointEmailModel> ApiCategoryCheckPoint(string apiUrl, string sp, ILog log)
+        {
+            CategoryCheckPointEmailModel cp = new CategoryCheckPointEmailModel();
+            try
+            {
+
+
+                log.LogInformation($"Method ApiCategoryCheckPoint weburl: {apiUrl} controller: {sp}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiCategoryCheckPoint weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<CategoryCheckPointEmailModel[]>();
+                        readTask.Wait();
+                        if (readTask.Result.Length > 0)
+                            cp = readTask.Result[0];
+                    }
+                    else
+                        throw new Exception($"Method ApiCategoryCheckPoint weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiCategoryCheckPoint weburl: {apiUrl} controller: {sp}  {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiCategoryCheckPoint weburl: {apiUrl} controller: {sp}  {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiCategoryCheckPoint weburl: {apiUrl} controller: {sp}  {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiCategoryCheckPoint weburl: {apiUrl} controller: {sp}  {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiCategoryCheckPoint weburl: {apiUrl} controller: {sp}  {ex.Message}");
+                throw new Exception($"Exception Method ApiCategoryCheckPoint weburl: {apiUrl} controller: {sp}  {ex.Message}");
+            }
+            return cp;
+        }
+
+        public async Task<EmailReportModel> ApiEmailReportModel(string apiUrl, string sp, ILog log)
+        {
+
+            EmailReportModel ERM = new EmailReportModel();
+            try
+            {
+                log.LogInformation($"Method ApiEmailReportModel weburl: {apiUrl} controller: {sp}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiEmailReportModel weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+
+                        var readTask = results.Content.ReadAsAsync<EmailReportModel[]>();
+                        readTask.Wait();
+
+                        if (readTask.Result.Length > 0)
+                            ERM = readTask.Result[0];
+                    }
+                    else
+                        throw new Exception($"Method ApiEmailReportModel weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiEmailReportModel weburl: {apiUrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiEmailReportModel weburl: {apiUrl} controller: {sp} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiEmailReportModel weburl: {apiUrl} controller: {sp} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiEmailReportModel weburl: {apiUrl} controller: {sp} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiEmailReportModel weburl: {apiUrl} controller: {sp} {ex.Message}");
+                throw new Exception($"Exception Method ApiEmailReportModel weburl: {apiUrl} controller: {sp} {ex.Message}");
+            }
+            return ERM;
+        }
+
+
+        public async Task<IList<string>> ApiUserInfo(string sp, string webApiWrl, ILog log)
+        {
+            IList<string> UserInfo = null;
+            try
+            {
+
+
+                log.LogInformation($"Method ApiUserInfo weburl: {webApiWrl} controller: {sp}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{webApiWrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiUserInfo weburl: {webApiWrl} controller: {sp} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                      
+                        var readTask = results.Content.ReadAsAsync<UsersModel[]>();
+                        readTask.Wait();
+                        //     List<string> tempUserList = readTask.Result.Where(p => !(p.EmailAddress.ToLower().Contains("edocs"))).Select(p => p.FirstName + " " + p.LastName).ToList();
+                        //  List<string> tempUserList = readTask.Result.Where(p => !(p.EmailAddress.ToLower().Contains("edocs"))).Select(p => p.EmailAddress).ToList();
+                        List<string> tempUserList = readTask.Result.Where(p => !(p.Cwid.ToLower().StartsWith("dar9229"))).Select(p => p.EmailAddress).ToList();
+                        tempUserList.Add("  ");
+                        tempUserList.Sort();
+                        UserInfo = tempUserList;
+
+                        //UserFirstLastName = readTask.Result.Select(p => p.FirstName + " " + p.LastName).ToList();
+                        //LassignedBy = readTask.Result.Where(p => !(p.EmailAddress.ToLower().Contains("edocs"))).Select(p => p.FirstName + " " + p.LastName).ToList();
+
+                        //LassignedTo = LassignedBy;
+                        //CategoryName = readTask.Result.Where(p => !(p.CategoryName.ToLower().Contains("edocs"))).Select(p => p.CategoryName).ToList();
+
+                    }
+                    else
+                        throw new Exception($"Method ApiUserInfo weburl: {webApiWrl} controller: {sp} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {ex.Message}");
+                throw new Exception($"Exception Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {ex.Message}");
+            }
+            return UserInfo;
+        }
+
+        public async Task<UsersModel> ApiUserProfileInfo(string sp, string webApiWrl, ILog log)
+        {
+            UsersModel UserInfo = null;
+            try
+            {
+                log.LogInformation($"Method ApiUserProfileInfo weburl: {webApiWrl} controller: {sp}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{webApiWrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiUserProfileInfo weburl: {webApiWrl} controller: {sp} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<UsersModel[]>();
+                        readTask.Wait();
+                        if (readTask.Result.Length > 0)
+                            UserInfo = readTask.Result[0];
+
+                    }
+                    else
+                        throw new Exception($"Method ApiUserProfileInfo weburl: {webApiWrl} controller: {sp} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiUserProfileInfo weburl: {webApiWrl} controller: {sp}  {httpex.Message}");
+                throw new Exception($"HttpRequestException  Method ApiUserProfileInfo weburl: {webApiWrl} controller: {sp}  {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiUserProfileInfo weburl: {webApiWrl} controller: {sp}  {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiUserProfileInfo weburl: {webApiWrl} controller: {sp}  {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiUserProfileInfo weburl: {webApiWrl} controller: {sp}  {ex.Message}");
+                throw new Exception($"Exception Method ApiUserProfileInfo weburl: {webApiWrl} controller: {sp}  {ex.Message}");
+            }
+            return UserInfo;
+        }
+
+        public async Task<BinRegistorModel> ConvertBinRegProcessModelToBinRegistorModel(BinRegProcessModel binRegProcessModel, string repProcCloseBatch)
+
+        {
+            BinRegistorModel binRegistorModel = new BinRegistorModel();
+            binRegistorModel.BinProcessBinModel = new BinProcessBinModel();
+            binRegistorModel.BinsClosedModel = new BinsClosedModel();
+            Task.Factory.StartNew(async () =>
+            {
+
+                binRegistorModel.BinID = binRegProcessModel.BinID;
+                binRegistorModel.BatchID = binRegProcessModel.BatchID;
+                binRegistorModel.BinComments = binRegProcessModel.BinComments;
+                binRegistorModel.RegAssignedTo = binRegProcessModel.RegAssignedTo;
+                binRegistorModel.RegCompletedAt = binRegProcessModel.RegCompletedAt;
+                binRegistorModel.RegCompletedBy = binRegProcessModel.RegCompletedBy;
+                binRegistorModel.RegAssignedBy = binRegProcessModel.RegAssignedBy;
+                binRegistorModel.BinContents = binRegProcessModel.BinContents;
+                binRegistorModel.CategoryName = binRegProcessModel.CategoryName;
+                binRegistorModel.RegAssignedBy = binRegProcessModel.RegAssignedBy;
+
+                binRegistorModel.RegCreatedBy = binRegProcessModel.RegCreatedBy;
+                binRegistorModel.RegStartedAt = binRegProcessModel.RegStartedAt;
+                binRegistorModel.RegProcesClose = repProcCloseBatch;
+                binRegistorModel.BinProcessBinModel.ProcessAssignedBy = binRegProcessModel.ProcessAssignedBy;
+                binRegistorModel.BinProcessBinModel.ProcessAssignedTo = binRegProcessModel.ProcessAssignedTo;
+                binRegistorModel.BinProcessBinModel.ProcessCompletedAt = binRegProcessModel.ProcessCompletedAt;
+                binRegistorModel.BinProcessBinModel.ProcessCompletedBy = binRegProcessModel.ProcessCompletedBy;
+                binRegistorModel.BinProcessBinModel.ProcessStartAt = binRegProcessModel.ProcessStartAt;
+
+                binRegistorModel.BinsClosedModel.BinClosedBy = binRegProcessModel.BinClosedBy;
+                binRegistorModel.BinsClosedModel.BinCompletedAt = binRegProcessModel.BinCompletedAt;
+                binRegistorModel.BinsClosedModel.ClosedCreatedAt = binRegProcessModel.ClosedCreatedAt;
+                binRegistorModel.LabRecNumber = binRegProcessModel.LabRecNumber;
+            }).Wait();
+            return binRegistorModel;
+        }
+
+        public async Task<IList<string>> ApiCategories(string sp, string apiUrl, ILog log,bool insertBlank)
+        {
+            IList<string> CategoryName = null;
+            try
+            {
+
+
+                log.LogInformation($"Method ApiCategories weburl: {apiUrl} controller: {sp}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiCategories weburl: {apiUrl} controller: {sp} results status code:{results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<CategoryIdName[]>();
+                        readTask.Wait();
+
+                        //CategoryName = readTask.Result.Where(p=>!(p.CategoryName.ToLower().Contains("edocs"))).Select(p => p.CategoryName).ToList();
+                        List<string> tempList = readTask.Result.Select(p => p.CategoryName).ToList();
+                        if(insertBlank)
+                       tempList.Add("  ");
+                        tempList.Sort();
+                        //CategoryName = readTask.Result.Select(p => p.CategoryName).ToList();
+                        CategoryName = tempList;
+
+
+
+                    }
+                    else
+                        throw new Exception($"Method ApiCategories weburl: {apiUrl} controller: {sp} results status code:{results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiCategories weburl: {apiUrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiCategories weburl: {apiUrl} controller: {sp} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiCategories weburl: {apiUrl} controller: {sp} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiCategories weburl: {apiUrl} controller: {sp} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiCategories weburl: {apiUrl} controller: {sp} {ex.Message}");
+                throw new Exception($"Exception Method ApiCategories weburl: {apiUrl} controller: {sp} {ex.Message}");
+            }
+            return CategoryName;
+
+
+        }
+
+        public async Task ApiCreateUpdateBatch(BinRegProcessModel binRegistorProcModel, string webApiUrl, string regProcessBatch, ILog log)
+        {
+            try
+            {
+
+
+                log.LogInformation($"Method ApiCreateUpdateBatch weburl: {webApiUrl} controller: {SqlConstants.ApiCreateBatch} {regProcessBatch} regProcessBatch: {regProcessBatch}");
+                using (var client = new HttpClient())
+                {
+                    BinRegistorModel binRegistorModel = await GetApis.GetApisInctance.ConvertBinRegProcessModelToBinRegistorModel(binRegistorProcModel, regProcessBatch);
+                    client.BaseAddress = new Uri($"{webApiUrl}");
+                    var jsonString = JsonConvert.SerializeObject(binRegistorModel);
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+                    var responseTask = client.PostAsync($"{client.BaseAddress.AbsoluteUri}{SqlConstants.ApiCreateBatch}", content);
+                    responseTask.Wait();
+                    var result = await client.PostAsync("Method Address", content);
+                    string resultContent = await result.Content.ReadAsStringAsync();
+                    var results = responseTask.Result;
+                    content.Dispose();
+                    log.LogInformation($"Method ApiCreateUpdateBatch weburl: {webApiUrl} controller: SqlConstants.ApiCreateBatch {regProcessBatch} regProcessBatch: {regProcessBatch} results status code: {result.StatusCode}");
+                    if (!(results.IsSuccessStatusCode))
+                    {
+                        throw new Exception($"Method ApiCreateUpdateBatch weburl: {webApiUrl} controller: SqlConstants.ApiCreateBatch {regProcessBatch} regProcessBatch: {regProcessBatch} results status code: {result.StatusCode}");
+
+
+
+                    }
+
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiCreateUpdateBatch weburl: {webApiUrl} controller: SqlConstants.ApiCreateBatch {regProcessBatch} regProcessBatch: {regProcessBatch} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiCreateUpdateBatch weburl: {webApiUrl} controller: SqlConstants.ApiCreateBatch {regProcessBatch} regProcessBatch: {regProcessBatch} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiCreateUpdateBatch weburl: {webApiUrl} controller: SqlConstants.ApiCreateBatch {regProcessBatch} regProcessBatch: {regProcessBatch} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiCreateUpdateBatch weburl: {webApiUrl} controller: SqlConstants.ApiCreateBatch {regProcessBatch} regProcessBatch: {regProcessBatch} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiCreateUpdateBatch weburl: {webApiUrl} controller: SqlConstants.ApiCreateBatch {regProcessBatch} regProcessBatch: {regProcessBatch} {ex.Message}");
+                throw new Exception($"Exception Method ApiCreateUpdateBatch weburl: {webApiUrl} controller: SqlConstants.ApiCreateBatch {regProcessBatch} regProcessBatch: {regProcessBatch} {ex.Message}");
+            }
+
+        }
+
+        public async Task<IDictionary<string, CategoryColorModel>> ApiCategoriesColors(string sp, string apiUrl, bool keyID, ILog log)
+        {
+            IDictionary<string, CategoryColorModel> CategoryName = null;
+            try
+            {
+
+
+                log.LogInformation($"Method ApiCategoriesColors weburl: {apiUrl} controller: {sp} keyid: {keyID.ToString()}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiCategoriesColors weburl: {apiUrl} controller: {sp} keyid: {keyID.ToString()} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+
+                        //var readTask1 = results.Content.ReadAsStringAsync();
+                        //readTask1.Wait();
+                        var readTask = results.Content.ReadAsAsync<CategoryColorModel[]>();
+                        readTask.Wait();
+                        if (keyID)
+                            CategoryName = readTask.Result.ToDictionary(p => p.CategorId);
+                        else
+                            CategoryName = readTask.Result.ToDictionary(p => p.CategoryName);
+                    }
+
+                    else
+                        throw new Exception($"Method ApiCategoriesColors weburl: {apiUrl} controller: {sp} keyid: {keyID.ToString()} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException  Method ApiCategoriesColors weburl: {apiUrl} controller: {sp} keyid: {keyID.ToString()} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiCategoriesColors weburl: {apiUrl} controller: {sp} keyid: {keyID.ToString()} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiCategoriesColors weburl: {apiUrl} controller: {sp} keyid: {keyID.ToString()} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiCategoriesColors weburl: {apiUrl} controller: {sp} keyid: {keyID.ToString()} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiCategoriesColors weburl: {apiUrl} controller: {sp} keyid: {keyID.ToString()} {ex.Message}");
+                throw new Exception($"Exception Method ApiCategoriesColors weburl: {apiUrl} controller: {sp} keyid: {keyID.ToString()} {ex.Message}");
+            }
+            return CategoryName;
+
+
+        }
+
+        public async Task<IDictionary<string, CategoryColorCodesModel>> ApiCategoriesColorsCodes(string sp, string apiUrl, ILog log)
+        {
+            IDictionary<string, CategoryColorCodesModel> CategoryName = null;
+            try
+            {
+                log.LogInformation($"Method ApiCategoriesColorsCodes weburl: {apiUrl} controller: {sp}");
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiCategoriesColorsCodes weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<CategoryColorCodesModel[]>();
+                        readTask.Wait();
+
+                        CategoryName = readTask.Result.ToDictionary(p => p.ColorCodeId);
+
+                    }
+                    else
+                        throw new Exception($"Method ApiCategoriesColorsCodes weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiCategoriesColorsCodes weburl: {apiUrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiCategoriesColorsCodes weburl: {apiUrl} controller: {sp} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiCategoriesColorsCodes weburl: {apiUrl} controller: {sp} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiCategoriesColorsCodes weburl: {apiUrl} controller: {sp} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiCategoriesColorsCodes weburl: {apiUrl} controller: {sp} {ex.Message}");
+                throw new Exception($"Exception Method ApiCategoriesColorsCodes weburl: {apiUrl} controller: {sp} {ex.Message}");
+            }
+            return CategoryName;
+        }
+
+        public async Task<IDictionary<string, CategoriesModel>> ApiGetCategoriesTotal(string sp, string apiUrl,ILog log)
+        {
+            IDictionary<string, CategoriesModel> CategoryName = null;
+            try
+            {
+                log.LogInformation($"Method ApiGetCategoriesTotal weburl: {apiUrl} controller: {sp}");
+            
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri($"{apiUrl}");
+                var responseTask = client.GetAsync($"{sp}");
+                responseTask.Wait();
+                var results = responseTask.Result;
+                    log.LogInformation($"Method ApiGetCategoriesTotal weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                {
+                    var readTask = results.Content.ReadAsAsync<CategoriesModel[]>();
+                    readTask.Wait();
+                    CategoryName = readTask.Result.ToDictionary(p => p.CategoryName);
+                }
+                    else
+                        throw new Exception($"Method ApiGetCategoriesTotal weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiGetCategoriesTotal weburl: {apiUrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiGetCategoriesTotal weburl: {apiUrl} controller: {sp} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiGetCategoriesTotal weburl: {apiUrl} controller: {sp} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiGetCategoriesTotal weburl: {apiUrl} controller: {sp} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiGetCategoriesTotal weburl: {apiUrl} controller: {sp}  {ex.Message}");
+                throw new Exception($"Exception Method ApiGetCategoriesTotal weburl: {apiUrl} controller: {sp} {ex.Message}");
+            }
+            return CategoryName;
+        }
+        public async Task<CategoryCheckPointEmailModel> ApiGetCategoriesDurations(string sp, string apiUrl,ILog log)
+        {
+            CategoryCheckPointEmailModel categoryCheckPointModel = new CategoryCheckPointEmailModel();
+            try
+            {
+                log.LogInformation($"Method ApiGetCategoriesDurations weburl: {apiUrl} controller: {sp}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiGetCategoriesDurations weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        
+                            var k = results.Content.ReadAsStringAsync();
+                            k.Wait();
+                            var readTask = results.Content.ReadAsAsync<CategoryCheckPointEmailModel[]>();
+                            readTask.Wait();
+
+                            if (readTask.Result.Length > 0)
+                                categoryCheckPointModel = readTask.Result[0];
+                        
+                    }
+                    else
+                        throw new Exception($"Method ApiGetCategoriesDurations weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiGetCategoriesDurations weburl: {apiUrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiGetCategoriesDurations weburl: {apiUrl} controller: {sp} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiGetCategoriesDurations weburl: {apiUrl} controller: {sp} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiGetCategoriesDurations weburl: {apiUrl} controller: {sp} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiGetCategoriesDurations weburl: {apiUrl} controller: {sp} {ex.Message}");
+                throw new Exception($"Exception Method ApiGetCategoriesDurations weburl: {apiUrl} controller: {sp} {ex.Message}");
+            }
+            return categoryCheckPointModel;
+        }
+#pragma warning disable 1998
+        public async Task<CategoryCheckPointModel> ApiGetCategoriesCheckPointModel(string sp, string apiUrl,ILog log)
+        {
+            CategoryCheckPointModel categoryCheckPointModel = new CategoryCheckPointModel();
+            try
+            {
+                log.LogInformation($"Method ApiGetCategoriesCheckPointModel weburl: {apiUrl} controller: {sp}");
+            
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri($"{apiUrl}");
+                var responseTask = client.GetAsync($"{sp}");
+                responseTask.Wait();
+                var results = responseTask.Result;
+                    log.LogInformation($"Method ApiGetCategoriesCheckPointModel weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                {
+                    
+                    //    var k = results.Content.ReadAsStringAsync();
+                      //  k.Wait();
+                        var readTask = results.Content.ReadAsAsync<CategoryCheckPointModel[]>();
+                        readTask.Wait();
+
+                        if (readTask.Result.Length > 0)
+                            categoryCheckPointModel = readTask.Result[0];
+                }
+                    else
+                        throw new Exception($"Method ApiGetCategoriesCheckPointModel weburl: {apiUrl} controller: {sp} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiGetCategoriesCheckPointModel weburl: {apiUrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiGetCategoriesCheckPointModel weburl: {apiUrl} controller: {sp} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiGetCategoriesCheckPointModel weburl: {apiUrl} controller: {sp} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiGetCategoriesCheckPointModel weburl: {apiUrl} controller: {sp} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiGetCategoriesCheckPointModel weburl: {apiUrl} controller: {sp} {ex.Message}");
+                throw new Exception($"Exception Method ApiGetCategoriesCheckPointModel weburl: {apiUrl} controller: {sp} {ex.Message}");
+            }
+            return categoryCheckPointModel;
+        }
+        public async Task<IDictionary<string, BinRegProcessModel>> ApiActiveByBinIDModel(string apiUrl, string sp, ILog log)
+        {
+            IDictionary<string, BinRegProcessModel> binRegPro = new Dictionary<string, BinRegProcessModel>();
+            try
+            {
+                log.LogInformation($"Method ApiActiveBinsModel weburl: {apiUrl} controller: {sp}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiActiveBinsModel weburl: {apiUrl} controller: {sp} results code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<BinRegProcessModel[]>();
+                        readTask.Wait();
+                        if (readTask.Result.Length > 0)
+                            binRegPro = readTask.Result.ToDictionary(p => p.BatchID.ToString());
+                        else
+                            log.LogWarning($"Method ApiActiveBinsModel weburl: {apiUrl} controller: {sp} no results for BinRegProcessModel ");
+
+                    }
+                    else
+                    {
+                        throw new Exception($"Method ApiActiveBinsModel weburl: {apiUrl} controller: {sp} no results results code {results.StatusCode} ");
+                    }
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"Method ApiActiveBinsModel HttpRequestException  weburl: {apiUrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"Metod ApiOpenBins HttpRequestException {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"Method ApiActiveBinsModel ArgumentNullException  weburl: {apiUrl} controller: {sp} {ag.Message}");
+                throw new Exception($"Metod ApiOpenBins ArgumentNullException {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Method ApiActiveBinsModel Exception  weburl: {apiUrl} controller: {sp} {ex.Message}");
+                throw new Exception($"Method ApiOpenBins bin id {ex.Message}");
+            }
+            return binRegPro;
+
+        }
+        public async Task<IDictionary<string, BinRegProcessModel>> ApiGetActiveBinsID(ILog log,string apiUrl, string sqlStoredProcedure)
+        {
+            IDictionary<string, BinRegProcessModel> binRegPro = new Dictionary<string, BinRegProcessModel>();
+            try
+            {
+                log.LogInformation($"Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure}");
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{sqlStoredProcedure}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<BinRegProcessModel[]>();
+                        readTask.Wait();
+                        binRegPro = readTask.Result.ToDictionary(p => p.BatchID.ToString());
+
+                    }
+                    else
+                        throw new Exception($"Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {httpex.Message}");
+                throw new Exception($"Metod  HttpRequestException Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {ag.Message}");
+                throw new Exception($"ArgumentNullException  Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {ex.Message}");
+                throw new Exception($"Exception Method ApiGetActiveBinsID weburl: {apiUrl} controller: {sqlStoredProcedure} {ex.Message}");
+            }
+            return binRegPro;
+        }
+
+        public async Task<IDictionary<string, SpectrumUsageReportsModel>> ApiUsageReports(string apiUrl, string sp, string controller,string cwid, string binStatus,
+                        DateTime repStDate,DateTime repEDate, ILog log)
+        {
+            IDictionary<string, SpectrumUsageReportsModel> usageRep = null;
+            try
+            {
+
+
+                log.LogInformation($"Method ApiUsageReports weburl: {apiUrl} controller: {controller} sp {sp} cwid {cwid} bin status {binStatus} st date {repStDate} end date {repEDate}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    string strRepStDate = repStDate.ToString("MM-dd-yyyy").Replace("//", "\\");
+                    string strRepEDate = repEDate.ToString("MM-dd-yyyy").Replace("//", "\\");
+                    var responseTask = client.GetAsync($"{controller}{cwid}/{binStatus}/{strRepStDate}/{strRepEDate}/{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiUsageReports weburl: {apiUrl} controller: {controller} sp {sp} cwid {cwid} bin status {binStatus} st date {repStDate} end date {repEDate} results stats code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+
+                        var readTask = results.Content.ReadAsAsync<SpectrumUsageReportsModel[]>();
+                        readTask.Wait();
+                        usageRep = readTask.Result.ToDictionary(p => p.BinID);
+
+
+
+                    }
+                    else
+                        throw new Exception($"Method ApiUsageReports weburl: {apiUrl} controller: {controller} sp {sp} cwid {cwid} bin status {binStatus} st date {repStDate} end date {repEDate} results stats code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiUsageReports weburl: {apiUrl} controller: {controller} sp {sp} cwid {cwid} bin status {binStatus} st date {repStDate} end date {repEDate} {httpex.Message}");
+                throw new Exception($"HttpRequestException  Method ApiUsageReports weburl: {apiUrl} controller: {controller} sp {sp} cwid {cwid} bin status {binStatus} st date {repStDate} end date {repEDate} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException   weburl:Method ApiUsageReports weburl: {apiUrl} controller: {controller} sp {sp} cwid {cwid} bin status {binStatus} st date {repStDate} end date {repEDate} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiUsageReports weburl: {apiUrl} controller: {controller} sp {sp} cwid {cwid} bin status {binStatus} st date {repStDate} end date {repEDate} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiUsageReports weburl: {apiUrl} controller: {controller} sp {sp} cwid {cwid} bin status {binStatus} st date {repStDate} end date {repEDate}  {ex.Message}");
+                throw new Exception($"Exception Method ApiUsageReports weburl: {apiUrl} controller: {controller} sp {sp} cwid {cwid} bin status {binStatus} st date {repStDate} end date {repEDate} {ex.Message}");
+            }
+            return usageRep;
+        }
+
+        public async Task<IDictionary<string, LabReqsDeletedModel>> ApiDeletedLabReqsReports(string apiUrl, string sp, string controller,string binStatus,
+                       DateTime repStDate, DateTime repEDate, ILog log)
+        {
+            IDictionary<string, LabReqsDeletedModel> delLRecRep = null;
+            try
+            {
+                log.LogInformation($"Method LabReqsDeletedModel weburl: {apiUrl} controller: {controller} sp {sp}   bin status {binStatus} st date {repStDate} end date {repEDate}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    string strRepStDate = repStDate.ToString("MM-dd-yyyy").Replace("//", "\\");
+                    string strRepEDate = repEDate.ToString("MM-dd-yyyy").Replace("//", "\\");
+                    var responseTask = client.GetAsync($"{controller}/{strRepStDate}/{strRepEDate}/{sp}/{binStatus}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method LabReqsDeletedModel weburl: {apiUrl} controller: {controller} sp {sp}   bin status {binStatus} st date {repStDate} end date {repEDate} results stats code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+
+                        var readTask = results.Content.ReadAsAsync<LabReqsDeletedModel[]>();
+                        readTask.Wait();
+                        delLRecRep = readTask.Result.ToDictionary(p => p.BatchId.ToString());
+
+
+
+                    }
+                    else
+                        throw new Exception($"Method LabReqsDeletedModel weburl: {apiUrl} controller: {controller} sp {sp}   bin status {binStatus} st date {repStDate} end date {repEDate} results stats code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method LabReqsDeletedModel weburl: {apiUrl} controller: {controller} sp {sp}   bin status {binStatus} st date {repStDate} end date {repEDate} {httpex.Message}");
+                throw new Exception($"HttpRequestException  Method LabReqsDeletedModel weburl: {apiUrl} controller: {controller} sp {sp}   bin status {binStatus} st date {repStDate} end date {repEDate} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException   weburl:Method LabReqsDeletedModel weburl: {apiUrl} controller: {controller} sp {sp}  bin status {binStatus} st date {repStDate} end date {repEDate} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method LabReqsDeletedModel weburl: {apiUrl} controller: {controller} sp {sp}   bin status {binStatus} st date {repStDate} end date {repEDate} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method LabReqsDeletedModel weburl: {apiUrl} controller: {controller} sp {sp}   bin status {binStatus} st date {repStDate} end date {repEDate}  {ex.Message}");
+                throw new Exception($"Exception Method LabReqsDeletedModel weburl: {apiUrl} controller: {controller} sp {sp}   bin status {binStatus} st date {repStDate} end date {repEDate} {ex.Message}");
+            }
+            return delLRecRep;
+        }
+
+        public async Task<IList<BinRegProcessModel>> GetSpecLabReq(string apiUrl, string controller, string sp, DateTime sDate, DateTime eDate, string labReqNum, ILog log)
+        {
+            IList<BinRegProcessModel> binRegPro = null;
+            try
+            {
+
+
+                log.LogInformation($"Method GetSpecLabReq weburl: {apiUrl} controller: {controller} sp {sp} labreqnum {labReqNum} date range {sDate}-{eDate}");
+                using (var client = new HttpClient())
+                {
+                    string repEDate = eDate.ToString("MM-dd-yyyy");
+                    string repSDate = sDate.ToString("MM-dd-yyyy");
+                    client.BaseAddress = new Uri($"{apiUrl}");
+
+                    var responseTask = client.GetAsync($"{controller}{labReqNum}/{repSDate.Replace("/", "-")}/{repEDate.Replace("/", "-")}/{sp}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method GetSpecLabReq weburl: {apiUrl} controller: {controller} sp {sp} labreqnum {labReqNum} date range {sDate}-{eDate} results stats code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+
+                        var readTask = results.Content.ReadAsAsync<BinRegProcessModel[]>();
+                        readTask.Wait();
+                        binRegPro = readTask.Result.ToList();
+
+
+
+                    }
+                    else
+                        throw new Exception($"Method GetSpecLabReq weburl: {apiUrl} controller: {controller} sp {sp} labreqnum {labReqNum} date range {sDate}-{eDate} results stats code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method GetSpecLabReq weburl: {apiUrl} controller: {controller} sp {sp} labreqnum {labReqNum} date range {sDate}-{eDate} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method GetSpecLabReq weburl: {apiUrl} controller: {controller} sp {sp} labreqnum {labReqNum} date range {sDate}-{eDate}  {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method GetSpecLabReq weburl: {apiUrl} controller: {controller} sp {sp} labreqnum {labReqNum} date range {sDate}-{eDate} results stats code:  {ag.Message}");
+                throw new Exception($"ArgumentNullException Method GetSpecLabReq weburl: {apiUrl} controller: {controller} sp {sp} labreqnum {labReqNum} date range {sDate}-{eDate} results stats code:  {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method GetSpecLabReq weburl: {apiUrl} controller: {controller} sp {sp} labreqnum {labReqNum} date range {sDate}-{eDate} results stats code:  {ex.Message}");
+                throw new Exception($"Exception Method GetSpecLabReq weburl: {apiUrl} controller: {controller} sp {sp} labreqnum {labReqNum} date range {sDate}-{eDate} results stats code: {ex.Message}");
+            }
+            return binRegPro;
+        }
+        public async Task<IList<string>> ApiUsersByCwid(string sp, string webApiWrl, ILog log, string listTop)
+        {
+            IList<string> UserInfo = null;
+            try
+            {
+
+
+                log.LogInformation($"Method ApiUserInfo weburl: {webApiWrl} controller: {sp}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{webApiWrl}");
+                    var responseTask = client.GetAsync($"{sp}");
+                    responseTask.Wait();
+
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiUserInfo weburl: {webApiWrl} controller: {sp} results status code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+
+                        var readTask = results.Content.ReadAsAsync<UsersModel[]>();
+                        readTask.Wait();
+                        //     List<string> tempUserList = readTask.Result.Where(p => !(p.EmailAddress.ToLower().Contains("edocs"))).Select(p => p.FirstName + " " + p.LastName).ToList();
+                        //  List<string> tempUserList = readTask.Result.Where(p => !(p.EmailAddress.ToLower().Contains("edocs"))).Select(p => p.EmailAddress).ToList();
+                        List<string> tempUserList = readTask.Result.Where(p => !(p.Cwid.ToLower().StartsWith("dar9229"))).Select(p => p.Cwid).ToList();
+                        //tempUserList.Add("  ");
+                        tempUserList.Sort();
+                        if (!(string.IsNullOrWhiteSpace(listTop)))
+                            tempUserList.Insert(0, listTop);
+                        UserInfo = tempUserList;
+
+                        //UserFirstLastName = readTask.Result.Select(p => p.FirstName + " " + p.LastName).ToList();
+                        //LassignedBy = readTask.Result.Where(p => !(p.EmailAddress.ToLower().Contains("edocs"))).Select(p => p.FirstName + " " + p.LastName).ToList();
+
+                        //LassignedTo = LassignedBy;
+                        //CategoryName = readTask.Result.Where(p => !(p.CategoryName.ToLower().Contains("edocs"))).Select(p => p.CategoryName).ToList();
+
+                    }
+                    else
+                        throw new Exception($"Method ApiUserInfo weburl: {webApiWrl} controller: {sp} results status code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {ex.Message}");
+                throw new Exception($"Exception Method ApiUserInfo weburl: {webApiWrl} controller: {sp} {ex.Message}");
+            }
+            return UserInfo;
+        }
+        public async Task<IDictionary<string, BinRegProcessModel>> ApiReportByCwid(string apiUrl, string cwid, string binStatus, string sp, DateTime sDate, DateTime eDate, string categoryName, ILog log)
+        {
+            IDictionary<string, BinRegProcessModel> binRegPro = null;
+            try
+            {
+
+
+                log.LogInformation($"Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} ");
+                using (var client = new HttpClient())
+                {
+                    string repSDate = sDate.ToString("MM-dd-yyyy");
+                    string repEDate = eDate.ToString("MM-dd-yyyy");
+                    client.BaseAddress = new Uri($"{apiUrl}");
+                    var responseTask = client.GetAsync($"{cwid}/{binStatus}/{sp}/{repSDate.Replace("/", "-")}/{repEDate.Replace("/", "-")}/{categoryName}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to  results stats code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask1 = results.Content.ReadAsStringAsync();
+                        readTask1.Wait();
+                        var readTask = results.Content.ReadAsAsync<BinRegProcessModel[]>();
+                        readTask.Wait();
+                        binRegPro = readTask.Result.ToDictionary(p => p.BatchID.ToString());
+
+
+
+                    }
+                    else
+                        throw new Exception($"Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list:  results stats code: {results.StatusCode}");
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"HttpRequestException Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list: {httpex.Message}");
+                throw new Exception($"HttpRequestException Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list:    {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"ArgumentNullException Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list:  results stats code:  {ag.Message}");
+                throw new Exception($"ArgumentNullException Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list:   results stats code:  {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Exception Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list:  results stats code:  {ex.Message}");
+                throw new Exception($"Exception Method ApiActiveBinsByBatchId weburl: {apiUrl} controller: {sp} to list:   results stats code: {ex.Message}");
+            }
+            return binRegPro;
+        }
+    }
+}
+

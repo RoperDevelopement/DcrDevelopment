@@ -1,0 +1,12 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQPhotoAlbumFilesystemArchiver, Scanquire.Public, Version=1.0.4835.22149, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="RootPath" value="C:\Archives\Photo\" />
+    <Null name="ScannerName" />
+    <Null name="ScannerSetting" />
+    <Simple name="CommandReaderName" value="DEFAULT" />
+    <Simple name="DocumentBuilderName" value="DEFAULT" />
+    <Simple name="FileWriterName" value="DEFAULT" />
+    <Simple name="TextImageBuilderName" value="DEFAULT" />
+    <Simple name="BookmarkImageBuilderName" value="DEFAULT" />
+  </Properties>
+</Complex>

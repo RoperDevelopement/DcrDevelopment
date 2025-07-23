@@ -1,0 +1,130 @@
+﻿<Complex name="Root" type="Edocs.Dillion.VCC.Archiver.VCCArchiver,Edocs.Dillion.VCC.Archiver">
+
+
+  <!--
+  <Complex name="Root" type="Edocs.Dillion.VCC.Archiver.DillionVCCArchiver,Edocs.Dillion.VCC.Archiver">
+<Complex name="Root" type="EdocsUSA.Scanquire.Clients.AcadiaDemo.ArcadaArchiver,EdocsUSA.Scanquire.Clients.AcadiaDemo">
+-->
+  <Properties>
+    <Simple name="DisPlayArchiverName" value="VCC Archiver"/>
+    <Simple name="IncludeBlankDocs" value="false" />
+    <Simple name="ShowTotalDocsScanned" value="true"/>
+    <Simple name="SaveRootPath" value="D:\Archives\VCC\" />
+    <Simple name="UpLoadFolder" value="D:\VCC\UpLoaded" />
+    <Simple name="InventoryTrackingApiUrl" value="http://localhost:5555/api/" />
+    <Simple name="InventoryTrackingSP" value="arcBSB" />
+    <Simple name="BSBProdDepUploadApiUrl" value="http://localhost:25100/api/" />
+    <Simple name="BSBProdDepUpLoadController" value="UpLoadBSBProDepRecords" />
+    <Simple name="ShowCmdWindow" value="true" />
+    <Simple name="UploadExe" value="d:\Archives\UploadArchiverBatches\Edocs.Upload.Archiver.exe" />
+    <Simple name="UploadExeParms" value="/batchid:{0} /af:{1} /archiver:{2}" />
+    <Simple name="LCROCROutPutFolder" value="D:\VCC\JPG" />
+    <Simple name="LCROCRExe" value="Edocs.Icr.Ocr.Google\Edocs.Icr.Ocr.Google.exe" />
+    <Simple name="LCROCRExeParms" value="/mt:{0} /pdfimg:{1} /of:{2}" />
+    <Simple name="LCROCRMineType" value="image/png" />
+    <Simple name="EdocsCustomerID" value="1001" />
+    <Simple name="ArchiverValues" value="address|permit owner|contractor|zone|code|Date Permit|ExcPermit|own|con" />
+    <Simple name="OrgImage" value="address|permit owner|contractor|zone|code|Date Permit|ExcPermit|own|con" />
+    <Simple name="ProcessWaitForExit" value="false" />
+    <Simple name="ChurchCity" value="ChurchCity.txt" />
+    <Simple name="Church" value="Church.txt" />
+    <Simple name="BookType" value="BookType.txt" />
+    <Simple name="CreateJpgImg" value="false" />
+    <Simple name="SqlConnection" value="Server=DCR;Database=EdocsITS;User=edocsusa;PassWord=6746edocs@;MultipleActiveResultSets=true;Integrated Security=false;Connection Timeout=30;" />
+    
+
+
+
+
+    <Simple name="EdocsCustomerID" value="1001" />
+
+    <Simple name="ShowConfirmDialogBox" value="false" />
+    <Simple name="OCRApiKey" value="OCRP8398898A" />
+    <Simple name="OCRWebApi" value="https://apipro1.ocr.space/parse/image" />
+    <Simple name="OCRISTable" value="True" />
+
+    <!--
+    <Simple name="AzureShareName" value="ITS/e-DocsITS" />
+    -->
+    <Complex name="FilesystemConnector">
+      <Properties>
+        <Simple name="RootPath" value="d:\Archives\MDTPDFFiles\" />
+        <Simple name="ExistingFileAction" value="AskUser" />
+        <!--
+        <Simple name="VersionPrefix" value="" />
+        <Simple name="VersionPadding" value="" />
+        -->
+        <Simple name="AddVersionInfoToPrimaryVersion" value="false" />
+        <Complex name="OpenFileDialog">
+          <Properties>
+            <Simple name="CheckFileExists" value="True" />
+            <Simple name="Multiselect" value="True" />
+            <Simple name="ReadOnlyChecked" value="False" />
+            <Simple name="ShowReadOnly" value="False" />
+            <Simple name="AddExtension" value="True" />
+            <Simple name="CheckPathExists" value="True" />
+            <Simple name="DefaultExt" value="" />
+            <Simple name="DereferenceLinks" value="True" />
+            <Simple name="FileName" value="" />
+            <Simple name="Filter" value="" />
+            <Simple name="FilterIndex" value="1" />
+            <Simple name="InitialDirectory" value="" />
+            <Simple name="RestoreDirectory" value="True" />
+            <Simple name="ShowHelp" value="False" />
+            <Simple name="SupportMultiDottedExtensions" value="False" />
+            <Simple name="Title" value="" />
+            <Simple name="ValidateNames" value="True" />
+            <Simple name="AutoUpgradeEnabled" value="True" />
+            <Null name="Tag" />
+            <Null name="Site" />
+          </Properties>
+        </Complex>
+        <Simple name="OpenFileDialogRememberLastDirectory" value="True" />
+        <Complex name="SaveFileDialog">
+          <Properties>
+            <Simple name="CreatePrompt" value="False" />
+            <Simple name="OverwritePrompt" value="False" />
+            <Simple name="AddExtension" value="True" />
+            <Simple name="CheckFileExists" value="False" />
+            <Simple name="CheckPathExists" value="True" />
+            <Simple name="DefaultExt" value="" />
+            <Simple name="DereferenceLinks" value="True" />
+            <Simple name="FileName" value="" />
+            <Simple name="Filter" value="" />
+            <Simple name="FilterIndex" value="1" />
+            <Simple name="InitialDirectory" value="" />
+            <Simple name="RestoreDirectory" value="True" />
+            <Simple name="ShowHelp" value="False" />
+            <Simple name="SupportMultiDottedExtensions" value="False" />
+            <Simple name="Title" value="" />
+            <Simple name="ValidateNames" value="True" />
+            <Simple name="AutoUpgradeEnabled" value="True" />
+            <Null name="Tag" />
+            <Null name="Site" />
+          </Properties>
+        </Complex>
+        <Simple name="SaveFileDialogRememberLastDirectory" value="True" />
+        <Complex name="FolderBrowserDialog">
+          <Properties>
+            <Simple name="ShowNewFolderButton" value="True" />
+            <Simple name="SelectedPath" value="" />
+            <Simple name="RootFolder" value="Desktop" />
+            <Simple name="Description" value="" />
+            <Null name="Tag" />
+            <Null name="Site" />
+          </Properties>
+        </Complex>
+      </Properties>
+    </Complex>
+    <!--
+    <Complex name="Log" type="EdocsUSA.Utilities.Logging.CsvFileDictionaryLogger, EdocsUSA.Utilities">
+       -->
+
+
+    <Simple name="ScannerName" value="CamDS"/>
+    <Simple name="ScannerSetting" value="" />
+    <Simple name="CommandReaderName" value="DEFAULT" />
+    <Simple name="FileWriterName" value="PDF"/>
+<Simple name="CommandImageBuilderName" value="DEFAULT"/>
+  </Properties>
+</Complex>

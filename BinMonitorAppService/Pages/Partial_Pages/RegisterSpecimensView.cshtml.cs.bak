@@ -1,0 +1,204 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
+using BinMonitorAppService.Models;
+using System.ComponentModel.DataAnnotations;
+using BinMonitorAppService.Constants;
+using BinMonitorAppService.ApiClasses;
+using BinMonitorAppService.Logging;
+namespace BinMonitorAppService.Pages.Partial_Pages
+{
+    public class RegisterSpecimensViewModel : PageModel
+    {
+        private readonly IConfiguration configuration;
+        private ILog auditLogs;
+
+        private string WebApiUrl
+        { get { return configuration.GetValue<string>("BinMonitorApi").ToString(); } }
+        public SpectrumMonitorMenuRightsModel SpectrumMonitorMenuRightsModel
+        { get; set; }
+        [BindProperty]
+        public IDictionary<string, BinRegProcessModel> BeginRegModel
+        { get; set; }
+        [BindProperty]
+        public IDictionary<string, BinRegProcessModel> CompleteRegModel
+        { get; set; }
+        [BindProperty]
+        public IDictionary<string, BinRegProcessModel> BeginProcessModel
+        { get; set; }
+        [BindProperty]
+        public IDictionary<string, BinRegProcessModel> CompleteProcessModel
+        { get; set; }
+        [BindProperty]
+        public IDictionary<string, BinRegProcessModel> BeginBothModel
+        { get; set; }
+        [BindProperty]
+        public IDictionary<string, BinRegProcessModel> CloseBatch
+        { get; set; }
+        public IList<string> BinModels
+        { get; set; }
+
+        public IList<string> AvaibleBins
+        { get; set; }
+        public string ModelName
+        { get; set; }
+
+       
+        public int TimeAdd
+        { get; set; }
+        public IList<string> ProcessAssignedTo
+        { get; set; }
+        public RegisterSpecimensViewModel(IConfiguration config, ILog logConfig)
+        {
+            configuration = config;
+            auditLogs = logConfig;
+        }
+        private async Task GetLogInformaiton()
+        {
+
+            auditLogs = InitAuditLogs.LogAsync(auditLogs, HttpContext.Session).ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+        public async Task<ActionResult> OnGetAsync(string bindID)
+        {
+            try
+            {
+
+                ViewData["CWID"] = await GetSessionVariables.SessionVarInstance.GetSessionVariable(HttpContext.Session, GetSessionVariables.SessionKeyCwid);
+                if (ViewData["CWID"] == null)
+                    return Redirect("/BinUsers/LoginView");
+
+                string totalQueryTime = string.Empty;
+                InitAuditLogs.StartStopWatch();
+                GetLogInformaiton().ConfigureAwait(false).GetAwaiter().GetResult();
+                auditLogs.LogInformation("Start RegisterSpecimensViewModel");
+                SpectrumMonitorMenuRightsModel = ApiSetUserProfile.UserProfileInstance.GetBMMenuRights(User.Identity.Name, HttpContext.Session, auditLogs, WebApiUrl).ConfigureAwait(false).GetAwaiter().GetResult();
+                GetViewData().ConfigureAwait(true).GetAwaiter().GetResult();
+                string url = WebApiUrl;
+                var qString = Request.QueryString;
+                string modelName = string.Empty;
+                if (qString.HasValue)
+                {
+                    auditLogs.LogInformation($"LookUpDrCodesViewModel query string {qString.Value}");
+                    if (string.IsNullOrWhiteSpace(bindID))
+                    {
+                        modelName = Request.Query["modelName"].ToString();
+                        auditLogs.LogInformation($"LookUpDrCodesViewModel model name: {modelName}");
+                    }
+                    else
+                    {
+                        modelName = "searchbinbyid";
+                        auditLogs.LogInformation($"LookUpDrCodesViewModel model name: {modelName} for bin id {bindID}");
+                    }
+
+                }
+                if (string.Compare(modelName, "beginProcessing", true) == 0)
+                {
+                    ModelName = "beginProcessing";
+                    auditLogs.LogInformation($"RegisterSpecimensViewModel model name: {ModelName} weburl: {url} controller: {SqlConstants.WebApiBinMonitor}{SqlConstants.SpCompleteRegBinsModel}");
+
+
+                    BeginProcessModel = await GetApis.GetApisInctance.ApiActiveBins($"{url}", $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SpCompleteRegBinsModel}", true, auditLogs);
+                    ProcessAssignedTo = GetApis.GetApisInctance.ApiUsersByCwid(SqlConstants.ApiUserInfo, WebApiUrl, auditLogs, string.Empty).ConfigureAwait(false).GetAwaiter().GetResult();
+
+                }
+                else if (string.Compare(modelName, "binsStatus", true) == 0)
+                {
+                    ModelName = "binsStatus";
+                   
+                  //  CurrentUtcTime =   DateTime.UtcNow.AddHours(-4);
+                    auditLogs.LogInformation($"RegisterSpecimensViewModel model name: {ModelName} weburl: {url} controller: {SqlConstants.WebApiBinMonitor}{SqlConstants.SpCompleteRegBinsModel}");
+                    BeginProcessModel = GetApis.GetApisInctance.ApiGetActiveBinsModel($"{url}{SqlConstants.WebApiBinMonitor}", SqlConstants.SpGetActiveBinsModel, SqlConstants.BinRegProcessMondelIndexBatchId, auditLogs).ConfigureAwait(false).GetAwaiter().GetResult();
+                  //  TimeAdd = GetAddTime().ConfigureAwait(false).GetAwaiter().GetResult();
+                }
+
+                else if (string.Compare(modelName, "beginRegistration", true) == 0)
+                {
+                    ModelName = "beginRegistration";
+                    auditLogs.LogInformation($"RegisterSpecimensViewModel model name: {ModelName} weburl: {url} controller: {SqlConstants.WebApiBinMonitor}{SqlConstants.ApiOpenBins}");
+                    BeginRegModel = await GetApis.GetApisInctance.ApiActiveBins($"{url}", $"{SqlConstants.WebApiBinMonitor}{SqlConstants.ApiOpenBins}", true, auditLogs);
+                    // BeginRegModel = await GetApis.GetApisInctance.ApiActiveBins($"{url}", $"{SqlConstants.WebApiBinMonitor}{SqlConstants.ApiGetAllBinIds}");
+                }
+
+                else if (string.Compare(modelName, "completeRegistration", true) == 0)
+                {
+                    ModelName = "completeRegistration";
+                    auditLogs.LogInformation($"RegisterSpecimensViewModel model name: {ModelName} weburl: {url} controller: {SqlConstants.WebApiBinMonitor}{SqlConstants.SpCompleteRegBinsModel}");
+                    CompleteRegModel = await GetApis.GetApisInctance.ApiActiveBins($"{url}", $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SpCompleteRegBinsModel}", true, auditLogs);
+                }
+                else if (string.Compare(modelName, "completeProcessing", true) == 0)
+                {
+                    ModelName = "completeProcessing";
+                    auditLogs.LogInformation($"RegisterSpecimensViewModel model name: {ModelName} weburl: {url} controller: {SqlConstants.WebApiBinMonitor}{SqlConstants.SpCompleteProcessModel}");
+                    CompleteProcessModel = await GetApis.GetApisInctance.ApiActiveBins($"{url}", $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SpCompleteProcessModel}", true, auditLogs);
+                }
+                else if (string.Compare(modelName, "StProcCloseReg", true) == 0)
+                {
+                    ModelName = "StProcCloseReg";
+                    auditLogs.LogInformation($"RegisterSpecimensViewModel model name: {ModelName} weburl: {url} controller: {SqlConstants.WebApiBinMonitor}{SqlConstants.SpCompleteRegStartProcessingBinsModel}");
+                    BeginBothModel = await GetApis.GetApisInctance.ApiActiveBins($"{url}", $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SpCompleteRegStartProcessingBinsModel}", true, auditLogs);
+                }
+                else if (string.Compare(modelName, "closeBatch", true) == 0)
+                {
+                    ModelName = "closeBatch";
+                    auditLogs.LogInformation($"RegisterSpecimensViewModel model name: {ModelName} weburl: {url} controller: {SqlConstants.WebApiBinMonitor}{SqlConstants.SpNotClosedModel}");
+                    CloseBatch = await GetApis.GetApisInctance.ApiActiveBins($"{url}", $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SpNotClosedModel}", true, auditLogs);
+                }
+                else if (string.Compare(modelName, "transFrom", true) == 0)
+                {
+                    ModelName = "transFrom";
+                    auditLogs.LogInformation($"RegisterSpecimensViewModel model name: {ModelName} weburl: {url} controller: {SqlConstants.WebApiBinMonitor}{SqlConstants.ApiActiveBinsModel}");
+                    BinModels = await GetApis.GetApisInctance.ApiBins(url, SqlConstants.ApiActiveBinsModel, false, auditLogs);
+                    BinModels = BinModels.Distinct().ToList();
+                    auditLogs.LogInformation($"LookUpDrCodesViewModel model name: {ModelName} weburl: {url} controller: {SqlConstants.WebApiBinMonitor}{SqlConstants.ApiOpenBins}");
+                    AvaibleBins = await GetApis.GetApisInctance.ApiBins(url, SqlConstants.ApiOpenBins, false, auditLogs);
+                }
+                else if (string.Compare(modelName, "searchbinbyid", true) == 0)
+                {
+                    ModelName = "binsStatus";
+                    auditLogs.LogInformation($"RegisterSpecimensViewModel model name: {ModelName} for biun id {bindID} weburl: {url} controller: {SqlConstants.WebApiBinMonitor}{SqlConstants.SpCompleteRegBinsModel}");
+                    string sp = $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SpGetActiveBinsModelByBinId}/{bindID}";
+                    BeginProcessModel = await GetApis.GetApisInctance.ApiActiveByBinIDModel(WebApiUrl, sp, auditLogs);
+                    //  BeginProcessModel = await GetApis.GetApisInctance.ApiActiveBinsModel(WebApiUrl, sp, );
+                }
+
+                else
+                {
+                    throw new Exception("Model Not Found for method RegisterSpecimensViewModel");
+                }
+
+
+
+                // CloseBatch = await GetApis.GetApisInctance.ApiActiveBins($"{url}", $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SpNotClosedModel}");
+
+                auditLogs.LogInformation($"End RegisterSpecimensViewModel total time: {InitAuditLogs.StopStopWatch()} ms");
+
+
+            }
+            catch (Exception ex)
+            {
+                auditLogs.LogError($"End RegisterSpecimensViewModel total time: {InitAuditLogs.StopStopWatch()} ms {ex.Message}");
+                return Redirect($"/BinUsers/DisplayErrorMessagesView?ErrMEss=Model RegisterSpecimensViewModel OnGetAsync {ex.Message}");
+
+
+            }
+            return Page();
+        }
+        private async Task<int> GetAddTime()
+        {
+          return await GetApis.GetApisInctance.GetAddTime(WebApiUrl, $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SPGetSpecSettings}", auditLogs, HttpContext.Session);
+          
+        }
+        private async Task GetViewData()
+        {
+            ViewData[SqlConstants.ViewDataChangeCategories] = SpectrumMonitorMenuRightsModel.Categories;
+            ViewData[SqlConstants.ViewDataEmailReports] = SpectrumMonitorMenuRightsModel.EmailReports;
+            ViewData[SqlConstants.ViewDataRunReports] = SpectrumMonitorMenuRightsModel.RunReports;
+
+        }
+
+    }
+}

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <StartArguments>/batchid:91160513-8ecd-4a0b-903a-20d81bb0d0b2</StartArguments>
+    <RemoteDebugEnabled>true</RemoteDebugEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <StartArguments>/batchid:15374c08-70d9-4543-a2d3-188023b1ae01</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>/batchid:ab6502a6-7aad-4cce-9f53-2027f20f7469</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartArguments>/batchid:6c880ce8-e9b5-454b-8d85-4d766a529e7a</StartArguments>
+  </PropertyGroup>
+</Project>

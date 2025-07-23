@@ -1,0 +1,1 @@
+# Edocs.Check.Scanquire.LogFIle

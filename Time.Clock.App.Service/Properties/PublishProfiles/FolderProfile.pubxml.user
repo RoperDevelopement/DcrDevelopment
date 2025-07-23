@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\EdocsTimeClockAppService</_PublishTargetUrl>
+    <History>True|2022-08-05T14:22:56.8469254Z;True|2022-08-03T15:19:38.2524897-06:00;True|2022-08-03T15:18:22.3057890-06:00;True|2022-08-03T15:16:59.8682564-06:00;True|2022-08-01T14:41:54.7721650-06:00;</History>
+  </PropertyGroup>
+</Project>

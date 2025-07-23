@@ -1,0 +1,17 @@
+﻿<Complex name="Root" type="Scanquire.Clients.NYP.DohCommandReader,  Scanquire.Clients.NYP.HIPAA">
+  <Properties>
+    <Simple name="BarcodeReaderName" value="DEFAULT" />
+    <Dictionary name="IndexFieldDefinitions">
+      <Items>
+        <Item>
+          <Simple value="AccessionNumber" />
+          <SingleArray>
+            <Items>
+              <Simple value="\d+"/>  
+            </Items>
+          </SingleArray>
+        </Item>
+      </Items>
+    </Dictionary>
+  </Properties>
+</Complex>

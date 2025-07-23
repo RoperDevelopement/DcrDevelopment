@@ -1,0 +1,349 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.TrackingSystemReports.ITSReportsByProjectViewModel
+@{
+    ViewData["Title"] = "ITS Reports By Project Name";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        .CellWithComment {
+            position: relative;
+        }
+
+        .CellComment {
+            display: none;
+            position: absolute;
+            z-index: 100;
+            border: 1px;
+            background-color: white;
+            border-style: solid;
+            border-width: 1px;
+            border-color: red;
+            padding: 3px;
+            color: red;
+            top: 20px;
+            left: 20px;
+        }
+
+        .CellWithComment:hover span.CellComment {
+            display: block;
+        }
+
+        input[type=text] {
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+
+        button:hover {
+            background: #C0C0C0;
+        }
+
+        button {
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 15px;
+            border: 1px solid grey;
+            border-left: none;
+            cursor: pointer;
+        }
+
+        .align-right {
+            text-align: right;
+            border: 0;
+        }
+    </style>
+}
+<div id="divMain" name="divMain" class="container-fluid">
+    @Html.AntiForgeryToken()
+    <h2 class="text-center text-dark">e-Docs USA Tracking System Reports By Document Name</h2>
+    <p class="p-0"></p>
+    <a href="#searchOptions" name="sOptions" id="sOptions" class=" btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+    <p class="alert-light" id="showmess" style="display:none">Click to expand/hide Search Options</p>
+    <p class="p-1" />
+    <div id="searchOptions" class="collapse">
+        <div class="container-fluid">
+
+            <form id="fRep" name="fRep" method="get">
+
+                <table class="table table-bordered tablecenter">
+                    <thead>
+                        <tr>
+                            <th class="text-center">@Html.LabelFor(model => Model.RepStartDate)</th>
+                            <th class="text-center">@Html.LabelFor(model => Model.RepEndDate)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">
+                                <p style="display:none" id="repErSDate" name="repERSDate" class="alert-danger">Scan Start Date Required</p>
+
+                                @Html.EditorFor(m => @Model.RepStartDate, new { @name = "RepStartDate", @id = "RepStartDate" })
+
+
+                            </td>
+                            @*
+                                class="text-center"><input type="date" id="repSEndDate" name="repSEndDate" /></td>
+                            *@
+                            <td> @Html.EditorFor(m => @Model.RepEndDate, new { @name = "RepEndDate", @id = "RepEndDate" }) </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </form>
+            @*
+                <button class="btn btn-primary btn-outline-primary text-center float-left" id="btnSubForm" name="btnSubForm">Run Report</button>
+                <input type="text" placeholder="Search By TrackingID..." id="trackID" name="trackID">
+                <button id="lookupTrackingID" name="lookupTrackingID"><i class="fa fa-search"></i></button>
+                <a type="button" class="btn btn-outline-danger btn-link float-right" id="btnExit" href="/Index" name="btnExit">Exit</a>
+            *@
+            <div style="margin:auto;max-width:300px;">
+                <input type="text" placeholder="Search By Document Name..." id="docName" name="docName">
+                <input type="text" placeholder="Search By TrackingID...." id="trackID" name="trackID">
+                <p class="p-2"></p>
+
+
+            </div>
+            <p class="p-2"></p>
+            <br />
+            <br />
+            <div class="align-right">
+                <button id="lookupTrackingID" name="lookupTrackingID" style="width:5%;height:10%"><i class="fa fa-search"></i></button>
+
+                @*
+          <button class="btn btn-primary btn-outline-primary" id="allIDs" name="allIDs"><i>All Documents</i></button>
+        <button id="allIDs" style="float:left;width:15%"><i>All Documents</i></button>
+                *@
+                <a type="button" class="btn btn-outline-danger btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <p class="p-2"></p>
+    @if ((Model.DicEdocsITSProjectNameNumber != null) && (Model.DicEdocsITSProjectNameNumber.Count() > 0))
+    {
+        <div class="container-fluid">
+
+            @*   <h2 class="text-center text-info">Report Start ScanDate <span> @Model.ITSInventoryTransferSent.Count()</span></h2>*@
+            <table cellspacing="2" style="margin-left: auto; margin-right: auto; border: double; background-color: #7abdff" width="100%" id="dtlUsers" name="dtlUsers">
+                <thead>
+                    <tr>
+                        <th class="border text-center">Customer Name</th>
+                        <th class="border text-center">Document Name</th>
+                        <th class="border text-center">Tacking ID</th>
+                        <th class="border text-center">Date Scanned</th>
+                        <th class="border text-center">Number Pages Scanned</th>
+                        <th class="border text-center">Number Pages Uploaded</th>
+                        <th class="border text-center">Number Pages OCR</th>
+                        <th class="border text-center">Number Typed Char</th>
+                        <th class="border text-center">Document Sent</th>
+                        <th class="border text-center">PDF File</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var items in Model.DicEdocsITSProjectNameNumber)
+                    {
+                    <tr onmouseover="$(this).css('background','white');" onmouseout="$(this).css('background','#7abdff');">
+                        <td class="border text-center">@items.Value.EdocsCustomerName</td>
+                        <td class="border text-center">@items.Key</td>
+                        <td class="border text-center">@items.Value.TrackingIDS</td>
+                        <td class="border text-center">@items.Value.ScannDate.ToString("MM/dd/yyyy")</td>
+
+                        <td class="border text-center">@items.Value.TotalScanned</td>
+                        <td class="border text-center">@items.Value.TotalRecordsUploaded</td>
+
+                        <td class="border text-center">@items.Value.TotalDocsOCR</td>
+                        <td class="border text-center">@items.Value.TotalCharTyped</td>
+                        <td class="border text-center">@items.Value.DocSent</td>
+                        <td class="CellWithComment"> <a href="/Partial_Pages/DisplayPdfFilePartialView?pdfurl=@items.Value.ID" target="_blank"> <img src="~/img/icpdf.gif" width="20" height="25" /></a>
+
+
+
+
+
+                    </tr>
+                    }
+                <tbody>
+
+
+            </table>
+            <p class="p-1"></p>
+            <h3 class="text-center text-info">Summary</h3>
+            <table cellspacing="2" style="margin-left: auto; margin-right: auto; border: double; background-color: #c2c2c2" width="100%">
+                <thead>
+                    <tr>
+                        <th class="border text-center">Pages Scanned</th>
+                        <th class="border text-center">Pages Uploaded</th>
+                        <th class="border text-center">Pages OCR</th>
+                        <th class="border text-center">Typed Char</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onmouseover="$(this).css('background','white');" onmouseout="$(this).css('background','#c2c2c2');">
+                        <td class="border text-center">@Model.TotalScanned</td>
+                        <td class="border text-center">@Model.TotalUploaded</td>
+                        <td class="border text-center">@Model.TotalOCR</td>
+
+                        <td class="border text-center">@Model.TotalTypedChar</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="p-1"></p>
+
+        </div>
+    }
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+    @*  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">*@
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
+        $(document).ready(function () {
+
+            $('#repErSDate').focus();
+
+            $("#divLoading").hide();
+            //$(this).bind("contextmenu", function (e) {
+
+            //    e.preventDefault();
+
+            //});
+            CompleteAjaxCall();
+            $('#lookupTrackingID').click(function (e) {
+                //if (!(CheckEmptyString($("#repSDate").val(), 'Need a Report Begin Date:'))) {
+                //    $("#repSDate").focus();
+                //    return false;
+                //}
+                //if (!(CheckEmptyString($("#repSEndDate").val(), 'Need a Report Begin Date:'))) {
+                //    $("#repSEndDate").focus();
+                //    return false;
+                //}
+                $("#divLoading").show();
+                //  ShowLoading();
+                $("<input type='hidden'/>")
+                    .attr("value", $("#RepStartDate").val())
+                    .attr("id", "repSDate")
+                    .attr("name", "repSDate")
+                    .prependTo("#fRep");
+                $("<input type='hidden'/>")
+                    .attr("value", $("#RepEndDate").val())
+                    .attr("id", "repSEndDate")
+                    .attr("name", "repSEndDate")
+                    .prependTo("#fRep");
+                $("<input type='hidden'/>")
+                    .attr("value", $("#trackID").val())
+                    .attr("id", "trackID")
+                    .attr("name", "trackID")
+                    .prependTo("#fRep");
+                $("<input type='hidden'/>")
+                    .attr("value", $("#docName").val())
+                    .attr("id", "docName")
+                    .attr("name", "docName")
+                    .prependTo("#fRep");
+                $("#fRep").submit();
+            });
+            $("#docName").mousedown(function (e) {
+                  $('#trackID').val('');
+            });
+            $("#trackID").mousedown(function () {
+                $('#docName').val('');
+            });
+            $("#trackID").autocomplete({
+
+                source: function (request, response) {
+                    var strData = request.term + "/tid";
+                    $.ajax({
+                        url: '/Partial_Pages/GetTackingIDSProjectNamePartialPage',
+                        //data: { "prefix": request.term },
+                        data: { "prefix":strData },
+
+                        type: "POST",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    //  get selected value;
+                    //$("#personNameValue").val(i.item.val);
+                },
+                minLength: 1
+            });
+            $("#docName").autocomplete({
+
+                source: function (request, response) {
+                    var strData = request.term + "/dn/" + $("#RepStartDate").val().replace("/", "-") +"/"+ $("#RepEndDate").val().replace("/", "-");
+                    $.ajax({
+                        url: '/Partial_Pages/GetTackingIDSProjectNamePartialPage',
+                        //data: { "prefix": request.term },
+                        data: { "prefix": strData },
+
+                        type: "POST",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (data) {
+                            
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    //  get selected value;
+                    //$("#personNameValue").val(i.item.val);
+                },
+                minLength: 1
+            });
+
+            $('#prInvoice').click(function () {
+                printOut('printInvoice');
+            });
+            $('#allIDs').click(function (e) {
+                $('#trackID').val('All TrackingIDs');
+                $('#lookupTrackingID').click();
+
+            });
+
+
+        });
+    </script>
+}

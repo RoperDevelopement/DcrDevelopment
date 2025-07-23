@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EDocs.Nyp.LabReqs.AppServices</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/datatables-select.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    @*<style type="text/css">
+            .modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: black;
+                z-index: 99;
+                opacity: 0.8;
+                filter: alpha(opacity=80);
+                -moz-opacity: 0.8;
+                min-height: 100%;
+                width: 100%;
+            }
+
+            .loading {
+                font-family: Arial;
+                font-size: 10pt;
+                border: 5px solid #67CFF5;
+                width: 200px;
+                height: 100px;
+                display: none;
+                position: fixed;
+                background-color: White;
+                z-index: 999;
+            }
+        </style>*@
+
+    <script type="text/javascript">
+        $(window).load(function () {
+
+            $(".loader").fadeOut("slow");
+        });
+    </script>
+</head>
+@*lightblue
+*@
+<body style="background-color:#f0f0f0;" >
+    <div class="loader">
+        <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color:black">
+            Loading please wait...<img src="~/Images/ajax-loading.gif">
+        </p>
+    </div>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="~/Images/NYP_Logo_Small.png" width="100" height="50" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1  justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Lab Reqs Home</a>
+                        </li>
+                        @*
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/LabReqs/LookUpLabReqsView" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Lab Reqs</a>
+                            </li>
+                        *@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Lab Reqs</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpLabReqsView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Lab Reqs</a>
+                                </li>
+                                @if (string.Compare(ViewData["EditLRDocs"].ToString(), "true", true) == 0)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-page="/LabReqs/EditLabReqsReportView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Report Changed Lab Reqs</a>
+                                    </li>
+
+                                }
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpCovid19LRView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">COVID-19 Lab Reqs</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Logs</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpSpecimenRejectionView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Specimen Rejection Logs</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/LabReqs/LookUpMaintenanceLogsView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Maintenance Logs</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpEmployeeComplianceLogsView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Employee Compliance Logs</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Send Out</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/LabReqs/LookupDohView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">DOH</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpMissingPunchFormsView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Punch Forms By DOS</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpSendOutPackingSlipsView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Send Out Packing Slips</a>
+                                </li>
+                                <li nowrap class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpSendOutResultsView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Send Out Results</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Misc Reqs</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpGrantReceiptsView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Grant Receipts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpDrCodesView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Dr Codes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpLabReqsView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Path Requistions</a>
+                                </li>
+                                <li nowrap class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/LabReqs/LookUpInvoiceView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Invoices</a>
+                                </li>
+                            </ul>
+
+                        </li>
+                        @if ((string.Compare(@ViewData["IsAdmin"].ToString(), "true", true) == 0) || (string.Compare(@ViewData["ViewAuditLogs"].ToString(), "true", true) == 0))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Management</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    @if (string.Compare(@ViewData["IsAdmin"].ToString(), "true", true) == 0)
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-page="/NypUsersInfo/NypUserInfoView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">User Profiles</a>
+                                        </li>
+                                    }
+                                    @if (string.Compare(@ViewData["ViewAuditLogs"].ToString(), "true", true) == 0)
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-page="/NypUsersInfo/AuditLogsView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">View AuditLogs</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Help</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Contact" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">Contact</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/About" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/NypUsersInfo/EdocsManuelView" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">LabReqs User Manual</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Privacy" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">Privacy</a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+            <partial name="_LoginPartial" />
+            @*
+                <p class="text-info"> Hello: @ViewData["CWID"]</p>
+                &nbsp;&nbsp;
+                <p> <a href="/NypUsersInfo/LoginView?Logout=@ViewData["CWID"]">Logout</a></p>
+            *@
+
+        </nav>
+        @*
+            <text class="navbar-brand " asp-area="" asp-page="">Logged in as user: @ViewData["CWID"]</text>
+        *@
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <a href="http://edocsusa.com/" target="_blank">   &copy; 2019 - e-Docs USA - </a><a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/datatables/datatables-select.min.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    @RenderSection("Scripts", required: false)
+
+
+</body>
+</html>

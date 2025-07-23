@@ -1,0 +1,247 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.TrackingSystem.InventoryScanningManagementView
+@{
+    ViewData["Title"] = "Scanning Mangement";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div class="container-fluid" id="divMain" name="divMain">
+    <h1 class="text-center">@Model.Header</h1>
+    <p class="p-0"></p>
+    <div class="row text-center">
+        <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+            <label class="text-nowrap" for="userid">User ID:</label>&nbsp;
+            <input type="text" size="50" maxlength="50" readonly="readonly" class="border text-nowrap" value="@ViewData["UserName"]" />
+        </div>
+    </div>
+    <div class="container">
+        @if (string.IsNullOrWhiteSpace(@Model.ScanningModel.TrackingID))
+        {
+        <form id="formGetTrackingID" method="get" role="form" style="display:block">
+            <fieldset>
+                 
+                @*
+        <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                *@
+                <input type="hidden" id="timerStarted" name="timerStarted" value="0" />
+
+                <p class="p-0"></p>
+                <div class="row text-center">
+                    <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+
+                        <label class="text-nowrap" for="TrackingID">Tracking ID:</label>&nbsp;
+                        <input type="text" id="TrackingID" name="TrackingID" size="50" maxlength="50" class="border text-nowrap" value="@Model.TrackingID" placeholder="Scan or Type in Barcode" />
+                        @Html.ValidationMessage("TrackingIDNF", new { @class = "text-danger" })
+                        @*
+                <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                        *@
+
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        }
+        else
+        {
+            <h3 class="text-center text-info p-1">Updating information for Tracking ID: @Model.ScanningModel.TrackingID</h3>
+            <p class="p-0"></p>
+            <form id="updateInv" name="updateInv" method="post">
+                
+                    @Html.HiddenFor(m => m.ScanningModel.IDTracking)
+                    @Html.HiddenFor(m => m.ScanningModel.TrackingID)
+                    @Html.HiddenFor(m => m.ScanningModel.DateDocumentsReceived)
+                    @Html.HiddenFor(m => m.ScanningModel.DateScanningStarted)
+
+                    @if (@Model.ScanningModel.DateDocumentsReceived.Year < 2000)
+                    {
+                        <div class="row text-center">
+                            <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+
+                                <label class="text-nowrap" for="DocumentsReceived">Documents Received:</label>&nbsp;
+                                <input type="datetime-local" id="DocumentsReceived" name="DocumentsReceived" class="border text-nowrap" />
+                                @*
+                    <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                                *@
+                                @Html.ValidationMessage("DDR", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p class="p-0"></p>
+                    }
+
+                    else
+                    {
+                        <div class="row text-center">
+                            <div class="col-*-* text-center form-inline" id="formContainer" style="margin:0 auto;">
+
+                                <label class="text-nowrap" for="DocumentsReceived">Documents Received:</label>&nbsp;
+                                <textarea class="border" id="DocumentsReceived" name="DocumentsReceived" readonly="readonly" rows="1" cols="25">@Model.ScanningModel.DateDocumentsReceived.ToString()</textarea>
+                                @*
+                    <input type="datetime" id="DateDocumentsReceived" name="DateDocumentsReceived" class="border text-nowrap" />
+
+                                *@
+
+                            </div>
+                        </div>
+                        <p class="p-0"></p>
+                    }
+                    @if (@Model.ScanningModel.DateScanningStarted.Year < 2000)
+                    {
+                        <div class="row text-center">
+                            <div class="col-*-* text-center form-inline" id="formContainer" style="margin:0 auto;">
+
+                                <label class="text-nowrap" for="ScanningStarted">Scanning Started:</label>&nbsp;
+                                <input type="datetime-local" id="ScanningStarted" name="ScanningStarted" class="border text-nowrap" />
+                                @*
+                    <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                                *@
+                                @Html.ValidationMessage("DSS", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p class="p-0"></p>
+                    }
+                    else
+                    {
+                        <div class="row text-center">
+                            <div class="col-*-* text-center form-inline" id="formContainer" style="margin:0 auto;">
+
+                                <label class="text-nowrap" for="ScanningStarted">Scanning Started:</label>&nbsp;
+                                <textarea class="border" id="ScanningStarted" name="ScanningStarted" readonly="readonly" rows="1" cols="25">@Model.ScanningModel.DateScanningStarted</textarea>
+                                @*
+                                 <input type="datetime" id="DateDocumentsReceived" name="DateDocumentsReceived" class="border text-nowrap" />
+                    <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                                *@
+
+                            </div>
+                        </div>
+
+                    }
+                    <p class="p-0"></p>
+                    <div class="row text-center">
+                        <div class="col-*-* text-center form-inline" style="margin:0 auto;">
+
+                            @Html.LabelFor(m => m.ScanningModel.NumberDocumentsReceived, new { @class = "text-center" })&nbsp;
+                            @if (@Model.ScanningModel.NumberDocumentsReceived == 0)
+                            {
+                                @Html.TextAreaFor(m => m.ScanningModel.NumberDocumentsReceived, new { @rows = "1", @cols = "5", @maxlength = "6", @class = "border text-nowrap text-center" })
+                                @Html.ValidationMessage("NDR", new { @class = "text-danger" })
+                            }
+                            else
+                            {
+                                @Html.TextAreaFor(m => m.ScanningModel.NumberDocumentsReceived, new { @rows = "1", @cols = "5", @readonly = "readonly", @maxlength = "6", @class = "border text-nowrap text-center" })
+                            }
+                            @*
+                             <input type="text" id="NumDocs" name="NumDocs" size="10" maxlength="10" class="border text-nowrap" value="@Model.ScanningModel.NumberDocumentsReceived" placeholder="Number Documents to be Scanned" />
+                <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                            *@
+
+                        </div>
+                    </div>
+                    <p class="p-0"></p>
+                    <div class="row text-center">
+                        <div class="col-*-* text-center" id="formContainer" style="margin:0 auto;">
+                            @Html.CheckBoxFor(m => m.NofiyUser)
+                            <label class="text-nowrap" for="datesent">Notify sender Docments Received:</label>&nbsp;
+
+                            @* <input type="checkbox" id="notifyUser" name="notifyUser" class="border text-nowrap" />
+
+                <textarea class="border" id="userid" name="useid" readonly="readonly" rows="1" cols="50" maxlength="50">@ViewData["UserName"]</textarea>
+                            *@
+
+                        </div>
+                    </div>
+                   
+</form>
+        }
+        <p class="p-4"></p>
+        <div class="row">
+            @if (string.IsNullOrWhiteSpace(@Model.ScanningModel.TrackingID))
+            {
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-dark btn-block" id="btnLookupTrackID" name="btnLookupTrackID">LookUp Tracking ID</button>
+                </div>
+            }
+            else
+            {
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-dark btn-block " id="btnUpDateInv" name="btnUpDateInv">Update Inventory Management</button>
+                </div>
+            }
+            <div class="col-sm-4">
+                <a class="btn btn-outline-warning btn-block  btn-link" id="btnReset" href="/TrackingSystem/InventoryScanningManagementView" name="btnReset" role="button">Reset</a>
+
+            </div>
+            <div class="col-sm-4">
+                <a class="btn btn-outline-danger btn-block  btn-link" id="btnexit" href="/Index" name="btnexit" role="button">Exit</a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+@section scripts{
+<script>
+    $(document).ready(function () {
+       // window.onload = function () {
+            if ($('#ScanningModel_TrackingID').length == 0) {
+                $('#TrackingID').focus();
+              
+            }
+                
+            
+
+
+        //};
+        $("#divLoading").hide();
+      //  $(this).bind("contextmenu", function (e) {
+
+         //   e.preventDefault();
+
+      //  });
+        $('#btnLookupTrackID').click(function (e) {
+            $("#divLoading").show();
+            $("#formGetTrackingID").submit();
+        });
+        $('#btnUpDateInv').click(function (e) {
+            $("#divLoading").show();
+            $("#updateInv").submit();
+        });
+
+        //});
+        $('#TrackingID').keydown(function (eventcode) {
+
+            
+            switch (event.keyCode) {
+                case 13:
+                    if ($('#TrackingID').val().length >= 6) {
+                        $('#btnLookupTrackID').click();
+                    }
+                    break;
+                case 119:
+                    SubmitForm(0, '#btnLookupTrackID', '#TrackingID', 'click');
+                    break;
+                default:
+                  //  if ($('#TrackingID').val().length >= 6) {
+                  //      $('#btnLookupTrackID').click();
+                  //  }
+                    SubmitForm(0, '#btnLookupTrackID', '#TrackingID', 'click' );
+                    
+
+
+
+                    
+                    return;
+                    break;
+            }
+
+
+
+        });
+    });
+</script>
+}

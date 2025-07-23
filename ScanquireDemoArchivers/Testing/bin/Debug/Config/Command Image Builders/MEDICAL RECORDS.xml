@@ -1,0 +1,28 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQCommandImageBuilderSelector, Scanquire.Public">
+  <Properties>
+    <SingleArray name="CommandImageBuilderNames">
+      <Items>
+        <Simple value="DEFAULT" />
+        <Simple value="ADMISSIONS" />
+        <Simple value="EKG" />
+        <Simple value="NEWBORN ID" />
+        <Simple value="DR NOTES" />
+        <Simple value="DISCHARGE" />
+      </Items>
+    </SingleArray>
+    <Simple name="BarcodeEncoderName" value="DEFAULT" />
+    <Simple name="ImageDPI" value="300" />
+    <Simple name="MinImageWidth" value="612" />
+    <Simple name="MinImageHeight" value="792" />
+    <Complex name="ImageMargin">
+      <Properties>
+        <Simple name="All" value="-1" />
+        <Simple name="Bottom" value="36" />
+        <Simple name="Left" value="0" />
+        <Simple name="Right" value="0" />
+        <Simple name="Top" value="36" />
+      </Properties>
+    </Complex>
+    <Simple name="BarcodeRendererName" value="DEFAULT" />
+  </Properties>
+</Complex>

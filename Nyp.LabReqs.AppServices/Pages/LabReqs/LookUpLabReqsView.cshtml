@@ -1,0 +1,1917 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.Pages.LabReqs.LookUpLabReqsModel
+@{
+    ViewData["Title"] = "LookUpLabReqsView";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger border">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+
+<div id="divMain" name="divMain">
+    <h1 class="text-center">Lab Reqs</h1>
+    <p class="p-1" />
+
+    <div style="background-color:white;">
+        <div class="container-fluid">
+            <p class="p-2" />
+            <a href="#searchOptions" name="sOptions" id="sOptions" class=" btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+            <p class="alert-light" id="showmess" style="display:none">Click to expand/hide Search Options</p>
+            <p class="p-1" />
+            <input type="hidden" id="partsearch" name="partsearch" value="" />
+            <div id="searchOptions" class="collapse">
+
+                <div>
+                    <p class="text-center  text-danger">**Search Start Date Required**</p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Lab Req Search Begin Date<p class="text-danger" id="errorSDate" name="errorSDate" style="display:none">* LabReq Search Begin Date Required</p> </th>
+                                <th class="text-center">Lab Req Search End Date<p class="text-danger" id="errorEDate" name="errorEDate" style="display:none">* LabReq Search End Date Required</p></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center"><input type="date" id="receiptDate" name="receiptDate" /></td>
+                                <td class="text-center"><input type="date" id="scanDate" name="scanDate" /></td>
+
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div id="checkboxSearchDates" style="display:none">
+
+                    <input type="hidden" id="searchBydate" name="searchBydate" />
+                    <div class="row alert-info">
+                        <div class="col-2">
+                            <p>Search By</p>
+                        </div>
+                        <div class="col-3">
+                            <input type="radio" name="lDate" id="lDate" />&nbsp;Date Of Service
+
+                        </div>
+                        <div class="col-2">
+                            <input type="radio" id="sDate" name="sDate" value="SDate" />&nbsp;Scan Date
+                        </div>
+                    </div>
+                </div>
+
+                <p class="p-0" />
+
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-dark btn-block" id="btnCSNNum" name="btnCSNNum">CSN Number</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-dark btn-block" id="btnFinIndNum" name="btnFinIndNum">Index Number</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-dark  btn-block" id="btnMRN" name="btnMRN">MRN</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-dark  btn-block" id="btnLrecNumCsnNum" name="btnLrecNumCsnNum">CSN Number &amp; Index Number</button>
+                    </div>
+                </div>
+                @*
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-dark btn-block" id="btnPatID" name="btnPatID">Patient ID</button>
+                    </div>
+                                    <div class="col">
+                                    <button type="button" class="btn btn-outline-dark btn-block" id="btnDrCode" name="btnDrCode">Dr Code</button>
+                                </div>
+                *@
+                <p class="p-0" />
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-dark btn-block" id="btnKWord" name="btnKWord">KeyWords</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-dark  btn-block" id="btnPFN" name="btnPFN">Patient Name</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-dark btn-block" id="btnReqNum" name="btnReqNum">Requisition Number</button>
+                    </div>
+                </div>
+                <p class="p-0" />
+                @*
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-outline-dark  btn-block" id="btnPFN" name="btnPFN">Patient Name</button>
+                        </div>
+
+
+                            <div class="col">
+                                <button type="button" class="btn btn-outline-dark  btn-block" id="btnPLN" name="btnPLN">Patient Last Name</button>
+                            </div>
+
+                            <div class="col">
+                                <button type="button" class="btn btn-outline-dark btn-block" id="btnDrN" name="btnDrN">Dr Name</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-outline-dark btn-block" id="btnSO" name="btnSO">Scan Operator</button>
+                            </div>
+
+                        </div>
+                *@
+                <p class="p-0" />
+                <div class="row">
+                    @*
+                        <div class="col-2">
+                            <button type="button" class="btn btn-outline-dark btn-block" id="btnDos" name="btnDos">DOS-Receipt Date</button>
+                        </div>
+                            <div class="col-2" ">
+                            <button type="button" class="btn btn-outline-dark btn-block" id="btnRD" name="btnRD">Receipt Date</button>
+                        </div>
+                    *@
+                    <div class="col" style="display:none" id="colDate" name="colDate">
+                        <button type="button" class="btn btn-outline-dark btn-block" id="btnRD" name="btnRD">Search By Date</button>
+                    </div>
+                    @*
+                        <div class="col-2" ">
+                            <button type="button" class="btn btn-outline-dark btn-block" id="btnSD" name="btnSD">Scan Date</button>
+                        </div>
+                               <div class="col-2" ">
+                            <button type="button" class="btn btn-outline-dark btn-block" id="btnSB" name="btnSB">Scan Batch</button>
+                        </div>
+                    *@
+
+                    <div class="col">
+                        <a class="btn btn-outline-warning btn-block  btn-link" id="btReset" href="/LabReqs/LookUpLabReqsView" name="btReset" role="button">Reset</a>
+
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-danger btn-block btn-link" id="btnexit" href="/Index" name="btnexit" role="button">Exit</a>
+
+                    </div>
+                </div>
+
+                <p class="p-1" />
+            </div>@*search*@
+        </div>@*end div con*@
+        <p class="p-2" />
+
+
+    </div>@*end div color*@
+</div>
+
+
+<!-- Modal -->
+
+<div id="modualSDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Missing Search Begin Date</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnCloseSDate')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center text-danger">**Lab Req Search Begin Date Required**</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="btnCloseSDate" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Index Number and Csn Number -->
+<div id="myModalIndexNumCSNNumber" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by CSN Number &amp; Index Number</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnCloseIndexNumCsnNum')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchIndexNumCsnNum" name="searchIndexNumCsnNum" class="form-horizontal">
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="form-group">
+                                <text class="text-nowrap" for="lreqCsnNum">Index Number: </text>
+                                <input type="text" maxlength="20" class="form-control-sm text-nowrap border" placeholder="Enter Index Number" id="lreqCsnNum" name="lreqCsnNum" />
+                                <p class="text-danger" id="searchIndexNum" style="display:none">* Need Index Number</p>
+                                @*
+                                    <textarea class="form-control-sm text-nowrap border" maxlength="16" rows="1" cols="50" placeholder="Enter Financial/Index #" id="lreqNum" name="lreqNum"></textarea>
+                                *@
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="text-nowrap" for="csnLreqNum">CSN Number: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="50" placeholder="Enter CSN Number" id="csnLreqNum" name="csnLreqNum" />
+                                <p class="text-danger" id="searchcsnLreqNum" style="display:none">* Need CSN Number</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="p-0 text-left" />
+                            @*
+                                <input type="checkbox" checked name="cbSearchPartial" id="cbSearchPartial" value="" />&nbsp;Fin# or Index# or CSN# Ends With
+                            *@
+                            <input type="checkbox" checked name="cbSearchIndexNumCsnNum" id="cbSearchIndexNumCsnNum" />&nbsp; CSN Number &amp; Index Number Starts With
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchIndexNumCsnNum" name="btnsearchIndexNumCsnNum" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnCloseIndexNumCsnNum" name="btnCloseIndexNumCsnNum" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal Index Number -->
+<div id="myModalIndexNum" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by Index Number</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnCloseIndexNum')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchFInNum" name="searchFInNum" class="form-horizontal">
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="form-group">
+                                <text class="text-nowrap" for="lreqNum">Index Number</text>
+                                <input type="text" maxlength="20" class="form-control-sm text-nowrap border" placeholder="Enter Index Number" id="lreqNum" name="lreqNum" />
+                                <p class="text-danger" id="searchFInNumBlank" style="display:none">* Need Index Number</p>
+                                @*
+                                    <textarea class="form-control-sm text-nowrap border" maxlength="16" rows="1" cols="50" placeholder="Enter Financial/Index #" id="lreqNum" name="lreqNum"></textarea>
+                                *@
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="p-0 text-left" />
+                            @*
+                                <input type="checkbox" checked name="cbSearchPartial" id="cbSearchPartial" value="" />&nbsp;Fin# or Index# or CSN# Ends With
+                            *@
+                            <input type="checkbox" checked name="cbSearchPartialLRFin" id="cbSearchPartialLRFin" />Index Number Start With
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchindexnum" name="btnsearchindexnum" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnCloseIndexNum" name="btnCloseIndexNum" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal csn Number -->
+<div id="myModalCSNNum" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by CSN Number</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnCloseCSNNum')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchReqNum" name="searchReqNum">
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="form-group">
+                                <label class="text-nowrap" for="reqsNum">CSN Number: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="10" placeholder="Enter CSN Number" id="CSNNum" name="CSNNum" />
+                                <p class="text-danger" id="searchCSNNumBlank" style="display:none">* Need CSN Number</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-2" />
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" value="" /> CSN Number Start With
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchCSNnum" name="btnsearchCSNnum" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnCloseCSNNum" name="btnCloseCSNNum" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal keywords -->
+<div id="myModalKeyWords" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by KeyWords</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnCloseKeyWords')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="fmsearchKeyWords" name="fmsearchKeyWords" class="form-horizontal">
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="form-group">
+                                <label class="text-nowrap" for="keyWords">KeyWords:</label>
+                                <textarea class="form-control-sm text-justify border form-inline" placeholder="KeyWords Fin/Index/CSN# MRN Patient Name Dr Code/Name/NPI#" id="keyWords" name="keyWords" rows="1" cols="70" maxlength="249"></textarea>
+                                <p class="text-danger" id="keyWordsError" name="keyWordsError" style="display:none">* Invalid Key Word Must be 6 Character's</p>
+                                <p class="text-info text-center text-info"> One or more KeyWords followed by a space.</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchKeyWords" name="btnsearchKeyWords" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnCloseKeyWords" name="btnCloseKeyWords" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal Rerq Number -->
+<div id="myModalReqNum" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by Requisition Number</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnClosereqNum')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchReqNum" name="searchReqNum">
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="form-group">
+                                <label class="text-nowrap" for="reqsNum">Requisition Number: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="16" placeholder="Enter Requisition&#35;/Order ID &#35;" id="reqsNum" name="reqsNum" />
+                                <p class="text-danger" id="searchReqNumBlank" style="display:none">* Need Requisition Number</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-2" />
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" value="" /> Requisition Number Start With
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchreqnum" name="btnsearchreqnum" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnClosereqNum" name="btnClosereqNum" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal Patient id -->
+<div id="myModalPatID" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by Patient ID</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnCloserPatID')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchPatID" name="searchPatID">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="text-nowrap" for="patID">Patient ID: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="16" placeholder="Enter Patient ID" id="patID" name="patID" />
+                                <p class="text-danger" id="searchPatIDBlank" style="display:none">* Need Patient ID</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-2" />
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" /> Patient ID Starts With
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchPatID" name="btnsearchPatID" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnCloserPatID" name="btnCloserPatID" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal MRN -->
+<div id="myModalMRN" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by MRN</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnCloserMRN')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchMRN" name="searchMRN">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="text-nowrap" for="patID">MRN: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="16" placeholder="Enter MRN" id="MRN" name="MRN" />
+                                <p class="text-danger" id="searchMRNBlank" style="display:none">* Need MRN</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-2" />
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" /> MRN Starts With
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchMRN" name="btnsearchMRN" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnCloserMRN" name="btnCloserMRN" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal client code id -->
+<div id="myModalClientCode" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by Client Code</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnClosecc')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchClientCode" name="searchClientCode">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="text-nowrap" for="clientcode">Client Code: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="16" placeholder="Enter Client Code" id="clientcode" name="clientcode" />
+                                <p class="text-danger" id="searchClientCodeBlank" style="display:none">* Need a Client Code</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-2" />
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" /> Client Code Starts With
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchClientCode" name="btnsearchClientCode" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnClosecc" name="btnClosecc" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal dr code -->
+<div id="myModaldrCode" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by Dr Code</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnCloserdrCode')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchdrCode" name="searchdrCode">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="text-nowrap" for="drCode">Dr Code: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="16" placeholder="Enter Dr Code" id="drCode" name="drCode" />
+                                <p class="text-danger" id="searchdrCodeBlank" style="display:none">* Need a Dr Code</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-2" />
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" /> Dr Code Starts With
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchdrCode" name="btnsearchdrCode" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnCloserdrCode" name="btnCloserdrCode" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Patient First Name -->
+<div id="myModalpFName" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by Patient Name</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnclosepFName')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchpFName" name="searchpFName">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="text-nowrap" for="pFName"> Patient First Name:</label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="50" placeholder="Enter Patient First Name" id="pFName" name="pFName" />
+                                <p class="text-danger" id="searchpFNameBlank" style="display:none">* Need Patient First Name</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="text-nowrap" for="pFName">Patient Last Name: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="50" placeholder="Enter Patient Last Name" id="pLName" name="pLName" />
+                                <p class="text-danger" id="searchpLNameBlank" style="display:none">* Need Patient Last Name</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-2" />
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" /> Patient Name Starts With
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchpFName" name="btnsearchpFName" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnclosepFName" name="btnclosepFName" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Patient Last Name -->
+<div id="myModalpLName" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by Patient Last Name</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btncloserpLName')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchpLName" name="searchpLName">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="text-nowrap" for="pFName">Patient Last Name: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="50" placeholder="Enter Patient Last Name" id="pLName" name="pLName" />
+                                <p class="text-danger" id="searchpLNameBlank" style="display:none">* Need Patient Last Name</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-2" />
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" /> Patient Last Name Starts With
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchpLName" name="btnsearchpLName" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btncloserpLName" name="btncloserpLName" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal dr Name -->
+<div id="myModaldrName" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by Doctor Name</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnclosedrName')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchdrName" name="searchdrName">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="text-nowrap" for="drName">Doctor Name: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="50" placeholder="Enter Dr Name" id="drName" name="drName" />
+                                <p class="text-danger" id="searchdrNameBlank" style="display:none">* Need Doctor Name</p>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-2" />
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" /> Doctor Name Starts With
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchdrName" name="btnseardrName" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnclosedrName" name="btnclosedrName" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Scan Operator-->
+<div id="myModalscanOp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by Scan Operator</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnclosescanOp')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchscanOp" name="searchscanOp">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="text-nowrap" for="scanOp">Scan Operator Name: </label>
+                                <input type="text" class="form-control-sm text-nowrap border" maxlength="50" placeholder="Enter Scan Opertor Name" id="scanOp" name="scanOp" />
+                                <p class="text-danger" id="searchscanOpBlank" style="display:none">* Need Scan Opertor Name</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-2" />
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" /> Scan Operator Name Starts With
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchscanOp" name="btnsearchscanOp" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnclosescanOp" name="btnclosescanOp" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal Scan batchid-->
+<div id="myModalscanBatch" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Search Lab Reqs by Scan Batch ID</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="BtnClick('btnclosescanBatch')">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <form method="get" id="searchscanBatch" name="searchscanBatch">
+
+                    <div class="row">
+                        <div nowrap class="col">
+                            <div nowrap class="form-group">
+                                <label nowrap class="text-nowrap" for="scanBatch">Scan Batch ID:</label>
+                                <input nowrap type="text" class="form-control text-nowrap border" maxlength="36" placeholder="Enter Scan Batch ID" id="scanBatch" name="scanBatch" />
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <p class="p-1" />
+
+                    <input type="checkbox" name="cbSearchPartial" id="cbSearchPartial" />Scan Batch ID Starts With
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsearchscanBatch" name="btnsearscanBatch" class="btn btn-pill btn-outline-primary">Search</button>
+                <button type="button" id="btnclosescanBatch" name="btnclosescanBatch" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="divLabReqs">
+
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+@*
+    @{
+       await Html.RenderPartialAsync("Partial_Pages/LoadingPagePartialView");
+    }
+*@
+
+@section scripts{
+
+
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            SessionExpireAlert(0);
+
+            $("#divLoading").hide();
+            $('#receiptDate').focus();
+            $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+
+            });
+
+            //search fin index num
+            $('#btnFinIndNum').click(function () {
+                if (($(receiptDate).val() == '') || ($(scanDate).val() == '')) {
+                    $("#divMain").fadeOut(100);
+                    $('#modualSDate').css("display", "block");
+
+                    return false;
+                }
+                SetValueUncehckCheckBoxValues();
+                $('#cbSearchPartialLRFin').prop('checked', true);
+                $('#searchFInNumBlank').css("display", "none");
+
+                $("#divMain").fadeOut(100);
+                $('#myModalIndexNum').css("display", "block");
+            });
+
+            $('#btnCloseIndexNum').click(function () {
+                $("#divMain").fadeIn(100);
+                $('#myModalIndexNum').css("display", "none");
+
+            });
+
+
+            $('#btnCloseSDate').click(function () {
+                $("#divMain").fadeIn(100);
+                $('#modualSDate').css("display", "none");
+                $('#receiptDate').focus();
+            });
+
+            $(document).keypress(function (e) {
+                if (e.which == 13) {
+
+                    if ($('#myModalIndexNum').is(':visible')) {
+
+                        $('#btnsearchindexnum').click();
+                        return false;
+
+                    }
+                    else if ($('#myModalPatID').is(':visible')) {
+
+                        $('#btnsearchPatID').click();
+                        return false;
+
+                    }
+                    else if ($('#myModalIndexNumCSNNumber').is(':visible')) {
+
+                        $('#btnsearchIndexNumCsnNum').click();
+                        return false;
+
+                    }
+                    else if ($('#myCSNNum').is(':visible')) {
+
+                        $('#btnsearchCSNnum').click();
+                        return false;
+
+                    }
+                    else if ($('#myModalReqNum').is(':visible')) {
+
+                        $('#btnsearchreqnum').click();
+                        return false;
+
+                    }
+                    else if ($('#myModalClientCode').is(':visible')) {
+
+                        $('#btnsearchClientCode').click();
+                        return false;
+
+                    }
+                    else if ($('#myModalMRN').is(':visible')) {
+
+                        $('#btnsearchMRN').click();
+                        return false;
+
+                    }
+
+                    else if ($('#myModalpFName').is(':visible')) {
+
+                        $('#btnsearchpFName').click();
+                        return false;
+
+                    }
+                    else if ($('#myModalpLName').is(':visible')) {
+
+                        $('#btnsearchpLName').click();
+                        return false;
+
+                    }
+                    else if ($('#myModaldrName').is(':visible')) {
+
+                        $('#btnsearchdrName').click();
+                        return false;
+
+                    }
+                    else if ($('#myModalscanOp').is(':visible')) {
+
+                        $('#btnsearchscanOp').click();
+                        return false;
+
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                return true;
+            });
+            //$('#cbSearchPartialLRFin').click(function (e) {
+            //    if ($('#cbSearchPartialLRFin').is(":checked")) {
+            //        alert("checked")
+            //    }
+            //    alert($('#cbSearchPartialLRFin').val());
+            //    //if ($('#cbSearchPartialLRFin').val() = 'on') {
+            //    //    $('#cbSearchPartialLRFin').prop('checked') ='false';
+            //    //    alert($('#cbSearchPartialLRFin').val());
+            //    //}
+            //    $('#cbSearchPartialLRFin').prop('checked')='false';
+            //    alert($('#cbSearchPartialLRFin').val());
+            //});
+            $('#btnsearchindexnum').click(function (e) {
+                if (CheckEmptyStr($('#lreqNum').val().trim())) {
+
+                    ShowHideDialog("searchFInNumBlank");
+
+                    return false;
+                }
+
+                // GetCheckBoxValues();
+                $('#btnCloseIndexNum').click();
+                $("#parLoading").text('Looking up Lab by Financial# / CSN# ' + $('#lreqNum').val());
+                $("#divLoading").show();
+                var pSearch = "false";
+                if ($('#cbSearchPartialLRFin').is(":checked")) {
+                    pSearch = "true";
+                }
+                e.preventDefault();
+                var lresSearchLabReqsUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+
+                $.ajax({
+                    type: "GET",
+                    url: lresSearchLabReqsUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbylabrec&cbSearchPartial=" + pSearch + "&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&finIndNum=" + $('#lreqNum').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+                });
+            });
+            //endsearch index number
+
+
+
+
+
+            //search req num
+            $('#btnCSNNum').click(function () {
+                if (($(receiptDate).val() == '') || ($(scanDate).val() == '')) {
+                    $("#divMain").fadeOut(100);
+                    $('#modualSDate').css("display", "block");
+
+                    return false;
+                }
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#searchCSNNumBlank').css("display", "none");
+                $('#searchcsnLreqNum').css("display", "block");
+                $('#myModalCSNNum').css("display", "block");
+            });
+            $('#btnLrecNumCsnNum').click(function () {
+                if (($(receiptDate).val() == '') || ($(scanDate).val() == '')) {
+                    $("#divMain").fadeOut(100);
+                    $('#searchIndexNum').css("display", "block");
+                    $('#searchcsnLreqNum').css("display", "block");
+                    $('#modualSDate').css("display", "block");
+
+                    return false;
+                }
+               // SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#cbSearchIndexNumCsnNum').prop('checked', true);
+                $('#searchIndexNum').css("display", "none");
+                $('#searchcsnLreqNum').css("display", "none");
+                
+                $('#myModalIndexNumCSNNumber').css("display", "block");
+            });
+            $('#btnCloseIndexNumCsnNum').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalIndexNumCSNNumber').css("display", "none");
+
+            });
+            //search by index number csn number
+            $('#btnsearchIndexNumCsnNum').click(function (e) {
+                if (CheckEmptyStr($('#lreqCsnNum').val().trim())) {
+
+                    ShowHideDialog("searchIndexNum");
+
+                    return false;
+                }
+                if (CheckEmptyStr($('#csnLreqNum').val().trim())) {
+
+                    ShowHideDialog("searchcsnLreqNum");
+
+                    return false;
+                }
+
+                // GetCheckBoxValues();
+                $('#btnCloseIndexNumCsnNum').click();
+                $("#parLoading").text('Looking up Lab by CSN Number' + $('#csnLreqNum').val() + ' and Index Number' + $('#lreqCsnNum').val());
+                $("#divLoading").show();
+                var pSearch = "false";
+                if ($('#cbSearchIndexNumCsnNum').is(":checked")) {
+                    pSearch = "true";
+                }
+             
+                e.preventDefault();
+                var lresSearchLabReqsUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+
+                $.ajax({
+                    type: "GET",
+                    url: lresSearchLabReqsUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbylabreccsnnumber&cbSearchPartial=" + pSearch + "&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&finIndNum=" + $('#lreqCsnNum').val() + "&CSNNum=" + $('#csnLreqNum').val()+ "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+                });
+            });
+
+
+
+            $('#btnCloseCSNNum').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalCSNNum').css("display", "none");
+
+            });
+
+            $('#btnsearchCSNnum').click(function (e) {
+                if (CheckEmptyStr($('#CSNNum').val().trim())) {
+
+                    ShowHideDialog("searchCSNNumBlank");
+
+                    return false;
+                }
+                GetCheckBoxValues();
+                $('#btnCloseCSNNum').click();
+                $("#parLoading").text('Looking up CSN ' + $('#CSNNum').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbyCSNnum&cbSearchPartial=" + $('#partsearch').val() + "&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&CSNNum=" + $('#CSNNum').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+            $('#btnReqNum').click(function () {
+                if (($(receiptDate).val() == '') || ($(scanDate).val() == '')) {
+                    $("#divMain").fadeOut(100);
+                    $('#modualSDate').css("display", "block");
+
+                    return false;
+                }
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#searchReqNumBlank').css("display", "none");
+                $('#myModalReqNum').css("display", "block");
+            });
+            $('#btnClosereqNum').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalReqNum').css("display", "none");
+
+            });
+            $('#btnsearchreqnum').click(function (e) {
+                if (CheckEmptyStr($('#reqsNum').val().trim())) {
+
+                    ShowHideDialog("searchReqNumBlank");
+
+                    return false;
+                }
+                GetCheckBoxValues();
+                $('#btnClosereqNum').click();
+                $("#parLoading").text('Looking up Requisition# / Order ID# ' + $('#reqsNum').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbyreqnum&cbSearchPartial=" + $('#partsearch').val() + "&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&reqsNum=" + $('#reqsNum').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+            //search patient id
+            $('#btnPatID').click(function () {
+                if (($(receiptDate).val() == '') || ($(scanDate).val() == '')) {
+                    $("#divMain").fadeOut(100);
+                    $('#modualSDate').css("display", "block");
+
+                    return false;
+                }
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#myModalPatID').css("display", "block");
+                $('#searchPatIDBlank').css("display", "none");
+                //  $('#myModalIndexNum').show().modal();
+            });
+            $('#btnCloserPatID').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalPatID').css("display", "none");
+
+            });
+
+            $('#btnsearchPatID').click(function (e) {
+                if (CheckEmptyStr($('#patID').val().trim())) {
+
+                    ShowHideDialog("searchPatIDBlank");
+
+                    return false;
+                }
+                GetCheckBoxValues();
+                $('#btnCloserPatID').click();
+                $("#parLoading").text('Looking up Patient Id ' + $('#patID').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbypatid&cbSearchPartial=" + $('#partsearch').val() + "&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&patID=" + $('#patID').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+
+
+            //search MRN
+            $('#btnMRN').click(function () {
+                if (($(receiptDate).val() == '') || ($(scanDate).val() == '')) {
+                    $("#divMain").fadeOut(100);
+                    $('#modualSDate').css("display", "block");
+
+                    return false;
+                }
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#myModalMRN').css("display", "block");
+                $('#searchMRNBlank').css("display", "none");
+                //  $('#myModalIndexNum').show().modal();
+            });
+            $('#btnCloserMRN').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalMRN').css("display", "none");
+
+            });
+
+            $('#btnsearchMRN').click(function (e) {
+                if (CheckEmptyStr($('#MRN').val().trim())) {
+
+                    ShowHideDialog("searchMRNBlank");
+
+                    return false;
+                }
+                GetCheckBoxValues();
+                $('#btnCloserMRN').click();
+                $("#parLoading").text('Looking up MRN ' + $('#MRN').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbyMRN&cbSearchPartial=" + $('#partsearch').val() + "&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&MRN=" + $('#MRN').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+
+            //search client code
+            $('#btnCC').click(function () {
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#myModalClientCode').css("display", "block");
+                $('#searchClientCodeBlank').css("display", "none");
+
+            });
+            $('#btnClosecc').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalClientCode').css("display", "none");
+
+            });
+
+            $('#btnsearchClientCode').click(function (e) {
+                if (CheckEmptyStr($('#clientcode').val().trim())) {
+
+                    ShowHideDialog("searchClientCodeBlank");
+
+                    return false;
+                }
+
+                GetCheckBoxValues();
+                $('#btnClosecc').click();
+                $("#parLoading").text('Looking up Client Code ' + $('#clientcode').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbyclientccode&cbSearchPartial=" + $('#partsearch').val() + "startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&clientcode=" + $('#clientcode').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+
+            //search dr code
+            $('#btnDrCode').click(function () {
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#myModaldrCode').css("display", "block");
+                $('#myModaldrCode').css("searchdrCodeBlank", "block");
+
+            });
+            $('#btnCloserdrCode').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModaldrCode').css("display", "none");
+
+            });
+
+            $('#btnsearchdrCode').click(function (e) {
+                if (CheckEmptyStr($('#drCode').val().trim())) {
+
+                    ShowHideDialog("searchdrCodeBlank");
+
+                    return false;
+                }
+                GetCheckBoxValues();
+                $('#btnCloserdrCode').click();
+                $("#parLoading").text('Looking up Dr Code' + $('#drCode').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbydrcode&cbSearchPartial=" + $('#partsearch').val() + "startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&drCode=" + $('#drCode').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+
+            //search patient f name
+            $('#btnPFN').click(function () {
+                if (($(receiptDate).val() == '') || ($(scanDate).val() == '')) {
+                    $("#divMain").fadeOut(100);
+                    $('#modualSDate').css("display", "block");
+
+                    return false;
+                }
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#myModalpFName').css("display", "block");
+                $('#searchpFNameBlank').css("display", "none");
+
+            });
+            $('#btnclosepFName').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalpFName').css("display", "none");
+
+            });
+
+            $('#btnsearchpFName').click(function (e) {
+                if ((CheckEmptyStr($('#pFName').val().trim())) && (CheckEmptyStr($('#pLName').val().trim()))) {
+
+                    ShowHideDialog("searchpFNameBlank");
+                    ShowHideDialog("searchpLNameBlank");
+
+
+                    return false;
+                }
+
+                GetCheckBoxValues();
+                $('#btnclosepFName').click();
+                $("#parLoading").text('Looking up Patient First Name ' + $('#pFName').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbypatientfname&cbSearchPartial=" + $('#partsearch').val() + "&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&pFName=" + $('#pFName').val() + "&searchByLogScanDate=" + $("#searchBydate").val() + "&pLName=" + $('#pLName').val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+
+            //search patient l name
+            $('#btnPLN').click(function () {
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#myModalpLName').css("display", "block");
+                $('#searchpLNameBlank').css("display", "none");
+
+            });
+            $('#btncloserpLName').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalpLName').css("display", "none");
+
+            });
+
+            $('#btnsearchpLName').click(function (e) {
+                if (CheckEmptyStr($('#pLName').val().trim())) {
+
+                    ShowHideDialog("searchpLNameBlank");
+
+                    return false;
+                }
+
+                GetCheckBoxValues();
+                $('#btncloserpLName').click();
+                $("#parLoading").text('Looking up Patient Last Name ' + $('#pLName').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbypatientlname&cbSearchPartial=" + $('#partsearch').val() + "startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&pLName=" + $('#pLName').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+            //search dr name
+            $('#btnDrN').click(function () {
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#myModaldrName').css("display", "block");
+                $('#searchdrNameBlank').css("display", "none");
+
+            });
+            $('#btnclosedrName').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModaldrName').css("display", "none");
+
+            });
+
+            $('#btnsearchdrName').click(function (e) {
+                if (CheckEmptyStr($('#drName').val().trim())) {
+
+                    ShowHideDialog("searchdrNameBlank");
+
+                    return false;
+                }
+
+                GetCheckBoxValues();
+                $('#btnclosedrName').click();
+                $("#parLoading").text('Looking up Doctor Name ' + $('#drName').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbydrname&cbSearchPartial=" + $('#partsearch').val() + "startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&drName=" + $('#drName').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                        //  $("#sOptions").click();
+                        //  $("#resuts").val(result);
+
+
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+
+            //scan operator
+            $('#btnSO').click(function () {
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#myModalscanOp').css("display", "block");
+                $('#searchscanOpBlank').css("display", "none");
+            });
+            $('#btnclosescanOp').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalscanOp').css("display", "none");
+
+            });
+
+            $('#btnsearchscanOp').click(function (e) {
+                if (CheckEmptyStr($('#scanOp').val().trim())) {
+
+                    ShowHideDialog("searchscanOpBlank");
+
+                    return false;
+                }
+
+                GetCheckBoxValues();
+                $('#btnclosescanOp').click();
+                $("#parLoading").text('Looking up Scan Operator ' + $('#scanOp').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchso&cbSearchPartial=" + $('#partsearch').val() + "startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&scanOp=" + $('#scanOp').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+
+                        //  $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+
+            //scan batch
+            $('#btnSB').click(function () {
+                SetValueUncehckCheckBoxValues();
+                $("#divMain").fadeOut(100);
+                $('#myModalscanBatch').css("display", "block");
+            });
+            $('#btnclosescanBatch').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalscanBatch').css("display", "none");
+
+            });
+
+            $('#btnsearchscanBatch').click(function (e) {
+                GetCheckBoxValues();
+                $('#btnclosescanBatch').click();
+                $("#parLoading").text('Looking up Batch Id ' + $('#scanBatch').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbatchid&cbSearchPartial=" + $('#partsearch').val() + "startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&scanBatch=" + $('#scanBatch').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+            //search receipt date
+            $('#btnRD').click(function (e) {
+
+
+                $("#parLoading").text('Looking up by Receipt date start date ' + $('#receiptDate').val() + ' receipt end date ' + $('#scanDate').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                //if ($.fn.dataTable.isDataTable('#dtLabReqs')) {
+                //    table = $('#dtLabReqs').DataTable();
+                //    table.destroy();
+                //}
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbyrecdate&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: true,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                        //  $("#sOptions").click();
+                        //  $("#resuts").val(result);
+
+
+                    },
+                    complete: function () {
+                        //    CompleteAjaxCall();
+                        $("#divLoading").hide();
+                        // $("#sOptions").click();
+
+
+
+                        //if ($("#dtLabReqs").length) {
+                        //    $('#dtLabReqs').DataTable({ "pagingType": "full", "processing": true});
+                        //    $('.dataTables_length').addClass('bs-select');
+                        //    }
+
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+            //search dos
+            $('#btnDos').click(function (e) {
+
+
+                $("#parLoading").text('Looking up by Date of Service start date ' + $('#receiptDate').val() + ' receipt end date ' + $('#scanDate').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbydosdate&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+            //search scan date
+            $('#btnSD').click(function (e) {
+
+
+                $("#parLoading").text('Looking up by Scan date start date ' + $('#receiptDate').val() + ' receipt end date ' + $('#scanDate').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbyscandate&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+
+
+
+            $('#receiptDate').change(function () {
+                if ($('#scanDate').val() == '') {
+                    //var currentdate = new Date();
+                    // var datetime = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate.getDate();
+                    // $('#scanDate').val(datetime);
+                    $('#colDate').css("display", "block");
+                    $('#checkboxSearchDates').css("display", "grid");
+                    //$("#searchBydate").val('searchByLogDate');
+                    $("#lDate").prop('checked', true);
+                    $('#searchBydate').val('searchByLogDate');
+                    $("#sDate").click();
+                }
+
+                //  document.getElementById('checkboxSearchDates').style.display = 'grid';
+                GetLRSearchStartEndDate();
+                $("#sDate").click();
+                //  document.getElementById('checkboxSearchDates').style.display = 'grid';
+            });
+            $('#scanDate').change(function () {
+                $('#checkboxSearchDates').css("display", "grid");
+                $('#colDate').css("display", "block");
+                if ($('#receiptDate').val() == '') {
+                    $("#lDate").prop('checked', true);
+                    $('#searchBydate').val('searchByLogDate');
+                }
+                //   CheckLRSearchStartDate();
+            });
+            $('#lDate').change(function () {
+                $("#searchBydate").val('searchByLogDate');
+                $('#sDate').prop('checked', false);
+
+            });
+            $('#sDate').change(function () {
+                $("#lDate").prop('checked', false);
+                $("#searchBydate").val('scanDate');
+
+            });
+
+
+            $('#btnKWord').click(function () {
+                if (($(receiptDate).val() == '') || ($(scanDate).val() == '')) {
+                    $("#divMain").fadeOut(100);
+                    $('#modualSDate').css("display", "block");
+
+                    return false;
+                }
+                //if (($(receiptDate).val() == '') || ($(scanDate).val() == '')) {
+                //    // alert("Needs a search date range..");
+                //    ShowHideDialog("errorSDate");
+                //    ShowHideDialog("errorEDate");
+                //    return false;
+                //}
+                $("#divMain").fadeOut(100);
+                $('#myModalKeyWords').css("display", "block");
+                $('#keyWordsError').css("display", "none");
+
+                //  $('#myModalIndexNum').show().modal();
+            });
+
+
+            $('#btnsearchKeyWords').click(function (e) {
+                if (CheckEmptyStr($('#keyWords').val().trim())) {
+                    ShowHideDialog("keyWordsError");
+                    //$('#searchKeyWords').css("display", "block");
+
+                    return false;
+                }
+                if ($('#keyWords').val().length < 3) {
+                    ShowHideDialog("keyWordsError");
+                    //$('#searchKeyWords').css("display", "block");
+
+                    return false;
+                }
+                GetCheckBoxValues();
+                $('#errorSDate').css("display", "none");
+                $('#errorEDate').css("display", "none");
+                $('#btnCloseKeyWords').click();
+                $("#parLoading").text('Looking up KeyWords ' + $('#keyWords').val());
+                $("#divLoading").show();
+
+                e.preventDefault();
+                var lresSearcReqNumhUrl = "/Partial_Pages/SearchLabReqsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: lresSearcReqNumhUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=searchbyKeyWord&" + "&startSDate=" + $('#receiptDate').val() + "&endSDate=" + $('#scanDate').val() + "&keyWords=" + $('#keyWords').val() + "&searchByLogScanDate=" + $("#searchBydate").val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        $("#divLabReqs").html(result);
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        $("#sOptions").click();
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                    }
+                });
+            });
+
+            $('#btnCloseKeyWords').click(function () {
+
+                $("#divMain").fadeIn(100);
+                $('#myModalKeyWords').css("display", "none");
+
+            });
+
+
+        });
+    </script>
+
+}
+@*
+    <button type="button" class="btn btn-outline-primary">Primary Button</button>
+            <button type="button" class="btn btn-outline-secondary">Secondary Button</button>
+            <button type="button" class="btn btn-outline-success">Success Button</button>
+            <button type="button" class="btn btn-outline-danger">Danger Button</button>
+            <button type="button" class="btn btn-outline-warning">Warning Button</button>
+            <button type="button" class="btn btn-outline-info">Info Button</button>
+            <button type="button" class="btn btn-outline-light">Light Button</button>
+*@

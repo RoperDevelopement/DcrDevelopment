@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Edocs.Employees.Time.Clock.App.Service</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/datatables-select.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+
+        @if (string.Compare(ViewData["EdocsAdmin"].ToString(), "1", true) == 0)
+        {
+
+
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="~/img/edocs logo.gif" style="width:200px; height:100px;" /></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">e-Docs Employees</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-page="/E-docs_Employees/AddNewEdocsEmployee" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Add</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-page="/EdocsITSCustomers/EdocsITSEditCustomersView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Edit</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            @if (@Url.ActionContext.HttpContext.Request.Path.Value != "/TimeClockReports/TimeClockReportView")
+                            {
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="/Index" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Time Clock Reports</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-page="/TimeClockReports/TimeClockReportView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Time Clock View/Edit Hours</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-page="/TestPages/TestTableView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Edit</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+
+                <a class="nav-link text-dark" asp-area="" asp-page="/ClockInOut/ClockAdminOut">Clock Out @ViewData["EmpID"].ToString()</a>
+
+            </nav>
+        }
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <a href="http://edocsusa.com/" target="_blank">   &copy; 2022 - e-Docs USA - </a><a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/datatables/datatables-select.min.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

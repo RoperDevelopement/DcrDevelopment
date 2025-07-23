@@ -1,0 +1,13 @@
+﻿<Complex name="Root" type="DemoArchivers.MedicalRecordsSharefileArchiver, DemoArchivers">
+  <Properties>
+    <Simple name="HostName" value="edocsusa.sharefile.com" />
+    <Simple name="ClientId" value="tP99c2xDkArdbLH1QDhYEa5hsRpXAGLd" />
+    <Simple name="ClientSecret" value="jEFJEqK7rX9gnq3yeVSPBSAt7Q8Shi00sLM9HGvcUFvoVuG8" />
+    <Simple name="ClientFolderId" value="fo7caef6-916e-4905-b8d2-a18f1293a477" />
+    <Null name="ScannerName" />
+    <Null name="ScannerSetting" />
+    <Simple name="CommandReaderName" value="DEFAULT" />
+    <Simple name="FileWriterName" value="PDF" />
+    <Simple name="CommandImageBuilderName" value="DEFAULT" />
+  </Properties>
+</Complex>

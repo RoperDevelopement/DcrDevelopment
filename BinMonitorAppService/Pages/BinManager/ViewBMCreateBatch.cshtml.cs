@@ -1,0 +1,646 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using BinMonitorAppService.Models;
+using BinMonitorAppService.Constants;
+using Microsoft.AspNetCore.Hosting;
+
+using Microsoft.AspNetCore.Identity;
+using System.Net.Http;
+using System.Security.Claims;
+using Microsoft.Net.Http;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Security.Principal;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Configuration;
+using BinMonitorAppService.ApiClasses;
+using Microsoft.AspNetCore.Http;
+using BinMonitorAppService.Logging;
+using Microsoft.AspNetCore.Authorization;
+namespace BinMonitorAppService.Pages.BinManager
+{
+
+    public class ViewBMCreateBatchModel : PageModel
+    {
+        private readonly IConfiguration configuration;
+        private ILog auditLogs;
+        private string WebApiUrl
+        { get { return configuration.GetValue<string>("BinMonitorApi").ToString(); } }
+
+        [MinLength(4)]
+        public IList<string> BinID
+        { get; set; }
+
+
+        [MaxLength(10)]
+        public IList<string> CategoryName
+        { get; set; }
+
+
+        [BindProperty]
+        public BinRegProcessModel BinRegistorModel
+        { get; set; }
+
+        public SpectrumMonitorSettings SpectrumMonitorSettings
+        { get; set; }
+        public IDictionary<string, BinRegProcessModel> BinRegProcModelActiveBins
+        { get; set; }
+
+        [Display(Name = "Register Cwid")]
+        [BindProperty]
+        public string Cwid
+        { get; set; }
+        public string SelBinId
+        { get; set; }
+        public string SelCatName
+        { get; set; }
+        public List<string> LabReqNumbers
+        { get; set; }
+        public string LabReqNum
+        { get; set; }
+        public SpectrumMonitorMenuRightsModel SpectrumMonitorMenuRightsModel
+        { get; set; }
+
+        public SpecMonitorFormUserPre MonitorFormUserPre
+        { get; set; }
+
+        public bool TableHeader
+        { get; set; }
+        public int TableDiv
+        { get; set; }
+        public int TotalRecordsProc
+        { get; set; }
+        public string MaxPerBin
+        { get; set; }
+        public bool CwidUnassigned
+        { get; set; }
+        public ViewBMCreateBatchModel(IConfiguration config, ILog logConfig)
+        {
+            configuration = config;
+            BinRegistorModel = new BinRegProcessModel();
+            auditLogs = logConfig;
+
+        }
+        private async Task GetLogInformaiton()
+        {
+
+            auditLogs = InitAuditLogs.LogAsync(auditLogs, HttpContext.Session).ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+        public async Task<IActionResult> OnGetAsync(string BinRegistorModel_LabRecNumber = null, string selCatName = null, string selBinId = null, string BinComments = null, string BinContents = null, bool delRec = false)
+        {
+            var qstr = Request.QueryString;
+            SelBinId = string.Empty;
+            SelCatName = string.Empty;
+
+
+            try
+            {
+                InitAuditLogs.StartStopWatch();
+                GetLogInformaiton().ConfigureAwait(false).GetAwaiter().GetResult();
+                auditLogs.LogInformation("Start OnGetAsync ViewBMCreateBatchModel");
+
+                if (!(User.Identity.IsAuthenticated))
+                {
+                    auditLogs.LogInformation($"ReNewing session for ViewBMCreateBatchModel total time: {InitAuditLogs.StopStopWatch()} ms");
+                    if (qstr.HasValue)
+                    {
+
+                        return Redirect($"/BinUsers/LoginView?returnUrl=/BinManager/ViewBMCreateBatch{qstr.Value}");
+                    }
+
+                    else
+                        return Redirect($"/BinUsers/LoginView?returnUrl=/BinManager/ViewBMCreateBatch");
+                }
+                ViewData["CWID"] = await GetSessionVariables.SessionVarInstance.GetSessionVariable(HttpContext.Session, GetSessionVariables.SessionKeyCwid).ConfigureAwait(false);
+                if (ViewData["CWID"] == null)
+                {
+                    auditLogs.LogInformation($"Session expired for ViewBMCreateBatchModel total time: {InitAuditLogs.StopStopWatch()} ms");
+                    if (qstr.HasValue)
+                    {
+
+                        return Redirect($"/BinUsers/LoginView?returnUrl=/BinManager/ViewBMCreateBatch{qstr.Value}");
+                    }
+
+                    else
+                        return Redirect($"/BinUsers/LoginView?returnUrl=/BinManager/ViewBMCreateBatch");
+                }
+                if (!(delRec))
+                {
+                    if (!(string.IsNullOrEmpty(selBinId)) || (!(string.IsNullOrEmpty(selCatName))))
+                    {
+                        SelBinId = selBinId;
+                        SelCatName = selCatName;
+                        if (string.Compare(Request.Query["unassignedCwid"], "on", true) == 0)
+                            CwidUnassigned = true;
+                        auditLogs.LogInformation($"Create batch for bin id: {SelBinId} category: {SelCatName} lab req#:{LabReqNum}");
+                        OnPostAsync(CwidUnassigned,BinRegistorModel_LabRecNumber, BinComments, BinContents).ConfigureAwait(false).GetAwaiter().GetResult();
+                    }
+                }
+                else
+                {
+                    SelBinId = selBinId;
+                    SelCatName = selCatName;
+                }
+                Init(selBinId).ConfigureAwait(true).GetAwaiter().GetResult();
+                if ((BinRegProcModelActiveBins != null) && (BinRegProcModelActiveBins.Count > 0))
+                {
+                    TableDiv = (int)(BinRegProcModelActiveBins.Count / 2);
+                    TableHeader = false;
+                    TotalRecordsProc = 0;
+                    
+                }
+                GetMaxPerBin().ConfigureAwait(false).GetAwaiter().GetResult();
+                auditLogs.LogInformation($"End ViewBMCreateBatchModel total time: {InitAuditLogs.StopStopWatch()} ms");
+
+
+            }
+            catch (Exception ex)
+            {
+                auditLogs.LogError($"ViewBMCreateBatchModel {ex.Message}");
+                return Redirect($"/BinUsers/DisplayErrorMessagesView?ErrMEss=Model ViewBMCreateBatchModel OnGetAsync {ex.Message}");
+
+            }
+            return Page();
+
+        }
+        private async Task GetViewData()
+        {
+            ViewData[SqlConstants.ViewDataChangeCategories] = SpectrumMonitorMenuRightsModel.Categories;
+            ViewData[SqlConstants.ViewDataEmailReports] = SpectrumMonitorMenuRightsModel.EmailReports;
+            ViewData[SqlConstants.ViewDataRunReports] = SpectrumMonitorMenuRightsModel.RunReports;
+
+        }
+        private async Task GetMaxPerBin()
+        {
+            MaxPerBin = GetSessionVariables.SessionVarInstance.GetSessionVariable(HttpContext.Session, SqlConstants.CachMaxPerBin).ConfigureAwait(true).GetAwaiter().GetResult();
+            if (string.IsNullOrWhiteSpace(MaxPerBin))
+            {
+                SpectrumMonitorSettings = await GetApis.GetApisInctance.GetSpecumMonitorSettigs(WebApiUrl, $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SPGetSpecSettings}", auditLogs);
+                MaxPerBin = SpectrumMonitorSettings.MaxLabReqsPerBin.ToString();
+                await GetSessionVariables.SessionVarInstance.SetSessionOjbjectAsJson(HttpContext.Session, SqlConstants.CachMaxPerBin, MaxPerBin);
+            }
+            MaxPerBin = MaxPerBin.Replace(SqlConstants.DoubleQuotes, "").Trim();
+        }
+       
+        private async Task Init(string selBinId)
+        {
+            Cwid = User.Identity.Name;
+            await Init(SelBinId, auditLogs);
+            LabReqNumbers = GetSessionVariables.SessionVarInstance.GetJsonSessionObject<List<string>>(HttpContext.Session, "NypLrNumbers").ConfigureAwait(true).GetAwaiter().GetResult();
+            if ((LabReqNumbers == null) || (LabReqNumbers.Count == 0))
+            {
+                LabReqNumbers = await BinsInformation.BinsApisInctance.ApiGetActiveBinsModel(WebApiUrl, $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SpGetActiveBinsModel}", auditLogs);
+                GetSessionVariables.SessionVarInstance.SetSessionOjbjectAsJson(HttpContext.Session, "NypLrNumbers", LabReqNumbers).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+
+            // LabReqNum = GetLabReqNum(auditLogs).Result;
+            if (!(string.IsNullOrWhiteSpace(selBinId)))
+            {
+                //IDictionary<string, BinRegProcessModel> keys = new Dictionary<string, BinRegProcessModel>();
+                //   keys = GetApis.GetApisInctance.ApiGetActiveBinsModel(WebApiUrl, $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SpGetActiveBinsModel}", SqlConstants.BinRegProcessMondelIndexBatchId, auditLogs).ConfigureAwait(false).GetAwaiter().GetResult();
+                //BinRegProcModelActiveBins = (IDictionary<string, BinRegProcessModel>)keys.Where(p => p.Value.BinID == selBinId);
+                //  BinRegProcModelActiveBins = BinRegProcModelActiveBins.Select(p => p==selBinId).ToDictionary();
+                //  BinRegProcModelActiveBins = GetApis.GetApisInctance.ApiActiveByBinIDModel(WebApiUrl, sp, auditLogs).ConfigureAwait(false).GetAwaiter().GetResult(); 
+                // BinRegProcModelActiveBins = BinRegProcModelActiveBins.FirstOrDefault(x => x.Key == selBinId);
+                string sp = $"{SqlConstants.WebApiBinMonitor}{SqlConstants.SpGetActiveBinsModelByBinId}/{selBinId}";
+
+                BinRegProcModelActiveBins = GetApis.GetApisInctance.ApiGetActiveBinsID(auditLogs,WebApiUrl, sp).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+            else
+                BinRegProcModelActiveBins = new Dictionary<string, BinRegProcessModel>();
+            SpectrumMonitorMenuRightsModel = ApiSetUserProfile.UserProfileInstance.GetBMMenuRights(User.Identity.Name, HttpContext.Session, auditLogs, WebApiUrl).ConfigureAwait(false).GetAwaiter().GetResult();
+            GetViewData().ConfigureAwait(true).GetAwaiter().GetResult();
+
+        }
+        private async Task<string> GetLabReqNum(ILog log)
+        {
+            string retStr = string.Empty;
+            foreach (string s in LabReqNumbers)
+            {
+                retStr += $"{s},";
+            }
+            if (!(string.IsNullOrWhiteSpace(retStr)))
+            {
+                if (retStr.EndsWith(","))
+                {
+                    retStr = retStr.Remove(retStr.Length - 1, 1).Trim();
+                }
+            }
+            log.LogInformation($"Method GetLabReqNum labreq#: {retStr}");
+            return retStr;
+        }
+        private async Task Init(string currentBIn, ILog log)
+        {
+            await ApiOpenBins(currentBIn, log);
+            //  await ApiUserInfo();
+            await ApiCategories(log);
+        }
+        public async Task<bool> CheckLabReqExists(string reqNum)
+        {
+            LabReqNumbers = GetSessionVariables.SessionVarInstance.GetJsonSessionObject<List<string>>(HttpContext.Session, "NypLrNumbers").ConfigureAwait(true).GetAwaiter().GetResult();
+            if (LabReqNumbers == null)
+                LabReqNumbers = new List<string>();
+            if (LabReqNumbers.Contains(reqNum))
+            {
+                ModelState.AddModelError("LabRecNumber", $"LabReq Number {reqNum} found in another bin");
+                return true;
+            }
+            else
+            {
+                LabReqNumbers.Add(reqNum);
+                GetSessionVariables.SessionVarInstance.SetSessionOjbjectAsJson(HttpContext.Session, "NypLrNumbers", LabReqNumbers).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+            return false;
+        }
+        //  private async Task AddNewLabRec(string labReqNumber = null,string binComments = null, string binContents = null)
+        private async Task<IActionResult> OnPostAsync(bool cwidUnassigned,string labReqNumber = null, string binComments = null, string binContents = null)
+        {
+            bool valid = true;
+            auditLogs.LogInformation($"Method AddNewLabRec BinID: {SelBinId} Category:{SelCatName} labReq number: {labReqNumber}");
+            Cwid = User.Identity.Name;
+            BinRegistorModel.LabRecNumber = labReqNumber;
+
+            if (string.IsNullOrEmpty(BinRegistorModel.LabRecNumber))
+            {
+                auditLogs.LogWarning("Lab Req Number required");
+                ModelState.AddModelError("LabRecNumber", "Lab Req Number required");
+                valid = false;
+            }
+            else if (BinRegistorModel.LabRecNumber.Length > 17)
+            {
+                auditLogs.LogWarning($"Invalid LabReq number {BinRegistorModel.LabRecNumber} lenght invalid {BinRegistorModel.LabRecNumber.Length}");
+                ModelState.AddModelError("LabRecNumber", $"Invalid LabReq number {BinRegistorModel.LabRecNumber} length invalid {BinRegistorModel.LabRecNumber.Length}");
+                valid = false;
+
+            }
+            else
+            {
+                bool labReqNumExists = await CheckLabReqExists(BinRegistorModel.LabRecNumber);
+                if (labReqNumExists)
+                {
+                    auditLogs.LogInformation($"OnPostAsync ViewBMCreateBatchModel Labrec# all ready exists: {BinRegistorModel.LabRecNumber}");
+                    valid = false;
+                }
+            }
+
+            if (string.IsNullOrEmpty(SelBinId))
+            {
+                auditLogs.LogWarning("BinId required");
+                ModelState.AddModelError("BinID", "BinId required");
+                valid = false;
+            }
+
+            if (string.IsNullOrEmpty(SelCatName))
+            {
+                valid = false;
+                auditLogs.LogWarning("Category Name required");
+                ModelState.AddModelError("CategoryName", "Category Name required");
+            }
+
+            if (!(string.IsNullOrWhiteSpace(binContents)))
+            {
+                BinRegistorModel.BinContents = binContents.Replace("{UserName}", Cwid);
+            }
+            if (!(string.IsNullOrWhiteSpace(binComments)))
+            {
+                BinRegistorModel.BinComments = binComments.Replace("{UserName}", Cwid);
+            }
+            if (valid)
+            {
+
+                BinRegistorModel.RegCreatedBy = Cwid;
+                BinRegistorModel.RegStartedAt = DateTime.Now;
+                BinRegistorModel.RegAssignedBy = Cwid;
+                if (cwidUnassigned)
+                    BinRegistorModel.RegAssignedTo = SqlConstants.UserUnassigned;
+                else
+                    BinRegistorModel.RegAssignedTo = Cwid;
+                BinRegistorModel.BinID = SelBinId;
+                BinRegistorModel.CategoryName = SelCatName;
+                auditLogs.LogInformation($"OnPostAsync ViewBMCreateBatchModel Create new batch: BinID: {BinRegistorModel.BinID} LabReqNumber: {BinRegistorModel.LabRecNumber} CategoryName: {BinRegistorModel.CategoryName} RegAssignedTo: {BinRegistorModel.RegAssignedTo} RegAssignedBy: {BinRegistorModel.RegAssignedBy} RegCreatedBy:{BinRegistorModel.RegCreatedBy} RegStartedAt:{BinRegistorModel.RegStartedAt}");
+                await ApiCreateBatch(BinRegistorModel, auditLogs);
+                BinRegistorModel.LabRecNumber = string.Empty;
+                //  return Redirect($"/ViewBMCreateBatch?selBinId{SelBinId}&selCatName={SelCatName}&BinRegistorModel_LabRecNumber={null}& BinComments={null}&BinComments={null}&returnPost=1");
+                //  RedirectToAction("ViewBMCreateBatch");
+                //return RedirectToPage("ViewBMCreateBatch");
+            }
+            //  Init().ConfigureAwait(true).GetAwaiter().GetResult();
+
+            //string totalQueryTime = InitAuditLogs.StopStopWatch();
+            auditLogs.LogInformation($"End OnPostAsync AddNewLabRec");
+            return Page();
+        }
+        public async Task<IActionResult> Done()
+
+        {
+            try
+            {
+
+                if (!(User.Identity.IsAuthenticated))
+                {
+                    return Redirect("/BinUsers/LoginView?returnUrl=/BinManager/ViewBMCreateBatch");
+                }
+                ViewData["CWID"] = await GetSessionVariables.SessionVarInstance.GetSessionVariable(HttpContext.Session, GetSessionVariables.SessionKeyCwid);
+                if (ViewData["CWID"] == null)
+                    return Redirect("/BinUsers/LoginView");
+                BinRegistorModel.LabRecNumber = Request.Form["BinRegistorModel_LabRecNumber"].ToString();
+                // BinRegistorModel.LabRecNumber = 
+
+                InitAuditLogs.StartStopWatch();
+                GetLogInformaiton().ConfigureAwait(false).GetAwaiter().GetResult();
+                auditLogs.LogInformation("Start OnPostAsync ViewBMCreateBatchModel");
+                Cwid = User.Identity.Name;
+                SelBinId = Request.Form["selBinId"];
+                SelCatName = Request.Form["selCatName"];
+                string binComments = Request.Form["BinComments"];
+                string binContents = Request.Form["BinContents"];
+                auditLogs.LogInformation($"OnPostAsync ViewBMCreateBatchModel BinID: {SelBinId} CategoryName: {SelCatName} Comments: {binComments} Contents: {binContents}");
+
+                bool valid = true;
+                string transFerFrom = Request.Form["oldBinID"];
+                if (!(string.IsNullOrWhiteSpace(transFerFrom)))
+                {
+                    BinRegistorModel.BinComments = binComments;
+                    string newBinId = Request.Form["newBinID"];
+                    auditLogs.LogInformation($"OnPostAsync ViewBMCreateBatchModel trnasfer BinID: {transFerFrom} to new  bindid: {newBinId}");
+                    await TransferApi.GetTransFerApisIntance.TransFerBin(WebApiUrl, transFerFrom, newBinId, BinRegistorModel.BinComments, Cwid, auditLogs);
+                    string totalQueryTime = InitAuditLogs.StopStopWatch();
+                    auditLogs.LogInformation($"End OnPostAsync ViewBMCreateBatchModel redirecting to url ViewBMCreateBatch total time: {totalQueryTime} ms");
+                    return Redirect("/BinUsers/LoginView?returnUrl=/BinManager/ViewBMCreateBatch");
+                }
+                else
+                {
+
+                    if (!(string.IsNullOrWhiteSpace(binContents)))
+                    {
+                        BinRegistorModel.BinContents = binContents.Replace("{UserName}", Cwid);
+                    }
+                    if (!(string.IsNullOrWhiteSpace(binComments)))
+                    {
+                        BinRegistorModel.BinComments = binComments.Replace("{UserName}", Cwid);
+                    }
+
+
+                    if (string.IsNullOrEmpty(BinRegistorModel.LabRecNumber))
+                    {
+                        auditLogs.LogWarning("Lab Req Number required");
+                        ModelState.AddModelError("LabRecNumber", "Lab Req Number required");
+                        valid = false;
+                    }
+                    else if (BinRegistorModel.LabRecNumber.Length > 15)
+                    {
+                        auditLogs.LogWarning($"Invalid LabReq number {BinRegistorModel.LabRecNumber} lenght invalid {BinRegistorModel.LabRecNumber.Length}");
+                        ModelState.AddModelError("LabRecNumber", $"Invalid LabReq number {BinRegistorModel.LabRecNumber} length invalid {BinRegistorModel.LabRecNumber.Length}");
+                        valid = false;
+
+                    }
+                    else
+                    {
+                        bool labReqNumExists = await CheckLabReqExists(BinRegistorModel.LabRecNumber);
+                        if (labReqNumExists)
+                        {
+                            auditLogs.LogInformation($"OnPostAsync ViewBMCreateBatchModel Labrec# all ready exists: {BinRegistorModel.LabRecNumber}");
+                            valid = false;
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(SelBinId))
+                    {
+                        auditLogs.LogWarning("BinId required");
+                        ModelState.AddModelError("BinID", "BinId required");
+                        valid = false;
+                    }
+
+                    if (string.IsNullOrEmpty(SelCatName))
+                    {
+                        valid = false;
+                        auditLogs.LogWarning("Category Name required");
+                        ModelState.AddModelError("CategoryName", "Category Name required");
+                    }
+
+                    if (valid)
+                    {
+
+                        BinRegistorModel.RegCreatedBy = Cwid;
+                        BinRegistorModel.RegStartedAt = DateTime.Now;
+                        BinRegistorModel.RegAssignedBy = Cwid;
+                        BinRegistorModel.RegAssignedTo = Cwid;
+                        BinRegistorModel.BinID = SelBinId;
+                        BinRegistorModel.CategoryName = SelCatName;
+                        auditLogs.LogInformation($"OnPostAsync ViewBMCreateBatchModel Create new batch: BinID: {BinRegistorModel.BinID} LabReqNumber: {BinRegistorModel.LabRecNumber} CategoryName: {BinRegistorModel.CategoryName} RegAssignedTo: {BinRegistorModel.RegAssignedTo} RegAssignedBy: {BinRegistorModel.RegAssignedBy} RegCreatedBy:{BinRegistorModel.RegCreatedBy} RegStartedAt:{BinRegistorModel.RegStartedAt}");
+                        await ApiCreateBatch(BinRegistorModel, auditLogs);
+                        BinRegistorModel.LabRecNumber = string.Empty;
+                        //  RedirectToAction("ViewBMCreateBatch");
+                        //return RedirectToPage("ViewBMCreateBatch");
+                    }
+
+
+                    Init(SelBinId).ConfigureAwait(true).GetAwaiter().GetResult();
+                    string totalQueryTime = InitAuditLogs.StopStopWatch();
+                    auditLogs.LogInformation($"End OnPostAsync ViewBMCreateBatchModel total time: {totalQueryTime} ms");
+                    int totMinutesLeft = ApiSetUserProfile.UserProfileInstance.GetSessionTime(HttpContext.Session, 1).ConfigureAwait(false).GetAwaiter().GetResult();
+                    //SessionExpires = totMinutesLeft.ToString(); 
+                    //if ((totMinutesLeft < 0) && (valid))
+                    //    return Redirect($"/BinUsers/LoginView?returnUrl=/BinManager/ViewBMCreateBatch?idBin={SelBinId}&nameCat={SelCatName}");
+
+                    //if (valid)
+                    //    return Redirect($"/BinUsers/LoginView?returnUrl=/BinManager/ViewBMCreateBatch?idBin={SelBinId}&nameCat={SelCatName}");
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                auditLogs.LogInformation($"End OnPostAsync ViewBMCreateBatchModel total time: {InitAuditLogs.StopStopWatch()} ms");
+                return Redirect($"/BinUsers/DisplayErrorMessagesView?ErrMEss=Model ViewBMCreateBatchModel OnGetAsync {ex.Message}");
+            }
+
+
+
+            return Page();
+
+
+        }
+
+
+        public async Task ApiCreateBatch(BinRegProcessModel binRegistorProcModel, ILog log)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(binRegistorProcModel.LabRecNumber))
+                    throw new Exception("Labreq number cannot be empty");
+                log.LogInformation($"Method ApiCreateBatch for binid:{binRegistorProcModel.BinID} weburl: {WebApiUrl} controller {SqlConstants.ApiCreateBatch}");
+                using (var client = new HttpClient())
+                {
+
+                    BinRegistorModel binRegistorModel = await GetApis.GetApisInctance.ConvertBinRegProcessModelToBinRegistorModel(binRegistorProcModel, SqlConstants.RegAllBatch);
+                    client.BaseAddress = new Uri($"{WebApiUrl}");
+                    var jsonString = JsonConvert.SerializeObject(binRegistorModel);
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+                    var responseTask = client.PostAsync($"{client.BaseAddress.AbsoluteUri}{SqlConstants.ApiCreateBatch}", content);
+                    responseTask.Wait();
+                    var result = await client.PostAsync("Method Address", content);
+                    string resultContent = await result.Content.ReadAsStringAsync();
+                    var results = responseTask.Result;
+                    content.Dispose();
+                    log.LogInformation($"Method ApiCreateBatch for binid:{binRegistorProcModel.BinID} weburl: {WebApiUrl} controller {SqlConstants.ApiCreateBatch} result stats code: {results.StatusCode}");
+                    if (!(results.IsSuccessStatusCode))
+                    {
+
+                        throw new Exception($"Method ApiCreateBatch for binid:{binRegistorProcModel.BinID} weburl: {WebApiUrl} controller {SqlConstants.ApiCreateBatch} result stats code: {results.StatusCode} batch not created");
+                    }
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"Method ApiCreateBatch HttpRequestException binid:{binRegistorProcModel.BinID} weburl: {WebApiUrl} controller {SqlConstants.ApiCreateBatch} {httpex.Message}");
+                throw new Exception($"Metod ApiOpenBins HttpRequestException {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"Method ApiCreateBatch ArgumentNullException binid:{binRegistorProcModel.BinID} weburl: {WebApiUrl} controller {SqlConstants.ApiCreateBatch} {ag.Message}");
+                throw new Exception($"Method ApiCreateBatch ArgumentNullException {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Method ApiCreateBatch Exception binid:{binRegistorProcModel.BinID} weburl: {WebApiUrl} controller {SqlConstants.ApiCreateBatch}");
+                throw new Exception($"Method ApiOpenBins binid:{binRegistorProcModel.BinID} weburl: {WebApiUrl} controller {SqlConstants.ApiCreateBatch} {ex.Message}");
+            }
+        }
+
+        public async Task ApiOpenBins(string currentBin, ILog log)
+        {
+            try
+            {
+                log.LogInformation($"Method ApiOpenBins bind id: {currentBin} weburl: {WebApiUrl} controller: {SqlConstants.ApiOpenBins}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{WebApiUrl}");
+                    var responseTask = client.GetAsync($"{SqlConstants.ApiOpenBins}");
+                    //  var responseTask = client.GetAsync($"{SqlConstants.ApiGetAllBinIds}");
+                    //  var responseTask = client.GetAsync($"{SqlConstants.ApiActiveBinsModel}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiOpenBins bind id: {currentBin} weburl: {WebApiUrl} controller: {SqlConstants.ApiOpenBins} results statscode: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<BinModel[]>();
+                        readTask.Wait();
+                        List<string> tempList = readTask.Result.Select(p => p.BinID).ToList();
+                        if (!(string.IsNullOrWhiteSpace(currentBin)))
+                            tempList.Add(currentBin);
+                        tempList.Add("  ");
+                        tempList.Sort();
+                        BinID = tempList;
+
+                        //BinID = readTask.Result.Select(p => p.BinID).ToList();
+                        //BinID.Add("000");
+                        //BinID = BinID.OrderBy(p => p).First();
+
+
+
+                    }
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"Method ApiOpenBins HttpRequestException bind id: {currentBin} weburl: {WebApiUrl} controller: {SqlConstants.ApiOpenBins} {httpex.Message}");
+                throw new Exception($"Metod ApiOpenBins HttpRequestException {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"Method ApiOpenBins ArgumentNullException bind id: {currentBin} weburl: {WebApiUrl} controller: {SqlConstants.ApiOpenBins} {ag.Message}");
+                throw new Exception($"Metod ApiOpenBins ArgumentNullException {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Method ApiOpenBins Exception bind id: {currentBin} weburl: {WebApiUrl} controller: {SqlConstants.ApiOpenBins} {ex.Message}");
+                throw new Exception($"Method ApiOpenBins bin id {currentBin} {ex.Message}");
+            }
+        }
+
+        public async Task ApiUserInfo()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri($"{WebApiUrl}");
+                var responseTask = client.GetAsync($"{SqlConstants.ApiUserInfo}");
+                responseTask.Wait();
+                var results = responseTask.Result;
+                if (results.IsSuccessStatusCode)
+                {
+                    var readTask = results.Content.ReadAsAsync<UsersModel[]>();
+                    readTask.Wait();
+                    List<string> tempUserList = readTask.Result.Where(p => !(p.EmailAddress.ToLower().Contains("edocs"))).Select(p => p.FirstName + " " + p.LastName).ToList();
+                    tempUserList.Add("  ");
+                    tempUserList.Sort();
+                    //  LassignedBy = tempUserList;
+                    // LassignedTo = LassignedBy;
+                    //UserFirstLastName = readTask.Result.Select(p => p.FirstName + " " + p.LastName).ToList();
+                    //LassignedBy = readTask.Result.Where(p => !(p.EmailAddress.ToLower().Contains("edocs"))).Select(p => p.FirstName + " " + p.LastName).ToList();
+
+                    //LassignedTo = LassignedBy;
+                    //CategoryName = readTask.Result.Where(p => !(p.CategoryName.ToLower().Contains("edocs"))).Select(p => p.CategoryName).ToList();
+
+                }
+            }
+        }
+        public async Task ApiCategories(ILog log)
+        {
+            try
+            {
+
+                log.LogInformation($"Method ApiCategories weburl: {WebApiUrl} controller: {SqlConstants.ApiCatNameID}");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri($"{WebApiUrl}");
+                    var responseTask = client.GetAsync($"{SqlConstants.ApiCatNameID}");
+                    responseTask.Wait();
+                    var results = responseTask.Result;
+                    log.LogInformation($"Method ApiCategories weburl: {WebApiUrl} controller: {SqlConstants.ApiCatNameID} result statud code: {results.StatusCode}");
+                    if (results.IsSuccessStatusCode)
+                    {
+                        var readTask = results.Content.ReadAsAsync<CategoryIdName[]>();
+                        readTask.Wait();
+
+                        //CategoryName = readTask.Result.Where(p=>!(p.CategoryName.ToLower().Contains("edocs"))).Select(p => p.CategoryName).ToList();
+                        List<string> tempList = readTask.Result.Select(p => p.CategoryName).ToList();
+                        tempList.Add("  ");
+                        tempList.Sort();
+                        //CategoryName = readTask.Result.Select(p => p.CategoryName).ToList();
+                        CategoryName = tempList;
+                    }
+                }
+            }
+            catch (HttpRequestException httpex)
+            {
+                log.LogError($"Method ApiCategories HttpRequestException  {WebApiUrl} controller: {SqlConstants.ApiOpenBins} {httpex.Message}");
+                throw new Exception($"Metod ApiCategories HttpRequestException {httpex.Message}");
+            }
+
+            catch (ArgumentNullException ag)
+            {
+                log.LogError($"Method ApiCategories ArgumentNullException  weburl: {WebApiUrl} controller: {SqlConstants.ApiOpenBins} {ag.Message}");
+                throw new Exception($"Metod ApiCategories ArgumentNullException {ag.Message}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Method ApiCategories Exception  weburl: {WebApiUrl} controller: {SqlConstants.ApiOpenBins} {ex.Message}");
+                throw new Exception($"Metod ApiCategories {ex.Message}");
+            }
+        }
+    }
+}

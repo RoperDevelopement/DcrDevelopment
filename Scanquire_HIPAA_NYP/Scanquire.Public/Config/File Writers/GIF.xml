@@ -1,0 +1,8 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQFileWriter_Image, Scanquire.Public">
+  <Properties>
+    <Simple name="ImageFormat" value="FIF_GIF" />
+    <Simple name="SaveFlags" value="DEFAULT" />
+    <Simple name="MimeType" value="image/gif" />
+    <Simple name="FileExtension" value=".gif" />
+  </Properties>
+</Complex>

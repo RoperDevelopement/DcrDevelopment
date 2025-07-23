@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{74F6C020-6CE6-41A5-8F8E-8D8838F0B07C}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Scanquire.Public</RootNamespace>
+    <AssemblyName>Scanquire.Public</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <CodeAnalysisRuleSet />
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DTK.BarReader">
+      <HintPath>..\..\BarCodeDlls\DTK.BarReader.dll</HintPath>
+    </Reference>
+    <Reference Include="EdocsUSA.Utilities, Version=1.0.7128.27480, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Assemblies\EdocsUSA.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeImageNET, Version=3.15.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Assemblies\3rd Party\FreeImage3154Win32\FreeImage\Wrapper\FreeImage.NET\cs\Bin\FreeImageNET.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client">
+      <HintPath>..\Dlls\Microsoft.SharePoint.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime">
+      <HintPath>..\Dlls\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Polenter.SharpSerializer">
+      <HintPath>..\..\..\Assemblies\3rd Party\sharpSerializerDll\Polenter.SharpSerializer.dll</HintPath>
+    </Reference>
+    <Reference Include="Scanquire.ThirdParty, Version=1.0.7333.25991, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Assemblies\Scanquire.ThirdParty.dll</HintPath>
+    </Reference>
+    <Reference Include="ScanquireLogin, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Assemblies\ScanquireLogin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Tesseract, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tesseract.3.3.0\lib\net40\Tesseract.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArchivesConstants\JsonsFieldConstants.cs" />
+    <Compile Include="AutoQaCheckBlankImages.cs" />
+    <Compile Include="BarcodeRenderer\BarcodeRenderers.cs" />
+    <Compile Include="Compression.cs" />
+    <Compile Include="Encryption.cs" />
+    <Compile Include="Extensions\FreeImageBitmapExtensions.cs" />
+    <Compile Include="Properties\SQArchiverSelector.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>SQArchiverSelector.settings</DependentUpon>
+    </Compile>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Sharepoint\SharepointCredentials.cs">
+      <SubType>UserControl</SubType>
+    </None>
+    <None Include="Sharepoint\SharepointCredentials.Designer.cs">
+      <DependentUpon>SharepointCredentials.cs</DependentUpon>
+    </None>
+    <None Include="Sharepoint\SharepointCredentialsDialog.cs">
+      <SubType>Form</SubType>
+    </None>
+    <None Include="Sharepoint\SharepointCredentialsDialog.Designer.cs">
+      <DependentUpon>SharepointCredentialsDialog.cs</DependentUpon>
+    </None>
+    <Compile Include="ScanQuireUsers\UserInformation.cs" />
+    <Compile Include="Sharepoint\SharepointCredentialsManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sharepoint\SharepointCredentialsManager.Designer.cs">
+      <DependentUpon>SharepointCredentialsManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sharepoint\SPHelper.cs" />
+    <Compile Include="SQCommandImageBuilder\SQCommandImageBuilder.cs" />
+    <Compile Include="SQCommand\ISQCommand_File.cs" />
+    <Compile Include="SQCommand\ISQCommand_Image.cs" />
+    <Compile Include="SQCommand\SQCommand_Image_DrawBarcode.cs" />
+    <None Include="Properties\SQArchiverSelector.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SQArchiverSelector.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="SQFile\SQFileReader\SQFileReaderBase.cs" />
+    <Compile Include="SQFilesystemConnector\SQFilesystemConnectors.cs" />
+    <Compile Include="Icons.Designer.cs">
+      <DependentUpon>Icons.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Encryption.Designer.cs">
+      <DependentUpon>Encryption.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Properties\SQFilesystemArchiver.Designer.cs">
+      <DependentUpon>SQFilesystemArchiver.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\SQImage.Designer.cs">
+      <DependentUpon>SQImage.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\SQImageListViewer.Designer.cs">
+      <DependentUpon>SQImageListViewer.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\SQImageRevision.Designer.cs">
+      <DependentUpon>SQImageRevision.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\SQImageViewer.Designer.cs">
+      <DependentUpon>SQImageViewer.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\SQTwain.Designer.cs">
+      <DependentUpon>SQTwain.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\TemporaryFile.Designer.cs">
+      <DependentUpon>TemporaryFile.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SerializedObjectDictionary.cs" />
+    <Compile Include="SerializedObjectDictionaryCollection.cs" />
+    <Compile Include="Serializer.cs" />
+    <Compile Include="Sharepoint\CAML.cs" />
+    <None Include="Sharepoint\SharepointConnector.cs" />
+    <Compile Include="Sharepoint\SharepointCredentialsInputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SQFilesystemConnector\SQFilesystemConnector.cs" />
+    <Compile Include="SQArchiver\ISQArchiver.cs" />
+    <Compile Include="SQArchiver\SQAcquireIntent.cs" />
+    <Compile Include="SQArchiver\SQAcquireSource.cs" />
+    <Compile Include="SQArchiver\SQArchiverBase.cs" />
+    <Compile Include="SQArchiver\SQArchivers.cs" />
+    <Compile Include="SQArchiver\SQFilesystemArchiver.cs" />
+    <Compile Include="SQFileWriter\ISQFileWriter.cs" />
+    <Compile Include="SQFileWriter\SQFileWriter_Tiff.cs" />
+    <Compile Include="ThirdParty\DebenuPdfLibrary915.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="ThirdParty\ShareFile.cs" />
+    <Compile Include="UserControls\ProgressMonitor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProgressMonitor.Designer.cs">
+      <DependentUpon>ProgressMonitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProgressMonitorToolstripItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\SessionLogViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SessionLogViewer.Designer.cs">
+      <DependentUpon>SessionLogViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SQArchiverSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SQArchiverSelector.Designer.cs">
+      <DependentUpon>SQArchiverSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SQImageListViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SQImageListViewer.Designer.cs">
+      <DependentUpon>SQImageListViewer.cs</DependentUpon>
+    </Compile>
+    <None Include="SQArchiver\SQPhotoAlbumFilesystemArchiver.cs" />
+    <Compile Include="SQBarcodeEncoder\SQBarcodeEncoders.cs" />
+    <Compile Include="SQBarcodeReader\ISQBarcodeReader.cs" />
+    <Compile Include="SQBarcodeReader\SQBarcodeReaders.cs" />
+    <Compile Include="SQCommandReader\ISQCommandReader.cs" />
+    <Compile Include="SQBarcodeEncoder\SQBarcodeEncoder.cs" />
+    <Compile Include="SQBarcodeEncoder\ISQBarcodeEncoder.cs" />
+    <Compile Include="SQBarcodeReader\SQBarcodeReader.cs" />
+    <Compile Include="SQCommand\ISQCommand_Document.cs" />
+    <Compile Include="SQCommand\SQCommand_Document_Password.cs" />
+    <Compile Include="SQCommand\ISQCommand_Page.cs" />
+    <Compile Include="SQCommand\SQCommand_Image_DrawImage.cs" />
+    <Compile Include="SQFile\SQFileReader\ISQFileReader.cs" />
+    <Compile Include="SQFile\SQFileReader\SQFileReaders.cs" />
+    <Compile Include="SQFile\SQFileReader\SQFileReader_Image.cs" />
+    <Compile Include="SQFile\SQFileReader\SQFileReader_Pdf.cs" />
+    <Compile Include="SQFileWriter\SQFileWriterBase.cs" />
+    <Compile Include="SQFileWriter\SQFileWriters.cs" />
+    <Compile Include="SQFileWriter\SQFileWriter_Image.cs" />
+    <Compile Include="SQFileWriter\SQFileWriter_Pdf.cs" />
+    <Compile Include="SQFile\SQFile_Pdf.cs" />
+    <Compile Include="SQImage\SQImageEditLock.cs" />
+    <Compile Include="SQTwain\SQTwainSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SQCommandImageBuilder\ISQCommandImageBuilder.cs" />
+    <Compile Include="SQCommandImageBuilder\SQCommandImageBuilderBase.cs" />
+    <Compile Include="SQCommandImageBuilder\SQCommandImageBuilders.cs" />
+    <Compile Include="SQCommandReader\SQCommandReader.cs" />
+    <Compile Include="SQCommandReader\SQCommandReaders.cs" />
+    <Compile Include="SQCommandReader\SQCommandReader_Barcode.cs" />
+    <Compile Include="SQCommand\ISQCommand.cs" />
+    <Compile Include="SQCommand\SQCommand_Page_Bookmark.cs" />
+    <Compile Include="SQCommand\SQCommand_Document_IndexField.cs" />
+    <Compile Include="SQCommand\SQCommand_Page_Exclude.cs" />
+    <Compile Include="SQCommand\SQCommand_Document_OwnerPassword.cs" />
+    <Compile Include="SQCommand\SQCommand_Image_Size.cs" />
+    <Compile Include="SQCommand\SQCommand_Image_DrawText.cs" />
+    <Compile Include="SQCommand\SQCommand_TerminateDocument.cs" />
+    <Compile Include="SQCommand\SQCommand_Document_UserPassword.cs" />
+    <Compile Include="SQDocument\SQDocument.cs" />
+    <Compile Include="SQFile\SQFile.cs" />
+    <Compile Include="SQImageProcessor\ISQImageProcessor.cs" />
+    <Compile Include="SQImageProcessor\SQImageProcessor_ConvertColorDepth.cs" />
+    <Compile Include="SQImageProcessor\SQImageProcessors.cs" />
+    <Compile Include="SQImageProcessor\SQImageProcessor_RotateFlip.cs" />
+    <None Include="Config\Image Processors\COLOR DEPTH 8BPP.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Text Image Builders\ORIGINAL PAGE ARCHIVED.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Text Image Builders\PAGES SCANNED TO SEPARATE FILE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Encryption.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Encryption.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\SQImageListViewer.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SQImageListViewer.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\SQImageRevision.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SQImageRevision.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\SQImageViewer.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SQImageViewer.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\SQTwain.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SQTwain.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\TemporaryFile.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>TemporaryFile.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="SQImage\SQImage.cs" />
+    <Compile Include="SQImage\SQImageRevision.cs" />
+    <Compile Include="SQImage\SQImageRegion.cs" />
+    <Compile Include="SQPage\SQPage.cs" />
+    <Compile Include="SQTwain\SQTwain.cs" />
+    <Compile Include="SQTwain\SQTwainSetting.cs" />
+    <Compile Include="SQTwain\SQTwainSettings.cs" />
+    <Compile Include="TemporaryFile.cs" />
+    <Compile Include="ThirdParty\BarcodeReaderEx.cs" />
+    <Compile Include="UserControls\ProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProgressDialog.Designer.cs">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SQSplitContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\SQThumbnailPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\SQThumbnailScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\SQToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\Archivers\LOCAL - TIFF.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Barcode Encoders\DEFAULT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Barcode Readers\DEFAULT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Barcode Renderers\DEFAULT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\File Writers\BMP.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\File Writers\GIF.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\File Writers\TIFF_CCITG4.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\File Writers\TIFF_LZW.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Graphics\logobw.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sharepoint\SharepointCredentials.resx">
+      <DependentUpon>SharepointCredentials.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Sharepoint\SharepointCredentialsDialog.resx">
+      <DependentUpon>SharepointCredentialsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="Sharepoint\SharepointCredentialsManager.resx">
+      <DependentUpon>SharepointCredentialsManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQTwain\SQTwainSettingsDialog.resx">
+      <DependentUpon>SQTwainSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProgressDialog.resx">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProgressMonitor.resx">
+      <DependentUpon>ProgressMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SessionLogViewer.resx">
+      <DependentUpon>SessionLogViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SQArchiverSelector.resx">
+      <DependentUpon>SQArchiverSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SQImageListViewer.resx">
+      <DependentUpon>SQImageListViewer.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Archivers\LOCAL.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Command Image Builders\DEFAULT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Command Readers\BARCODE DEFAULT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Command Readers\DEFAULT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Readers\BMP.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Readers\GIF.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Readers\JPEG.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Readers\JPG.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Readers\PDF.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Readers\PNG.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Readers\TIF.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Readers\TIFF.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Writers\DEFAULT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Writers\JPEG_GOOD.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Writers\JPEG_SUPERB.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Writers\PDF ENCRYPTED.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Writers\PDF.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\File Writers\PNG.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Image Processors\COLOR DEPTH 4BPP.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Image Processors\ROTATE 180 FLIP NONE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Image Processors\ROTATE 270 FLIP NONE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Text Image Builders\DAMAGED PAGE OMITTED.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Text Image Builders\DAMAGED_PAGE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Text Image Builders\DEFAULT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Text Image Builders\FREE TYPE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Text Image Builders\UNREADABLE PAGE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Image Processors\ROTATE 90 FLIP NONE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\SQFilesystemArchiver.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SQFilesystemArchiver.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\SQImage.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SQImage.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetDir)Scanquire.Public*.*" "l:\EdocsGitHub\Assemblies\*.*"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Tesseract.3.3.0\build\Tesseract.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Tesseract.3.3.0\build\Tesseract.targets'))" />
+  </Target>
+  <Import Project="..\packages\Tesseract.3.3.0\build\Tesseract.targets" Condition="Exists('..\packages\Tesseract.3.3.0\build\Tesseract.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+  
+  </Target>
+</Project>

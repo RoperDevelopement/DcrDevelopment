@@ -1,0 +1,599 @@
+﻿@page
+@model BinMonitorAppService.Pages.BinUsers.ViewBinMonitorUsersModel
+
+
+
+@{
+    ViewData["Title"] = "ViewBinMonitorUsers";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+}
+
+
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+<header>
+    <h1 class="text-center">Edit BinMonitor Users Profile</h1>
+    <h2 class="text-center"> @Html.ValidationMessage("ErrorMessage", new { @class = "text-danger" })</h2>
+</header>
+<div style="background-color:#ffffff">
+
+    <p class="p-2" />
+    <div class="container mt-3">
+        <h2 id="h2selTab" class="text-center" style="display:@Model.StyleDisPlay">Select Tab</h2>
+        <form method="get" id="getCwidUserInfo">
+            <input type="hidden" id="selTab" value="createusers" name="selTab" />
+            <label class="control-label text-nowrap">Select User</label>
+            <select id="selCatName" name="selCatName">
+                <option></option>
+                @foreach (string selUser in Model.Users)
+                {
+                    if (!(string.IsNullOrWhiteSpace(@selUser)))
+                    {
+                        if (string.Compare(@selUser, Model.SelUser, true) == 0)
+                        {
+                            <option selected>@selUser</option>
+                        }
+                        else
+                        {
+                            <option>@selUser</option>
+                        }
+
+                    }
+
+                }
+            </select>
+
+        </form>
+        <p class="p-1" />
+        <div id="divTabs">
+
+            <!-- Nav tabs -->
+            <ul id="myTab" class="nav nav-tabs">
+                @if ((@Model.MonitorFormUserPre.Admin) || (@Model.MonitorFormUserPre.CreateUsers))
+                {
+                    <li id="cu" class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#createusers">Create New User</a>
+                    </li>
+                }
+
+                <li id="eu" class="nav-item">
+                    <a class="nav-link  active" data-toggle="tab" href="#editusers">Edit User</a>
+                </li>
+                @if ((@Model.MonitorFormUserPre.Admin) || (@Model.MonitorFormUserPre.ManageUserProfiles))
+                {
+                    <li id="mp" class="nav-item">
+                        <a class="nav-link " data-toggle="tab" href="#manageprofiles">Manage Profiles</a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+
+        <div class="tab-content">
+            <!-- Tab panes -->
+            <div id="createusers" class="container-fluid tab-pane fade">
+                <p class="p-1" />
+                <form method="post" id="formcu" name="formcu" class="border form-inline justify-content-center">
+                    <p class="p-1" />
+                    <div class="row">
+                        <div class="col">
+                            <label>CWID</label>
+                            @Html.TextAreaFor(m => Model.UsersModel.Cwid, new { @rows = "1", @cols = "40", @class = "border form-control", @placeholder = "Enter CWID" })
+                            @Html.ValidationMessage("Cwid", new { @class = "text-danger" })
+                        </div>
+                        <div class="col">
+                            <label>User Profile</label>
+                            <select id="selURightsCr" name="selURightsCr">
+                                <option></option>
+                                @foreach (string uRightsCR in Model.ProfileRights)
+                                {
+                                    <option>@uRightsCR</option>
+                                }
+                            </select>
+                            @Html.ValidationMessage("UserPf", new { @class = "text-danger" })
+                        </div>
+                        <p class="p-3" />
+                    </div>
+                    <p class="p-3" />
+                </form>
+                <p class="p-3" />
+            </div>
+            <p class="p-1" />
+            @if ((@Model.MonitorFormUserPre.Admin) || (@Model.MonitorFormUserPre.ManageUserProfiles))
+            {
+                <div id="manageprofiles" class="container-fluid tab-pane fade">
+
+                    <div class="container-fluid text-center">
+                        <p class="p-1" />
+                        <div class="border">
+                            <p class="p-1" />
+                            <form method="post" id="createprofile" name="createprofile">
+                                <input type="hidden" value="crnewprofile" id="updatestatus" name="updatestatus" />
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="inlineblock flex-nowrap">
+                                            <label class="inlineblock" for="newprofile">Profile Name:</label>
+                                        </p>
+                                        <p class="inlineblock flex-nowrap">
+                                            <input type="text" placeholder="New Profile Name" class="border form-control inlineblock" id="newprofileName" name="newprofileName" />
+                                        </p>
+
+                                        &nbsp;&nbsp;<input type="submit" placeholder="New Profile Name" class="btn-outline-primary inlineblock " value="Create" onclick="this.submit();" />
+
+                                        @Html.ValidationMessage("ProfileName", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                            </form>
+
+                            <form method="post" id="formmp" name="formmp">
+                                <label class="inlineblock" for="selUserRights">Existing Profiles:</label>
+
+                                <select id="selUserRights" name="selUserRights">
+                                    @* <option></option>
+
+                                @foreach (string selURights in Model.ProfileRights)
+                                {
+                                    if (!(string.IsNullOrWhiteSpace(@selURights)))
+                                    {
+
+                                        if(string.Compare( Model.SelectUserProfile)
+                                        <option>@selURights</option>
+
+
+                                    }
+
+                                }
+                                    *@
+                                    @foreach (var item in Model.SpecMonUserRigths)
+                                    {
+                                        if (string.Compare(item.Key, @Model.SelectUserProfile, false) == 0)
+                                        {
+                                            <option selected="selected">@item.Key</option>
+
+                                        }
+                                        else
+                                        {
+                                            <option>@item.Key</option>
+
+                                        }
+                                    }
+
+                                </select>
+                                @Html.ValidationMessage("AdminProf", new { @class = "text-info" })
+                                <p class="p-0" />
+                                <div>
+
+
+
+                                    @foreach (string selprofile in Model.Premissions)
+                                    {
+
+                                        if (!(string.IsNullOrWhiteSpace(@selprofile)))
+                                        {
+                                            int i = 0;
+                                            foreach (string s in @selprofile.Split(','))
+                                            {
+                                                Model.CheckBoxStr[i++] = @s;
+                                            }
+
+
+
+
+                                            if ((string.Compare(Model.CheckBoxStr[0], "true", true) == 0))
+                                            {
+                                                <div class="row text-left">
+                                                    <p class="inlineblock margionZero">
+                                                        <div class="col">
+                                                            <input type="checkbox" checked="checked" id="@Model.CheckBoxStr[1]" name="checkedProf" value="@Model.CheckBoxStr[1]" />
+                                                            <label class="text-left"><span>Profile Permissions @Model.CheckBoxStr[1]&nbsp; &nbsp;</span></label>
+                                                        </div>
+                                                    </p>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="row text-left">
+                                                    <p class="inlineblock margionZero">
+                                                        <div class="col">
+                                                            <input type="checkbox" id="@selprofile" name="checkedProf" value="@selprofile" />&nbsp; &nbsp;<label><span>Profile Permissions @Model.CheckBoxStr[1]</span></label>
+                                                        </div>
+                                                    </p>
+                                                </div>
+                                            }
+
+
+                                        }
+                                    }
+                                </div>
+
+
+
+
+
+                            </form>
+
+
+                        </div>
+                        <p class="p-0" />
+                    </div>
+                </div>
+            }
+
+
+            <div id="editusers" class="container-fluid tab-pane show active">
+                <br>
+                <div class="container-fluid border">
+                    @if (@Model.UsersModelEdit != null)
+                    {
+                        <form method="post" id="formeu" name="formeu">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="text-left">CWID</label>
+                                    @Html.TextAreaFor(m => Model.UsersModelEdit.Cwid, new { @rows = "1", @cols = "40", @readonly = "readonly", @class = " border form-control text-left" })
+                                    @Html.ValidationMessage("CwidEu", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col">
+                                    <label class="text-left">Email Address</label>
+                                    @Html.TextAreaFor(m => Model.UsersModelEdit.EmailAddress, new { @rows = "1", @cols = "25", @class = "border form-control text-left" })
+                                    @Html.ValidationMessage("EmailEu", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <p class="p-0" />
+                            <div class="row row-no-gutters">
+                                <div class="col">
+                                    <label class="text-left">First Name</label>
+                                    @Html.TextAreaFor(m => Model.UsersModelEdit.FirstName, new { @rows = "1", @cols = "25", @class = "border form-control text-left" })
+                                    @Html.ValidationMessage("FNameEu", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col">
+                                    <label class="text-left">Last Name</label>
+                                    @Html.TextAreaFor(m => Model.UsersModelEdit.LastName, new { @rows = "1", @cols = "25", @class = "border form-control text-left" })
+                                    @Html.ValidationMessage("LNameEu", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <p class="p-0" />
+                            <div class="row row-no-gutters">
+                                <div class="col">
+                                    <label class="text-left">Date Last Logged In</label>
+                                    @Html.TextAreaFor(m => Model.UsersModelEdit.DateLastLogin, new { @readonly = "readonly", @rows = "1", @cols = "25", @class = "border form-control text-left" })
+                                    @Html.ValidationMessage("FNameEu", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col">
+                                    <label class="text-left">Date Password Last Changed</label>
+                                    @Html.TextAreaFor(m => Model.UsersModelEdit.DatePasswordLastChanged, new { @readonly = "readonly", @rows = "1", @cols = "25", @class = "border form-control text-left" })
+                                    @Html.ValidationMessage("LNameEu", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <p class="p-2" />
+                            <div class="row row-no-gutters">
+                                <div class="col text-left">
+                                    <label>User Profile</label>
+                                    <select id="selURights" name="selURights">
+
+                                        @foreach (string uRights in Model.ProfileRights)
+                                        {
+                                            if (!(string.IsNullOrWhiteSpace(@uRights)))
+                                            {
+
+                                                if (string.Compare(uRights, Model.UsersModelEdit.UserProfileName, true) == 0)
+                                                {
+                                                    <option selected="selected">@uRights</option>
+                                                }
+                                                else
+                                                {
+                                                    <option>@uRights</option>
+                                                }
+
+
+
+                                            }
+
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="p-1" />
+                            <div class="row row-no-gutters text-left">
+                                <div class="col text-left" style="display:inline">
+                                    @if ((Model.MonitorFormUserPre.Admin) || (Model.MonitorFormUserPre.DeleteUsers))
+                                    {
+                                        <p class="text-left" style="display:inline">
+                                            <input type="checkbox" id="deluser" name="deluser" />&nbsp; Delete User&nbsp;
+                                        </p>
+
+                                    }
+                                    @*
+                                @if ((Model.MonitorFormUserPre.Admin) || (Model.MonitorFormUserPre.ChangeUsersPasswords))
+                                {*@
+                                    <p class="text-left" style="display:inline">
+
+                                        <input type="checkbox" id="cbchangepw" name="cbchangepw" />&nbsp; Change Password&nbsp;
+                                    </p>
+
+
+                                    @*
+                                @if ((Model.MonitorFormUserPre.Admin) || (Model.MonitorFormUserPre.ChangeUsersPasswords))
+
+                                {*@
+                                    <p class="text-left" style="display:inline">
+
+                                        <input type="checkbox" id="generatepw" name="generatepw" />&nbsp; Generate New Password
+                                    </p>
+
+
+                                </div>
+                            </div>
+                            <div id="cpassword" name="cpassword" style="display:none">
+                                <p class="p-1" />
+                                <div class="row ">
+                                    <div class="col text-left">
+
+                                        <label for="OldPassWord">Old Password</label>
+
+                                        <input type="password" id="OldPassWord" name="OldPassWord" placeholder="User old Password" class="form-control" data-toggle="tooltip" data-placement="right" title="Password must be 8 chars and must contain (numbers upper low case letters an non-numeric char eg.1Aa#$)" />
+                                        @Html.ValidationMessage("changepwOldPW", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="col">
+
+                                        <label for="NewPassWordEdit">New PassWord:</label>
+
+                                        <input type="password" id="NewPassWordEdit" name="NewPassWordEdit" class="form-control" placeholder="User New Password" data-toggle="tooltip" data-placement="right" title="Password must be 8 chars and must contain (numbers upper low case letters an non-numeric char eg.1Aa#$)" />
+                                        @Html.ValidationMessage("changepwNewPW", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="col">
+
+                                        <label for="verifyNewPassWordEdit">Verify PassWord:</label>
+
+                                        <input type="password" id="verifyNewPassWordEdit" name="verifyNewPassWordEdit" placeholder="Verify Password" class="form-control" />
+                                        @Html.ValidationMessage("changepwNewPWVerify", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="p-1" />
+                        </form>
+                    }
+                    else
+                    {
+                        <h2 class="text-center">Select User to Edit</h2>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <p class="p-0"></p>
+        <button class="btn btn-outline-primary" id="updateUsers" name="updateUsers" style="display:block;margin:0 auto">UpDate User</button>
+        <p class="p-0"></p>
+        <input type="button" value="Exit" class="btn btn-outline-primary" id="exit" name="exit" style="display:table;margin:0 auto" /></a>
+        <p class="p-2"></p>
+        <button type="button" id="btnOpenModel" class="btn btn-primary" data-toggle="modal" data-target="#delUsermodal" style="display:none">
+            Open modal
+        </button>
+
+    </div>
+
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+            top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+            opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parBmUpScreen" name="parCategory" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting / Updating Category, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+<div class="modal fade" id="delUsermodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 id="h4" class="modal-title">Delete User</h4>
+
+                <button id="btndis" type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <button type="button" id="btnyes" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                <button type="button" id="btno" class="btn btn-danger" data-dismiss="modal">No</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+            <!-- Modal footer -->
+
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="load">
+    <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 id="modheader" class="modal-title">Getting Users</h4>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script type="text/javascript">
+                $(window).on('load', function () {
+                    //           $('#load').modal('hide');
+
+                 ///   alert( @Html.Raw( ViewData["Title"]);
+
+                //    $("#eu").tab.prototype.click();
+                    //$("#eu").click();
+                });
+    </script>
+    <script>
+        $(document).ready(function () {
+           SessionExpireAlert(0);
+            $("#divLoading").hide();
+            $("#cbchangepw").prop('checked', false);
+            $("#generatepw").prop('checked', false);
+            $('#selTab').val('editusers');
+            
+            //      $("#myTab a").click(function(e){
+            // e.preventDefault();
+            // $(this).tab('show');
+            // });
+
+            switch (document.readyState) {
+                 
+                case "loading":
+                    $('#load').modal('hide');
+                    //    // The document is still loading.
+                    break;
+                default:
+                    break;
+                //  case "interactive":
+                //    // The document has finished loading. We can now access the DOM elements.
+                //                        // But sub-resources such as images, stylesheets and frames are still loading.
+                //                     //   alert("interactive");
+                //    break;
+                //  case "complete":
+                //                        // The page is fully loaded.
+                //                        //    document.getElementById('load').style.display = "none";
+                //                  //      alert("comlpere")
+                //      $('#load').modal('hide');
+                //    break;
+            }
+
+            $('#selCatName').change(function () {
+
+                var message = "Getting User Informatrion CWID " + $('#selCatName').val();
+                ShowLoadingDialog(message);
+                document.getElementById("mp").style.display = "block";
+                document.getElementById("eu").style.display = "block";
+                document.getElementById("updateUsers").style.display = "table";
+                document.getElementById("h2selTab").style.display = "block";
+                $("#getCwidUserInfo").submit();
+
+            });
+            $('#selUserRights').change(function () {
+
+                $("#formmp").attr("method", "get");
+                var message = "Getting Profile " + $('#selUserRights').val();
+                ShowLoadingDialog(message);
+                $('#formmp').submit();
+            });
+
+            $('#mp').click(function () {
+                $('#updateUsers').text("Update Profile");
+                $('#selTab').val('manageprofiles');
+
+            });
+            $('#exit').click(function () {
+                var message = "Closing Update Users";
+                ShowLoadingDialog(message);
+                $("<input type='hidden' value='exit' />")
+                    .attr("id", "updatestatus")
+                    .attr("name", "updatestatus")
+                    .prependTo("#formcu");
+                $("#formcu").submit();
+
+
+            });
+
+            $("#cbchangepw").change(function () {
+
+                if (document.getElementById("cpassword").style.display == "inline-block") {
+                    document.getElementById("cpassword").style.display = "none";
+                }
+                else
+                    document.getElementById("cpassword").style.display = "inline-block";
+
+            });
+            $('#cu').click(function () {
+                $('#updateUsers').text("Create New User");
+                document.getElementById("updateUsers").style.display = "block";
+                $('#selTab').val('createusers');
+
+            });
+            $('#eu').click(function () {
+                $('#updateUsers').text("Update User");
+                $('#selTab').val('editusers');
+
+            });
+
+            $('#updateUsers').click(function () {
+
+                //   var message = "Getting User Informatrion";
+                //  ShowLoadingDialog(message);
+                if ($('#selTab').val() == 'manageprofiles') {
+
+                    var messageprofiles = "Updating Profile " + $('#selUserRights').val();;
+                    ShowLoadingDialog(messageprofiles);
+
+                    $("<input type='hidden' value='updateuserprofiles' />")
+                        .attr("id", "updatestatus")
+                        .attr("name", "updatestatus")
+                        .prependTo("#formmp");
+                    // $("#formmp").attr("method","post");
+                    $("#formmp").submit();
+                }
+                else if ($('#selTab').val() == 'createusers') {
+                    var messagecrusers = "Creating new user " + $('#UsersModel_Cwid').val();
+                    ShowLoadingDialog(messagecrusers);
+                    $("#modheader").text("Creating new user");
+                    $('#load').modal('show');
+                    $("<input type='hidden' value='createusers' />")
+                        .attr("id", "updatestatus")
+                        .attr("name", "updatestatus")
+                        .prependTo("#formcu");
+                    $("#formcu").submit();
+                }
+                else {
+                    var messageusers = "Updating User " + $('#selCatName').val();
+                    ShowLoadingDialog(messageusers);
+                    $("#modheader").text("UpDateing user " + $("#selCatName").val());
+                    $('#load').modal('show');
+                    $("<input type='hidden' value='udpateUser' />")
+                        .attr("id", "updatestatus")
+                        .attr("name", "updatestatus")
+                        .prependTo("#formeu");
+
+                    $("#formeu").submit();
+                }
+
+            });
+            $("#generatepw").click(function () {
+                $("#cbchangepw").prop('checked', false);
+
+                $('#updateUsers').click();
+            });
+            $("#btndis").click(function () {
+                $("#deluser").prop('checked', false);
+            });
+            $("#btnyes").click(function () {
+
+                $('#updateUsers').click();
+            });
+            $("#btno").click(function () {
+                $("#deluser").prop('checked', false);
+            });
+
+            $("#deluser").click(function () {
+
+                $("#h4").text("Delete user " + $("#selCatName").val());
+                $("#btnOpenModel").click();
+
+
+
+            });
+
+
+
+
+        });
+    </script>
+}

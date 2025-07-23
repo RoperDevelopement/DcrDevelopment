@@ -1,0 +1,375 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.NypUserInfoViewModel
+@{
+    ViewData["Title"] = "NypUserInfoView";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+@*
+    <partial name="Shared/_RecordsNetImage" />
+*@
+<header>
+    <h1 class="text-center">Edit Users Profile</h1>
+    <h2 class="text-center"> @Html.ValidationMessage("ErrorMessage", new { @class = "text-danger" })</h2>
+</header>
+@*style="background-color:lightblue"
+    style="background-color:#ffffff"*@
+<div id="divMain" style="background-color:#ffffff" name="divMain" class="container-fluid">
+    <button type="button" id="btnOpenModel" class="btn btn-primary" data-toggle="modal" data-target="#delUsermodal" style="display:none">
+        Open modal
+    </button>
+    <p class="p-2" />
+    <div class="container-fluid mt-3">
+        <h2 id="h2selTab" class="text-center">Select Tab</h2>
+        <form method="get" id="getNypUserInfo">
+            <input type="hidden" id="selTab" value="createusers" name="selTab" />
+            <label class="control-label text-nowrap">Select User To Edit:</label>
+            <select id="selCwid" name="selCwid">
+                <option></option>
+                @foreach (var selUser in Model.LabRecsUser)
+                {
+                    if (!(string.IsNullOrWhiteSpace(@selUser.Key)))
+                    {
+                        if (string.Compare(@selUser.Key, Model.SelUser, true) == 0)
+                        {
+                            <option selected>@selUser.Key</option>
+                        }
+                        else
+                        {
+                            <option>@selUser.Key</option>
+                        }
+
+                    }
+
+                }
+            </select>
+
+        </form>
+        <ul class="nav nav-tabs justify-content-center">
+            <li class="nav-item">
+
+                <a href="#createUser" id="cu" class="nav-link " data-toggle="tab">Create User</a>
+
+
+            </li>
+            <li class="nav-item">
+
+                <a href="#profile" id="prof" class="nav-link active" data-toggle="tab">Edit Profile</a>
+
+            </li>
+            <li class="nav-item">
+
+                <a href="#listUsers" id="lusers" class="nav-link" data-toggle="tab">List Users</a>
+
+
+            </li>
+        </ul>
+        <div class="tab-content">
+
+            <div class="tab-pane fade" id="createUser">
+                <p class="p-0"></p>
+                <h6 class="text-center text-info">Add New User</h6>
+                <p class="p-0"></p>
+                <div class="container text-center">
+                    <form method="get" id="addUser">
+                        <input type="hidden" value="addNewUser" id="addNewuser" name="addNewuser" />
+                        <div class="row text-center">
+                            <div class="col" style="display:block">
+                                <p>
+                                    <label class="align-bottom">Enter Cwid:</label>
+                                    @Html.TextAreaFor(m => Model.NewCwid, new { @rows = "1", @cols = "25", @class = "border  text-info" })
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col">
+                                <p>
+                                    @Html.CheckBoxFor(m => Model.NewUserIsAdmin)
+                                    <label>User Admin:</label>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row text-center">
+                            <div class="col">
+                                <p>
+                                    @Html.CheckBoxFor(m => Model.NewUserViewAuditLogs)
+                                    <label>User View Audit Logs:</label>
+
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <p class="p-0"></p>
+
+                        <input id="newuser" name="newuser" type="submit" value="Add New User" class="btn btn-primary" />
+                        <p class="p-1"></p>
+
+                    </form>
+
+                </div>
+            </div>
+
+
+
+            <div class="tab-pane show active" id="profile">
+                <p class="p-1"></p>
+                @if (Model.LabReqsUsersModel != null)
+                {
+                    <div class="container-fluid text-center">
+                        <form method="post" id="getuserprofile">
+
+                            <div class="row text-center">
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(m => m.LabReqsUsersModel.Cwid, new { @class = "align-bottom" })
+                                        @Html.TextAreaFor(m => Model.LabReqsUsersModel.Cwid, new { @readonly = "readonly", @rows = "1", @cols = "25", @class = "border text-info" })
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col" style="display:block">
+                                    <p>
+
+                                        @Html.LabelFor(m => m.LabReqsUsersModel.FirstName, new { @class = "align-bottom" })
+                                        @Html.TextAreaFor(m => Model.LabReqsUsersModel.FirstName, new { @readonly = "readonly", @rows = "1", @cols = "25", @class = "border text-info" })
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(m => m.LabReqsUsersModel.LastName, new { @class = "align-bottom" })
+                                        @Html.TextAreaFor(m => Model.LabReqsUsersModel.LastName, new { @readonly = "readonly", @rows = "1", @cols = "25", @class = "border  text-info" })
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(m => m.LabReqsUsersModel.EmailAddress, new { @class = "align-bottom" })
+                                        @Html.TextAreaFor(m => Model.LabReqsUsersModel.EmailAddress, new { @readonly = "readonly", @rows = "1", @cols = "25", @class = "border  text-info" })
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col" style="display:inline-block">
+                                    <p>
+                                        @Html.LabelFor(m => m.LabReqsUsersModel.LastLoggedIn, new { @class = "align-bottom" })
+                                        @Html.TextAreaFor(m => Model.LabReqsUsersModel.LastLoggedIn, new { @readonly = "readonly", @rows = "1", @cols = "25", @class = "border  text-info" })
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row text-center">
+                                <div class="col">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.CheckBoxFor(m => Model.LabReqsUsersModel.ViewAuditLogs)
+                                    @Html.LabelFor(m => m.LabReqsUsersModel.ViewAuditLogs, new { @class = "align-middle" })
+
+
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.CheckBoxFor(m => Model.LabReqsUsersModel.EditLRDocs)
+                                    @Html.LabelFor(m => m.LabReqsUsersModel.EditLRDocs, new { @class = "align-middle" })
+                                </div>
+
+                            </div>
+                            <div class="row text-center">
+                                <div class="col">
+                                    @Html.CheckBoxFor(m => Model.LabReqsUsersModel.Active)
+                                    @Html.LabelFor(m => m.LabReqsUsersModel.Active, new { @class = "align-middle" })
+
+
+                                </div>
+                            </div>
+
+                            <div class="row text-center">
+                                <div class="col">
+                                    @Html.CheckBoxFor(m => Model.LabReqsUsersModel.IsAdmin)
+                                    @Html.LabelFor(m => m.LabReqsUsersModel.IsAdmin, new { @class = "align-middle" })
+                                </div>
+
+                            </div>
+                            <div class="row text-center">
+                                <div class="col">
+                                    @Html.CheckBoxFor(m => Model.LabReqsUsersModel.DelUser)
+                                    @Html.LabelFor(m => m.LabReqsUsersModel.DelUser, new { @class = "align-middle", @id = "userDel" })
+                                </div>
+
+                            </div>
+                            <p class="p-1"></p>
+                            <input id="subedit" name="subedit" type="submit" value="UpDate User Information" asp-page-handler="ProfileUpDate" class="btn btn-primary btn-outline-info" />
+                            <p class="p-1"></p>
+                        </form>
+                    </div>
+
+
+
+
+                }
+            </div>
+
+            <div class="tab-pane fade" id="listUsers">
+                @if (Model.LabRecsUser != null)
+                {
+                    <div id="divLabReqs">
+
+                        <table class="table table-hover w-75" id="dtLabReqs">
+                            <thead>
+                                <tr>
+                                    <th>Cwid</th>
+                                    <th>FirstName</th>
+                                    <th>LastName</th>
+                                    <th>Email</th>
+                                    <th>Last Logged In</th>
+                                    <th>View Audit Logs</th>
+                                    <th>Active</th>
+                                    <th>Admin</th>
+                                    <th>Edit DOCS</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var users in @Model.LabRecsUser)
+                                {
+
+
+                                    <tr>
+                                        <td>@users.Value.Cwid</td>
+                                        <td>@users.Value.FirstName</td>
+                                        <td>@users.Value.LastName</td>
+                                        <td>@users.Value.EmailAddress</td>
+                                        <td>@users.Value.LastLoggedIn</td>
+                                        <td>@users.Value.ViewAuditLogs.ToString()</td>
+                                        <td>@users.Value.Active.ToString()</td>
+                                        <td>@users.Value.EditLRDocs</td>
+                                        <td>@users.Value.IsAdmin.ToString()</td>
+                                        <td> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/NypUsersInfo/NypUserInfoView?selCwid=@users.Value.Cwid" class="btn btn-info" role="button" target="_self">Edit</a></span></td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                <form method="get">
+                    <p class="p-0"></p>
+                    <div class="col-xs-12">
+                        <div class="text-right">
+                            <input id="exportuser" name="exportuser" type="submit" value="Export Users" class="btn btn-primary text-light" />
+                        </div>
+                    </div>
+                    <p class="p-1"></p>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+    <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+        <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+            Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+        </p>
+    </div>
+</div>
+<div class="modal fade" id="delUsermodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 id="h4" class="modal-title">Delete User</h4>
+
+                <button id="btndis" type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <button type="button" id="btnyes" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                <button type="button" id="btno" class="btn btn-danger" data-dismiss="modal">No</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+            <!-- Modal footer -->
+
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SessionExpireAlert(480000);
+            CompleteAjaxCall();
+            $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+
+            });
+            $("#divLoading").hide();
+            $('#LabReqsUsersModel_DelUser').prop('checked', false);
+
+
+            $('#selCwid').change(function () {
+
+                var message = "Getting User Informatrion for " + $('#selCwid').val() + " CWID";
+                ShowLoadingDialog(message);
+                $("<input type='hidden' value='selUser' />")
+                    .attr("id", "getUser")
+                    .attr("name", "getUser")
+                    .prependTo("#getNypUserInfo");
+                $("#getNypUserInfo").submit();
+
+            });
+            $('#LabReqsUsersModel_DelUser').click(function () {
+                $("#h4").text("Delete user " + $("#selCwid").val());
+                $("#btnOpenModel").click();
+                $('#LabReqsUsersModel_DelUser').prop('checked', false);
+
+
+            });
+
+            $('#newuser').click(function () {
+                $('#parLoading').html('Creating new user ');
+                $("#divLoading").show();
+                //$('#subedit').click();
+            });
+            $('#subedit').click(function () {
+                document.getElementById("parLoading").html = 'Updating Cwid ' + $('#selCwid').val();
+
+                $("#divLoading").show();
+                //$('#subedit').click();
+            });
+
+            $('#btnyes').click(function () {
+
+                var message = "Deleting  " + $('#selCwid').val() + " CWID";
+                document.getElementById("parLoading").val = message;
+                $("#divLoading").show();
+                $('#LabReqsUsersModel_DelUser').prop('checked', true);
+                $('#subedit').click();
+            });
+            $('#btno').click(function () {
+                $('#LabReqsUsersModel_DelUser').prop('checked', false);
+            });
+            $('#btndis').click(function () {
+
+                $('#LabReqsUsersModel_DelUser').prop('checked', false);
+            });
+
+        });
+
+    </script>
+}

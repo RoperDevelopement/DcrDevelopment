@@ -1,0 +1,82 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.Pages.Partial_Pages.SearchCOVID19PartialViewModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+
+<head>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+
+</head>
+<html>
+
+<body>
+    <div class="container-fluid">
+        <p class="text-left">Total Query Time @Model.TotalQueryTime</p>
+        <p class="p-0" />
+        @if ((@Model.LabReqs != null) && (@Model.LabReqs.Count > 0))
+        {
+
+            <table class="table table-hover w-auto" id="dtLabReqs">
+                <thead>
+                    <tr class="w-auto">
+                        <th>File URL</th>
+                        <th>Index Number</th>
+                        <th>Financial Number</th>
+                        <th>Req Number</th>
+                        <th>Patient ID</th>
+                        <th>Client Code</th>
+                        <th>Patient Name</th>
+                        <th>Dr Code</th>
+                        <th>Dr Name</th>
+                        <th>Scan Operator</th>
+                        <th>Receipt Date</th>
+                        <th>Service Date</th>
+                        <th>Scan Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var items in Model.LabReqs)
+                    {
+
+                        <tr class="w-auto">
+                            @*
+                                <td> <a href="@items.Value.FileUrl" download="@items.Value.FileUrl" target="_parent"><img src="~/Images/small_export-to-pdf-icon-pdf-export-toolbar-icon.png" width="20" height="25" /></a></td>
+                                   <td> <a href="/Partial_Pages/DisplayPdfFilePartialView?pdfurl=@items.Value.FileUrl" target="_blank"> <img src="~/Images/small_export-to-pdf-icon-pdf-export-toolbar-icon.png" width="20" height="25" /></a></td>
+                            *@
+
+
+                            <td> <a href="/Partial_Pages/DisplayPdfFilePartialView?pdfurl=@items.Value.FileUrl" target="_blank"> <img src="~/Images/icpdf.gif" width="20" height="25" /></a></td>
+                            <td>@items.Value.IndexNumber</td>
+
+                            <td>@items.Value.FinancialNumber</td>
+                            <td>@items.Value.RequisitionNumber</td>
+                            <td>@items.Value.PatientID</td>
+                            <td>@items.Value.ClientCode</td>
+                            <td>@items.Value.PatientName</td>
+                            <td>@items.Value.DrCode</td>
+                            <td>@items.Value.DrName</td>
+                            <td>@items.Value.ScanOperator</td>
+                            <td>@items.Value.ReceiptDate.ToString("MM/dd/yyyy")</td>
+                            <td>@items.Value.DateOfService.ToString("MM/dd/yyyy")</td>
+                            <td>@items.Value.ScanDate.ToString("MM/dd/yyyy")</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+
+    </div>
+
+</body>
+</html>
+

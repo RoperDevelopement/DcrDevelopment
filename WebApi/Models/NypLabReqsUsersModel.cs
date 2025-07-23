@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
+using System.ComponentModel.DataAnnotations;
+using EDocs.Nyp.LabReqs.AppServices.LabReqInterfaces;
+
+namespace EDocs.Nyp.LabReqs.AppServices.Models
+{
+    public class NypLabReqsUsersModel : INypUsers
+    {
+        [Display(Name = "Cwid:")]
+        public string Cwid
+        { get; set; }
+        [Display(Name = "First Name:")]
+        public string FirstName
+        { get; set; }
+        [Display(Name = "Last Name:")]
+        public string LastName
+        { get; set; }
+        [Display(Name = "Email Address:")]
+        public string EmailAddress
+        { get; set; }
+        [Display(Name = "Last Logged In:")]
+        public DateTime LastLoggedIn
+        { get; set; }
+        [Display(Name = "View Audit Logs")]
+        public bool ViewAuditLogs
+        { get; set; } = false;
+        [Display(Name = "User Active")]
+        public bool Active
+        { get; set; } = false;
+        [Display(Name = "User Admin")]
+        public bool IsAdmin
+        { get; set; } = false;
+        [Display(Name = "Delete User")]
+        public bool DelUser
+        { get; set; } = false;
+       public bool EditLRDocs
+        { get; set; }
+    }
+}

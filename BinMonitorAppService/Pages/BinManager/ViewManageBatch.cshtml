@@ -1,0 +1,598 @@
+﻿@page
+@model BinMonitorAppService.Pages.BinManager.ViewManageBatchModel
+@using BinMonitorAppService.Constants
+@{
+    ViewData["Title"] = "ViewManageBatch";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+}
+@section scripts {
+
+    <script>
+
+
+
+
+
+        $(document).ready(function () {
+            $("#divLoading").hide();
+             SessionExpireAlert($('#expiresSession').val());
+              $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+               
+            });
+            $('#btnAddComments').click(function () {
+
+                if ($('#binComments').val().length != 0) {
+                    var dNow = new Date();
+                    var n = dNow.toString();
+                    $('#BinComments').append('{UserName} added comments on ' + n + ' ' + $('#binComments').val() + '\n');
+                    $('#binComments').val('');
+                }
+                else {
+                    alert('No Comments to add');
+                }
+                $('#binComments').focus();
+            });
+            $('#selcatName').change(function () {
+
+                var catComents = '{UserName} changed category ' + $('#CategoryName').val() + ' to category name ' + $('#selcatName').val();
+
+                $('#binComments').val(catComents);
+                $("<input type='hidden' value='changeCategory' />")
+                    .attr("id", "binStatus")
+                    .attr("name", "binStatus")
+                    .prependTo("#updatedatetime");
+
+                $("<input type='hidden'/>")
+                    .attr("value", $('#selcatName').val())
+                    .attr("id", "selcat")
+                    .attr("name", "selcat")
+                    .prependTo("#updatedatetime");
+                var message = "Changing  Category Name "+ $('#CategoryName').val() + ' to new category name ' + $('#selcatName').val();
+                ShowLoadingDialog(message);
+                $("#updatedatetime").submit()
+
+
+            });
+            $('#regBatch').click(function () {
+                $("<input type='text' value='beginreg' />")
+                    .attr("id", "binStatus")
+                    .attr("name", "binStatus")
+                    .prependTo("#updatedatetime");
+                  var message = "Begin Registration";
+                ShowLoadingDialog(message);
+                $("#updatedatetime").submit()
+            });
+
+            $('#compBatch').click(function () {
+                $("<input type='text' value='compreg' />")
+                    .attr("id", "binStatus")
+                    .attr("name", "binStatus")
+                    .prependTo("#updatedatetime");
+                var message = "Complete Registration";
+                ShowLoadingDialog(message);
+                $("#updatedatetime").submit()
+            });
+
+            $('#begProcBatch').click(function () {
+                $("<input type='text' value='beginproc' />")
+                    .attr("id", "binStatus")
+                    .attr("name", "binStatus")
+                    .prependTo("#updatedatetime");
+                var message = "Begin Processing";
+                ShowLoadingDialog(message);
+                $("#updatedatetime").submit()
+            });
+
+            $('#compProceBatch').click(function () {
+                $("<input type='text' value='compProc' />")
+                    .attr("id", "binStatus")
+                    .attr("name", "binStatus")
+                    .prependTo("#updatedatetime");
+                var message = "Complete Processing";
+                ShowLoadingDialog(message);
+                $("#updatedatetime").submit()
+            });
+
+            $('#closeBatch').click(function () {
+                $("<input type='text' value='closeBatch' />")
+                    .attr("id", "binStatus")
+                    .attr("name", "binStatus")
+                    .prependTo("#updatedatetime");
+                var message = "Close Batch";
+                ShowLoadingDialog(message);
+               
+                $("#updatedatetime").submit()
+            });
+
+            $('#BinIDd').change(function () {
+
+                $("<input type='text'/>")
+                    .attr("id", "BinID")
+                    .attr("name", "BinID")
+                    .attr("value", $("#BinID").val())
+                    .prependTo("#updatedatetime");
+                $("#updatedatetime").attr("method", "get");
+                var message = "Getting BinID "+$("#BinID").val();
+                ShowLoadingDialog(message);
+                $("#updatedatetime").submit();
+            });
+
+
+
+        });
+
+
+
+    </script>
+}
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Page Manage BinMonitor Batches will refresh in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+<header class="text-center">
+    <h1>Manage BinMonitor Batches</h1>
+</header>
+<h3 class="text-center">@Html.ValidationMessage("Error", new { @class = "text-danger" })</h3>
+<p class="p-0"></p>
+
+<div style="background-color:white">
+    <input type="hidden" id="expiresSession" value="@Model.SessionExpires" />
+    <div class="text-md-center container-fluid">
+        <p class="p-4"></p>
+        <form method="get" id="updateBatches">
+            <div class="form-group">
+                @*start row top*@
+                <div class="row">
+                    <div class="col">
+                        <p>
+                            Bin ID
+                            @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                            {
+
+                                @Html.DropDownList("BinID", new SelectList(Model.BinsModel, Model.ManageBatchModel.BinID), new { @onchange = "this.form.submit()" })
+                            }
+
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        @*end row top*@
+        <form method="post" id="updatedatetime" asp-validation-summary="ModelOnly">
+            <div class="form-group">
+                @*start batch details*@
+
+                <div class="text-center">
+                    <header>
+                        <h5> Batch Details</h5> <a asp-area="" asp-page="/BinManager/ViewManagerHome"><input type="button" value="&times;" class="btn btn-outline-dark" title="Close" /></a>
+                    </header>
+
+
+                </div>
+                <p class="p-0"></p>
+                @*end row transfer contents*@
+                @*start row category text box contents*@
+                <div class="row text-left">
+                    <div class="col">
+                        <p>
+                            Select Category To Transfer To
+                            @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                            {
+                                @if (Model.SpectrumMonitorMenuRightsModel.TransFerCategories)
+                                {
+                                    <select id="selcatName" name="selURightsCr">
+
+                                        @foreach (string cname in Model.CategoryName)
+                                        {
+                                            if (string.Compare(cname, Model.ManageBatchModel.CategoryName, true) == 0)
+                                            {
+                                                <option selected="selected" value="@cname" class="border text-uppercase text-md-left text-nowrap">@cname</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@cname" class="border text-uppercase text-md-left text-nowrap">@cname</option>
+                                            }
+                                        }
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select id="selcatName" name="selURightsCr">
+
+                                        @foreach (string cname in Model.CategoryName)
+                                        {
+                                            if (string.Compare(cname, Model.ManageBatchModel.CategoryName, true) == 0)
+                                            {
+                                                <option selected="selected" value="@cname" class="border text-uppercase text-md-left text-nowrap">@cname</option>
+                                            }
+
+                                        }
+                                    </select>
+                                }
+                            }
+                        </p>
+                    </div>
+                    <div class="col">
+
+                        @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                        {
+                            <textarea rows="3" cols="10" class="form-control" readonly="readonly"> @Html.DisplayFor(model => Model.ManageBatchModel.BinContents)</textarea>
+                        }
+                        else
+                        {
+                            <textarea rows="3" cols="10" class="form-control" readonly="readonly">No Contents found</textarea>
+                        }
+                    </div>
+                </div>
+                <p class="p-0" />
+                @*end row category text box contents*@
+                @*start row Comments*@
+                <div class="row text-left">
+                    <div class="col">
+                        <p>
+                            Comments
+                            <input type="text" maxlength="100" size="50" id="binComments" name="binComments" />
+                        </p>
+                        @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                        {
+                            if (Model.ManageBatchModel.BinClosedBy == "Not CLosed")
+                            {
+                                <p class="text-center">
+                                    <button type="button" class="align-text-bottom btn-info" id="btnAddComments">Add Comments</button>
+                                </p>
+                            }
+
+                        }
+
+                    </div>
+
+                    <div class="col">
+                        @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                        {
+                            <textarea rows="3" cols="10" class="form-control " id="BinComments" name="BinComments" readonly="readonly"> @Html.DisplayFor(model => Model.ManageBatchModel.BinComments)</textarea>
+                        }
+                        else
+                        {
+                            <textarea rows="5" cols="10" class="form-control " id="BinComments" name="BinComments" readonly="readonly">No Data</textarea>
+                        }
+
+                    </div>
+                </div>
+                <p class="p-0" />
+
+                <div class="row text-left">
+                    <div class="col">
+                        <div class="border">
+                            <header>
+                                <h6 class="text-center">Regstration</h6>
+                            </header>
+                            <p class="p-2"></p>
+                            <p>
+                                Assigned By
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+                                    <span class="border text-uppercase text-md-left text-nowrap control-label">@Html.DisplayFor(model => Model.ManageBatchModel.RegAssignedBy)</span>
+                                }
+                            <p>
+                                Assigned To
+
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+                                    if (Model.ManageBatchModel.RegStartedAt.Year < 2000)
+                                    {
+                                        <span class="border text-uppercase text-md-left text-nowrap">  @Html.DropDownList("RegAssignedTo", new SelectList(Model.LassignedBy, Model.ManageBatchModel.RegAssignedTo))</span>
+                                    }
+
+                                    else
+                                    {
+                                        <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.RegAssignedTo)</span>
+                                    }
+                                    @Html.ValidationMessage("RegAssignedTO", new { @class = "text-danger" })
+                                }
+
+                            </p>
+
+                            <p>
+                                Completed By
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+
+                                    if (Model.ManageBatchModel.RegCompletedAt.Year < 2000)
+                                    {
+
+
+                                        <span class="border text-uppercase text-md-left text-nowrap" asp-for="ManageBatchModel[Model.CurrentBatchNumber].RegCompletedBy">@Html.DropDownList("RegCompletedBy", new SelectList(Model.LassignedBy, Model.ManageBatchModel.RegCompletedBy))</span>
+
+
+                                    }
+                                    else
+                                    {
+                                        <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.RegCompletedBy)</span>
+                                    }
+                                    @Html.ValidationMessage("RegCompletedBy", new { @class = "text-danger" })
+                                }
+
+                            </p>
+                            <p>
+                                Started At
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+                                    <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.RegStartedAt)</span>
+
+                                }
+
+                            </p>
+                            <p>
+                                Completed At
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+
+                                    <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.RegCompletedAt)</span>
+                                }
+                            </p>
+                            <p>
+                                Duration
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+
+                                    <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.RegDuration)</span>
+                                }
+                            </p>
+
+                        </div>
+
+                        <div>
+                            @if (string.IsNullOrWhiteSpace(Model.CurrentBatchNumber))
+                            {
+
+                                <input type="submit" onclick="this.form.submit()" value="Begin Registration" name="regBatch" id="regBatch" class="form-control btn-outline-dark" disabled="disabled" />
+                                <input type="submit" onclick="this.form.submit()" value="Complete Registration" name="compBatch" id="compBatch" class="form-control btn-outline-dark" disabled="disabled" />
+                            }
+                            else
+                            {
+                                if (Model.ManageBatchModel.RegStartedAt.Year < 2000)
+                                {
+                                    <input type="submit" onclick="this.form.submit()" value="Begin Registration" name="regBatch" id="regBatch" class="form-control inlineblock btn-outline-dark" />
+                                }
+                                else
+                                {
+                                    <input type="submit" onclick="this.form.submit()" value="Begin Registration" name="regBatch" id="regBatch" class="form-control inlineblock btn" disabled="disabled" />
+                                }
+
+                                if (Model.ManageBatchModel.RegCompletedAt.Year < 2000)
+                                {
+                                    <input type="submit" onclick="this.form.submit()" value="Complete Registration" name="compBatch" id="compBatch" class="form-control btn-outline-dark" />
+                                }
+                                else
+                                {
+                                    <input type="submit" onclick="this.form.submit()" value="Complete Registration" name="compBatch" id="compBatch" class="form-control btn" disabled="disabled" />
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="border">
+                            <header>
+                                <h6 class="text-center">Processing</h6>
+                            </header>
+                            <p class="p-2"></p>
+                            <p>
+                                Assigned By
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+                                    <span class="border text-uppercase text-md-left text-nowrap control-label" asp-for="Model.ManageBatchModel.ProcessAssignedBy">@Html.DisplayFor(model => Model.ManageBatchModel.ProcessAssignedBy)</span>
+
+                                }
+
+                            </p>
+                            <p>
+                                Assigned To
+
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+
+                                    if (Model.ManageBatchModel.ProcessStartAt.Year < 2000)
+                                    {
+                                        <span class="border text-uppercase text-md-left text-nowrap">  @Html.DropDownList("ProcessAssignedTo", new SelectList(Model.LassignedBy, Model.ManageBatchModel.ProcessAssignedTo))</span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.ProcessAssignedTo)</span>
+                                    }
+                                    @Html.ValidationMessage("ProcessAssignedTo", new { @class = "text-danger" })
+                                }
+                            </p>
+
+                            <p>
+                                Completed By
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+                                    if (Model.ManageBatchModel.ProcessCompletedAt.Year < 2000)
+                                    {
+                                        <span class="border text-uppercase text-md-left text-nowrap">  @Html.DropDownList("ProcessCompletedBy", new SelectList(Model.LassignedBy, Model.ManageBatchModel.ProcessCompletedBy))</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.ProcessCompletedBy)</span>
+                                    }
+                                    @Html.ValidationMessage("ProCompletedBy", new { @class = "text-danger" })
+                                }
+                            </p>
+                            <p>
+                                Started At
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+                                    <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.ProcessStartAt)</span>
+                                }
+
+                            </p>
+                            <p>
+                                Completed At
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+
+                                    <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.ProcessCompletedAt)</span>
+                                }
+                            </p>
+                            <p>
+                                Duration
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+
+                                    <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.ProcessDuration)</span>
+                                }
+                            </p>
+                        </div>
+                        <div>
+                            @if (string.IsNullOrWhiteSpace(Model.CurrentBatchNumber))
+                            {
+                                <input type="submit" value="Begin Processing" name="begProcBatch" id="begProcBatch" class="form-control btn-outline-dark" disabled="disabled" />
+                                <input type="submit" value="Complete Processing" name="compProceBatch" id="compProceBatch" class="form-control btn-outline-dark" disabled="disabled" />
+                            }
+                            else
+                            {
+                                if (Model.ManageBatchModel.ProcessStartAt.Year < 2000)
+                                {
+                                    <input type="submit" value="Begin Processing" name="begProcBatch" id="begProcBatch" class="form-control btn-outline-dark" />
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Begin Processing" name="begProcBatch" id="begProcBatch" class="form-control btn" disabled="disabled" />
+                                }
+                                if (Model.ManageBatchModel.ProcessCompletedAt.Year < 2000)
+                                {
+                                    <input type="submit" value="Complete Processing" name="compProceBatch" id="compProceBatch" class="form-control btn-outline-dark" />
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Complete Processing" name="compProceBatch" id="compProceBatch" class="form-control btn-outline-dark" disabled="disabled" />
+                                }
+
+                            }
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col">
+                        <div class="border">
+                            <header>
+                                <h6 class="text-center">Overall Status</h6>
+                            </header>
+                            <p class="p-2"></p>
+                            <p>
+                                Created At
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+                                    <span class="border text-uppercase text-md-left text-nowrap control-label" asp-for="ManageBatchModel[Model.CurrentBatchNumber].RegStartedAt">@Html.DisplayFor(model => Model.ManageBatchModel.ClosedCreatedAt)</span>
+                                }
+
+                            </p>
+                            <p>
+                                Created BY
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+                                    <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.RegCreatedBy)</span>
+                                }
+
+                            </p>
+                            <p>
+                                Closed At
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+                                    <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.BinCompletedAt)</span>
+                                }
+
+                            </p>
+                            <p>
+                                Total Duration
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+                                    <span class="border text-uppercase text-md-left text-nowrap">@Html.DisplayFor(model => Model.ManageBatchModel.CompleteDuration)</span>
+                                }
+
+                            </p>
+                            <p>
+                                Closed By
+                                @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                                {
+
+                                    <span class="border text-uppercase text-md-left text-nowrap ">@Html.DisplayFor(model => Model.ManageBatchModel.BinClosedBy)</span>
+                                }
+                            </p>
+                        </div>
+                        <div>
+                            @if (string.IsNullOrWhiteSpace(Model.CurrentBatchNumber))
+                            {
+                                <input type="submit" onclick="this.form.submit()" value="Close Batch" name="closeBatch" id="closeBatch" class="form-control  btn-outline-dark" disabled="disabled" />
+                            }
+                            else
+                            {
+
+                                if (Model.ManageBatchModel.BinCompletedAt.Year < 2000)
+                                {
+                                    <input type="submit" onclick="this.form.submit()" value="Close Batch" name="closeBatch" id="closeBatch" class="form-control btn-outline-dark" />
+                                }
+                                else
+                                {
+                                    <input type="submit" onclick="this.form.submit()" value="Close Batch" name="closeBatch" id="closeBatch" class="form-control  btn" disabled="disabled" />
+                                }
+                            }
+                            <p class="p-1" />
+                        </div>
+
+                        <p class="p-1" />
+
+                    </div>
+                    <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:none">
+                        <p id="parBmUpScreen" name="parCategory" style="position: absolute; top: 30%; left: 45%; color: White;">
+                            Getting / Updating Category, please wait...<img src="~/Images/ajax-loading.gif">
+                        </p>
+                    </div>
+                    @*end row Comments*@
+                    @if (!(string.IsNullOrWhiteSpace(Model.CurrentBatchNumber)))
+                    {
+                        @*BinReg*@
+                        <input type="hidden" asp-for="ManageBatchModel.BinID" id="BinId" name="BinId" />
+                        <input type="hidden" asp-for="ManageBatchModel.BatchID" id="BatchID" name="BatchID" />
+                        <input type="hidden" asp-for="ManageBatchModel.CategoryName" id="CategoryName" name="CategoryName" value="@Model.SelCategoryName" />
+                        <input type="hidden" asp-for="ManageBatchModel.RegAssignedBy" id="RegAssignedBy" name="RegAssignedBy" />
+                        <input type="hidden" asp-for="ManageBatchModel.RegAssignedTo" id="RegAssignedTo" name="RegAssignedTo" />
+                        <input type="hidden" asp-for="ManageBatchModel.RegStartedAt" id="RegStartedAt" name="RegStartedAt" />
+                        <input type="hidden" asp-for="ManageBatchModel.RegCompletedBy" id="RegCompltedBy" name="RegCompltedBy" />
+                        <input type="hidden" asp-for="ManageBatchModel.RegCompletedAt" id="RegCompletedAt" name="RegCompletedAt" />
+                        <input type="hidden" asp-for="ManageBatchModel.RegCreatedBy" id="RegCreatedBy" name="RegCreatedBy" />
+
+                        @*BinProcess*@
+                        <input type="hidden" asp-for="ManageBatchModel.ProcessAssignedBy" id="ProcessAssignedBy" name="ProcessAssignedBy" />
+                        <input type="hidden" asp-for="ManageBatchModel.ProcessAssignedTo" id="ProcessAssignedTo" name="ProcessAssignedTo" />
+                        <input type="hidden" asp-for="ManageBatchModel.ProcessStartAt" id="ProcessStartAt" name="ProcessStartAt" />
+                        <input type="hidden" asp-for="ManageBatchModel.ProcessCompletedAt" id="ProcessCompletedAt" name="ProcessCompletedAt" />
+                        <input type="hidden" asp-for="ManageBatchModel.ProcessCompletedBy" id="ProcessCompletedBy" name="ProcessCompletedBy" />
+
+                        @*BinClosed*@
+                        <input type="hidden" asp-for="ManageBatchModel.BinClosedBy" id="BinClosedBy" name="BinClosedBy" />
+                        <input type="hidden" asp-for="ManageBatchModel.BinCompletedAt" id="BinCompletedAT" name="BinCompletedAT" />
+                        <input type="hidden" asp-for="ManageBatchModel.ClosedCreatedAt" id="ClosedCreatedAt" name="ClosedCreatedAt" />
+
+                        <input type="hidden" asp-for="ManageBatchModel.BinComments" id="BinComments" name="BinComments" />
+                        <input type="hidden" asp-for="ManageBatchModel.BinContents" id="BinContents" name="BinContents" />
+
+                    }
+
+                </div>
+            </div>
+        </form>
+        <p class="p-1" />
+    </div>
+</div>
+
+@*end div fore*@

@@ -1,0 +1,16 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQPdfFileWriter, Scanquire.Public, Version=1.0.4800.27181, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="FileExtension" value=".pdf" />
+    <Simple name="Encryption" value="BIT256_AES" />
+    <Simple name="Permissions" value="ALL" />
+    <Simple name="OwnerPassword" value="edocs" />
+    <Null name="UserPassword" />
+    <Simple name="MonochromeImageFormat" value="FIF_TIFF" />
+    <Simple name="MonochromeImageSaveFlags" value="TIFF_CCITTFAX4" />
+    <Simple name="GreyscaleImageFormat" value="FIF_PNG" />
+    <Simple name="GreyscaleImageSaveFlags" value="PNG_Z_BEST_COMPRESSION" />
+    <Simple name="ColorImageFormat" value="FIF_JPEG" />
+    <Simple name="ColorImageSaveFlags" value="PNG_Z_NO_COMPRESSION" />
+    <Simple name="ScaleToNearestHalfInch" value="True" />
+  </Properties>
+</Complex>

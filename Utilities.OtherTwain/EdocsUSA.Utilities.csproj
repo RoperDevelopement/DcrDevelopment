@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{DE32014B-BF7A-4228-9EC8-4E1A68E18590}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>EdocsUSA.Utilities</RootNamespace>
+    <AssemblyName>EdocsUSA.Utilities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Patagames.Ocr, Version=1.11.3.40, Culture=neutral, PublicKeyToken=be14d8e1fe46e570, processorArchitecture=MSIL">
+      <HintPath>packages\Tesseract.Net.SDK.1.15.342\lib\net40\Patagames.Ocr.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Tesseract, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Tesseract.3.3.0\lib\net40\Tesseract.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\DatePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DatePicker.Designer.cs">
+      <DependentUpon>DatePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MonthCalendarDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\MonthCalendarDialog.Designer.cs">
+      <DependentUpon>MonthCalendarDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logging\ITraceLogging.cs" />
+    <Compile Include="Logging\TraceLogger.cs" />
+    <Compile Include="Url.cs" />
+    <Compile Include="Edocs_Utilities.cs" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Code128BarcodeDrawer.cs" />
+    <None Include="Code128BarcodeGeneratorOld.cs" />
+    <Compile Include="BusyStatus.cs" />
+    <Compile Include="Code128BarcodeRenderer.cs" />
+    <Compile Include="ComboBoxInputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComboBoxInputControl.Designer.cs">
+      <DependentUpon>ComboBoxInputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommandLine.cs" />
+    <Compile Include="Controls\BorderlessToolstripRender.cs" />
+    <Compile Include="Controls\CaptionLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataGridViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ExistingFileActionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ImageViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\InputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\InputControl.Designer.cs">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\InputDialog.Designer.cs">
+      <DependentUpon>InputDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InputDialogBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\IWin32WindowWrapper.cs" />
+    <Compile Include="Controls\ListBoxDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ListBoxInputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ProgressBarEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProgressBarExToolstripItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <None Include="Controls\ProgressMonitor.cs" />
+    <None Include="Controls\ProgressMonitorToolstripItem.cs" />
+    <Compile Include="Controls\StatusWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\StatusWindow.Designer.cs">
+      <DependentUpon>StatusWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TableLayoutPanelInputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ThumbnailViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ThumbnailViewer.Designer.cs">
+      <DependentUpon>ThumbnailViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ValidatingTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ValidatingTextBoxInputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DateTimeTools.cs" />
+    <None Include="DebugEx.cs" />
+    <Compile Include="EventWaiter.cs" />
+    <Compile Include="ExistingFileAction.cs" />
+    <Compile Include="Extensions\BitmapExtensions.cs" />
+    <Compile Include="Extensions\BlockingCollectionExtensions.cs" />
+    <Compile Include="Extensions\ConsoleExtensions.cs" />
+    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\DirectoryExtensions.cs" />
+    <Compile Include="Extensions\FileExtensions.cs" />
+    <Compile Include="Extensions\FolderBrowserDialogExtensions.cs" />
+    <Compile Include="Extensions\FormExtensions.cs" />
+    <Compile Include="Extensions\GraphicsExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
+    <Compile Include="Extensions\ListBoxExtensions.cs" />
+    <Compile Include="Extensions\MathExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\OpenFileDialogExtensions.cs" />
+    <Compile Include="Extensions\PathExtensions.cs" />
+    <Compile Include="Extensions\PointExtensions.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
+    <Compile Include="Extensions\RectangleExtensions.cs" />
+    <Compile Include="Extensions\RichTextBoxExtensions.cs" />
+    <Compile Include="Extensions\SaveFileDialogExtensions.cs" />
+    <Compile Include="Extensions\SizeExtensions.cs" />
+    <Compile Include="Extensions\StringTools.cs" />
+    <Compile Include="Extensions\SynchronizationContextExtensions.cs" />
+    <None Include="Extensions\TaskExtensions.cs" />
+    <Compile Include="Extensions\TypeConverterExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <None Include="FilesystemConnector.cs" />
+    <Compile Include="IEnumeratorProgress.cs" />
+    <Compile Include="ImageTools.cs" />
+    <Compile Include="INIFile.cs" />
+    <Compile Include="Interop\FlashWindow.cs" />
+    <Compile Include="Interop\Gdi32.cs" />
+    <Compile Include="Interop\GDIPlus.cs" />
+    <Compile Include="Interop\Kernel32.cs" />
+    <Compile Include="Interop\User32.cs" />
+    <Compile Include="Interop\WindowsMessageIDs.cs" />
+    <Compile Include="ISerializableBrush.cs" />
+    <Compile Include="IStatusNotifier.cs" />
+    <Compile Include="Logging\CsvDictionaryLogger.cs" />
+    <Compile Include="Logging\FileDictionaryLoggerBase.cs" />
+    <Compile Include="Logging\IDictionaryLogger.cs" />
+    <Compile Include="Logging\JsonFileDictionaryLogger.cs" />
+    <Compile Include="Percent.cs" />
+    <Compile Include="Progress.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializableColor.cs" />
+    <Compile Include="SerializableFont.cs" />
+    <Compile Include="SerializableSolidBrush.cs" />
+    <Compile Include="SettingsDirectory.cs" />
+    <Compile Include="SettingsFile.cs" />
+    <Compile Include="SettingsManager.cs" />
+    <None Include="packages.config" />
+    <None Include="SettingValue.cs" />
+    <Compile Include="SynchronizedBindintList.cs" />
+    <Compile Include="TraceEx.cs" />
+    <Compile Include="Twain.cs" />
+    <None Include="tessdata\configs\config.cfg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\eng.cube.bigrams">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\eng.cube.fold">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\eng.cube.lm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\eng.cube.nn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\eng.cube.params">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\eng.cube.size">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\eng.cube.word-freq">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\eng.tesseract_cube.nn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\eng.traineddata">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\pdf.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="tessdata\pdf.ttx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ComboBoxInputControl.resx">
+      <DependentUpon>ComboBoxInputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DatePicker.resx">
+      <DependentUpon>DatePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InputControl.resx">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InputDialog.resx">
+      <DependentUpon>InputDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MonthCalendarDialog.resx">
+      <DependentUpon>MonthCalendarDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StatusWindow.resx">
+      <DependentUpon>StatusWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ThumbnailViewer.resx">
+      <DependentUpon>ThumbnailViewer.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="x64\tesseract.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\tesseract.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PostBuildEvent>copy EdocsUSA.Utilities.dll "C:\Assemblies\"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetDir)EdocsUSA.Utilities*.*" "L:\EdocsGitHub\Assemblies\*.*"</PostBuildEvent>
+  </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+    <Error Condition="!Exists('packages\Tesseract.3.3.0\build\Tesseract.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Tesseract.3.3.0\build\Tesseract.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <Import Project="packages\Tesseract.3.3.0\build\Tesseract.targets" Condition="Exists('packages\Tesseract.3.3.0\build\Tesseract.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>copy L:\EdocsGitHub\EdocsUSA.Utilities\Dlls\*.*  "$(TargetDir)*.*"</PreBuildEvent>
+  </PropertyGroup>
+  <Import Project="packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+</Project>

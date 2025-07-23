@@ -1,0 +1,8 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQDirectoryReader, Scanquire.Public, Version=1.0.5046.18822, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <SingleArray name="SupportedFileExtensions">
+      <Items />
+    </SingleArray>
+    <Simple name="DirectorySearchOption" value="TopDirectoryOnly" />
+  </Properties>
+</Complex>

@@ -1,0 +1,14 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQTextImageBuilderSelector, Scanquire.Public, Version=1.0.4800.19558, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="SortName" value="True" />
+    <SingleArray name="TextImageBuilderNames">
+      <Items>
+			<Simple value="DAMAGED_PAGE" />
+			<Simple value="UNREADABLE PAGE" />
+			<Simple value="FREE TYPE" />
+    		<Simple value="ORIGINAL PAGE ARCHIVED" />
+			<Simple value="PAGES SCANNED TO SEPARATE FILE" />
+      </Items>
+    </SingleArray>
+  </Properties>
+</Complex>

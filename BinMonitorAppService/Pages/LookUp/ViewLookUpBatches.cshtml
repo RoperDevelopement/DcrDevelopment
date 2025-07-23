@@ -1,0 +1,584 @@
+﻿@page
+@model BinMonitorAppService.Pages.LookUp.ViewLookUpBatchesModel
+
+
+
+@{
+    ViewData["Title"] = "ViewLookUpBatches";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+}
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Page BinMonitor Report will refresh in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+
+<h1 class="text-center">BinMonitor Report</h1>
+<div style="background-color:#ffffff" class="small">
+
+    <p class="p-2" />
+    <header>
+        <h1 class="text-center">Report Date Range @Model.BinStatusStartDate.ToString("MM-dd-yyyy") - @Model.BinStatusEndDate.ToString("MM-dd-yyyy")</h1>
+    </header>
+    <p class="p-0"></p>
+    <div class="container-fluid">
+
+        <form method="get" id="getBinStats" name="getBinStats">
+            <div class="form-group form-inline">
+                <div class="row">
+                    @*
+                        <div class="col">
+                            <p class="margionZero">
+                                Active Bins
+                            </p>
+                            <p class="margionZero">  @Html.DropDownList("BinID", new SelectList(Model.BinID, " "), new { @class = "form-control" })</p>
+                        </div>
+                    *@
+                    <div class="col">
+                        <p class="margionZero text-center">
+                            Bin Status
+                        </p>
+                        <p class="margionZero">
+                            @Html.DropDownList("ReportType",
+                                         new SelectList(Enum.GetValues(typeof(DropListDislOptions))),
+                                         new { @class = "form-control", @onclick = "this.submit()" })
+                        </p>
+                    </div>
+
+                    <div class="col">
+                        <p class="margionZero text-center">
+                            Category
+                        </p>
+                        <p class="margionZero text-left">
+                            @Html.DropDownListFor(m => m.CategoryName,
+                         new SelectList(Model.CategoryName, "CategoryName"), new { @name = "CategoryName", @id = "CategoryName", @class = "form-conrol", @onchange = "this.submit()" })
+                        </p>
+                    </div>
+                    <div class="col text-center">
+                        <p class="margionZero text-nowrap text-center">
+                            @Html.LabelFor(model => Model.BinStatusStartDate, new { @class = "text-left" })
+                        </p>
+                        <p asp-for="BinStatusEndDate">
+                            @Html.EditorFor(m => Model.BinStatusStartDate)
+                        </p>
+                    </div>
+                    <div class="col text-centertext-center">
+                        <p class="margionZero text-nowrap text-center">
+                            @Html.LabelFor(model => Model.BinStatusEndDate)
+                        </p>
+                        <p asp-for="BinStatusEndDate">
+                            @Html.EditorFor(m => Model.BinStatusEndDate)
+                        </p>
+                    </div>
+                    <div class="col a text-nowrap" style="display:inline">
+
+                        @*
+                                                    <div class="col inlineblock">
+                                                    <p class="inlineblock">
+                            @Html.CheckBoxFor(m => m.DisplayCommentContents, htmlAttributes: new { @class = "inlineblock text-nowrap",@style="display:block", @onchange = "this.submit()" })
+                             @Html.LabelFor(model => Mod
+                        *@
+                        <p></p>
+                        <p class="margionZero a text-nowrap" style="display:inline">
+                            @Html.CheckBoxFor(m => m.DisplayCommentContents, new { @onchange = "this.submit()", @class = "a text-nowrap"})
+
+                            @*   <p class="margionZero text-left text-nowrap"> *@
+                            @Html.LabelFor(model => Model.DisplayCommentContents, new { @class = "a text-nowrap" })
+
+                        </p>
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>@*end form-grouip*@
+
+            <p class="p-0"></p>
+            <div class="table-responsive">
+                @if ((Model.IDicBins != null) && (Model.IDicBins.Count() > 0))
+
+                {
+
+                    @foreach (var item in Model.IDicBins)
+                    {
+
+                        @if (@Model.Loop == 0)
+                        {
+                            Model.PagingLinks.Add($"linkNumber-{@Model.Loop}");
+                            @Html.Raw($"<div style=\"display:block\" id=\"linkNumber-{@Model.Loop}\" name=\"linkNumber-{@Model.Loop}\">");
+                        }
+                        else
+                        {
+                            if (@Model.Loop % 50 == 0)
+                            {
+                                Model.PagingLinks.Add($"linkNumber-{@Model.Loop}");
+                                @Html.Raw($"<div style=\"display:none\" id=\"linkNumber-{@Model.Loop}\" name=\"linkNumber-{@Model.Loop}\">");
+
+                            }
+
+                        }
+                        <h6 class="text-center text-info">
+                            Bin ID @Html.DisplayFor(model => item.Value.BinID) LabReq Number  @Html.DisplayFor(model => item.Value.LabRecNumber) Category @Html.DisplayFor(model => item.Value.CategoryName)
+
+                            @if (string.IsNullOrWhiteSpace((@item.Value.BinClosedBy)))
+                            {
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/BinManager/ViewManageBatch?BatchId=@item.Value.BatchID" class="btn btn-info" role="button" target="_blank">Edit</a></span>
+                            }
+
+                        </h6>
+
+                        Model.Loop = Model.Loop + 5;
+                        <table class="table table-hover text-nowrap  w-100 " id="table_bins" name="table_bins">
+
+                            <thead>
+                                <tr class="flex-nowrap">
+                                    <th>Bin Status</th>
+                                    <th>Assigned By</th>
+                                    <th>Assigned To</th>
+                                    <th>Started At</th>
+                                    <th>Completed By</th>
+                                    <th>Completed At</th>
+                                    <th>Duration</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                @if ((Model.ReportType == DropListDislOptions.AllBins) || (Model.ReportType == DropListDislOptions.RegisteredBins))
+                                {
+                                    if (item.Value.RegStartedAt.Year < 2000)
+                                    {
+                                        Model.TotalRegBinNotStarted++;
+                                    }
+
+                                    if (string.Compare(item.Value.RegAssignedTo, "Not Assigned", false) == 0)
+                                    {
+                                        Model.TotalRegBinNotAssigned++;
+                                    }
+                                    if (item.Value.RegCompletedAt.Year < 2000)
+                                    {
+                                        Model.TotalRegBinNotCompleted++;
+                                    }
+                                    <tr>
+                                        <td>
+                                            Register Bin
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.Value.RegAssignedBy)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.Value.RegAssignedTo)
+                                        </td>
+                                        <td>
+                                            @if (item.Value.RegStartedAt.Year > 2000)
+                                            {
+                                                @Html.DisplayFor(model => item.Value.RegStartedAt)
+                                            }
+                                            else
+                                            {
+                                                <p class="text-danger">  Registration Not Started </p>
+
+                                            }
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.Value.RegCompletedBy)
+                                        </td>
+                                        <td>
+                                            @if (item.Value.RegCompletedAt.Year > 2000)
+                                            {
+                                                @Html.DisplayFor(model => item.Value.RegCompletedAt)
+                                            }
+                                            else
+                                            {
+                                                <p class="text-danger"> Registion not Completed</p>
+                                            }
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.Value.RegDuration)
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                }
+                                @if ((Model.ReportType == DropListDislOptions.AllBins) || (Model.ReportType == DropListDislOptions.ProcessingBins))
+                                {
+                                    if (item.Value.ProcessStartAt.Year < 2000)
+                                    {
+                                        Model.TotalProcBinNotStarted++;
+                                    }
+
+                                    if (string.Compare(item.Value.ProcessAssignedTo, "Not Assigned", false) == 0)
+                                    {
+                                        Model.TotalProcBinNotAssigned++;
+                                    }
+                                    if (item.Value.ProcessCompletedAt.Year < 2000)
+                                    {
+                                        Model.TotalProcBinNotCompleted++;
+                                    }
+                                    <tr>
+                                        <td>
+                                            Processing Bin
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => item.Value.ProcessAssignedBy)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.Value.ProcessAssignedTo)
+                                        </td>
+                                        <td>
+                                            @if (item.Value.ProcessStartAt.Year > 2000)
+                                            {
+                                                @Html.DisplayFor(model => item.Value.ProcessStartAt)
+                                            }
+                                            else
+                                            {
+                                                <p class="text-danger">Processing Not Started</p>
+                                            }
+
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => item.Value.ProcessCompletedBy)
+                                        </td>
+                                        <td>
+                                            @if (item.Value.ProcessCompletedAt.Year > 2000)
+                                            {
+                                                @Html.DisplayFor(model => item.Value.ProcessCompletedAt)
+                                            }
+                                            else
+                                            {
+                                                <p class="text-danger">Processing Not Completed</p>
+                                            }
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.Value.ProcessDuration)
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                }
+                                <tr>
+                                    @if (item.Value.BinCompletedAt.Year < 2000)
+                                    {
+                                        Model.TotalBinNotClosed++;
+                                    }
+                                    <td>
+                                        Closed Bin
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(model => item.Value.RegCreatedBy)
+                                    </td>
+                                    <td>
+                                        N/A
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => item.Value.ClosedCreatedAt)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => item.Value.BinClosedBy)
+                                    </td>
+                                    <td>
+                                        @if (item.Value.BinCompletedAt.Year > 2000)
+                                        {
+                                            @Html.DisplayFor(model => item.Value.BinCompletedAt)
+                                        }
+                                        else
+                                        {
+                                            <p class="text-danger">Not Closed</p>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => item.Value.CompleteDuration)
+                                    </td>
+                                    <td>
+                                        @*
+                                            <a href="/BinManager/ViewManageBatch?BatchId=@item.Value.BatchID" class="btn btn-info" role="button" target="_blank">Edit</a>
+                                        *@
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+
+                            @if (@Model.DisplayCommentContents)
+                            {
+                                @if (!(string.IsNullOrWhiteSpace(item.Value.BinComments)))
+                                {
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td>Comments</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr td class="text-left">
+                                                <td>@Html.DisplayFor(model => item.Value.BinComments)</td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                }
+                                @if (!(string.IsNullOrWhiteSpace(item.Value.BinContents)))
+                                {
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td>Contents</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left">@Html.DisplayFor(model => item.Value.BinContents)</td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                }
+
+                            }
+
+                        </table>
+                        @if ((@Model.Loop % 50 == 0) || (@Model.Loop >= @Model.IDicBins.Count() * 5))
+                        {
+                            @Html.Raw("</div>");
+                        }
+
+                    }
+
+                    @*end table*@
+                }
+                <input type="hidden" asp-for="BinStatusEndDate" id="BinStatusEndDate" name="BinStatusEndDate" />
+            </div>
+            @*
+                <input type="submit" value="Bin Status" class="btn-block" onclick="this.submit()" />
+            *@
+
+        </form>
+        <p class="p-0"></p>
+        <div class="row container-fluid border ">
+            @if ((Model.ReportType == DropListDislOptions.AllBins) || (Model.ReportType == DropListDislOptions.RegisteredBins))
+            {
+                <div class="col">
+                    <p class="margionZero font-weight-bold">Registered Bins Not Started @Model.TotalRegBinNotStarted</p>
+                    <p class="margionZero font-weight-bold">Registered Bins Not Assigned @Model.TotalRegBinNotAssigned</p>
+                    <p class="margionZero font-weight-bold">Registered Bins Not Completed @Model.TotalRegBinNotCompleted</p>
+                </div>
+            }
+            @if ((Model.ReportType == DropListDislOptions.AllBins) || (Model.ReportType == DropListDislOptions.ProcessingBins))
+            {
+                <div class="col">
+                    <p class="margionZero font-weight-bold">Processed Bins Not Started @Model.TotalProcBinNotStarted</p>
+                    <p class="margionZero font-weight-bold">Processed Bins Not Assigned @Model.TotalProcBinNotAssigned</p>
+                    <p class="margionZero font-weight-bold">Processed Bins Not Completed @Model.TotalProcBinNotCompleted</p>
+                </div>
+            }
+            <div class="col">
+                <p class="margionZero font-weight-bold">Bins Not Closed @Model.TotalBinNotClosed</p>
+
+            </div>
+
+        </div>
+
+        @if (@Model.Loop > 50)
+        {
+            Model.Loop = 1;
+            <div class="container">
+
+                @*
+                    <li class="page-item"><a class="page-link" href="#" onclick="AlertName('l','l')" id="prevLink" name="prevLink">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#" id="nextPage" name="nextPage" style="display:none">Next</a></li>
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item"><a class="page-link" href="#" onclick="AlertName('l','l')" id="prevLink" name="prevLink">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                *@
+
+                <p class="p-1"></p>
+
+                <ul class="pagination justify-content-end">
+                    @foreach (var link in @Model.PagingLinks)
+                    {
+                        @if (@Model.Loop == 1)
+                        {
+                            @Html.Raw($"<li class=\"page-item active\" id=\"pag{link}\" name=\"pag{link}\" ><a class=\"page-link\"  href=\"#\" onclick=\"NextPrevPage('{link}','pag{link}')\">{@Model.Loop}</a></li>");
+                        }
+                        else
+                        {
+                            @Html.Raw($"<li class=\"page-item\" id=\"pag{link}\" name=\"pag{link}\" ><a class=\"page-link\"  href=\"#\" onclick=\"NextPrevPage('{link}','pag{link}')\">{@Model.Loop}</a></li>");
+                        }
+                        Model.Loop = Model.Loop + 1;
+                    }
+
+                </ul>
+            </div>
+        }
+
+
+
+    </div>@*end continer fluid*@
+    <p class="p-1" />
+
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:block">
+    <p id="parBmUpScreen" name="parCategory" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Loading Reports please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+             SessionExpireAlert(0);
+
+            // $(this).bind("contextmenu", function (e) {
+
+            //    e.preventDefault();
+               
+            //});
+
+             $("#divLoading").hide();
+            $('#DisplayCommentContents').change(function () {
+                var message = "Displaying Comments ";
+                ShowLoadingDialog(message);
+                $("#getBinStats").submit()
+            });
+
+            $('#CategoryName').change(function () {
+                var message = "Getting Reports for Category Name " + $('#CategoryName').val();
+                ShowLoadingDialog(message);
+                $("#getBinStats").submit()
+            });
+
+            $('#ReportType').change(function () {
+                var message = "Getting Reports for Bin Status " + $('#ReportType').val();
+                ShowLoadingDialog(message);
+                $("#getBinStats").submit()
+            });
+
+
+
+            $('#BinStatusEndDate').change(function () {
+                var message = "Getting Report for Start Date: " + $('#BinStatusStartDate').val() + " End Date: " + $('#BinStatusEndDate').val();
+                ShowLoadingDialog(message);
+                $("#getBinStats").submit()
+            });
+            $('#BinStatusStartDate').change(function () {
+                var message = "Getting Report for Start Date: " + $('#BinStatusStartDate').val() + " End Date: " + $('#BinStatusEndDate').val();
+                ShowLoadingDialog(message);
+                $("#getBinStats").submit()
+            });
+
+
+
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        function NextPrevPage(page, classLi) {
+
+            //var elms = document.getElementsById(;
+            var elms = document.querySelectorAll("[id^='linkNumber']");
+            for (i = 0; i < elms.length; i++) {
+                if (elms[i].style.display == 'block') {
+                    elms[i].style.display = "none";
+                    var linkId = "pag" + elms[i].id;
+                    document.getElementById(linkId).classList.remove("active");
+                    break;
+                }
+            }
+            document.getElementById(page).style.display = "block"
+            document.getElementById(classLi).classList.add("active");
+            //document.getElementById("linkNumber-0").style.display = 'none'
+            //document.getElementById("linkNumber-20").style.display = "block"
+            //  alert(document.getElementById("linkNumber-20").style.display);
+            //if (document.getElementById("0").style.display == 'none')
+            //  document.getElementById("advanced").style.display = "inline";
+            //else {
+            //  document.getElementById("advanced").style.display = "none";
+            // document.getElementById("reset").click();
+        }
+
+
+
+
+    </script>
+
+}
+@*
+    @section scripts {
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+        <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js">
+        </script>
+        <link rel="stylesheet"
+              href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet"
+              href="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/jqueryui/dataTables.jqueryui.css" />
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('#table_bins').parent().dataTable({
+                        responsive: true,
+                        columnDefs: [
+                            { targets: [-1, -3], className: 'dt-body-right' }
+                        ]
+                    } );
+            });
+        </script>
+
+    }
+
+        @section scripts {
+
+            <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+            <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/jqueryui/dataTables.jqueryui.js">
+            </script>
+            <link rel="stylesheet"
+                  href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+            <link rel="stylesheet"
+                  href="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/jqueryui/dataTables.jqueryui.css"/>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#table_bins').dataTable({
+                  "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                iDisplayLength: 25,
+                iDisplayStart: 3,
+                "oLanguage": {
+                    "sUrl": "media/language/de_DE.txt",
+                    "sZeroRecords": "There are no records that match your search criterion",
+                    "sLengthMenu": "Display _MENU_ records per page",
+                    "sInfo": "Displaying _START_ to _END_ of _TOTAL_ records",
+                    "sInfoEmpty": "Showing 0 to 0 of 0 records",
+                    "sInfoFiltered": "(filtered from _MAX_ total records)"
+                },
+                sPagination: "full_numbers",
+                bStateSave: true,
+                sScorollX: "300px",
+                sScrollY: "200px",
+                bScrollInfinite:true, //this property disables pagination
+                oSearch: { "sSearch": "Type here...", "bRegex": false, "bSmart": false }
+        } );
+                });
+            </script>
+
+
+*@
+

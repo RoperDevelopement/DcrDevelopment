@@ -1,0 +1,159 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.Pages.LabReqs.EditLabReqsReportViewModel
+@{
+    ViewData["Title"] = "View Changed LabReqs";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div id="headingSessionExp" style="display:none">
+        <h3 class="text-center text-danger border">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+    </div>
+    <div id="maindiv" class="container-fluid small" style="background-color:white">
+        <h1 class="text-center">View Changed LabReqs</h1>
+        <p class="p-1" />
+        <a href="#searchOptions" name="sOptions" id="sOptions" class=" btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+        <p class="alert-light" id="showmess" style="display:none">Click to expand/hide Search Options</p>
+        <p class="p-1" />
+        <div id="searchOptions" class="collapse">
+
+            <div>
+                <form method="get" id="getChanged" name="getChanged">
+                    <input type="hidden" id="runRep" name="runRep" value="true" />
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Lab Req Search Begin Date</th>
+                                <th class="text-center">Lab Req Search End Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center"><input type="date" id="receiptDate" name="receiptDate" /></td>
+                                <td class="text-center"><input type="date" id="scanDate" name="scanDate" /></td>
+
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="row text-center" style="margin:0 auto">
+                        <div class="col">
+                            @Html.LabelFor(m => m.IndexNumber, new { @style = "width:125px" })
+                            @Html.EditorFor(m => m.IndexNumber,new { htmlAttributes = new { placeholder = "Not Required" } })
+                        </div>
+                    </div>
+                    <div class="row text-center" style="margin:0 auto">
+                        <div class="col">
+                            @Html.LabelFor(m => m.FinancialNumber, new { @style = "width:125px" })
+                            @Html.EditorFor(m => m.FinancialNumber, new { htmlAttributes = new { placeholder = "Not Required" } })
+                        </div>
+                    </div>
+                    <div class="row text-center" style="margin:0 auto">
+                        <div class="col">
+                            @Html.LabelFor(m => m.MRN, new { @style = "width:125px" })
+                            @Html.EditorFor(m => m.MRN, new { htmlAttributes = new { placeholder = "Not Required" } })
+                        </div>
+                    </div>
+
+                </form>
+                <p class="p-0"></p>
+                <div class="row text-xl-right" style="margin:0 auto">
+                    <div class="col">
+
+                        <button class="btn btn-outline-primary btn-default" id="btdrunrep" name="btdrunrep">Run Report</button>
+                        &nbsp;&nbsp;<a class="btn btn-outline-danger btn-link" id="btnexit" href="https://edocsnyplabreqs.azurewebsites.net/Index" name="btnexit" role="button">Exit</a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="p-2"></p>
+        </div>
+    </div>@*End main div*@
+    <p class="p-2"></p>
+
+    <div class="container-fluid">
+
+        @if ((@Model.LabReqsModel != null) && (Model.LabReqsModel.Count() > 0))
+        {
+            <table border="1" style="background-color:darkturquoise" class="table table-hover w-auto  text-lg-left" id="dtLabReqs">
+                <thead>
+                    <tr style="font-size:small;" class="w-auto">
+                        <th>File URL</th>
+                        <th>Index Number</th>
+                        <th>CSN Number</th>
+                        <th>Req Number</th>
+                        <th>MRN</th>
+                        <th>Client Code</th>
+                        <th>Patient Name</th>
+                        <th>Dr Code</th>
+                        <th>Dr Name</th>
+                        <th>Modify By</th>
+                        <th>Version Number</th>
+                        <th>Scan Operator</th>
+                        <th>Date Changed</th>
+                        <th>Date of Service</th>
+                        <th>Scan Date</th>
+
+                    </tr>
+                </thead>
+                @foreach (var items in Model.LabReqsModel)
+                {
+                    <tr style="font-size:small;" class="w-auto">
+                        <td> <a href="/Partial_Pages/DisplayPdfFilePartialView?pdfurl=@items.Value.FileUrl" target="_blank" class="text-info"> <img src="~/Images/icpdf.gif" width="20" height="25" /></a></td>
+                        <td>@items.Value.IndexNumber</td>
+
+                        <td>@items.Value.FinancialNumber</td>
+                        <td>@items.Value.RequisitionNumber</td>
+                        <td>@items.Value.MRN</td>
+                        <td>@items.Value.ClientCode</td>
+                        <td>@items.Value.PatientName</td>
+                        <td>@items.Value.DrCode</td>
+                        <td>@items.Value.DrName</td>
+                        <td>@items.Value.ModifyBy</td>
+                        <td>@items.Value.VersionNumber</td>
+                        <td>@items.Value.ScanOperator</td>
+                        <td>@items.Value.DateAdded.ToString("MM/dd/yyyy")</td>
+                        <td>@items.Value.DateOfService.ToString("MM/dd/yyyy")</td>
+                        <td>@items.Value.ScanDate.ToString("MM/dd/yyyy")</td>
+
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+           
+            SessionExpireAlert(0);
+            $("#divLoading").hide();
+            $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+
+            });
+            //$("#btnrunrep").click(function (e) {
+                
+            //    alert(";;;");
+            //});
+            $('#btdrunrep').click(function (e) {
+                
+                $("#maindiv").fadeOut(100);
+             
+                $("#divLoading").show();
+                $("#getChanged").submit();
+            });
+           
+
+            
+        });
+        </script>
+}

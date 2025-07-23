@@ -1,0 +1,457 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.Invoice.CreateInvoiceViewModel
+@{
+}
+
+<div class="container-fluid" id="printInvoice">
+    <button type="button" id="btnOpenModel" class="btn btn-primary" data-toggle="modal" data-target="#createInvmodal" style="display:none">
+        Open modal
+    </button>
+    <button class="btn btn-info" id="generateInvoice"  style="display:none">Save Invoice</button>
+    @if ((@Model.ScanningCost != null) && (@Model.ScanningCost.Count() > 0))
+    {
+        <input type="hidden" value="@Model.ScanStartDate" id="invSDate" />
+        <input type="hidden" value="@Model.ScanStartDate" id="invEDate" />
+        <input type="hidden" value="@Model.CustomerID" id="custID" />
+        <input type="hidden" value="@Model.TotalCost" id="invTotalCost" />
+        <img align="right" src="@Model.EdocsModel.ImgStr" style="margin:0;width:250px;height:125px;" />
+        <p class="p2"></p>
+        <div id="invNum1">
+            <h1 style="text-align:center;">
+                Invoice
+            </h1>
+        </div>
+
+
+
+
+        @*
+            <h1 style="text-align:right;">
+                <span style="float:left">e-Docs Usa Inc.</span>
+                Invoice
+            </h1>
+        *@
+<div id="saveHtml">
+    <p class="p-1"></p>
+    <h2 style="text-align: left; font-size:small">
+        e-Docs Usa Inc.
+    </h2>
+    <h4 style="text-align: left;font-size:small">
+        @Model.EdocsModel.EdocsCustomerAddress
+    </h4>
+    <h4 style="text-align: left; font-size:small">
+        @Model.EdocsModel.EdocsCustomerCity, @Model.EdocsModel.EdosCustomerState, @Model.EdocsModel.EdocsCustomerZipCode
+    </h4>
+    <h4 style="text-align: left; font-size:small">
+        Phone:(@Model.EdocsModel.EdocsCustomerPhoneNumber.Substring(0, 3)) @Model.EdocsModel.EdocsCustomerPhoneNumber.Substring(3, 3)-@Model.EdocsModel.EdocsCustomerPhoneNumber.Substring(6, 4)
+    </h4>
+    <h4 style="text-align: right; font-size:small">
+        <span style="float: left; font-size:small"> Email: @Model.EdocsModel.EdocsCustomerEmailAddress</span>
+        Invoice #&nbsp;&nbsp; Date of Invoice
+    </h4>
+
+    <h4 id="invNum" style="float:right; font-size:small">
+        <span style="float: left; font-size:small"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@DateTime.Now.ToString("MM-dd-yyyy")
+    </h4>
+
+    <p class="p-1"></p>
+    <img align="left" src="@Model.EdocsITSCustomers.ImgStr" style="margin: 0 auto; width:100px; height:100px;" />
+
+    <p class="p-2"></p>
+    <p class="p-2"></p>
+    <p class="p-2"></p>
+    <p class="p-1"></p>
+
+
+    <h2 style="text-align: right; font-size:small">
+        <span style="float:left">Bill TO</span>
+        CustomerID @Model.EdocsITSCustomers.EdocsCustomerID Terms Net 30 Days
+    </h2>
+    @*
+        <h4 style="text-align: right; font-size:small">
+            <span style="float:left">@Model.EdocsITSCustomers.EdosCustomerFirstName @Model.EdocsITSCustomers.EdocsCustomerLastName</span>
+
+        </h4>
+    *@
+    <h4 style="text-align: left; font-size:small">
+        @Model.EdocsITSCustomers.EdocsCustomerName
+    </h4>
+    <h4 style="text-align: left; font-size:small">
+        @Model.EdocsITSCustomers.EdocsCustomerAddress
+    </h4>
+    <h4 style="text-align: left; font-size:small">
+        @Model.EdocsITSCustomers.EdocsCustomerCity, @Model.EdocsITSCustomers.EdosCustomerState, @Model.EdocsITSCustomers.EdocsCustomerZipCode
+    </h4>
+    <h4 style="text-align: left; font-size:small">
+        Phone:(@Model.EdocsITSCustomers.EdocsCustomerPhoneNumber.Substring(0, 3)) @Model.EdocsITSCustomers.EdocsCustomerPhoneNumber.Substring(4, 3)-@Model.EdocsITSCustomers.EdocsCustomerPhoneNumber.Substring(6, 4)
+
+    </h4>
+    <h4 style="text-align: left; font-size:small">
+        Email:@Model.EdocsITSCustomers.EdocsCustomerEmailAddress
+    </h4>
+    <h3 class="text-center" style="font-size: small">Scan Dates @Model.ScanStartDate-@Model.ScanEndDate</h3>
+    <p class="p-0"></p>
+
+    @if ((@Model.ScanningCost != null) && (@Model.ScanningCost.Count() > 0))
+    {
+
+
+        <table class="table table-hover w-auto table-bordered  table-info" id="dtlScanningCost" style="font-size:small">
+            <thead>
+
+
+                <tr class="w-auto" style="background-color:cornflowerblue; font-size:small">
+                    <th style="font-size:small">Document Name</th>
+                    <th style="font-size:small">Tracking ID</th>
+                    <th style="font-size:small">Total Images Scanned</th>
+                    <th style="font-size:small">Total Pages Uploaded</th>
+                    <th style="font-size:small">Contracted per Page Fee</th>
+                    <th style="font-size:small">Total Scanned Pages Fee</th>
+                    <th style="font-size:small">Total Pages OCR</th>
+                    <th style="font-size:small">Contracted OCR per Page Fee</th>
+                    <th style="font-size:small">Total OCR Pages Fee</th>
+                    <th style="font-size:small">Total Characters per Index</th>
+                    <th style="font-size:small">Contracted per Index Fee</th>
+                    <th style="font-size:small">Total Indexing Fee</th>
+                    <th style="font-size:small">Scan Date</th>
+                    <th style="font-size:small">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var items in Model.ScanningCost)
+                {
+
+                    <tr class="w-auto" style="font-size:small">
+                        <td style="font-size:small">@items.Value.TrackingID</td>
+                        <td style="font-size:small">@items.Value.IDTracking</td>
+                        <td style="font-size:small">@items.Value.Scanned</td>
+                        <td style="font-size:small">@items.Value.Uploaded</td>
+                        <td style="font-size:small">$@string.Format("{0:0.00}", @items.Value.PricePerDocument)</td>
+                        <td style="font-size:small">$@string.Format("{0:0.00}", @items.Value.CostPerDoc)</td>
+                        <td style="font-size:small">@items.Value.DocsOCR</td>
+                        <td style="font-size:small">$@string.Format("{0:0.00}", @items.Value.PriceOCR)</td>
+                        <td style="font-size:small">$@string.Format("{0:0.00}", @items.Value.OcrCost)</td>
+                        <td style="font-size:small">@items.Value.CharTyped</td>
+                        <td style="font-size:small">$@string.Format("{0:0.00}", @items.Value.PriceCharTyped)</td>
+                        <td style="font-size:small">$@string.Format("{0:0.00}", @items.Value.CostPerChar)</td>
+
+                        <td style="font-size:small">@items.Value.ScannDate.ToString("MM-dd-yyyyy")</td>
+                        <td style="font-size:small">$@string.Format("{0:0.00}", @items.Value.CostPerDoc + @items.Value.OcrCost + @items.Value.CostPerChar)</td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot style="font-size:small">
+                <tr style="font-size:small">
+                    <td style="font-size:small">Total</td>
+                    <td style="font-size:small"></td>
+                    <td style="font-size:small">@Model.TotalImagesScanned</td>
+                    <td style="font-size:small">@Model.TotalDocuments</td>
+                    <td style="font-size:small">N/A</td>
+                    <td style="font-size:small">$@string.Format("{0:0.00}", @Model.TotalDocCost)</td>
+                    <td style="font-size:small">@Model.TotalOcr</td>
+                    <td style="font-size:small">N/A</td>
+                    <td style="font-size:small">N/A</td>
+                    <td style="font-size:small">@Model.TotalCharTyped</td>
+                    <td style="font-size:small">N/A</td>
+                    <td style="font-size:small">$@string.Format("{0:0.00}", @Model.TotalCharCost)</td>
+                    <td style="font-size:small">N/A</td>
+                    <td style="font-size:small">$@string.Format("{0:0.00}", @Model.TotalCost)</td>
+                </tr>
+            </tfoot>
+
+        </table>
+
+        <p class="p-2"></p>
+        <h2 class="text-right" style="font-size:small">Invoice Summary</h2>
+        <p class="p-0"></p>
+        <p class="text-info text-right" style="font-size:small">Total Pages Scanned @Model.TotalDocuments</p>
+        <p class="text-info text-right" style="font-size:small">Total Scanned Pages Fee $@string.Format("{0:0.00}", @Model.TotalDocCost)</p>
+        <p class="text-info text-right" style="font-size:small">Total OCR Pages Fee $@string.Format("{0:0.00}", @Model.TotalOcrCost)</p>
+        <p class="text-info text-right" style="font-size:small">Total Indexing Fee $@string.Format("{0:0.00}", @Model.TotalCharCost)</p>
+        <p class="text-info text-right" style="font-size:small">SubTotal $@string.Format("{0:0.00}", @Model.TotalCost)</p>
+        <p class="text-info text-right" style="font-size:small">Tax Rate 0.00%</p>
+        <p class="text-info text-right" style="font-size:small">Other Fees $0.00</p>
+        <p class="text-info text-right" style="font-size:small">Total Cost $@string.Format("{0:0.00}", @Model.TotalCost)</p>
+        <p class="p-0"></p>
+        <p class="p-1"></p>
+
+        <div class="text-center">
+            <p class="flex-nowrap" style="text-emphasis-color: blue; margin: 0; padding-top:0;">Thank you for your business!</p>
+            <p class="flex-nowrap" style="text-emphasis-color: blue; margin: 0; padding-top: 0;">If you have any questions about this invoice, please contact.</p>
+            <p class="flex-nowrap" style="text-emphasis-color:blue">@Model.EdocsModel.EdosCustomerFirstName @Model.EdocsModel.EdocsCustomerLastName,@Model.EdocsModel.EdocsCustomerEmailAddress,(@Model.EdocsModel.EdocsCustomerPhoneNumber.Substring(0, 3)) @Model.EdocsModel.EdocsCustomerPhoneNumber.Substring(3, 3)-@Model.EdocsModel.EdocsCustomerPhoneNumber.Substring(6, 4)</p>
+        </div>
+
+
+
+
+    }
+
+    else
+    {
+        <p class="text-center text-dark">No Scanning Cost Found</p>
+        <a type="button" class="btn btn-outline-dark btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+    }
+</div>
+
+
+    }
+</div>
+<div id="btnexit">
+    @if ((@Model.ScanningCost != null) && (@Model.ScanningCost.Count() > 0))
+    {
+        <button class="btn btn-info" id="prInvoice" style="display:none">Print Report</button>
+        <button class="btn btn-info" id="saveInvoice">Save Invoice</button>
+        <a type="button" class="btn btn-outline-dark btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+    }
+</div>
+@if (Model.TotalDocuments < 0)
+{
+    <p class="text-center text-danger">No Invoice Records found for Scanning Date Range @Model.ScanStartDate-@Model.ScanEndDate</p>
+    <a type="button" class="btn btn-outline-dark btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+}
+
+@if (@Model.TotalOcr < 0)
+{
+
+
+
+    <div class="container-fluid">
+        <h3 class="text-center text-info">Select Customer</h3>
+        <form method="get" id="formCustId" role="form">
+            <div class="row text-center  form-inline">
+                <div class="col-*-* text-center" style="margin:0 auto;">
+                    <select id="cusID" name="cusID">
+                        <option value="Customer Name">Customer Name</option>
+                        @foreach (var id in Model.EdocsITCustomerIDs)
+                        {
+                            <option value="@id.EdocsCustomerID">@id.EdocsCustomerName</option>
+                        }
+
+
+                    </select>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+    @if (@Model.RepStartDate.Year > 2000)
+    {
+        <input type="hidden" value="@Model.CustomerID" id="idCust" name="idCust" />
+        @if (@Model.ScanStartDate == "No start date")
+        {
+            <p class="text-center text-dark">No Invcoice Records found for @Model.RepStartDate.ToString("MM-dd-yyyy") - @Model.RepEndDate.ToString("MM-dd-yyyy")</p>
+        }
+                    else
+                    {
+
+                    
+        <table class="table table-bordered tablecenter">
+            <thead>
+                <tr>
+
+                    <th class="text-center">@Html.LabelFor(model => Model.RepStartDate)</th>
+                    <th class="text-center">@Html.LabelFor(model => Model.RepEndDate)</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        <p style="display:none" id="repErSDate" name="repERSDate" class="alert-danger">Scan Start Date Required</p>
+
+                        @Html.EditorFor(m => @Model.RepStartDate, new { @name = "RepStartDate", @id = "RepStartDate", @class = "text-center",@readonly= "readonly", @disabled = "disabled" })
+
+
+                    </td>
+                    @*
+                        class="text-center"><input type="date" id="repSEndDate" name="repSEndDate" /></td>
+                    *@
+                    <td> @Html.EditorFor(m => @Model.RepEndDate, new { @name = "RepEndDate", @id = "RepEndDate", @class = "text-center", @disabled = "disabled" }) </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <button class="btn btn-primary btn-outline-primary text-center float-left" id="btnSubForm" name="btnSubForm">Run Report</button>
+        }
+        <a type="button" class="btn btn-outline-danger btn-link float-right" id="btnExit" href="/Index" name="btnExit">Exit</a>
+    }
+}
+<div class="modal fade" id="createInvmodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 id="h4" class="modal-title">Scanning Complete Create Invoice?</h4>
+
+                <button id="btndis" type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <button type="button" id="btnyes" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                <button type="button" id="btno" class="btn btn-info" data-dismiss="modal">No</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+            <!-- Modal footer -->
+
+
+        </div>
+    </div>
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+@section scripts{
+    <script>
+//const { json } = require("node:stream/consumers");
+
+        $(document).ready(function () {
+            // printOut('printInvoice');
+            $('#prInvoice').click(function () {
+
+               // alert("ooo");
+               //    var jsonHtml = JsonString('saveHtml');
+              //  var strSend = "jsonHtml=" + jsonHtml;
+             //
+                // alert(strSend);
+                //  //alert(jsonHtml);
+                // e.preventDefault();
+                //  // var str =
+                //$.ajax({
+                //    url: addHtmlFile,
+                //    type: "POST",
+                //    headers: {
+                //        'Accept': 'application/json',
+                //        'Content-Type': 'application/json'
+                //    },
+                    //contentType: "application/json; charset=utf-8",
+                //      contentType: 'application/html; charset=utf-8',
+                   // datatype: "application/json",
+                //     // contentType: 'application/html; charset=utf-8',
+                //      //contentType: "text/plain",
+                //   dataType: "json",
+                //      datatype: "html",
+                  // data: strSend, // pass that text to the server as a correct JSON String
+                //   success: function (msg) { },
+                //    error: function (request, status, error) {
+                //        alert("ERROR!!" + request.getAllResponseHeaders());
+                //        alert(error);
+                //        alert(status);
+                //    }
+
+                //});
+                printOut('printInvoice');
+            });
+            $('#btnyes').click(function () {
+                $('#printInvoice').fadeIn(100);
+                $('#btnexit').fadeIn(100);
+                $('#generateInvoice').click();
+              //  var message = "Deleting  " + $('#selCwid').val() + " CWID";
+               // document.getElementById("parLoading").val = message;
+               // $("#divLoading").show();
+               // $('#LabReqsUsersModel_DelUser').prop('checked', true);
+               // $('#subedit').click();
+            });
+            $('#btno').click(function () {
+                $('#printInvoice').fadeIn(100);
+                $('#btnexit').fadeIn(100);
+                return  ;
+            });
+            $('#btnSubForm').click(function (e) {
+                $("#divLoading").show();
+                //  ShowLoading();
+                var getInvoiceDates = "/Invoice/CreateInvoiceView?repSDate=" + $("#RepStartDate").val().replace('/', '-') + "&repSEndDate=" + $("#RepEndDate").val().replace('/', '-') + "&custID=" + $("#idCust").val();
+                window.open(getInvoiceDates, '_self');
+            });
+            $('#saveInvoice').click(function (e) {
+                $('#printInvoice').fadeOut(100);
+                $('#btnexit').fadeOut(100);
+                $("#createInvmodal").modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                $("#btnOpenModel").click();
+            });
+            $('#generateInvoice').click(function (e) {
+
+                //  alert("invSDate=" + $('#invSDate').val().replace('/', '-') + "&invEDate=" + $('#invEDate').val().replace('/', '-') + "&custID=" + $('#custID').val() + "$invTotalCost=" + $('#invTotalCost').val());
+                //  var jStr= JsonString();
+                //   var str = getUsersProfiles+"invSDate=" + $('#invSDate').val().replace('/', '-')+ "&invEDate=" + $('#invEDate').val().replace('/', '-') + "&custID=" + $('#custID').val();
+                //  var html = $("#printInvoice").html();
+               // 
+                //  alert(html);
+                $("#divLoading").show();
+                e.preventDefault();
+                var getUsersProfiles = "/Partial_Pages/GenerateInvoicePartialView/";
+
+                var strData = "invSDate=" + $('#invSDate').val().replace('/', '-') + "&invEDate=" + $('#invEDate').val().replace('/', '-') + "&custID=" + $('#custID').val() + "&invTotalCost=" + $('#invTotalCost').val();// + "&htmldata=" + jStr;
+                //     alert(strData);
+                $.ajax({
+                    type: "GET",
+                    url: getUsersProfiles,
+                    contentType: 'application/html; charset=utf-8',
+                    data: strData,
+                    //  data: "invSDate=" + $('#invSDate').val().replace('/', '-')+ "&invEDate=" + $('#invEnd').val().replace('/', '-') + "&custID=" + $('#custID').val(),
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+                        // alert("success");\
+                        $('#prInvoice').show();
+                        $('#saveInvoice').hide();
+                        $("#invNum").html(result);
+                        // SendHtmlPage();
+                    },
+                    complete: function () {
+                        //   CompleteAjaxCall();
+                        // alert("compl");
+                        $("#divLoading").hide();
+                        // $('#dtlUsers').DataTable({ "pagingType": "full" });
+                        // $('.dataTables_length').addClass('bs-select');
+
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+                });
+               
+
+            });
+
+            $('#cusID').change(function (e) {
+                //if (!(CheckEmptyString($("#repSDate").val(), 'Need a Report Begin Date:'))) {
+                //    $("#repSDate").focus();
+                //    return false;
+                //}
+                //if (!(CheckEmptyString($("#repSEndDate").val(), 'Need a Report Begin Date:'))) {
+                //    $("#repSEndDate").focus();
+                //    return false;
+                //}
+                $("#divLoading").show();
+                //  ShowLoading();
+                var getInvoiceDates = "/Invoice/CreateInvoiceView?repSDate=01-01-0001" + "&repSEndDate=01-01-0001" + "&custID=" + $("#cusID").val();
+                window.open(getInvoiceDates, '_self');
+
+
+                // $("#formCustId").submit();
+
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center"><img align="middle" src="~/Images/NYP-Logo.png" /></div>
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+<div class="text-center">
+    <h1 class="display-4">NYP BinMonitor Management System</h1>
+</div>
+
+<p class="p-lg-5"></p>
+<div class="text-left">
+
+    <h2 class="alert-heading text-left">Confidentiality Notice</h2>
+    <p class="text-info border">
+        The information in this system at New York Presbyterian Hospital is confidential and access is restricted to employees only.
+        The information in use is on a need-to-know basis. Unauthorized or improper use of the system or the confidential information may result in dismissal and civil… and/or criminal penalties.
+        Your actions are being monitored while logged in and you are responsible for your actions while logged in. Your user name and password are used to uniquely identify you. You are responsible for any actions taken under your user account.
+    </p>
+</div>
+<p class="p-lg-5"></p>
+<div class="text-center"><a href="http://edocsusa.com/" target="_blank"> <img align="middle" src="~/Images/logo_black_v2.png" /></a></div>
+@section scripts {
+    <script type="text/javascript">
+$(document).ready(function()
+{
+   // executes when HTML-Document is loaded and DOM is ready
+   SessionExpireAlert(0);
+});
+    </script>
+}

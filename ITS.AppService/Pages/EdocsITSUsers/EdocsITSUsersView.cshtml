@@ -1,0 +1,511 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.EdocsITSUsers.EdocsITSUsersViewModel
+@{
+    ViewData["Title"] = "View Users";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div id="divMain" style="background-color:#ffffff" name="divMain" class="container-fluid">
+    <header>
+        @*
+        <h1 class="text-center">Edit Users Profiles @Model.UserLogin.EdocsCustomerName</h1>
+        *@
+        <h1 class="text-center">Edit Users Profiles</h1>
+        <h2 class="text-center"> @Html.ValidationMessage("ErrorMessage", new { @class = "text-danger" })</h2>
+    </header>
+    <p class="p-1"></p>
+    <div class="container-fluid mt-3">
+
+        <form method="get" id="getEdocsITSUsersUserInfo">
+            <input type="hidden" id="selTab" value="createusers" name="selTab" />
+            <label class="control-label text-nowrap">Select User To Edit:</label>
+            <select id="SelUser" name="SelUser">
+                <option></option>
+                @foreach (var itsUsers in Model.DicUserNameModel)
+                {
+                    if (!(string.IsNullOrWhiteSpace(@itsUsers.Value.UserName)))
+                    {
+                        if (string.Compare(@itsUsers.Value.UserName, Model.CurrSelUser, true) == 0)
+                        {
+
+                            <option selected>@itsUsers.Value.UserName</option>
+                        }
+                        else
+                        {
+                            <option>@itsUsers.Value.UserName</option>
+                        }
+
+                    }
+
+                }
+            </select>
+
+        </form>
+    </div>
+    <div class="container-fluid mt-3">
+        <h2 id="h2selTab" class="text-center">Select Tab</h2>
+
+        <ul class="nav nav-tabs justify-content-center">
+            @if ((Model.UserLogin.IsCustomerAdmin) || (Model.UserLogin.IsEdocsAdmin))
+            {
+                <li class="nav-item">
+                    @if (string.IsNullOrWhiteSpace(Model.CurrSelUser))
+                    {
+                        <a href="#createUser" id="cu" class="nav-link active " data-toggle="tab">Create User</a>
+                    }
+                    else
+                    {
+                        <a href="#createUser" id="cu" class="nav-link" data-toggle="tab">Create User</a>
+                    }
+
+
+
+                </li>
+            }
+            <li class="nav-item">
+                @if (string.IsNullOrWhiteSpace(Model.CurrSelUser))
+                {
+                    <a href="#profile" id="prof" class="nav-link  " data-toggle="tab">Edit Profile</a>
+                }
+                else
+                {
+                    <a href="#profile" id="prof" class="nav-link active " data-toggle="tab">Edit Profile</a>
+                }
+
+
+
+            </li>
+            @if ((Model.UserLogin.IsCustomerAdmin) || (Model.UserLogin.IsEdocsAdmin))
+            {
+                <li class="nav-item">
+
+                    <a href="#listUsers" id="lusers" class="nav-link" data-toggle="tab">List Users</a>
+
+
+                </li>
+            }
+        </ul>
+        <div class="tab-content">
+
+            <div class="tab-pane @Model.ShowActiveCr" id="createUser">
+
+                <p class="p-0"></p>
+                <h6 class="text-center text-info">Create New User</h6>
+                <p class="p-0"></p>
+                <div class="container-fluid text-center">
+                    @*asp-page="/EdocsITSUsers/EdocsITSUsersView" asp-page-handler="CreateNewUser"*@
+                    <form method="post" asp-page="/EdocsITSUsers/EdocsITSUsersView" asp-page-handler="CreateNewUser">
+
+
+                        <div class="row text-center">
+                            <div class="col" style="display:block">
+                                <p>
+                                    @Html.LabelFor(model => model.CreateUserModel.UserName, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                    @Html.TextAreaFor(m => Model.CreateUserModel.UserName, new { @rows = "1", @cols = "25", @class = "border  text-info", @required = "required" })
+                                    @Html.ValidationMessage("ErrorMessageUserName", new { @class = "text-danger" })
+                                </p>
+                            </div>
+                            <div class="col" id="divcrPW" style="display:block">
+                                <p>
+                                    @Html.LabelFor(model => model.CreateUserModel.Password, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                    @Html.PasswordFor(m => Model.CreateUserModel.Password, new { @rows = "1", @cols = "10", @class = "border  text-info" })
+                                    @Html.ValidationMessage("ErrorMessagePW", new { @class = "text-danger" })
+                                </p>
+
+                            </div>
+                            <div class="col" style="display:none" id="divVP">
+                                <p>
+                                    @Html.LabelFor(model => model.VerifyPW, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                    @Html.PasswordFor(m => Model.VerifyPW, new { @rows = "1", @cols = "10", @class = "border  text-info" })
+                                    @Html.ValidationMessage("ErrorVerifyPW", new { @class = "text-danger" })
+                                </p>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="row text-center">
+                            <div class="col" style="display:block">
+                                <p>
+                                    @Html.LabelFor(model => model.CreateUserModel.FirstName, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                    @Html.TextAreaFor(m => Model.CreateUserModel.FirstName, new { @rows = "1", @cols = "25", @class = "border  text-info", @required = "required" })
+                                </p>
+                            </div>
+                            <div class="col" style="display:block">
+                                <p>
+                                    @Html.LabelFor(model => model.CreateUserModel.LastName, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                    @Html.TextAreaFor(m => Model.CreateUserModel.LastName, new { @rows = "1", @cols = "25", @class = "border  text-info", @required = "required" })
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row text-center">
+                            <div class="col" style="display:block">
+                                <p>
+                                    @Html.LabelFor(model => model.CreateUserModel.EmailAddress, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                    @Html.TextAreaFor(m => Model.CreateUserModel.EmailAddress, new { @rows = "1", @cols = "25", @class = "border  text-info", @required = "required" })
+                                    @Html.ValidationMessage("ErrorCrUserEmail", new { @class = "text-danger" })
+                                    @*   @Html.ValidationMessageFor(m => m.CreateUserModel.EmailAddress, "", new { @class = "text-danger" })*@
+                                </p>
+                            </div>
+                            <div class="col" style="display:block">
+                                <p>
+                                    @Html.LabelFor(model => model.CreateUserModel.CellPhoneNumber, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                    @Html.TextAreaFor(m => Model.CreateUserModel.CellPhoneNumber, new { @rows = "1", @cols = "25", @class = "border  text-info", @required = "required", onkeypress = "return onlyNumberKey(event)" })
+                                    @Html.ValidationMessage("ErrorMessageCellPhone", new { @class = "text-danger" })
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="row text-center">
+                            @if ((Model.UserLogin.IsEdocsAdmin))
+                            {
+                                <div class="col" style="display:block">
+                                    <p>
+
+                                        @Html.CheckBoxFor(m => Model.CreateUserModel.IsEdocsAdmin)
+                                        @Html.LabelFor(model => model.CreateUserModel.IsEdocsAdmin)&nbsp;&nbsp;
+                                    </p>
+                                </div>
+                            }
+                            <div class="col" style="display:block">
+                                <p>
+
+                                    @Html.CheckBoxFor(m => Model.CreateUserModel.IsCustomerAdmin)
+                                    @Html.LabelFor(model => model.CreateUserModel.IsCustomerAdmin)&nbsp;&nbsp;
+                                </p>
+                            </div>
+
+                            <div class="col" style="display:block">
+                                <p>
+
+                                    @Html.CheckBoxFor(m => Model.GeneratePW)
+                                    @Html.LabelFor(model => model.GeneratePW)&nbsp;&nbsp;
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <input id="createUser" name="createUser" type="submit" value="Create New User" class="btn btn-primary" />&nbsp;&nbsp;
+                        <input type="reset" class="btn btn-warning" value="Reset">&nbsp;&nbsp;
+                        <a id="exit" name="exit" class="btn btn-outline-dark   btn-link" href="/Index">Exit</a>&nbsp;&nbsp;
+                    </form>
+                </div>
+            </div>@*End div create user*@
+
+            <div class="tab-pane @Model.ShowActiveEditUser" id="profile">
+                <p class="p-0"></p>
+                <h6 class="text-center text-info">Edit Profile</h6>
+
+                <p class="p-0"></p>
+                @if (@Model.EditUserModel != null)
+                {
+                    <div class="container-fluid">
+                        <form method="post" id="feditUser">
+
+
+
+                            <div class="row text-center">
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(model => model.EditUserModel.UserName, new { @class = "align-top" })&nbsp;
+                                        @Html.TextAreaFor(m => Model.EditUserModel.UserName, new { @rows = "2", @cols = "25", @class = "border  text-info", @readonly = "readonly" })
+                                    </p>
+                                </div>
+
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(model => model.EditUserModel.EmailAddress, new { @class = "align-top" })&nbsp;
+                                        @Html.TextAreaFor(m => Model.EditUserModel.EmailAddress, new { @rows = "2", @cols = "25", @class = "border  text-info", @required = "required" })
+                                        @Html.ValidationMessage("ErrorMessageEditUserEmail", new { @class = "text-danger" })
+                                    </p>
+                                </div>
+
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(model => model.EditUserModel.CellPhoneNumber, new { @class = "align-top" })&nbsp;
+                                        @Html.TextAreaFor(m => Model.EditUserModel.CellPhoneNumber, new { @rows = "1", @cols = "15", @class = "border  text-info", @required = "required" })
+                                        @Html.ValidationMessage("ErrorMessageCellPhoneEditUser", new { @class = "text-danger" })
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(model => model.EditUserModel.FirstName, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                        @Html.TextAreaFor(m => Model.EditUserModel.FirstName, new { @rows = "1", @cols = "25", @class = "border  text-info", @required = "required" })
+                                        
+                                    </p>
+                                </div>
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(model => model.EditUserModel.LastName, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                        @Html.TextAreaFor(m => Model.EditUserModel.LastName, new { @rows = "1", @cols = "25", @class = "border  text-info", @required = "required" })
+                                        
+                                    </p>
+                                </div>
+
+                            </div>
+                            <div class="row text-center">
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(model => model.EditUserModel.DateLastLogin, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                        @Html.TextAreaFor(m => Model.EditUserModel.DateLastLogin, new { @rows = "1", @cols = "25", @class = "border  text-info", @readonly = "readonly" })
+                                    </p>
+                                </div>
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(model => model.EditUserModel.DatePasswordLastChanged, new { @class = "align-bottom" })&nbsp;&nbsp;
+                                        @Html.TextAreaFor(m => Model.EditUserModel.DatePasswordLastChanged, new { @rows = "1", @cols = "25", @class = "border  text-info", @readonly = "readonly" })
+                                    </p>
+                                </div>
+
+                            </div>
+                            <div class="row text-center">
+                                @if ((Model.UserLogin.IsEdocsAdmin))
+                                {
+                                    <div class="col" style="display:block">
+                                        <p>
+                                            @Html.CheckBoxFor(m => Model.EditUserModel.IsEdocsAdmin, new { @rows = "1", @cols = "25", @class = "border  text-info" })
+                                            @Html.LabelFor(model => model.EditUserModel.IsEdocsAdmin)&nbsp;&nbsp;
+
+                                        </p>
+                                    </div>
+                                }
+                                @if ((Model.UserLogin.IsCustomerAdmin) || (Model.UserLogin.IsEdocsAdmin))
+                                {
+                                    <div class="col" style="display:block">
+                                        <p>
+                                            @Html.CheckBoxFor(m => Model.EditUserModel.IsCustomerAdmin, new { @rows = "1", @cols = "25", @class = "border  text-info" })
+                                            @Html.LabelFor(model => model.EditUserModel.IsCustomerAdmin)&nbsp;&nbsp;
+
+                                        </p>
+                                    </div>
+                                    <div class="col" style="display:block">
+                                        <p>
+                                            @Html.CheckBoxFor(m => Model.EditUserModel.IsUserActive, new { @rows = "1", @cols = "25", @class = "border  text-info" })
+                                            @Html.LabelFor(model => model.EditUserModel.IsUserActive)&nbsp;&nbsp;
+
+                                        </p>
+                                    </div>
+                                }
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.CheckBoxFor(m => m.ChangePW, new { @rows = "1", @cols = "25", @class = "border  text-info" })
+                                        @Html.LabelFor(model => model.ChangePW)&nbsp;&nbsp;
+
+                                    </p>
+                                </div>
+
+
+                            </div>
+                            <div class="row text-center" id="divCrNewPw">
+
+                                <div class="col" style="display:block">
+                                    <p>
+
+                                        @*
+                                            @Html.LabelFor(model => model.CreateUserModel.Password, new { @class = "align-top" })&nbsp;
+                                        *@
+                                        <label for="EditUserModel_Password" class="align-top">Old Password:</label>
+                                        @Html.PasswordFor(m => Model.EditUserModel.Password, new { @rows = "2", @cols = "25", @class = "border  text-info" })
+                                    </p>
+                                </div>
+
+                                <div class="col" style="display:block">
+                                    <p>
+
+                                        @Html.LabelFor(model => model.CreateUserModel.NewPassword, new { @class = "align-top" })&nbsp;
+
+
+                                        @Html.PasswordFor(m => Model.EditUserModel.NewPassword, new { @rows = "2", @cols = "25", @class = "border  text-info" })
+                                        @Html.ValidationMessage("ErrorMessageChangePW", new { @class = "text-danger" })
+                                    </p>
+                                </div>
+
+                                <div class="col" style="display:block">
+                                    <p>
+                                        @Html.LabelFor(model => model.VerifyNewPW, new { @class = "align-top" })&nbsp;
+                                        @Html.PasswordFor(m => m.VerifyNewPW, new { @rows = "2", @cols = "25", @class = "border  text-info" })
+                                        @Html.ValidationMessage("ErrorMessageVerifyChangePW", new { @class = "text-danger" })
+                                    </p>
+                                </div>
+                                <div class="col" style="display:block">
+                                    <p>
+
+                                        @Html.CheckBoxFor(m => m.GenerateNewPW, new { @rows = "1", @cols = "25", @class = "border  text-info" })
+                                        @Html.LabelFor(model => model.GenerateNewPW)&nbsp;&nbsp;
+
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row text-center">
+                                <div class="col" style="display:inline">
+                                    <p>
+                                        <input id="btnUpdatePro" name="btnUpdatePro" type="submit" value="Update User Profile" class="btn btn-primary" />&nbsp;&nbsp;
+                                        <input type="reset" class="btn btn-warning" value="Reset">&nbsp;&nbsp;
+                                        <a id="exit" name="exit" class="btn btn-outline-dark   btn-link" href="/Index">Exit</a>&nbsp;&nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                }
+                else
+                {
+                    <p class="text-center text-danger">Select User To Edit</p>
+                }
+            </div>@*End div create user profile*@
+            <div class="tab-pane fade" id="listUsers">
+                <p class="p-0"></p>
+                <h6 class="text-center text-info">Users</h6>
+                <div class="container-fluid " id="usersList">
+
+                </div>
+                <p class="p-0"></p>
+                <form method="get">
+                    <p class="p-0"></p>
+                    <div class="col-xs-12">
+                        <div class="text-center">
+                            <input id="exportuser" name="exportuser" type="submit" value="Export Users" class="btn btn-primary text-light" />
+                        </div>
+                    </div>
+                    <p class="p-1"></p>
+                </form>
+            </div>@*End div create listusers*@
+        </div>
+    </div>
+
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#divCrNewPw').hide();
+            if (($('#ChangePW').prop('checked') == true)) {
+                $('#divCrNewPw').show();
+
+            }
+            
+            
+            
+            
+            $('#SelUser').change(function () {
+                $("#getEdocsITSUsersUserInfo").submit();
+
+            });
+            $('#CreateUserModel_Password').focus(function () {
+                $("#divVP").css(this.style, 'display:block');
+
+            });
+            $('#GeneratePW').click(function () {
+                $("#CreateUserModel_Password").val("");
+                if (($('#GeneratePW').prop('checked') == true)) {
+                    $("#CreateUserModel_Password").val("GenNewPW1234?");
+                    $("#VerifyPW").val("");
+                    $("#divcrPW").hide();
+                    $("#divVP").hide();
+                }
+                else {
+                    // alert("open");
+                    //if (($('#EdocsITSCustomersModel_StoreDocuments').prop('checked') == true)) {
+                    //$("#divVP").css(this.style, 'display:none');
+                    $("#divcrPW").css(this.style, 'display:block');
+                    //  }
+
+                    // $("#h4").text("Delete user " + $("#EdocsITSCustomers_EdocsCustomerName").val());
+
+                }
+
+            });
+            $('#ChangePW').click(function () {
+
+                $('#VerifyNewPW').val("");
+                $('#EditUserModel_Password').val("");
+                $('#EditUserModel_NewPassword').val("");
+                if (($('#ChangePW').prop('checked') == true)) {
+                    //$("#CreateUserModel_Password").val("");
+                    // $("#VerifyPW").val("");
+                    //$("#divGenNewPw").css(this.style, 'display:block');;
+                    $('#divCrNewPw').show();
+                    // $("#divVP").hide();
+                }
+                else {
+                    // alert("open");
+                    //if (($('#EdocsITSCustomersModel_StoreDocuments').prop('checked') == true)) {
+                    //$("#divVP").css(this.style, 'display:none');
+                    //$("#divGenNewPw").css(this.style, 'display:none');
+                    $('#divCrNewPw').hide();
+                    //  }
+
+                    // $("#h4").text("Delete user " + $("#EdocsITSCustomers_EdocsCustomerName").val());
+
+                }
+
+
+            });
+            $('#GenerateNewPW').click(function () {
+                $('#VerifyNewPW').val("");
+                $('#EditUserModel_Password').val("");
+               $('#EditUserModel_NewPassword').val("");
+                if (($('#GenerateNewPW').prop('checked') == true)) {
+                    //$("#CreateUserModel_Password").val("");
+                    // $("#VerifyPW").val("");
+                    //$("#divGenNewPw").css(this.style, 'display:block');;
+                    $('#EditUserModel_Password').val("PWGenerated!?");
+                    $('#VerifyNewPW').val("NewPW12345678??");
+                    $('#EditUserModel_NewPassword').val("NewPW12345678??");
+                    // $("#divVP").hide();
+                }
+
+            });
+            $('#lusers').click(function () {
+
+
+                $("#divLoading").show();
+                //  e.preventDefault();
+
+                var getUsersProfiles = "/Partial_Pages/DisplayUsersPartialView/";
+
+                $.ajax({
+                    type: "GET",
+                    url: getUsersProfiles,
+                    contentType: 'application/html; charset=utf-8',
+                    data: "searchlr=sddd",
+                    datatype: "html",
+                    cache: false,
+
+                    success: function (result) {
+
+                        $("#usersList").html(result);
+                    },
+                    complete: function () {
+                        //   CompleteAjaxCall();
+                        $("#divLoading").hide();
+                        $('#dtlUsers').DataTable({ "pagingType": "full" });
+                        $('.dataTables_length').addClass('bs-select');
+
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+                });
+            });
+
+
+        });//end doc ready
+    </script>
+}

@@ -1,0 +1,33 @@
+﻿<Complex name="Root" type="DemoArchivers.DohSingleRecordArchiver, DemoArchivers">
+  <Properties>
+    <Simple name="SiteUrl" value="http://edocsbackup/sites/doh/" />
+    <Simple name="LibraryName" value="Sendouts" />
+    <SingleArray name="PerformingLabs">
+      <Items>
+        <Simple value="" />
+        <Simple value="Ambry Genetics" />
+        <Simple value="ARUP" />
+        <Simple value="Athena Diagnostics" />
+        <Simple value="Blood Center of Wisconsin" />
+        <Simple value="Esoterix" />
+        <Simple value="Genoptix" />
+        <Simple value="John Hopkins" />
+        <Simple value="LabCorp" />
+        <Simple value="Mayo Medical Laboratories" />
+        <Simple value="Medical Neurogenetics" />
+        <Simple value="Palo Alto" />
+        <Simple value="Prevention Genetics" />
+        <Simple value="Prometheus Laboratory" />
+        <Simple value="Quest Diagnostics" />
+        <Simple value="Rogosin Institute" />
+        <Simple value="University of Rochester" />
+        <Simple value="University of Washington" />
+      </Items>
+    </SingleArray>
+    <Null name="ScannerName" />
+    <Null name="ScannerSetting" />
+    <Simple name="CommandReaderName" value="DEFAULT" />
+    <Simple name="FileWriterName" value="PDF" />
+    <Simple name="CommandImageBuilderName" value="DEFAULT" />
+  </Properties>
+</Complex>

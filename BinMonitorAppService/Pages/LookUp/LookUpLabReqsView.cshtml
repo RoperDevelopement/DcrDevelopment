@@ -1,0 +1,223 @@
+﻿@page
+@model BinMonitorAppService.Pages.LookUp.LookUpLabReqsViewModel
+@{
+    ViewData["Title"] = "ViewLookUpLabReqs";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+}
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Page BinMonitor Report will refresh in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+<div class="container-fluid small" style="background-color:#ffffff">
+    <p class="p-2" />
+    <header>
+        <h3 class="text-center">Lookup LabReq Date Range @Model.StDate.ToString("MM-dd-yyyy") - @Model.EndDate.ToString("MM-dd-yyyy")</h3>
+    </header>
+    <p class="p-0"></p>
+    <form method="get" id="fmUsgRepDur" name="fmUsgRepDur">
+        <div class="form-group text-center">
+            <div class="row" style="display:table;margin:auto">
+
+                <div class="col">
+                    @Html.LabelFor(model => Model.StDate, new { @class = "text-left" })
+                    @Html.EditorFor(m => Model.StDate, new { @name = "StDate", @id = "StDate" })
+                </div>
+                <p class="p-0"></p>
+                <div class="col">
+                    <p asp-for="UsageRepStDate">
+                        @Html.LabelFor(model => Model.EndDate, new { @class = "text-left" })
+                        @Html.EditorFor(m => @Model.EndDate, new { @name = "EndDate", @id = "EndDate" })
+                    </p>
+                </div>
+                @*
+                    <p class="p-0"></p>
+                    <div class="col">
+                        @Html.LabelFor(model => Model.ReportType, new { @class = "text-left" })
+                        @Html.DropDownList("ReportType",
+                                             new SelectList(Enum.GetValues(typeof(DropListBinOptionOptions))),
+                                             new { @onclick = "this.submit()" })
+                    </div>
+                *@
+                <p class="p-0"></p>
+                <div class="col">
+                    @Html.LabelFor(model => Model.LabReqNumber, new { @class = "text-left" })
+                    @Html.EditorFor(model => Model.LabReqNumber)
+
+                </div>
+                <p class="p-0"></p>
+            </div>
+        </div>
+        <div class="text-center">
+
+            <button class="btn btn-outline-primary " id="subcrbatch" name="subcrbatch">Lookup LabReq</button>
+            <button class="btn btn-outline-secondary " id="export" name="export">Export</button>
+        </div>
+    </form>
+    <p class="p-1"></p>
+    <div class="container-fluid">
+        @if ((Model.LLabReq != null) && (Model.LLabReq.Count() > 0))
+        {
+            <table class="table table-hover table-bordered table-info  w-100" id="table_bins" name="table_bins">
+
+                <thead>
+                    <tr class="flex-nowrap">
+                        <th>Bin Status</th>
+                        <th>Bin ID</th>
+                        <th>Category</th>
+                        <th>Assigned By</th>
+                        <th>Assigned To</th>
+                        <th>Started At</th>
+                        <th>Completed By</th>
+                        <th>Completed At</th>
+                        <th>Duration</th>
+
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.LLabReq)
+                    {
+                    <tr>
+                        <td>
+                            Register Bin
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.BinID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.RegAssignedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.RegAssignedTo)
+                        </td>
+                        <td>
+                            @if (item.RegStartedAt.Year > 2000)
+                            {
+                                @Html.DisplayFor(model => item.RegStartedAt)
+                            }
+                            else
+                            {
+                                <p class="text-danger">  Registration Not Started </p>
+
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.RegCompletedBy)
+                        </td>
+                        <td>
+                            @if (item.RegCompletedAt.Year > 2000)
+                            {
+                                @Html.DisplayFor(model => item.RegCompletedAt)
+                            }
+                            else
+                            {
+                                <p class="text-danger"> Registion not Completed</p>
+                            }
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.RegDuration)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Processing Bin
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.BinID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ProcessAssignedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ProcessAssignedTo)
+                        </td>
+                        <td>
+                            @if (item.ProcessStartAt.Year > 2000)
+                            {
+                                @Html.DisplayFor(model => item.ProcessStartAt)
+                            }
+                            else
+                            {
+                                <p class="text-danger">Processing Not Started</p>
+                            }
+
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => item.ProcessCompletedBy)
+                        </td>
+                        <td>
+                            @if (item.ProcessCompletedAt.Year > 2000)
+                            {
+                                @Html.DisplayFor(model => item.ProcessCompletedAt)
+                            }
+                            else
+                            {
+                                <p class="text-danger">Processing Not Completed</p>
+                            }
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ProcessDuration)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Closed Bin
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.BinID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.RegCreatedBy)
+                        </td>
+                        <td>
+                            N/A
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ClosedCreatedAt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.BinClosedBy)
+                        </td>
+                        <td>
+                            @if (item.BinCompletedAt.Year > 2000)
+                            {
+                                @Html.DisplayFor(model => item.BinCompletedAt)
+                            }
+                            else
+                            {
+                                <p class="text-danger">Not Closed</p>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CompleteDuration)
+                        </td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            @if (!(string.IsNullOrWhiteSpace(Model.LookupLabReqNumber)))
+            {
+                <p class="p-2"></p>
+    <p class="text-center text-info"><strong>LabReq Number @Model.LookupLabReqNumber  Not Found</strong></p>
+            }
+        }
+        <p class="p-1"></p>
+    </div>
+</div>

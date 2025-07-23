@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Mobile_LabReqs.ViewsModels"
+               
+               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+              ios:Page.UseSafeArea="true"
+             x:Class="Mobile_LabReqs.Views.LabReqsKeyWordsPage"
+              Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <local:LabReqsKeyWordsModel/>
+    </ContentPage.BindingContext>
+    <!-- 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add New" Icon="ic_action_new.png"   />
+        <ToolbarItem Text="Refresh" Icon="ic_autorenew.png"   />
+    </ContentPage.ToolbarItems>
+    -->
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+            <Label Text="Search Start Date" FontSize="Medium" />
+            <DatePicker Date="{Binding  SearchStartDate}"></DatePicker>
+            <Label Text="Search End Date" FontSize="Medium" />
+            <DatePicker Date="{Binding  SearchEndDate}"></DatePicker>
+
+            <Label Text="KeyWord" FontSize="Medium" />
+            <Editor Text="{Binding SearchStr, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            <RadioButton Content="Search By Scan Date"  IsChecked="{Binding SearchScanDate}"></RadioButton>
+            <RadioButton Content="Search By Date of Service"  IsChecked="{Binding SearchDateofService}" ></RadioButton>
+            <StackLayout Orientation="Horizontal">
+                 
+                <Button Text="Search" Command="{Binding SearchCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

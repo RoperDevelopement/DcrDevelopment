@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <title>Send New User Email</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:lightblue">
+    <div >
+        <header>
+            <h1 class="text-center">Need to add new CWID {CWID} to LabReqs</h1>
+        </header>
+        <p class="p-1"></p>
+        <h1 class="text-center alert-warning">Must have Admin rights to add new users</h1>
+        <p class="p-1"></p>
+        <section>
+            <h3>Steps to add New Cwid</h3>
+            <p class="p-1"></p>
+            <ol class="b">
+                <li>Log into the NYP Azure LabReqs Web Site</li>
+                <li><a href="https://edocsnyplabreqs.azurewebsites.net/">LabReqs Web site.</a> </li>
+                <li>If you have admin rights User Profiles will show up on the menu bar.</li>
+                <li>Click on User Profiles and <span class="text-dark">Edit Users Profile page wil open.</span></li>
+                <li>Click on Tab Create User</li>
+                <li>Enter Cwid</li>
+                <li>Click on Add New User</li>
+                <li>Afer the user is added, send an email to <span><a href="mailto:{EmailAdddressNewUser}"> {EmailAdddressNewUser}</a></span> and notified the user their CWID {CWID} they have been added to the NYP LabReqs site.</li>
+            </ol>
+        </section>
+    </div>
+</body>
+</html>

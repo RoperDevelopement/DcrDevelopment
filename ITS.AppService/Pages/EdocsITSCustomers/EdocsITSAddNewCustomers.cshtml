@@ -1,0 +1,694 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.EdocsITSCustomers.EdocsITSAddNewCustomersModel
+@{
+    ViewData["Title"] = "Add New Customer";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div id="divmain" class="container-fluid">
+    @Html.AntiForgeryToken()
+ 
+    <div id="imgFile">
+        <img id="img64" src="data:@Model.ImgBase64" alt="customer image" style="width:200px; height:100px;" />
+    </div>
+    <h1 class="text-center">e-Docs USA Tracking System New Customer</h1>
+
+    <p class="p-md-0"></p>
+    @*  <form method="post" enctype="multipart/form-data" id="imageUploadForm" class="dropzone">
+                <div class="fallback">
+                    <div class="form-group">
+                        <input name="image" type="file" class="form-control" accept="image/*" />
+                    </div>
+                    <input type="submit" id="imageUpload" value="Upload" class="btn btn-default" />
+                </div>
+            </form>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Recent Upload</h3>
+
+                <div>
+                    <img id="recentImage" class="img-responsive img-thumbnail" width="500" />
+                </div>
+            </div>
+        </div>
+
+            <div class="container">
+                <form method="post" action="" enctype="multipart/form-data" id="myform">
+                    <div class='preview'>
+                        <img src="" id="img" width="100" height="100">
+                    </div>
+                    <div>
+                        <input type="file" id="file" name="file" />
+                        <input type="button" class="button" value="Upload" id="but_upload">
+                    </div>
+                </form>
+            </div>
+    *@
+<form id="addCustomers" method="post" class="form-horizontal border" style="width:50%;margin:0 auto" role="form">
+    <input type="hidden" id="imageStr" value="" />
+
+    <p class="p-2"></p>
+    @Html.HiddenFor(m => m.EdocsITSCustomersModel.StorageYears)
+    @Html.HiddenFor(m => m.EdocsITSCustomersModel.StorageDays)
+    @Html.HiddenFor(m => m.EdocsITSCustomersModel.StorageMonths)
+    @Html.HiddenFor(m => m.EdocsITSCustomersModel.ImgStr)
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.EdocsCustomerName)&nbsp;&nbsp;
+        @Html.TextAreaFor(model => model.EdocsITSCustomersModel.EdocsCustomerName, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required" })
+
+    </div>
+    <br />
+    <div class="form-inline" style="text-align:center">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.EdocsCustomerAddress)&nbsp;&nbsp;
+        @Html.TextAreaFor(model => model.EdocsITSCustomersModel.EdocsCustomerAddress, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required" })
+
+    </div>
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.EdocsCustomerCity)&nbsp;&nbsp;
+        @Html.TextAreaFor(model => model.EdocsITSCustomersModel.EdocsCustomerCity, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required" })
+
+    </div>
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.EdosCustomerState)&nbsp;&nbsp;
+        <select id="CustomerState" name="CustomerState">
+            <option>Select State</option>
+            @foreach (string stateAbb in Model.StateAbb)
+            {
+                <option>@stateAbb</option>
+            }
+        </select>
+
+    </div>
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.EdocsCustomerZipCode)&nbsp;&nbsp;
+        @Html.TextAreaFor(model => model.EdocsITSCustomersModel.EdocsCustomerZipCode, new { @rows = "1", @cols = "50", @maxlength = "15", @required = "required" })
+
+    </div>
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.EdosCustomerFirstName)&nbsp;&nbsp;
+        @Html.TextAreaFor(model => model.EdocsITSCustomersModel.EdosCustomerFirstName, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required" })
+
+    </div>
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.EdocsCustomerLastName)&nbsp;&nbsp;
+        @Html.TextAreaFor(model => model.EdocsITSCustomersModel.EdocsCustomerLastName, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required" })
+
+    </div>
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.EdocsCustomerPhoneNumber)&nbsp;&nbsp;
+        @Html.TextAreaFor(model => model.EdocsITSCustomersModel.EdocsCustomerPhoneNumber, new { @rows = "1", @cols = "20", @maxlength = "15", @required = "required", onkeypress = "return onlyNumberKey(event)" })
+
+    </div>
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.EdocsCustomerCellPhoneNumber)&nbsp;&nbsp;
+        @Html.TextAreaFor(model => model.EdocsITSCustomersModel.EdocsCustomerCellPhoneNumber, new { @rows = "1", @cols = "20", @maxlength = "15", @required = "required", onkeypress = "return onlyNumberKey(event)" })
+
+    </div>
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.EdocsCustomerEmailAddress, new { @class = "text-nowrap" })&nbsp;&nbsp;
+        @Html.TextAreaFor(model => model.EdocsITSCustomersModel.EdocsCustomerEmailAddress, new { @rows = "1", @cols = "30", @maxlength = "50", @class = "text-nowrap", @required = "required" })
+
+    </div>
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.PricePerDocument)&nbsp;&nbsp;
+        @Html.TextBoxFor(model => model.EdocsITSCustomersModel.PricePerDocument, new { @type = "number", @min = "0", @step = "0.01", @rows = "1", @cols = "5" })&nbsp;&nbsp;
+
+
+
+    </div>
+    <br />
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.PricePerLargeDocuments)&nbsp;&nbsp;
+        @Html.TextBoxFor(model => model.EdocsITSCustomersModel.PricePerLargeDocuments, new { @type = "number", @min = "0", @step = "0.01", @rows = "1", @cols = "5" })&nbsp;&nbsp;
+
+
+
+    </div>
+    <br />
+    <div class="form-inline">
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.PriceStoreByMonth)&nbsp;&nbsp;
+        @Html.TextBoxFor(model => model.EdocsITSCustomersModel.PriceStoreByMonth, new { @type = "number", @min = "0", @step = "0.01", @rows = "1", @cols = "5" })&nbsp;&nbsp;
+
+
+    </div>
+    <br />
+
+    <div class="form-inline">
+
+        @Html.LabelFor(m => Model.EdocsITSCustomersModel.PriceSetUpFee)&nbsp;&nbsp;
+        @Html.TextBoxFor(model => model.EdocsITSCustomersModel.PriceSetUpFee, new { @type = "number", @min = "0", @step = "0.01", @rows = "1", @cols = "5" })&nbsp;&nbsp;
+
+
+    </div>
+    <br />
+    <div class="form-inline">
+
+        @Html.LabelFor(m => Model.EdocsITSCustomersModel.PriceOcr)&nbsp;&nbsp;
+        @Html.TextBoxFor(model => model.EdocsITSCustomersModel.PriceOcr, new { @type = "number", @min = "0", @step = "0.01", @rows = "1", @cols = "5" })&nbsp;&nbsp;
+
+
+    </div>
+    <br />
+    <br />
+    <div class="form-inline">
+
+        @Html.LabelFor(m => Model.EdocsITSCustomersModel.PricePerChar)&nbsp;&nbsp;
+        @Html.TextBoxFor(model => model.EdocsITSCustomersModel.PricePerChar, new { @type = "number", @min = "0", @step = "0.01", @rows = "1", @cols = "5" })&nbsp;&nbsp;
+
+
+    </div>
+    <br />
+    <div class="form-inline">
+
+        @Html.CheckBoxFor(m => Model.EdocsITSCustomersModel.StoreDocuments)&nbsp;&nbsp;
+        @Html.LabelFor(model => model.EdocsITSCustomersModel.StoreDocuments)&nbsp;&nbsp;
+
+
+    </div>
+
+    <br />
+    <div class="form-inline">
+        @Html.CheckBoxFor(m => m.AddCustomerLogIn)&nbsp;&nbsp;
+        @Html.LabelFor(model => model.AddCustomerLogIn)&nbsp;&nbsp;
+
+        @Html.CheckBoxFor(m => m.SendCustomerEmail)&nbsp;&nbsp;
+        @Html.LabelFor(model => model.SendCustomerEmail)&nbsp;&nbsp;
+
+    </div>
+
+    <br />
+    <div class="form-inline">
+        @Html.CheckBoxFor(m => m.EdocsAdmin)&nbsp;&nbsp;
+        @Html.LabelFor(model => model.EdocsAdmin)&nbsp;&nbsp;
+
+        @Html.CheckBoxFor(m => m.CustomerAdmin)&nbsp;&nbsp;
+        @Html.LabelFor(model => model.CustomerAdmin)&nbsp;&nbsp;
+
+    </div>
+    <br />
+    @*
+        <label class="button" for="fileElem">Select Company Image</label>
+
+        <input type="file" id="@Model.ImgFolder" multiple accept="image/*" />
+        <label class="button" for="fileElem">Select Company Image</label>
+    *@
+    <h6 class="text-center text-info">Notes</h6>
+    <p class="p-2 text-center">
+
+        @Html.TextAreaFor(model => model.EdocsITSCustomersModel.EdocsCustomerNotes, new { @rows = "10", @cols = "50" })
+    </p>
+    <br />
+
+    <div class="p-2 text-center" style="margin:0 auto;">
+        <button class="btn-outline-info btn-link btn" id="btnAddCust">Add Customer</button>
+        <a type="button" class="btn btn-outline-dark btn-link" href="/EdocsITSCustomers/EdocsITSAddNewCustomers" id="btnReset" name="btnReset">Reset</a>
+        <a type="button" class="btn btn-outline-dark btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+    </div>
+    @*
+        <span>Select Customer Image:</span>
+
+                <input type="file" name="postedFiles" multiple />
+                          <input type="file" class="btn" value="Select Image" name="postedFiles" id="postedFiles" accept="image/*" />
+                        <input type="button" id="btnUploadImage" class="btn  btn-info"  value="Upload" asp-page-handler="Upload" />
+
+            <input type="file" class="btn  btn-info" value="Upload" />
+
+            <br />
+
+            <input type="submit" class="btn  btn-info" value="Upload" asp-page-handler="Upload" />
+    *@
+</form>
+    <p class="p-2"></p>
+    @*
+            <div class="border text-center">
+                <form method="post" enctype="multipart/form-data" id="frmUpload">
+                    <span>Select Customer Image:</span>
+
+                <input type="file" name="postedFiles" multiple />
+                          <input type="file" class="btn" value="Select Image" name="postedFiles" id="postedFiles" accept="image/*" />
+                        <input type="button" id="btnUploadImage" class="btn  btn-info"  value="Upload" asp-page-handler="Upload" />
+
+        <input type="file" class="btn  btn-info" value="Upload" />
+
+        <br />
+
+        <input type="submit" class="btn  btn-info" value="Upload" asp-page-handler="Upload" />
+        </form>
+         <form method="post" enctype="multipart/form-data" id="frmUpload">
+    *@
+<div class="border text-center">
+
+    <span>Select Customer Image:</span>
+
+
+    <input type="file" class="btn postedFiles" value="Select Image" name="postedFiles" id="postedFiles" accept="image/*" />
+    @*   <button class="btn  btn-success" id="btnUploadImage" onclick="SendFormData( );">Upload</button>*@
+
+
+
+    <br />
+
+
+
+</div>
+    <br />
+    @*
+        <form enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <label class="file">
+                    <input type="file" asp-for="FileUpload.FormFile" multiple aria-label="File browser example">
+                    <span class="file-custom"></span>
+                </label>
+                <input asp-page-handler="Upload" class="btn btn-primary" type="submit" value="Upload">
+            </div>
+            </form>
+    *@
+</div>
+ 
+<div class="modal fade" id="storageDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 id="h4" class="modal-title">Storage Days </h4>
+
+                <button id="btndis" type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-*-* text-center form-inline">
+                            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp; <select id="sYears">
+                                <option value="0">Select Years</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">14</option>
+                            </select>
+                        </div>
+                        &nbsp;&nbsp;
+                        <div class="col-*-* text-center form-inline">
+                            <select id="sMonths">
+                                <option value="0">Select Months</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="9">8</option>
+                                <option value="10">8</option>
+                                <option value="11">8</option>
+                            </select>
+                        </div>
+                        &nbsp;&nbsp;
+                        <div class="col-*-* text-center form-inline">
+                            <select id="sDays">
+                                <option value="0">Select Days</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnAddStoreageDays" name="btnAddStoreageDays" class="btn btn-pill btn-outline-primary" data-dismiss="modal">Add Storage</button>
+                <button type="button" id="btncloseStoreageDays" name="btncloseStoreageDays" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+            <!-- Modal footer -->
+
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="loginInUserName">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 id="h4" class="modal-title">Add User Login Name</h4>
+
+                <button id="btndis" type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-*-* text-center form-inline border-dark">
+                            &nbsp;&nbsp;<label for="userID">Enter Login Name:</label>&nbsp;
+                            <input type="text" id="userID" />
+                        </div>
+                    </div>
+                    <p class="p-0"></p>
+                    <div class="modal-footer">
+                        <button type="button" id="btnAddLoginName" name="btnAddLoginName" class="btn btn-pill btn-outline-primary" data-dismiss="modal">Login Name</button>
+                        <button type="button" id="btncloseAddLoginName" name="btncloseAddLoginName" class="btn btn-pill btn-outline-danger" data-dismiss="modal">Close</button>
+                    </div>
+                    <!-- Modal footer -->
+
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+        <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+            <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+                Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+            </p>
+        </div>
+        <button type="button" id="btnOpenModel" class="btn btn-primary" data-toggle="modal" data-target="#storageDialog" style="display:none">
+            Open modal
+        </button>
+        <button type="button" id="btnOpenLogin" class="btn btn-primary" data-toggle="modal" data-target="#loginInUserName" style="display:none">
+            Open modal
+        </button>
+        @section scripts{
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $("#divLoading").hide();
+
+                    $('#EdocsITSCustomersModel_StoreDocuments').click(function (e) {
+
+                        if (($('#EdocsITSCustomersModel_StoreDocuments').prop('checked') == false)) {
+                            $('#EdocsITSCustomersModel_StoreDocuments').prop('checked', false);
+                        }
+                        else {
+                            // alert("open");
+                            //if (($('#EdocsITSCustomersModel_StoreDocuments').prop('checked') == true)) {
+                            $("#btnOpenModel").click();
+                            //  }
+
+                            // $("#h4").text("Delete user " + $("#EdocsITSCustomers_EdocsCustomerName").val());
+
+                        }
+
+                    });
+                    
+                    $('#btndis').click(function (e) {
+                        $('#EdocsITSCustomersModel_StoreDocuments').prop('checked', false);
+                    });
+                    $('#btncloseStoreageDays').click(function (e) {
+                        $('#EdocsITSCustomersModel_StoreDocuments').prop('checked', false);
+                    });
+                    $('#btnAddStoreageDays').click(function (e) {
+                        $('#EdocsITSCustomersModel_StorageYears').val($('#sYears').val());
+                        $('#EdocsITSCustomersModel_StorageDays').val($('#sDays').val());
+                        $('#EdocsITSCustomersModel_StorageMonths').val($('#sMonths').val());
+                    });
+                    $('#AddCustomerLogIn').click(function (e) {
+
+                        if (($('#AddCustomerLogIn').prop('checked') == false)) {
+                            $('#AddCustomerLogIn').prop('checked', false);
+                        }
+                        else {
+                            // alert("open");
+                            //if (($('#EdocsITSCustomersModel_StoreDocuments').prop('checked') == true)) {
+                            $("#userID").val($('#EdocsITSCustomersModel_EdocsCustomerEmailAddress').val());
+                            
+                            $("#btnOpenLogin").click();
+                            //  }
+
+                            // $("#h4").text("Delete user " + $("#EdocsITSCustomers_EdocsCustomerName").val());
+
+                        }
+
+                    });
+                    //$("#but_upload").click(function () {
+
+                    //    var fd = new FormData();
+                    //    var files = $('#file')[0].files;
+
+                    //    // Check file selected or not
+                    //    if (files.length > 0) {
+                    //        fd.append('file', files[0]);
+
+                    //        $.ajax({
+                    //            url: 'upload.php',
+                    //            type: 'post',
+                    //            data: fd,
+                    //            contentType: false,
+                    //            processData: false,
+                    //            success: function (response) {
+                    //                if (response != 0) {
+                    //                    $("#img").attr("src", response);
+                    //                    $(".preview img").show(); // Display image element
+                    //                } else {
+                    //                    alert('file not uploaded');
+                    //                }
+                    //            },
+                    //        });
+                    //    } else {
+                    //        alert("Please select a file.");
+                    //    }
+                    //});
+                    //$("#btnUploadImage").click(function (e) {
+                    //  //  alert($('#postedFiles').val());
+                      
+                    //   // var fd = new FormData();
+                      
+                    //    //var files = $('#postedFiles')[0].files;
+                    //   // if (files.length > 0) {
+                    //   // fd.append('file', $('#postedFiles').val());
+                    //   // debugger;
+                    //       // alert(files[0]);
+                    //   // }
+                    //    e.preventDefault();
+                    //    var url1 = "/EdocsITSCustomers/ImageView/";
+                    //   // var strData = "image=" + $('#postedFiles').val();
+                    //    var strData = "file=" + $('#postedFiles').val();
+                     
+                        
+                    //    $.ajax({
+                    //        type: "GET",
+                    //        url: url1,
+                    //        data:  strData  ,
+                    //        datatype: "html",
+                    //        // contentType: 'application/image',
+                    //      //  data: { fd, 'module': 'ajax_data_form' },
+                    //            //  data: "invSDate=" + $('#invSDate').val().replace('/', '-')+ "&invEDate=" + $('#invEnd').val().replace('/', '-') + "&custID=" + $('#custID').val(),
+                    //        contentType: 'application/html;charset=utf-8',
+                    //            processData: false,
+                    //            cache: false,
+
+                    //            success: function (result) {
+                    //                //alert(result); 
+                    //                ////    $('#imgFile').show();
+                    //              //   $("#img64").attr('src', result);
+                    //                $("#imgFile").html(result);
+                    //                document.getElementById("imageStr").value=$("#imgString").attr("src");
+                    //                // SendHtmlPage();
+                    //            },
+                    //            complete: function () {
+                    //                //   CompleteAjaxCall();
+                    //                // alert("compl");
+                    //                $("#divLoading").hide();
+                    //                // $('#dtlUsers').DataTable({ "pagingType": "full" });
+                    //                // $('.dataTables_length').addClass('bs-select');
+
+                    //            },
+                    //            error: function (request, status, error) {
+                    //                $("#divLoading").hide();
+                    //                alert(error);
+                    //                alert(request.getAllResponseHeaders());
+                    //                alert(status.show);
+                    //            }
+                    //        });
+
+                    ////    paramName: "image",
+                    ////    acceptedFiles: "image/*",
+                    ////    success: function (file) {
+                    ////        $("#recentImage").attr('src', `./uploads/${file.name}`);
+                    ////    }
+                    //});
+                    $("#postedFiles").change(function (e) {
+                     //   alert  ($('input:hidden[name="__RequestVerificationToken"]').val());
+                            //alert($('#postedFiles').val());
+                       // var files = $('#postedFiles').prop("files");
+                         var files = $('#postedFiles').prop("files");
+                        //  var files = $('#postedFiles').get(0);
+                      //  var fileUpload = files.files;
+                      //  alert(files[0].name);
+                       // alert(files.length);
+                        //for (var i = 0; i < files.length; i++) {
+                        //    alert(files[i].name);
+                        //}
+                        //alert(files[0].val());
+                       // var fd = new FormData();
+                       // formData.append('file', files[0]);
+                        //var files = $('#postedFiles')[0].files;
+                        // if (files.length > 0) {
+                      //  fd.append('MyUploader', files[0]);
+                        //fd.append('enctype', "multipart/form-data");
+                        // debugger;
+                        // alert(files[0]);
+                        // }
+                      //  var files = $('#postedFiles').prop("files");
+                      //  var f = document.getElementById('#postedFiles').prop("files");
+                       // alert(f.html);
+                    //    alert(files[0].val());
+                       // var files = this.files[0];
+                     //   var form = document.getElementById('frmUpload');
+                       // var formData = new FormData(form);
+                       // for (const [key, value] of formData) {
+                         //   output.textContent += `${key}: ${value}\n`;
+                          //  alert(output.textContent);
+                        // }
+                        
+                       // var files = $('#postedFiles').val();
+                      //  alert(files);
+                         var formData = new FormData();
+                        //formData.append('file', $('#postedFiles')[0].files[0]); 
+                        //  formData.append('alert(files[0]);
+                      //   alert(files[0]);
+                        //formData.append('MyUploader', files[0]);
+                        formData.append("MyUploader", $("#postedFiles")[0].files[0]);
+                       // formData.append('MyUploader', $('#postedFiles').val());
+                      //  formData.append('MyUploader1', files[0]);
+                       // formData.append('MyUploader', $('#postedFiles').val());
+                     //   formData.append('MyUploader', $('#postedFiles').prop("files"));
+                      //  formData.append("MyUploader", files);
+                        
+                       
+                       // formData.append('MyUploader', files[0]);
+                        //  for (var pair of formData.entries()) {
+                      //        alert(pair[0]+',' + pair[1]);
+                       //   }
+                       // alert(window.location.href);
+                          e.preventDefault();
+                     //   var url1 = "/EdocsITSCustomers/EdocsITSAddNewCustomers?handler=MyUploader";
+                      //  var url1 = window.location.href+'/';
+                          var url1 = "/EdocsITSCustomers/ImageView";
+                        // var strData = "image=" + $('#postedFiles').val();
+                     //   var strData = "file=" + $('#postedFiles').val();
+
+
+                        $.ajax({
+                            type: "post",
+                            url: url1,
+                           // body: formData,
+                             data: formData,
+                              //data: fd,
+                        //    data: new FormData(document.forms[1]),
+                         //   data: { fd},
+                            // datatype: "html",
+                        //     contentType: 'multipart/form-data',
+                           //    data: { fd, 'module': 'ajax_data_form' },
+                            //  data: "invSDate=" + $('#invSDate').val().replace('/', '-')+ "&invEDate=" + $('#invEnd').val().replace('/', '-') + "&custID=" + $('#custID').val(),
+                            //  contentType: 'application/html;charset=utf-8',
+                             contentType: false,
+                            processData: false,
+                            cache: false,
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN",
+                                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+
+                            success: function (result) {
+                                // alert(result); 
+                                ////    $('#imgFile').show();
+                                 //   $("#img64").attr('src', result);
+                                 $("#imgFile").html(result);
+                                document.getElementById("EdocsITSCustomersModel_ImgStr").value = $("#imgString").attr("src");
+                               // alert(document.getElementById("imageStr").value);
+                                // SendHtmlPage();
+                            },
+                            complete: function () {
+                                //   CompleteAjaxCall();
+                                // alert("compl");
+                                $("#divLoading").hide();
+                                // $('#dtlUsers').DataTable({ "pagingType": "full" });
+                                // $('.dataTables_length').addClass('bs-select');
+
+                            },
+                            error: function (request, status, error) {
+                                $("#divLoading").hide();
+                                alert(error);
+                                alert(request.getAllResponseHeaders());
+                                alert(status.show);
+                            }
+                        });
+
+                        //    paramName: "image",
+                        //    acceptedFiles: "image/*",
+                        //    success: function (file) {
+                        //        $("#recentImage").attr('src', `./uploads/${file.name}`);
+                        //    }
+                    });
+                    //$("#imageUpload").click(function () {
+                    //    alert("helo");
+                    //    url: "/Partial_Pages/UploadImageView/",
+                    //    paramName: "image",
+                    //        acceptedFiles: "image/*",
+                    //            success: function (file) {
+                    //        $("#recentImage").attr('src', `./uploads/${file.name}`);
+                    //    }
+                    //});
+
+                });
+            </script>
+        }

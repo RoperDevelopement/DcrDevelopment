@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<BMEmailServiceSettings>
+  <BMEmailInfo>
+    <!--24 hr foramt-->
+    <EmailStartTime>6</EmailStartTime>
+    <EmailEndTime>19</EmailEndTime>
+    <DefaultThreadSleepHr>2</DefaultThreadSleepHr>
+  </BMEmailInfo>
+  <ReportInfo>
+    <SendDailyReports>8</SendDailyReports>
+    <DailyReportLastSent></DailyReportLastSent>
+    <SendEMailFreq></SendEMailFreq>
+    <LastTimeReportSent></LastTimeReportSent>
+    <CreateEmailTransForm>\xslt\DailyEmail.xslt</CreateEmailTransForm>
+  </ReportInfo>
+  <Email>
+    <EmailServer>smtp.gmail.com</EmailServer>
+    <EmailFrom>AlertSender@edocsusa.com</EmailFrom>
+    <EmailPassword>6746edocs</EmailPassword>
+    <EmailPort>587</EmailPort>
+    <EmailCC></EmailCC>
+    <EmailTo>dan.roper@edocsusa.com</EmailTo>
+    <EmailSubject>BinMonitor report {repStr}</EmailSubject>
+    <TextTo>BinMonitor report {repStr}</TextTo>
+    <TextCC></TextCC>
+  </Email>
+  <SqlServerInfo>
+    <!-- <SqlServerName>dcrx64prof</SqlServerName>-->
+    <SqlServerName>104.41.141.244</SqlServerName>
+    <DbName>BinMonitorCloud</DbName>
+    <UserName>edocsusa</UserName>
+    <PassWord>6746edocs@</PassWord>
+  </SqlServerInfo>
+  <AuditLogs>
+    <AzureBlobStorageConnectionString>
+      DefaultEndpointsProtocol=https;AccountName=edocsnypstorageprod;AccountKey=XNvT1ZL9JwsPLtI/AXGu8pJ7aGtkcaU5GoF6ibbzJ0RTuU5reUqdquOqJEyohAeNFZDjoAxM/tEVQNyR1g5kCg==;EndpointSuffix=core.windows.net
+    </AzureBlobStorageConnectionString>
+    <AzureBlobContanierAuditUploadShare>
+      auditlogsupload-prod
+    </AzureBlobContanierAuditUploadShare>
+    <AzureBlobAccountName>
+      edocsnypstorageprod
+    </AzureBlobAccountName>
+    <AzureBlobAccountKey>
+      XNvT1ZL9JwsPLtI/AXGu8pJ7aGtkcaU5GoF6ibbzJ0RTuU5reUqdquOqJEyohAeNFZDjoAxM/tEVQNyR1g5kCg==
+    </AzureBlobAccountKey>
+
+
+  </AuditLogs>
+</BMEmailServiceSettings>

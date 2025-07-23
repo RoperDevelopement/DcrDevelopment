@@ -1,0 +1,6 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQCommandReader_Barcode, Scanquire.Public">
+  <Properties>
+    <Simple name="BarcodeEncoderName" value="DEFAULT" />
+    <Simple name="BarcodeReaderName" value="DEFAULT" />
+  </Properties>
+</Complex>

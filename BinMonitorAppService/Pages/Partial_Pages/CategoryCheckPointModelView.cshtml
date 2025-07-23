@@ -1,0 +1,116 @@
+﻿@page
+@model BinMonitorAppService.Pages.Partial_Pages.CategoryCheckPointModelViewModel
+@{
+    Layout = null;
+}
+
+<html>
+<body>
+    <div id="divCp" name="divCp">
+        <p class="p-0" />
+        <div class="row justify-content-center  ">
+            <div class="col">
+                <div class="border text-center">
+                    <h6 class="text-center">Check Point 1</h6>
+                    @Html.LabelFor(model => Model.CategoryCheckPointModel.CategoryCheckPointOneDuration, new { @class = "text-center" }) @Html.EditorFor(model => Model.CategoryCheckPointModel.CategoryCheckPointOneDuration, Model.CategoryCheckPointModel.CategoryCheckPointOneDuration, new { @class = "border", @maxLength = 5 }) <p class="alert-danger border" style="display:none" id="invalidTime">*Invalid Duration format hh:mm 02:00</p>
+                    <p>
+                        <input type="hidden" value="@Model.CategoryCheckPointModel.CategoryColorCheckPointOne" id="CategoryColorCheckPointOne" name="CategoryColorCheckPointOne" />
+                        <button type="button" class="btn-light" id="btnChangeColor1" style="color:@Model.CategoryCheckPointModel.CategoryColorCheckPointOne" name="btnChangeColor1" onclick="ChangeColor('btnChangeColor1')">Change Color&nbsp;&nbsp;&nbsp;</button>
+                    </p>
+                </div>
+
+                <div class="border text-center">
+                    <h6 class="text-center">Check Point 2</h6>
+                    @Html.LabelFor(model => Model.CategoryCheckPointModel.CategoryCheckPointTwoDuration) @Html.EditorFor(model => Model.CategoryCheckPointModel.CategoryCheckPointTwoDuration, Model.CategoryCheckPointModel.CategoryCheckPointTwoDuration, new { @class = "border", @maxLength = 5 }) <p class="alert-danger border" style="display:none" id="invalidTime">*Invalid Duration format hh:mm 02:00</p>
+                    <p>
+                        <input type="hidden" value="@Model.CategoryCheckPointModel.CategoryColorCheckPointTwo" id="CategoryColorCheckPointTwo" name="CategoryColorCheckPointTwo" />
+                        <button type="button" class="btn-light" id="btnChangeColor2" style="color:@Model.CategoryCheckPointModel.CategoryColorCheckPointTwo" name="btnChangeColor2" onclick="ChangeColor('btnChangeColor2')">Change Color&nbsp;&nbsp;&nbsp;</button>
+                    </p>
+                </div>
+
+                <div class="border text-center">
+                    <h6 class="text-center">Check Point 3</h6>
+                    <input type="hidden" value="@Model.CategoryCheckPointModel.CategoryColorCheckPointThree" id="CategoryColorCheckPointThree" name="CategoryColorCheckPointThree" />
+                    @Html.LabelFor(model => Model.CategoryCheckPointModel.CategoryCheckPointThreeDuration) @Html.EditorFor(model => Model.CategoryCheckPointModel.CategoryCheckPointThreeDuration, Model.CategoryCheckPointModel.CategoryCheckPointThreeDuration, new { @class = "border", @maxLength = 5 }) <p class="alert-danger border" style="display:none" id="invalidTime">*Invalid Duration format hh:mm 02:00</p>
+                    <p>
+                        <button type="button" class="btn-light" id="btnChangeColor3" style="color:@Model.CategoryCheckPointModel.CategoryColorCheckPointThree" name="btnChangeColor3" onclick="ChangeColor('btnChangeColor3')">Change Color&nbsp;&nbsp;&nbsp;</button>
+                    </p>
+                </div>
+                <div class="border text-center">
+                    <h6 class="text-center">Check Point 4</h6>
+                    <input type="hidden" value="@Model.CategoryCheckPointModel.CategoryColorCheckPointFour" id="CategoryColorCheckPointFour" name="CategoryColorCheckPointFour" />
+                    @Html.LabelFor(model => Model.CategoryCheckPointModel.CategoryCheckPointFourDuration) @Html.EditorFor(model => Model.CategoryCheckPointModel.CategoryCheckPointFourDuration, Model.CategoryCheckPointModel.CategoryCheckPointTwoDuration, new { @class = "border", @maxLength = 5 }) <p class="alert-danger border" style="display:none" id="invalidTime">*Invalid Duration format hh:mm 02:00</p>
+                    <p>
+                        <button type="button" class="btn-light" id="btnChangeColor4" style="color:@Model.CategoryCheckPointModel.CategoryColorCheckPointFour" name="btnChangeColor4" onclick="ChangeColor('btnChangeColor4')">Change Color&nbsp;&nbsp;&nbsp;</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <p class="p-2" />
+        <h6 class="text-center">Email Alerts</h6>
+        <div class="row justify-content-center border">
+
+
+
+            <input type="hidden" id="currentDuration" name="currentDuration" value='@Html.DisplayFor(model=>Model.CategoryCheckPointEmailModel.Duration)' />
+            @if (@Model.CategoryCheckPointEmailModel.Flash)
+            {
+                <input type="hidden" id="currentFlash" name="currentFlash" value="True" />
+            }
+            else
+            {
+                <input type="hidden" id="currentFlash" name="currentFlash" value="False" />
+            }
+            <input type="hidden" id="currentEmailTo" name="currentEmailTo" value='@Html.DisplayFor(model=>Model.CategoryCheckPointEmailModel.EmailTo)' />
+            @if (@Model.CategoryCheckPointEmailModel.EmailAlerts)
+            {
+                <input type="hidden" id="currentEmailAlerts" name="currentEmailAlerts" value="True" />
+            }
+            else
+            {
+                <input type="hidden" id="currentEmailAlerts" name="currentEmailAlerts" value="False" />
+            }
+        <div class="col-4 text-center">
+
+            @Html.LabelFor(model => Model.CategoryCheckPointEmailModel.Duration) @Html.EditorFor(model => Model.CategoryCheckPointEmailModel.Duration, Model.CategoryCheckPointEmailModel.Duration, new { @class = "border", @maxLength = 5 }) <p class="alert-danger border" style="display:none" id="invalidTime">*Invalid Duration format hh:mm 02:00</p>
+            <p class="margionZero"></p>
+            @Html.CheckBoxFor(model => Model.CategoryCheckPointEmailModel.EmailAlerts) Send Email Alerts
+            <p class="margionZero"></p>
+            <select multiple id="selemail">
+                @if (!(string.IsNullOrWhiteSpace(@Model.CategoryCheckPointEmailModel.EmailTo)))
+                {
+                    foreach (var emTo in Model.CategoryCheckPointEmailModel.EmailTo.Split(';'))
+                    {
+                        if (!(string.IsNullOrWhiteSpace(@emTo)))
+                        {
+                            <option selected>@emTo</option>
+                        }
+                    }
+                }
+                @foreach (var em in Model.EmailTo)
+                {
+                    if (!(string.IsNullOrWhiteSpace(@em)))
+                    {
+                        <option value="@em">@em</option>
+                    }
+                    @*
+                if (string.IsNullOrWhiteSpace(@em))
+                {
+                    <option value="@em" selected>@em</option>
+                }
+                else
+                {
+                    <option value="@em">@em</option>
+                }
+                    *@
+                }
+
+            </select>
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+

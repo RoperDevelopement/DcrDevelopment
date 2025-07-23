@@ -1,0 +1,65 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.TrackingSystem.PrintsSgnatureViewModel
+@{
+}
+
+<div class="container-fluid">
+    
+    @if (!(string.IsNullOrWhiteSpace(@Model.SigatureData)  ))
+    {
+        @Html.Raw(@Model.SigatureData)
+        <div id="pr">
+            <a type="button" class="btn btn-outline-danger btn-link" style="float:right;" id="btnExit" href="/Index" name="btnExit">Exit</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;<button button class="btn btn-primary btn-outline-primary" id="prInvoice" style="float: right; margin-right:5px">Print</button>
+        </div>
+    }
+
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            // printOut('printInvoice');
+            $('#prInvoice').click(function () {
+                printOut('saveHtml');
+            });
+
+         //   $('#cusID').change(function (e) {
+                //if (!(CheckEmptyString($("#repSDate").val(), 'Need a Report Begin Date:'))) {
+            //    //    $("#repSDate").focus();
+            //    //    return false;
+            //    //}
+            //    //if (!(CheckEmptyString($("#repSEndDate").val(), 'Need a Report Begin Date:'))) {
+            //    //    $("#repSEndDate").focus();
+            //    //    return false;
+            //    //}
+            //    $("#divLoading").show();
+            //    //  ShowLoading();
+
+
+
+            //    $("#formCustId").submit();
+
+            //});
+            //$('#invNum').change(function (e) {
+            //    //if (!(CheckEmptyString($("#repSDate").val(), 'Need a Report Begin Date:'))) {
+            //    //    $("#repSDate").focus();
+            //    //    return false;
+            //    //}
+            //    //if (!(CheckEmptyString($("#repSEndDate").val(), 'Need a Report Begin Date:'))) {
+            //    //    $("#repSEndDate").focus();
+            //    //    return false;
+            //    //}
+            //    $("#divLoading").show();
+            //    //  ShowLoading();
+
+
+
+            //    $("#formInvNumber").submit();
+
+            //});
+
+
+        });
+    </script>
+}

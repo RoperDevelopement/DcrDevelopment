@@ -1,0 +1,6 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQFileWriter_Tiff, Scanquire.Public">
+  <Properties>
+    <Simple name="Compression" value="CompressionLZW" />
+    <Simple name="FileExtension" value="TIF" />
+  </Properties>
+</Complex>

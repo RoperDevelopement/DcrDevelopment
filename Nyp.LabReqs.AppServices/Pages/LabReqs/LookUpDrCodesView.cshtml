@@ -1,0 +1,208 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.LookUpDrCodesViewModel
+@{
+    ViewData["Title"] = "LookUpDrCodesView";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger border">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+@*
+    <partial name="Shared/_RecordsNetImage" />
+    *@
+    <div id="divMain" name="divMain">
+        <h1 class="text-center">Dr Codes</h1>
+        @Html.ValidationMessage("ErrorMessage", new { @class = "text-danger" })
+
+        <p class="p-1" />
+        <div style="background-color:white;">
+            <div class="container-fluid">
+                <p class="p-2" />
+                <a href="#searchOptions" name="sOptions" id="sOptions" class=" btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+                <p class="alert-light" id="showmess" style="display:none">Click to expand/hide Search Options</p>
+                <p class="p-1" />
+
+                <div id="searchOptions" class="collapse">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Search Begin Date</th>
+                                <th class="text-center">Search End Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center"><input type="date" id="searchStartDate" name="searchStartDate" value="@Model.StartDate" /></td>
+                                <td class="text-center"><input type="date" id="searchEndDate" name="searchEndDate" value="@Model.EndDate" /></td>
+
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div>
+
+                        <form method="get" id="frDrCodes" name="frDrCodes" class="form-horizontal">
+                            <div class="row h-100">
+                                <div class="col">
+                                    @Html.LabelFor(model => model.DrCodeModel.DrCode, new { @class = "text-nowrap" })<p class="p-0" />
+                                    @Html.TextAreaFor(m => m.DrCodeModel.DrCode, new { @maxlength = "16", @rows = "1", @cols = "30", @class = "text-nowrap border", @placeholder = "Dr Code or * All Dr Codes" })
+                                    @Html.ValidationMessage("ErrorMessage", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(model => model.DrCodeModel.DrFName, new { @class = "text-nowrap" })
+                                    @Html.TextAreaFor(m => m.DrCodeModel.DrFName, new { @maxlength = "25", @rows = "1", @cols = "30", @class = "text-nowrap border", @placeholder = "Dr First Name" })
+
+                                </div>
+
+
+                                <div class="col">
+                                    @Html.LabelFor(model => model.DrCodeModel.DrLName, new { @class = "text-nowrap" })
+                                    @Html.TextAreaFor(m => m.DrCodeModel.DrLName, new { @maxlength = "25", @rows = "1", @cols = "30", @class = "text-nowrap border", @placeholder = "Dr Last Name" })
+
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(model => model.DrCodeModel.ScanOperator, new { @class = "text-nowrap" })
+                                    @Html.TextAreaFor(m => m.DrCodeModel.ScanOperator, new { @maxlength = "25", @rows = "1", @cols = "30", @class = "text-nowrap border", @placeholder = "Scan Operator" })
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+
+                                    @Html.CheckBoxFor(m => m.DrCodeModel.SearchPartial)
+                                    <label class="text-nowrap">Starts With</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-outline-primary btn-block" id="btnDrCodes" name="btnDrCodes">Search DrCodes</button>
+                        </div>
+                        <div class="col" ">
+                            <a class="btn btn-outline-warning btn-block btn-link" id="btnrest" href="/LabReqs/LookUpDrCodesView" name="btnrest" role="button">Reset</a>
+
+                        </div>
+                        <div class="col" ">
+                            <a class="btn btn-outline-danger btn-block btn-link" id="btnexit" href="/Index" name="btnexit" role="button">Exit</a>
+
+                        </div>
+
+                    </div>
+                </div>@*end div searh options*@
+<p class="p-1" />
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+@if ((@Model.IDicDrcodes != null))
+{
+    <div id="divLabReqs">
+        <p class="text-left">Total Query Time @Model.TotalQueryTime</p>
+        <p class="p-0" />
+        <table class="table table-hover w-auto" width="100%" id="dtLabReqs">
+            <thead>
+                <tr>
+                    <th>File URL</th>
+                    <th>Dr Code</th>
+                    <th>Dr First Name</th>
+                    <th>Dr Last Name</th>
+                    <th>Scan Operator</th>
+                    <th>Scan Date</th>
+                    <th>Scan Batch ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var items in Model.IDicDrcodes)
+                {
+
+                    <tr>
+
+                        <td> <a href="/Partial_Pages/DisplayPdfFilePartialView?pdfurl=@items.Value.FileUrl" target="_blank"><img src="~/Images/small_export-to-pdf-icon-pdf-export-toolbar-icon.png" width="20" height="25" /></a></td>
+                        <td>@items.Value.DrCode</td>
+                        <td>@items.Value.DrFName</td>
+                        <td>@items.Value.DrLName</td>
+                        <td>@items.Value.ScanOperator</td>
+                        <td>@items.Value.ScanDate</td>
+                        <td>@items.Value.ScanBatch</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+}
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SessionExpireAlert(0);
+            CompleteAjaxCall();
+            $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+
+            });
+            $("#divLoading").hide();
+
+            $(document).keypress(function (e) {
+                if (e.which == 13) {
+
+                    $('#btnDrCodes').click();
+                    return false;
+
+                }
+
+
+
+                return true;
+            });
+
+
+
+            $('#btnDrCodes').click(function () {
+
+                var message = "Looking up DrCodes ";
+                ShowLoadingDialog(message);
+                $('#btnCloseFromYear').click();
+                $("<input type='hidden'/>")
+                    .attr("value", $('#searchStartDate').val())
+                    .attr("id", "startSDate")
+                    .attr("name", "startSDate")
+                    .prependTo("#frDrCodes");
+                $("<input type='hidden'/>")
+                    .attr("value", $('#searchEndDate').val())
+                    .attr("id", "endSDate")
+                    .attr("name", "endSDate")
+                    .prependTo("#frDrCodes");
+                $("#frDrCodes").submit();
+
+            });
+
+            $('#searchStartDate').change(function () {
+                GetSearchStartEndDate();
+
+            });
+            $('#searchEndDate').change(function () {
+                CheckSearchStartDate();
+
+            });
+
+        });//end doc ready
+
+    </script>
+}

@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ScanQuireSqlCmds.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SqlSever" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">edocdevdan</Value>
+    </Setting>
+    <Setting Name="SqlDataBase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ScanquireUsers</Value>
+    </Setting>
+    <Setting Name="DbUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAFFcQ2jDA8ECcIGnDAE4cqgAAAAACAAAAAAAQZgAAAAEAACAAAABOeHfrkko9G+/oHRpi9T6bSjYgd+U6cAT7zujl3jjQ9AAAAAAOgAAAAAIAACAAAACEsNmYQ9kA/JG7EIFg0qKSeamvxSNKqp3edJDCjuFQKyAAAABfzU4uPMgDQSniqYEyvuTY4UoJKylg93UlNC8PFW2k+kAAAAAVEQ5vt6BH7kgFmFKbtp25i5K10aW1+aC3ZF14aZQTfYdXbv8CrpKSFbGwCaX6dcWuKiZpdY8j+B0sqoQmKSDx</Value>
+    </Setting>
+    <Setting Name="DbKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">eDoButTeMt59701=</Value>
+    </Setting>
+    <Setting Name="DbPassWord" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAFFcQ2jDA8ECcIGnDAE4cqgAAAAACAAAAAAAQZgAAAAEAACAAAADeliDK7w4wja6rNdnzLaid3mQlOxQ7OZCD+dXUhPTWSgAAAAAOgAAAAAIAACAAAACzdg9VNZnWsgkB4HYumvgfQqk1vXwFSMG8CZPdhgW0/iAAAACuTfRbiWNJHA1y+qhFBznlvfePsEj2k+h9RD0LaWFnVkAAAAAnSSS/p8XPTN3IuinsmjUNC19W/GMmOolikDv+kZGeLIug4iugnnUPWyBxMUhlUIMwl/42nhjs0Xmprro6P06c</Value>
+    </Setting>
+    <Setting Name="SqlServerTimeOut" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

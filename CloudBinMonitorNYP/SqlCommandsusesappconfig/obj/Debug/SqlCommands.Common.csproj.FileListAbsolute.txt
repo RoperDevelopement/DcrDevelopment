@@ -1,0 +1,11 @@
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\obj\Debug\SqlCommands.Common.csproj.CoreCompileInputs.cache
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\bin\Debug\SqlCommands.Common.dll.config
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\bin\Debug\SqlCommands.Common.dll
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\bin\Debug\SqlCommands.Common.pdb
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\obj\Debug\SqlCommands.Common.dll
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\obj\Debug\SqlCommands.Common.pdb
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\bin\Debug\System.Net.Http.dll
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\bin\Debug\System.Net.Http.xml
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\bin\Debug\ja\System.Net.Http.resources.dll
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\obj\Debug\SqlCommands.Common.csproj.CopyComplete
+C:\Edocs\CloudBinMonitorNYP\SqlCommands\obj\Debug\SqlCommands.Common.csprojAssemblyReference.cache

@@ -1,0 +1,11 @@
+﻿<Complex name="Root" type="BinMonitor.Common.Bin, BinMonitor.Common">
+  <Properties>
+    <Simple name="Id" value="P08" />
+    <SingleArray name="SupportedCategories">
+      <Items>
+        <Simple value="PROBLEM" />
+      </Items>
+    </SingleArray>
+    <Null name="BatchId" />
+  </Properties>
+</Complex>

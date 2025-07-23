@@ -1,0 +1,4 @@
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\obj\x86\Debug\OptixBatchUploader.csprojAssemblyReference.cache
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\obj\x86\Debug\OptixBatchUploader.csproj.CoreCompileInputs.cache
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\OptixBatchUploader\obj\x86\Debug\OptixBatchUploader.csprojAssemblyReference.cache
+C:\Edocs\Scanquire.Clients.NYP.HIPAA\OptixBatchUploader\obj\x86\Debug\OptixBatchUploader.csproj.CoreCompileInputs.cache

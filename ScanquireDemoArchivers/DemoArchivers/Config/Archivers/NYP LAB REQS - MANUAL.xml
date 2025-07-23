@@ -1,0 +1,22 @@
+﻿<Complex name="Root" type="DemoArchivers.NYPLabRecordsArchiver, DemoArchivers">
+  <Properties>
+    <Simple name="MetadataSiteUrl" value="https://brnsrvr/" />
+    <Simple name="DefaultIndexNumber" value="55555" />
+    <Simple name="ReceiptStation" value="CS"/>
+    <Simple name="DefaultCategory" value="" />
+    <SingleArray name="IndexNumberPriorities">
+      <Items>
+        <Simple value="^(r|R|\d)\d{8}$" />
+        <Simple value="^\d{15}$" />
+      </Items>
+    </SingleArray>
+    <Simple name="CommandReaderName" value="DEFAULT" />
+    <Simple name="ScannerName" value="Canon DR-6030C TWAIN" />
+    <Simple name="ScannerSetting" value="LAB REQS DEFAULT" />
+    <Simple name="FileWriterName" value="TIFF_CCITG4" />
+    <Simple name="CommandImageBuilderName" value="DEFAULT" />
+    <Simple name="OutputDir" value="C:\Archives\Lab_Reqs\"/>
+    <Simple name="ImportScriptPath" value="C:\Archives\Lab_Reqs\ManualIndexingTemp\ManualIndexingTemp.exe"/>
+
+  </Properties>
+</Complex>

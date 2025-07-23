@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Edocs.ITS.AppService</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/datatables-select.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                @*border-radius:50%;*@
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="~/img/edocs logo.gif" style="width:200px; height:100px;" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1  justify-content-around">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');" asp-page="/Index">Home</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">e-Docs Customer</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/EdocsITSCustomers/EdocsITSAddNewCustomers" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">New</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/EdocsITSCustomers/EdocsITSEditCustomersView" onmouseover="$(this).css('background','rgb(180, 180, 180)');" onmouseout="$(this).css('background','white');">Edit</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">e-Docs Inventory</a>
+
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/TrackingSystem/InventoryTransferView" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Transfer</a>
+                                </li>
+                                @* <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/TrackingSystem/InventoryScanningManagementView" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Lookup</a>
+                </li>
+                                *@
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/TrackingSystem/SignOffPickUp" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Sign Off</a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Billing</a>
+
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Invoice/CreateInvoiceView" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Create Invoice Docnames</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Invoice/CreateInvoiceTrackingIDsView" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Create Invoice TrackingID</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Invoice/CreateCustomInvoiceView" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">Custom Invoice</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Invoice/UpDateInvoiceView" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">UpDate Invoice</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Invoice/RePrintInvoiceView" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">RePrint Invoice</a>
+                                </li>
+
+
+
+
+
+
+
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Documents Review</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/DocumentsAcceptReject/AcceptRejectDocumentsView" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">Accept/Reject</a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        @*
+        <li class="nav-item dropdown">
+            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Lookup Records</a>
+            <ul class="dropdown-menu" role="menu">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');" asp-page="/ITSLookUpDocuments/ITSPSUSDLookUpDocView">PSUSD Records</a>
+                </li>
+
+
+
+            </ul>
+        </li>
+                        *@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Reports</a>
+
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/TrackingSystemReports/ITSReportsByProjectView" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">Document Name</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/TrackingSystemReports/ITSReportByTrackingIDView" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">TrackinID</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/TrackingSystemReports/ITSReportsView" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">Inventory Reports</a>
+                                </li>
+
+                                @*
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/TrackingSystemReports/ITSReportCostView" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">Cost Report</a>
+                </li>
+                                *@
+
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="link" asp-area="" asp-page="" onmouseover="$(this).css('background','#7abdff');" onmouseout="$(this).css('background','white');">Management</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/EdocsITSUsers/EdocsITSUsersView" onmouseover="$(this).css('background','yellow');" onmouseout="$(this).css('background','white');">User Profiles</a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+                    </ul>
+</div>
+            </div>
+            <partial name="_LoginPartial" />
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <a href="http://edocsusa.com/" target="_blank"> &copy; 2020 - e-Docs USA - </a> <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/datatables/datatables-select.min.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

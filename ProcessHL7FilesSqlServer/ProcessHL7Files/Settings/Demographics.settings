@@ -1,0 +1,57 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ProcessHL7Files.Settings" GeneratedClassName="Demographics">
+  <Profiles />
+  <Settings>
+    <Setting Name="HL7VendorName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Default</Value>
+    </Setting>
+    <Setting Name="HL7VendorVersion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2.5.1</Value>
+    </Setting>
+    <Setting Name="InputDir" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Hl7Files\</Value>
+    </Setting>
+    <Setting Name="OutputDir" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Hl7OutPut\LogsErrorFolder\</Value>
+    </Setting>
+    <Setting Name="CopyDir" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\OutPut\CopyDir\</Value>
+    </Setting>
+    <Setting Name="CopyOriginal" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DeleteOriginal" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SqlServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">edocsSQLServer</Value>
+    </Setting>
+    <Setting Name="SqlDataBase" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">HL7</Value>
+    </Setting>
+    <Setting Name="AzureBlobStorageConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DefaultEndpointsProtocol=https;AccountName=edocsnypstorageprod;AccountKey=XNvT1ZL9JwsPLtI/AXGu8pJ7aGtkcaU5GoF6ibbzJ0RTuU5reUqdquOqJEyohAeNFZDjoAxM/tEVQNyR1g5kCg==;EndpointSuffix=core.windows.net</Value>
+    </Setting>
+    <Setting Name="AzureBlobContanierHl7Archive" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">hl7archive</Value>
+    </Setting>
+    <Setting Name="AzureBlobContanierAuditLogs" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">auditlogsupload-prod</Value>
+    </Setting>
+    <Setting Name="AzureBlobAccountName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">edocsnypstorageprod</Value>
+    </Setting>
+    <Setting Name="AzureBlobAccountKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">XNvT1ZL9JwsPLtI/AXGu8pJ7aGtkcaU5GoF6ibbzJ0RTuU5reUqdquOqJEyohAeNFZDjoAxM/tEVQNyR1g5kCg==</Value>
+    </Setting>
+    <Setting Name="ArchiveHl7Azure" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HL7ArchiveFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">F:\HL7ArchiveFiles\</Value>
+    </Setting>
+    <Setting Name="DaysToKeepLogFiles" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

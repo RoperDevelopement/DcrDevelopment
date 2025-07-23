@@ -1,0 +1,176 @@
+﻿@page
+@model BinMonitorAppService.Pages.Manage.ViewSpectrumSettingsModel
+@{
+    ViewData["Title"] = "ViewSpectrumSettings";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+}
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger">Manage BinMonitor Settings will refresh in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+<h1 class="text-center">Manage BinMonitor Settings</h1>
+<p class="p-0" />
+<div style="background-color:white">
+    <p class="p-2" />
+
+    <div class="container-fluid">
+
+        <form method="post">
+           
+            <div class="border">
+                <div class="row form-group">
+                    <div class="col">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.UpDateBmScreenSeconds, new { @class = "text-nowrap" })
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.UpDateBmScreenSeconds, new { @rows = "1", @cols = "20" })
+                    </div>
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.BarCodesTimerSeconds, new { @class = "text-nowrap" })
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.BarCodesTimerSeconds, new { @rows = "1", @cols = "20" })
+                    </div>
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.SessionTimeOutMin, new { @class = "text-nowrap" })
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.SessionTimeOutMin, new { @rows = "1", @cols = "20" })
+                    </div>
+                </div>
+                <p class="p-0" />
+                <div class="row">
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.WorkingFolder)
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.WorkingFolder, new { @class = "form-control" })
+                    </div>
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.UpDateFolder)
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.UpDateFolder, new { @class = "form-control" })
+                    </div>
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.WebApi)
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.WebApi, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.NotUploadFolder)
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.NotUploadFolder, new { @class = "form-control" })
+                    </div>
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.AzureCloudUpdateFolder)
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => @Model.SpectrumMonitorSettings.AzureCloudUpdateFolder, new { @class = "form-control" })
+                    </div>
+                </div>
+                <p class="p-0" />
+                <div class="row">
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.EmailPw)
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => @Model.SpectrumMonitorSettings.EmailPw, new { @class = "form-control" })
+                    </div>
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.SpectrumMonitorAppServiceUrl)
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.SpectrumMonitorAppServiceUrl, new { @class = "form-control" })
+                    </div>
+
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.DefaultWebBrowser)
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.DefaultWebBrowser, new { @class = "form-control" })
+                    </div>
+
+                </div>
+
+
+                <p class="p-0" />
+                <div class="row">
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.DaysToKeepLogFiles, new { @class = "text-nowrap" })
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => @Model.SpectrumMonitorSettings.DaysToKeepLogFiles, new { @rows = "1", @cols = "5" })
+                    </div>
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.NumDaysCheckForUpDates, new { @class = "text-nowrap" })
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => @Model.SpectrumMonitorSettings.NumDaysCheckForUpDates, new { @rows = "1", @cols = "5" })
+                    </div>
+
+
+                </div>
+
+                <p class="p-0" />
+                <div class="row">
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.StartTime, new { @class = "text-nowrap" })
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.StartTime, new { @rows = "1", @cols = "20" })
+                    </div>
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.EndTime, new { @class = "text-nowrap" })
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.EndTime, new { @rows = "1", @cols = "20" })
+                    </div>
+                </div>
+                <p class="p-0" />
+                <div class="row">
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.MaxLabReqsPerBin, new { @class = "text-nowrap" })
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.MaxLabReqsPerBin, new { @rows = "1", @cols = "20" })
+
+                    </div>
+                    <div class="col form-group">
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.AddDateTime, new { @class = "text-nowrap" })
+                        <p class="p-0" />
+                        @Html.TextAreaFor(model => model.SpectrumMonitorSettings.AddDateTime, new { @rows = "1", @cols = "20", @class = "text-nowrap" })
+
+                    </div>
+                </div>
+                <p class="p-0" />
+                <div class="row">
+                    <div class="col form-group">
+                        @Html.CheckBoxFor(model => model.SpectrumMonitorSettings.RestartNightly)
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.RestartNightly, new { @class = "text-nowrap" })
+
+                    </div>
+                    <div class="col form-group">
+                        @Html.CheckBoxFor(model => model.SpectrumMonitorSettings.RunOnWeeksEnds)
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.RunOnWeeksEnds, new { @class = "text-nowrap" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col form-group">
+                        @Html.CheckBoxFor(model => model.SpectrumMonitorSettings.UpdateConfigFile)
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.UpdateConfigFile, new { @class = "text-nowrap" })
+                    </div>
+                    <div class="col form-group">
+                        @Html.CheckBoxFor(model => model.SpectrumMonitorSettings.AppTopWindow)
+                        @Html.LabelFor(model => model.SpectrumMonitorSettings.AppTopWindow, new { @class = "text-nowrap" })
+                    </div>
+                </div>
+                <p class="p-2" />
+                <div class="form-group d-md-inline-flex text-right">
+                    <input type="submit" value="Update" class="btn btn-outline-dark text-center" />&nbsp;&nbsp;
+                    <a asp-area="" asp-page="/BinManager/ViewManagerHome"><input type="button" value="Exit" class="btn btn-outline-dark" /></a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <p class="p-2"></p>
+</div>
+@section scripts {
+    <script type="text/javascript">
+    $(document).ready(function () {
+        SessionExpireAlert(300000);
+
+         $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+               
+            });
+
+    });
+    </script>
+}

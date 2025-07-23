@@ -1,0 +1,13 @@
+﻿<Complex name="Root" type="DemoArchivers.LongTermCareROIArchiver, DemoArchivers, Version=1.0.4805.15337, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="RootPath" value="C:\Archives\Mental Health ROI" />
+    <Simple name="EnableLogging" value="True" />
+    <Simple name="LogFilePath" value="C:\Archives\Mental Health ROI\ScanquireLog.csv" />
+    <Simple name="CommandReaderName" value="BARCODE DEFAULT" />
+    <Simple name="DocumentBuilderName" value="BARCODE DEFAULT" />
+    <Simple name="FileWriterName" value="PDF" />
+  	 <Simple name="EncryptedFileWriterName" value="PDF ENCRYPTED" />
+    <Simple name="TextImageBuilderName" value="DEFAULT" />
+    <Simple name="BookmarkImageBuilderName" value="MENTAL HEALTH" />
+  </Properties>
+</Complex>

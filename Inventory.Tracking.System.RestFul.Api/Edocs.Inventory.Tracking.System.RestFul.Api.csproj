@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>70441516-0e53-44b2-b853-42f136f0f78a</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Models\EdocsITSTrackingIDModel.cs~RF98db9c6.TMP" />
+    <None Remove="Models\HtmlFileModel.cs~RF444f201.TMP" />
+    <None Remove="Models\PSUSDUploadRecordsModel.cs~RFe941de.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="copy L:\EdocsGitHub\Edocs.ITS.AppService\Interfaces\IETS.cs  L:\EdocsGitHub\Edocs.Inventory.Tracking.System.RestFul.Api\Interfaces\IETS.cs" />
+  </Target>
+
+
+</Project>

@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+namespace Scanquire.Public.EdocsUSAImageTools
+{
+    public delegate void UpDateBrightness(int brightness);
+    public delegate void ImageRestoreBright();
+    public partial class BrightnessForm : Form
+    {
+        public event UpDateBrightness ChangeBrightness;
+        public event ImageRestoreBright RestoreImageBFRM;
+        public BrightnessForm()
+        {
+            InitializeComponent();
+            trackBar1.Focus();
+            btnOK.DialogResult = DialogResult.OK;
+            btnCancel.DialogResult = DialogResult.Cancel;
+
+        }
+
+        public int BrightnessValue
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(txtBrightnessValue.Text))
+                    txtBrightnessValue.Text = "0";
+                return Convert.ToInt32(txtBrightnessValue.Text); 
+            }
+            set { txtBrightnessValue.Text = value.ToString(); }
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            BrightnessValue = trackBar1.Value;
+         //   ChangeBrightness(BrightnessValue);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BrightnessValue = 0;
+            trackBar1.Value = 0;
+            RestoreImageBFRM();
+        }
+
+       
+
+       
+
+        private void txtBrightnessValue_TextChanged(object sender, EventArgs e)
+        {
+                trackBar1.Value = BrightnessValue;
+                ChangeBrightness(BrightnessValue);
+           
+        }
+    }
+}

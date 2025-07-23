@@ -1,0 +1,62 @@
+﻿<Complex name="Root" type="BinMonitor.Common.UserProfile, BinMonitor.Common">
+  <Properties>
+    <Simple name="Id" value="ADMIN" />
+    <Dictionary name="CategoryPermissions">
+      <Items>
+        <Item>
+          <Simple value="PROBLEM" />
+          <Complex>
+            <Properties>
+              <Simple name="CanCreate" value="True" />
+              <Simple name="CanAddComment" value="True" />
+              <Simple name="CanAssign" value="True" />
+              <Simple name="CanCheckOut" value="True" />
+              <Simple name="CanCheckIn" value="True" />
+              <Simple name="CanClose" value="True" />
+            </Properties>
+          </Complex>
+        </Item>
+        <Item>
+          <Simple value="ROUTINE" />
+          <Complex>
+            <Properties>
+              <Simple name="CanCreate" value="True" />
+              <Simple name="CanAddComment" value="True" />
+              <Simple name="CanAssign" value="True" />
+              <Simple name="CanCheckOut" value="True" />
+              <Simple name="CanCheckIn" value="True" />
+              <Simple name="CanClose" value="True" />
+            </Properties>
+          </Complex>
+        </Item>
+        <Item>
+          <Simple value="STAT" />
+          <Complex>
+            <Properties>
+              <Simple name="CanCreate" value="True" />
+              <Simple name="CanAddComment" value="True" />
+              <Simple name="CanAssign" value="True" />
+              <Simple name="CanCheckOut" value="True" />
+              <Simple name="CanCheckIn" value="True" />
+              <Simple name="CanClose" value="True" />
+            </Properties>
+          </Complex>
+        </Item>
+        <Item>
+          <Simple value="READY" />
+          <Complex>
+            <Properties>
+              <Simple name="CanCreate" value="True" />
+              <Simple name="CanAddComment" value="True" />
+              <Simple name="CanAssign" value="True" />
+              <Simple name="CanCheckOut" value="True" />
+              <Simple name="CanCheckIn" value="True" />
+              <Simple name="CanClose" value="True" />
+            </Properties>
+          </Complex>
+        </Item>
+      </Items>
+    </Dictionary>
+    <Simple name="IsAdmin" value="True" />
+  </Properties>
+</Complex>

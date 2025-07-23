@@ -1,0 +1,401 @@
+﻿@page
+@model BinMonitorAppService.Pages.BinManager.ViewBMCreateBatchEmailWF
+
+@{
+    ViewData["Title"] = "ViewBMCreateBatchEmailWF";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+}
+@if (!(string.IsNullOrWhiteSpace(@ViewData["ErrMess"].ToString())))
+{
+
+    Response.Redirect(@ViewData["ErrMess"].ToString());
+}
+
+<header>
+    <h1 class="text-center">Create Specimen Batch Work Flow</h1>
+
+</header>
+<p class="p-0"></p>
+<div class="container-fluid border align-content-center text-center marginTop">
+    <p class="text-center">Batch Details</p>
+    <form method="post" id="fNewBatch">
+        <div class="form-group">
+            <div class="flexrow">
+                <div class="flexcolumn">
+                    <button type="button" class="align-text-bottom btn-outline-dark" id="btnTF" name="btnTF">Transfer From</button>
+                    <input type="hidden" id="oldBinID" name="oldBinID" />
+                    <input type="hidden" id="newBinID" name="newBinID" />
+                    <p class="p-1" />
+                    @*
+                        <text class="text-black-50 board" id="txtTF" name="txtTF">Transfer from</text>
+                        <p class="p-1" />
+                        <text class="text-black-50 board">Transfer from</text>
+                        <p class="p-1" />
+                    *@
+                    <label asp-for="BinRegistorModel.BinID" class="control-label text-nowrap">Bin ID</label>
+                    @Html.DropDownListFor(m => m.BinID,
+    new SelectList(Model.BinID, Model.BinID), new { @class = "form-conrol" })
+                    @Html.ValidationMessage("BinID", new { @class = "text-danger" })
+
+
+                    <p class="p-1" />
+                    <label asp-for="BinRegistorModel.CategoryName" class="control-label text-nowrap"></label>
+                    @Html.DropDownListFor(m => m.CategoryName,
+               new SelectList(Model.CategoryName, "Category Name"), new { @class = "form-conrol" })
+                    @Html.ValidationMessage("CategoryName", new { @class = "text-danger" })
+                    <p class="p-1" />
+                    @Html.CheckBoxFor(m => m.IsRegistered, new { @onclick = "ChangeStyleHide('register')", @class = "form-conrol", @checked = "" })
+
+                    <label class="control-label text-nowrap">Requires Registration</label>
+                    <p class="p-1" />
+                    <div id="register" style="display:none">
+
+                        <label asp-for="BinRegistorModel.RegAssignedBy" class="control-label text-nowrap"></label>
+                        @Html.DropDownListFor(m => m.LassignedBy,
+                      new SelectList(Model.LassignedBy, Model.BinRegistorModel.RegAssignedBy), new { @name = "RegAssignedBy", @id = "RegAssignedBy", @class = "form-conrol" })
+                        <p class="p-1" />
+                        <label asp-for="BinRegistorModel.RegAssignedTo" class="text-nowrap inlineblock"></label>
+                        @Html.DropDownListFor(m => m.LassignedTo,
+                     new SelectList(Model.LassignedTo, Model.BinRegistorModel.RegAssignedTo), new { @name = "RegAssignedTo", @id = "RegAssignedTo", @class = "form-conrol" })
+                    </div>
+
+                    <p class="p-1" />
+
+                </div>
+                <div class="flexcolumn">
+                    <label class="text-nowrap inlineblock">Contents</label>
+                    <input type="text" size="50" class="col-md board" id="contentsBin" />
+
+                    <p class="p-1" />
+                    <textarea rows="5" cols="1" class="form-control" id="BinContents" name="BinContents" readonly="readonly" asp-for="BinRegistorModel.BinContents">@Html.DisplayFor(model => Model.BinRegistorModel.BinContents)</textarea>
+                    <p class="p-1" />
+                    <button type="button" class="align-text-bottom btn-outline-dark inlineblock" id="btnAddContents">Add Contents</button>
+                    <button type="button" class="align-text-bottom btn-outline-danger inlineblock" id="btnRemoveContents">Remove Contents</button>
+
+
+                </div>
+                <div class="flexcolumn">
+                    <label class="text-nowrap inlineblock">Comments</label>
+                    <input type="text" size="50" class="col-md board" id="commentsBin" name="commentsBin" />
+
+                    <p class="p-1" />
+                    <textarea rows="5" cols="1" class="form-control" id="BinComments" name="BinComments" readonly="readonly" asp-for="BinRegistorModel.BinComments">@Html.DisplayFor(model => Model.BinRegistorModel.BinComments)</textarea>
+                    <p class="p-1" />
+                    <button type="button" class="align-text-bottom btn-outline-dark inlineblock" id="btnAddComments">Add Comments</button>
+                    <button type="button" class="align-text-bottom  btn-outline-danger inlineblock" id="btnRemoveComments">Remove Comments</button>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            <h5>WorkFlow</h5>
+            <p class="p-0"></p>
+            <div class="row justify-content-center">
+                <div class="col-4 border text-center">
+                    <h6 class="text-center">Create Send Email</h6>
+                    <p class="p-0" />
+                    <div style="display:block">
+                        @Html.CheckBoxFor(m => m.WorkFlowEmailModelCreate.EmailOnStart) Start
+                        @Html.CheckBoxFor(m => m.WorkFlowEmailModelCreate.EmailOnComplete) Complete
+                        @Html.CheckBoxFor(m => m.WorkFlowEmailModelCreate.EmailContents) Contents
+                        <p asp-item="WorkFlowEmailModelCreate.EmailTo" class="control-label text-nowrap margionZero">Email Recipents</p>
+                        <select id="emailRecCreate" name="emailRecCreate" multiple>
+                            <option value="" selected></option>
+                            @foreach (var email in Model.LassignedBy)
+                            {
+                                if (!(string.IsNullOrWhiteSpace(email)))
+                                {
+                                    <option value="@email">@email</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 border text-center">
+                    <h6 class="text-center">Register Send Email</h6>
+                    <p class="p-0" />
+                    <div style="display:block">
+                        @Html.CheckBoxFor(m => m.WorkFlowEmailModelRegister.EmailOnStart) Start
+                        @Html.CheckBoxFor(m => m.WorkFlowEmailModelRegister.EmailOnComplete) Complete
+                        @Html.CheckBoxFor(m => m.WorkFlowEmailModelRegister.EmailContents) Contents
+                        <p asp-item="WorkFlowEmailModelRegister.EmailTo" class="control-label text-nowrap margionZero">Email Recipents</p>
+                        <select id="emailRecRegister" name="emailRecRegister" multiple>
+                            <option value="" selected></option>
+                            @foreach (var email in Model.LassignedBy)
+                            {
+                                if (!(string.IsNullOrWhiteSpace(email)))
+                                {
+                                    <option value="@email">@email</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 border">
+                    <h6 class="text-center">Process Send Email</h6>
+                    <p class="p-0" />
+                    <div style="display:block">
+                        @Html.CheckBoxFor(m => m.WorkFlowEmailModelProcess.EmailOnStart) Start
+
+                        @Html.CheckBoxFor(m => m.WorkFlowEmailModelProcess.EmailOnComplete) Complete
+
+                        @Html.CheckBoxFor(m => m.WorkFlowEmailModelProcess.EmailContents) Contents
+
+                        <p asp-item="WorkFlowEmailModelCreate.EmailTo" class="control-label text-nowrap margionZero">Email Recipents</p>
+                        @*
+                            <p class="margionZero"> @Html.CheckBoxFor(m => m.WorkFlowEmailModelProcess.EmailOnStart) Email on Start</p>
+                            <p class="margionZero"> @Html.CheckBoxFor(m => m.WorkFlowEmailModelProcess.EmailOnComplete)&nbsp;&nbsp;&nbsp;&nbsp; Email on Complete</p>
+                            <p class="margionZero"> @Html.CheckBoxFor(m => m.WorkFlowEmailModelProcess.EmailContents)&nbsp;&nbsp;&nbsp;&nbsp; Email Contents&nbsp;&nbsp;&nbsp;</p>
+                            <p asp-item="WorkFlowEmailModelCreate.EmailTo" class="control-label text-nowrap margionZero">Email Recipents</p>
+                        *@
+                        <select id="emailRecProcess" name="emailRecProcess" multiple>
+                            <option value="" selected></option>
+                            @foreach (var email in Model.LassignedBy)
+                            {
+                                if (!(string.IsNullOrWhiteSpace(email)))
+                                {
+                                    <option value="@email">@email</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="p-0"></p>
+        <div class="form-group d-md-inline-flex">
+            <input type="submit" value="Submit" class="btn btn-outline-dark" />
+            <input type="reset" value="Clear" class="btn btn-outline-dark" id="reset" />
+            <a asp-area="" asp-page="/BinManager/ViewManagerHome"><input type="button" value="Exit" class="btn btn-outline-dark" /></a>
+        </div>
+    </form>
+    <div id="modalTransFrom" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">TransFer Specimen Batch </h4>
+
+
+
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <img src="~/Images/giphy.gif" id="loadingDataTF" style="display:none;" />
+                    </div>
+                    <div id="showformTF" style="display:block;">
+
+                        <div class="col-md-4">
+                            <input type="hidden" />
+                        </div>
+                        <div id="divTransFrom" name="divTransFrom"></div>
+
+                    </div>
+                    <div class="row" id="showBtnSave" name="showBtnSave">
+                        @* <input type="button" value="Save" class="btn btn-success" id="saveTF" name="saveTF" />
+                            <button class="btn btn-success" id="saveTF" name="saveTF" >Save</button>
+                                            <button class="btn btn-success" id="saveTF" name="saveTF">Save</button>
+                        *@
+                        <button class="btn btn-success" id="saveTF" name="saveTF">Save</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+@section scripts {
+
+    <script>
+
+        function ChangeStyleHide(nameID) {
+
+            if (document.getElementById(nameID).style.display == 'none')
+                document.getElementById(nameID).style.display = "inline";
+            else {
+                document.getElementById(nameID).style.display = "none";
+                document.getElementById("reset").click();
+            }
+
+
+
+        }
+        $(document).ready(function () {
+
+              $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+               
+            });
+            $('#btnAddContents').click(function () {
+                if ($('#contentsBin').val().length != 0) {
+
+                    var dNow = new Date();
+                    var n = dNow.toString();
+                    $('#BinContents').append('{UserName} added on ' + n + ' ' + $('#contentsBin').val() + '\n');
+                    $('#contentsBin').val('');
+
+                }
+                else {
+                    alert('No Contents to add');
+                }
+                $('#BinContents').focus();
+            });
+            $('#btnRemoveContents').click(function () {
+                if ($('#BinContents').val().length != 0) {
+                    $('#BinContents').val('');
+                }
+                else {
+                    alert('No contents found');
+                }
+                $('#binContents').focus();
+            });
+
+            $('#btnRemoveComments').click(function () {
+                if ($('#BinComments').val().length != 0) {
+                    $('#BinComments').val('');
+                }
+                else {
+                    alert('No comments found');
+                }
+                $('#commentsBin').focus();
+            });
+
+            $('#btnAddComments').click(function () {
+                if ($('#commentsBin').val().length != 0) {
+                    var dNow = new Date();
+                    var n = dNow.toString();
+                    $('#BinComments').append('{UserName} added on ' + n + ' ' + $('#commentsBin').val() + '\n');
+                    $('#commentsBin').val('');
+
+                }
+                else {
+                    alert('No Comments to add');
+                }
+                $('#commentsBin').focus();
+            });
+
+
+
+
+            //  $('#saveTF').click(function () {
+
+            //    $('#tfAddComments').hide();
+            //  if ($('#tfComments').val().length != 0) {
+            //    var dNow = new Date();
+            //  var bintrdt = dNow.toString();
+            // $('#BinComments').append('{UserName} transfered bin ' + $('#BinIDTF').val() + ' on ' + bintrdt + ' ' + $('#tfComments').val() + '\n');
+            // $('#tfComments').val('');
+            //$('#oldBinID').val($('#BinIDTF').val());
+            // $('#txtTF').text('Transfer from bin ' + $('#BinIDTF').val());
+            // $("#btnRemoveComments").hide();
+            // $('#modalTransFrom').hide();
+            //  $('#fNewBatch').submit();
+
+            //}
+            //else {
+            //  $('#tfAddComments').show();
+            // }
+
+            //});
+
+            $('#saveTF').click(function () {
+
+                $('#tfAddComments').hide();
+                if ($('#tfComments').val().length != 0) {
+                    var dNow = new Date();
+                    var bintrdt = dNow.toString();
+                    $('#BinComments').append('{UserName} transfered binid ' + $('#BinIDTF').val() + ' to BinID' + $('#BinIDAvailable').val() + ' on ' + bintrdt + ' ' + $('#tfComments').val() + '\n');
+                    //$('#tfComments').val('');
+                    $('#oldBinID').val($('#BinIDTF').val());
+                    $('#newBinID').val($('#BinIDAvailable').val());
+                    //$('#txtTF').text('Transfer from bin ' + $('#BinIDTF').val());
+                    //$("#btnRemoveComments").hide();
+                    //$('#modalTransFrom').hide();
+                 
+                    $('#fNewBatch').submit();
+                }
+                else {
+                    $('#tfAddComments').show();
+                }
+
+            });
+
+
+            $("#btnTF").click(function (e) {
+                e.preventDefault();
+                ShowHideLoding('loadingDataTF');
+                ShowHideLoding('showformTF');
+                var pvUrl = "/Partial_Pages/RegisterSpecimensView?modelName=transFrom";
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    success: function (result) {
+                        //   alert(result);
+                        $("#divTransFrom").html(result);
+                        //    $("#resuts").val(result);
+                        if (CheckForId("noSPec")) {
+                            $("#saveTF").hide();
+                        }
+
+
+
+                    },
+                    complete: function () {
+                        ShowHideLoding('loadingDataTF');
+                        ShowHideLoding('showformTF');
+                    },
+                    error: function (request, status, error) {
+                        document.getElementById("modalTransFrom").style = "none";
+                        alert("error");
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    <script>
+        // Get the button that opens the modal
+        // Get the modal
+        var modalTF = document.getElementById("modalTransFrom");
+
+
+
+        // Get the <span> element that closes the modal
+        var spanTF = document.getElementsByClassName("close")[0];
+
+        var btnTF = document.getElementById("btnTF");
+        // When the user clicks the button, open the modal
+        btnTF.onclick = function () {
+            modalTF.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        spanTF.onclick = function () {
+            modalTF.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modalTF) {
+                modalTF.style.display = "none";
+
+            }
+        }
+
+    </script>
+}

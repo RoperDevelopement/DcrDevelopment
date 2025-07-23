@@ -1,0 +1,83 @@
+﻿@page
+@model Edocs.Employees.Time.Clock.App.Service.Pages.TimeClockReports.TimeClockPrintHoursWorkedViewModel
+@{
+    ViewData["Title"] = "e-Docs Time Clock Reports";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/css/datatables-select.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/datatables/datatables-select.min.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>
+    <script src="~/js/site.js"></script>
+
+</head>
+<html>
+
+<body>
+    <div class="container-fluid">
+        
+        <div class="container-fluid" id="printReportHr">
+
+            @if (@Model.TimeClockHrs.Count == 0)
+            {
+                <p class="text-danger">No Time Card Records for Employee ID: @Model.EmpID.ToString()</p>
+            }
+            else
+            {
+
+                <h2 class="text-center">Report Employee ID:@Model.EmpID.ToString()</h2>
+                <h2 class="text-center">Report Date Range: @Model.TimeCardStDate.ToString("MM-dd-yyyy")-@Model.TimeCardEndDate.ToString("MM-dd-yyyy")</h2>
+                <p class="p-1"></p>
+                <table class="table table-hover w-auto"  id="dtEmpRep" style="background-color:antiquewhite">
+                    <thead>
+                        <tr>
+                            <th>EmpID</th>
+                            <th>In</th>
+                            <th>Out</th>
+                            <th>Worked</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var items in Model.TimeClockHrs)
+                        {
+
+                            <tr class="w-auto">
+                                <td class="w-auto">@items.EmpID</td>
+                                <td class="w-auto">@items.ClockInTime</td>
+                                <td class="w-auto">@items.ClockOutTime</td>
+                                <td class="w-auto">@items.TimeSpanDur</td>
+
+
+                                @*
+                <td><button class="btn-block" onclick="UpDateTimeCard('@items.ID', this);">UpDate</button></td>
+                                *@
+
+
+                            </tr>
+
+
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr class="w-100">
+                            <td class="w-100">Total Hrs Worked: @Model.TotalHrsWorked</td>
+                            <td class="w-100">Total Records:@Model.TimeClockHrs.Count</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            }
+        </div>
+        </div>
+</body>
+</html>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            printOut('printReportHr');
+          
+        });
+        </script>
+}

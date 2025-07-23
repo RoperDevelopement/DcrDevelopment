@@ -1,0 +1,7 @@
+﻿EZTWAIN Classic (eztw32.dll) is a Windows DLL that provides an easy
+interface to the TWAIN image acquisition protocol.
+
+This software is unsupported, public domain software.
+Originally written by Spike McLarty and donated to the TWAIN
+Working Group, it is now made available by Dosadi.
+It is free in both senses of the word: No fees, no restrictions.

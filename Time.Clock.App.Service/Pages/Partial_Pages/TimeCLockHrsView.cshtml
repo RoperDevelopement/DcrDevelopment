@@ -1,0 +1,96 @@
+﻿@page
+@model Edocs.Employees.Time.Clock.App.Service.Pages.Partial_Pages.TimeCLockHrsViewModel
+@{
+    Layout = null;
+}
+<head>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/datatables-select.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+     
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/datatables/datatables-select.min.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>
+
+</head>
+<html>
+
+<body>
+    <div class="container-fluid">
+        @if (string.Compare(Model.EmpID, "UPDATE", true) == 0)
+        {
+            <p id="message">@Model.TotalHrsWorked</p>
+        }
+        else if (@Model.TimeClockHrs.Count == 0)
+        {
+            <p class="text-danger">No Time Card Records for Employee ID: @Model.EmpID.ToString()</p>
+        }
+        else
+        {
+            <p class="p-0"></p>
+            @*<table class="table table-hover w-auto" id="dtEmpRep" style="background-color:antiquewhite"  >*@
+            <table class="table table-hover" id="dataTableEmpRep" name="dataTableEmpRep" style="background-color: lightblue; width:50%">
+                <thead>
+                    <tr class="w-auto">
+                        <th>EmpID</th>
+                        <th>Clock In</th>
+                        <th>Clock Out</th>
+                        <th>Hrs Worked</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+
+                    @foreach (var items in Model.TimeClockHrs)
+                    {
+
+                    <tr class="w-auto">
+                        <td>@items.EmpID</td>
+                        <td><textarea rows="1 " cols="25" id="@Model.PageInID">@items.ClockInTime</textarea></td>
+                        <td><textarea rows="1 " cols="25" id="@Model.PageOutID">@items.ClockOutTime</textarea></td>
+                        @*<td><textarea rows="1 " cols="10" readonly="readonly" id="@Model.TotDurID">@items.TimeSpanDur</textarea></td>*@
+                        <td>@items.TimeSpanDur</td>
+
+
+                        @*
+        <td><button class="btn-block" onclick="UpDateTimeCard('@items.ID', this);">UpDate</button></td>
+                        *@
+
+                        <td><button class="btn-block" onclick="UpdateTimeCard('@items.ID', '@Model.PageInID', '@Model.PageOutID');">UpDate</button></td>
+                        <td><button class="btn-block" onclick="DelTimeCard('@items.ID');">Delete</button></td>
+
+                    </tr>
+                        Model.PageInID = Model.PageInID + 1;
+                        Model.PageOutID = Model.PageOutID + 1;
+                        
+
+                    }
+                </tbody>
+                @* <tfoot>
+                    <tr style="width:100%">
+                        <td>Total Hrs Worked:@Model.TotalHrsWorked</td>
+                        <td>Total Records:@Model.TimeClockHrs.Count</td>
+                    </tr>
+                </tfoot>
+                *@
+            </table>
+                <p class="p-0"></p>
+                 
+                <p class="text-center text-dark"><strong>Total Hrs Worked: @Model.TotalHrsWorked</strong></p>
+                <p class="text-center text-dark"><strong>Total Records: @Model.TimeClockHrs.Count</strong></p>
+                
+                <p class="p-0"></p>
+            
+        }
+    
+    </div>
+</body>
+</html>

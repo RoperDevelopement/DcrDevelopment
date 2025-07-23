@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+            background-color:aquamarine
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid black;
+        }
+
+        tr:hover {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center"> Missing Documents or Easement PDF Files MDT Report Ran {DateTimeReportRan}</h1>
+    <br>
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>Message</th>
+                <th>Path</th>
+            </tr>
+        </thead>
+        <tbody>
+            {TableData}
+        </tbody>
+    </table>
+    <br>
+    <br>
+</body>
+</html>

@@ -1,0 +1,16 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQFileWriter_Pdf, Scanquire.Public">
+  <Properties>
+    <Simple name="FileExtension" value=".pdf" />
+    <Simple name="Encryption" value="NONE" />
+    <Simple name="Permissions" value="ALL" />
+    <Null name="OwnerPassword" />
+    <Null name="UserPassword" />
+    <Simple name="MonochromeImageFormat" value="FIF_TIFF" />
+    <Simple name="MonochromeImageSaveFlags" value="TIFF_CCITTFAX4" />
+    <Simple name="GreyscaleImageFormat" value="FIF_PNG" />
+    <Simple name="GreyscaleImageSaveFlags" value="PNG_Z_BEST_COMPRESSION" />
+    <Simple name="ColorImageFormat" value="FIF_JPEG" />
+    <Simple name="ColorImageSaveFlags" value="PNG_Z_NO_COMPRESSION" />
+    <Simple name="ScalePagesToNearestHalfInch" value="True" />
+  </Properties>
+</Complex>

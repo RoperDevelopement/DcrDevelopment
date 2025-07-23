@@ -1,0 +1,8 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQFileWriter_Image, Scanquire.Public">
+  <Properties>
+    <Simple name="ImageFormat" value="FIF_PNG" />
+    <Simple name="SaveFlags" value="PNG_Z_BEST_COMPRESSION" />
+    <Simple name="MimeType" value="image/png" />
+    <Simple name="FileExtension" value=".png" />
+  </Properties>
+</Complex>

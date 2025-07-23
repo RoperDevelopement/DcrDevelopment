@@ -1,0 +1,114 @@
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\MEDICAL RECORDS SHAREFILE.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\STUDENT RECORDS DEMO.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\MENTAL HEALTH ROI.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\MENTAL HEALTH.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Bookmark Image Builders\MENTAL HEALTH.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\CASES.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\DOH SINGLE RECORD.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\JHCCC.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\MEDICAL RECORDS 2.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\NYP LAB REQS - MANUAL.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\NYP LAB REQS.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Barcode Encoders\NYP LAB REQS.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Barcode Readers\NYP LAB REQS.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Command Image Builders\ADMISSIONS.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Command Image Builders\DISCHARGE.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Command Image Builders\DR NOTES.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Command Image Builders\EKG.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Command Image Builders\MEDICAL RECORDS.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Command Image Builders\NEWBORN ID.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Command Readers\NYP LAB REQS.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.exe
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.pdb
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.vshost.exe
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.exe.config
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.vshost.exe.config
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.vshost.exe.manifest
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\BEHAVIORAL HEALTH ROI.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\BEHAVIORAL HEALTH.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\DISCHARGE SUMMARIES.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\EMAIL.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\HUMAN RESOURCES.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\LONG TERM CARE ROI.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\MEDICAL RECORDS ROI.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Archivers\MEDICAL RECORDS.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Bookmark Image Builders\BEHAVIORAL HEALTH.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Bookmark Image Builders\LONG TERM CARE.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Config\Bookmark Image Builders\MEDICAL RECORDS.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Testing.exe.config
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Testing.exe
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Testing.pdb
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\DemoArchivers.dll
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Polenter.SharpSerializer.dll
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Scanquire.Public.dll
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Scanquire.ThirdParty.dll
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\EdocsUSA.Utilities.dll
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Microsoft.Threading.Tasks.dll
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Newtonsoft.Json.dll
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\DemoArchivers.pdb
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\DemoArchivers.dll.config
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Polenter.SharpSerializer.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Microsoft.Threading.Tasks.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\bin\Debug\Newtonsoft.Json.xml
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\obj\Debug\Testing.csprojResolveAssemblyReference.cache
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\obj\Debug\Testing.csproj.Testing.exe.config
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\obj\Debug\Testing.csproj.CoreCompileInputs.cache
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\obj\Debug\Testing.exe
+D:\Sam Brinly\Code\Scanquire Demo Archivers\Testing\obj\Debug\Testing.pdb
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\MEDICAL RECORDS SHAREFILE.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\STUDENT RECORDS DEMO.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\MENTAL HEALTH ROI.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\MENTAL HEALTH.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Bookmark Image Builders\MENTAL HEALTH.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\CASES.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\DOH SINGLE RECORD.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\JHCCC.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\MEDICAL RECORDS 2.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\NYP LAB REQS - MANUAL.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\NYP LAB REQS.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Barcode Encoders\NYP LAB REQS.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Barcode Readers\NYP LAB REQS.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Command Image Builders\ADMISSIONS.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Command Image Builders\DISCHARGE.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Command Image Builders\DR NOTES.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Command Image Builders\EKG.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Command Image Builders\MEDICAL RECORDS.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Command Image Builders\NEWBORN ID.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Command Readers\NYP LAB REQS.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.exe
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.pdb
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.vshost.exe
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.exe.config
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.vshost.exe.config
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Scripts\Edocs.NYP.UploadLabReqsBatch.vshost.exe.manifest
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\BEHAVIORAL HEALTH ROI.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\BEHAVIORAL HEALTH.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\DISCHARGE SUMMARIES.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\EMAIL.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\HUMAN RESOURCES.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\LONG TERM CARE ROI.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\MEDICAL RECORDS ROI.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Archivers\MEDICAL RECORDS.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Bookmark Image Builders\BEHAVIORAL HEALTH.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Bookmark Image Builders\LONG TERM CARE.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Config\Bookmark Image Builders\MEDICAL RECORDS.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Testing.exe.config
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Testing.exe
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Testing.pdb
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\DemoArchivers.dll
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Scanquire.Public.dll
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\EdocsUSA.Utilities.dll
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Microsoft.SharePoint.Client.dll
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Microsoft.SharePoint.Client.Runtime.dll
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\DemoArchivers.pdb
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\DemoArchivers.dll.config
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Polenter.SharpSerializer.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Edocs\ScanquireDemoArchivers\Testing\obj\Debug\Testing.csprojAssemblyReference.cache
+C:\Edocs\ScanquireDemoArchivers\Testing\obj\Debug\Testing.exe.config
+C:\Edocs\ScanquireDemoArchivers\Testing\obj\Debug\Testing.csproj.CoreCompileInputs.cache
+C:\Edocs\ScanquireDemoArchivers\Testing\obj\Debug\Testing.csproj.CopyComplete
+C:\Edocs\ScanquireDemoArchivers\Testing\obj\Debug\Testing.exe
+C:\Edocs\ScanquireDemoArchivers\Testing\obj\Debug\Testing.pdb
+C:\Edocs\ScanquireDemoArchivers\Testing\bin\Debug\EdocsUSA.Utilities.pdb

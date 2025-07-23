@@ -1,0 +1,16 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQCommandImageBuilder, Scanquire.Public, Version=1.0.4800.25753, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="ImageDPI" value="300" />
+    <Simple name="ImageWidth" value="2550" />
+    <Simple name="ImageHeight" value="3300" />
+    <Complex name="ImageMargin">
+      <Properties>
+        <Simple name="All" value="300" />
+        <Simple name="Bottom" value="300" />
+        <Simple name="Left" value="300" />
+        <Simple name="Right" value="300" />
+        <Simple name="Top" value="300" />
+      </Properties>
+    </Complex>
+  </Properties>
+</Complex>

@@ -1,0 +1,2 @@
+L:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\SharepointBatchUploader\obj\x86\Release\SharepointBatchUploader.csprojAssemblyReference.cache
+L:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\SharepointBatchUploader\obj\x86\Release\SharepointBatchUploader.csproj.CoreCompileInputs.cache

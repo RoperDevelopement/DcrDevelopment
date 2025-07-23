@@ -1,0 +1,7 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQImageFileWriter, Scanquire.Public, Version=1.0.4800.27181, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="ImageFormat" value="FIF_JPEG" />
+    <Simple name="SaveFlags" value="JPEG_QUALITYSUPERB" />
+    <Simple name="FileExtension" value=".jpg" />
+  </Properties>
+</Complex>

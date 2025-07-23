@@ -1,0 +1,372 @@
+﻿@page
+@model Edocs.Demo.Application.Services.Pages.DemoPages.BSBPublicWorksDepartmentViewModel
+@{
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        .CellWithComment {
+            position: relative;
+        }
+
+        .CellComment {
+            display: none;
+            position: absolute;
+            z-index: 100;
+            border: 1px;
+            background-color: white;
+            border-style: solid;
+            border-width: 1px;
+            border-color: red;
+            padding: 3px;
+            color: red;
+            top: 20px;
+            left: 20px;
+        }
+
+        .CellWithComment:hover span.CellComment {
+            display: block;
+        }
+
+        .txtArea {
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+
+        input[type=text] {
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+
+        button:hover {
+            background: #C0C0C0;
+        }
+
+        button {
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 15px;
+            border: 1px solid grey;
+            border-left: none;
+            cursor: pointer;
+        }
+
+        .align-right {
+            text-align: right;
+            border: 0;
+        }
+    </style>
+}
+<div id="divMain" name="divMain" class="container-fluid">
+
+    @Html.AntiForgeryToken()
+
+    <button class="btn btn-info" id="pdfbutt" name="pdfbutt" style="display:none">Save Invoice</button>
+    <input type="hidden" value="" id="pdfName" name="pdfName" />
+    <h1 class="text-center text-dark">BSB Plublic Works Department</h1>
+    <p class="p-0"></p>
+    <a href="#searchOptions" name="sOptions" id="sOptions" class=" btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+    <p class="alert-light" id="showmess" style="display:none">Click to expand/hide Search Options</p>
+
+    <div id="searchOptions" class="collapse">
+        <p class="p-0"></p>
+        <div container-fluid">
+            <ul class="navbar-nav flex-grow-1  justify-content-around border-dark">
+                <li id="navAdvan" class="nav-item">
+                    <span data-toggle="tooltip" title="Get all records by Department or Year or Project">
+                        <button type="button" class="btn btn-default">Advance Search</button>
+                    </span>
+
+
+                </li>
+
+                <li id="navKeyWord" class="nav-item">
+                    <span data-toggle="tooltip" title="Search for records by keywords..">
+                        <button type="button" class="btn btn-default">KeyWord Search</button>
+                    </span>
+                </li>
+
+            </ul>
+        </div>
+        <div id="advSearch" name="advSearch" class="container-fluid">
+            @if (@Model.BSBPlublicWorksDepartmentProjectDep != null)
+            {
+                <h3 class="text-center text-info">Advanced Search Options</h3>
+                <div class="container-fluid">
+
+
+                    <div class="row text-center">
+                        <div class="col-*-* text-center" style="margin:0 auto;">
+                            <select id="pDep" name="pDep">
+                                <option value="Optional">Department</option>
+                                @foreach (var id in Model.BSBPlublicWorksDepartmentProjectDep)
+                                {
+                                    <option value="@id.ProjectDepartment">@id.ProjectDepartment</option>
+
+                                }
+
+
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            }
+            <p class="p-0"></p>
+            @if (@Model.BSBPlublicWorksDepartmentYears != null)
+            {
+
+                <div class="container-fluid">
+
+
+                    <div class="row text-center">
+                        <div class="col-*-* text-center" style="margin:0 auto;">
+                            <select id="pYear" name="pYear">
+                                <option value="Optional">Year</option>
+                                @foreach (var id in Model.BSBPlublicWorksDepartmentYears)
+                                {
+                                    <option value="@id.ProjectYear">@id.ProjectYear</option>
+
+                                }
+
+
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+            <p class="p-0"></p>
+            <div class="container-fluid text-center">
+               
+                <div class="row text-center">
+                    @*
+        <div style="margin:auto;max-width:300px;">
+            <input type="text" placeholder="Search By Document Name..." id="pName" name="pName">
+            <input type="text" placeholder="Search By TrackingID...." id="trackID" name="trackID">
+            <p class="p-2"></p>
+
+
+        </div>
+                    *@
+
+
+                    <div class="col-*-* text-center" style="margin:0 auto;">
+
+                        <textarea id="pName" class="txtArea" style="margin-left:100px; width: 500px;" name="projectName" placeholder="Search by Project Name optional" rows="1" cols="50"
+                                  data-toggle="tooltip" title="Search by Project Name optional"></textarea>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="keywordSesearch" name="keywordSesearch" class="container-fluid" style="display:none">
+            <h3 class="text-center text-info">KeyWord Search</h3>
+            <div class="row text-center">
+                <div class="col-*-*" style="margin:auto;">
+                    <textarea id="searchTxt" class="txtArea" style="margin-left:100px; width: 500px;" name="searchTxt" placeholder="Search Text (To search by phrase in your criteria use a comma.) ex: Find, me" rows="3" cols="100"
+                              data-toggle="tooltip" title="Search Text (To search by phrase in your criteria use a comma.) ex: Find, me"></textarea>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="searchType" value="advSearch" />
+        <p class="p-0"></p>
+        <div class="align-right">
+            <button id="searchRecs" name="searchRecs"><i class="fa fa-search">Search</i></button>
+
+            @*
+                  <button class="btn btn-primary btn-outline-primary" id="allIDs" name="allIDs"><i>All Documents</i></button>
+                <button id="allIDs" style="float:left;width:15%"><i>All Documents</i></button>
+                *@
+                <a type="button" class="btn btn-outline-danger btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+
+            </div>
+
+    </div>
+    <div class="container-fluid" id="bsbpwdrecs" name="bsbpwdrecs"></div>
+</div>
+<p class="p-0"></p>
+<div id="pdf_container" style="overflow:auto;">
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
+        $(document).ready(function () {
+            $('#navKeyWord').click(function () {
+                $('#searchType').val("keywordSesearch")
+                document.getElementById("advSearch").style.display = "none";
+                document.getElementById("keywordSesearch").style.display = "block";
+            });
+            $('#navAdvan').click(function () {
+                $('#searchType').val("advSearch")
+                document.getElementById("advSearch").style.display = "block";
+                document.getElementById("keywordSesearch").style.display = "none";
+            });
+            $('#searchRecs').click(function (e) {
+                $('#sOptions').click();
+
+                var strData = $('#searchType').val();
+
+                if (strData == 'advSearch') {
+                    strData = "sType=" + strData + "&pname=" + '"' + $("#pName").val() + '"' + "&pyear=" + $("#pYear").val() + "&pDep=" + $("#pDep").val() + "&kWords=NA";
+
+                }
+                else {
+                    strData = "sType=" + strData + "&pname=" + '"' + '"' + "&pyear=Optional" + "&pDep=Optional" + $("#pDep").val() + "&kWords=" + '"' + $("#searchTxt").val() + '"';
+                }
+
+                $("#divLoading").show();
+                e.preventDefault();
+                var getUsersProfiles = "/Partial_Pages/BSBPWDRecordsPartialView/";
+                $.ajax({
+                    type: "GET",
+                    url: getUsersProfiles,
+                    contentType: 'application/html;charset=utf-8',
+                    data: strData,
+                    datatype: "html",
+                    cache: false,
+                    success: function (results) {
+
+                        // $('#trackingID').show();
+                        // $('#printInvoice').show();
+                        // $('#prInvoice').show();
+
+                        //  $('#saveInvoice').hide();
+                        $("#bsbpwdrecs").html(results);
+                        //Convert Base64 string to Byte Array.
+                        // var bytes = Base64ToBytes(r.Data);
+
+                        //  LoadPdfFromBlob(bytes);
+                    },
+                    complete: function () {
+                        //   CompleteAjaxCall();
+                        //  $('#trackID').val('');
+                        $("#divLoading").hide();
+                        // $("#sOptions").click();
+                        // $('#dtlUsers').DataTable({ "pagingType": "full" });
+                        // $('.dataTables_length').addClass('bs-select');
+
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+                });
+
+
+            });
+            $('#pdfbutt').click(function (e) {
+                $('#sOptions').click();
+
+                //   $('#sOptions').click();
+                $("#divLoading").show();
+                e.preventDefault();
+
+                var getUsersProfiles = "/Partial_Pages/GetPdfDocView/";
+                var strData = "pdfDocName=" + $('#pdfName').val();
+
+                $.ajax({
+                    type: "GET",
+                    url: getUsersProfiles,
+                    contentType: 'application/html;charset=utf-8',
+                    data: strData,
+                    datatype: "html",
+                    cache: false,
+                    success: function (results) {
+
+                        $('#pdf_container').show();
+                        //  $('#saveInvoice').hide();
+                        $("#pdf_container").html(results);
+                        //Convert Base64 string to Byte Array.
+                        // var bytes = Base64ToBytes(r.Data);
+
+                        //  LoadPdfFromBlob(bytes);
+                    },
+                    complete: function () {
+                        //   CompleteAjaxCall();
+                        // alert("compl");
+                        $("#divLoading").hide();
+                        $('#sOptions').click(); $('#sOptions').click();
+                        // $('#dtlUsers').DataTable({ "pagingType": "full" });
+                        // $('.dataTables_length').addClass('bs-select');
+
+                    },
+                    error: function (request, status, error) {
+                        $("#divLoading").hide();
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+                });
+
+            });
+            $("#pName").mousedown(function () {
+                $('#pName').val('');
+            });
+            $("#pName").autocomplete({
+
+                source: function (request, response) {
+                  // var strData = request.term + "/pName";
+                    var strData = request.term
+                    
+                    $.ajax({
+                        url: '/Partial_Pages/AutoCompletProjectNamesPartialPage',
+                       //  data: { "prefix": request.term },
+                      //  data: { "prefix": strData },
+                         data: { "prefix": strData },
+
+                        type: "POST",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        success: function (data) {
+                             
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    //  get selected value;
+                    //$("#personNameValue").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+    </script>
+
+}

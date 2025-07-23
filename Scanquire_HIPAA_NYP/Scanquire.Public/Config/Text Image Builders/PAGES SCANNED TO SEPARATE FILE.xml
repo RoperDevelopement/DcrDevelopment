@@ -1,0 +1,13 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQTextImageBuilder, Scanquire.Public">
+  <Properties>
+    <Simple name="ImageDPI" value="300" />
+    <Simple name="ImageWidth" value="2550" />
+    <Simple name="ImageHeight" value="3300" />
+    <Simple name="ImageMargin" value="300" />
+    <Simple name="Header" value="The following page(s) have been scanned to a separate file." />
+    <Null name="Footer" />
+    <Simple name="PromptForComments" value="True" />
+    <Simple name="IncludeUserNameInFooter" value="True" />
+    <Simple name="IncludeTimeStampInFooter" value="True" />
+  </Properties>
+</Complex>

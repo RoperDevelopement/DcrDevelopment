@@ -1,0 +1,73 @@
+﻿@page
+@model BinMonitorAppService.Pages.Partial_Pages.ReportTransferModel
+@{
+    Layout = null;
+}
+
+<html lang="en">
+
+<head>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/datatables-select.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/datatables/datatables-select.min.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>
+</head>
+
+<body>
+    @if ((Model.DicRepTrans != null) && (Model.DicRepTrans.Count() > 0))
+    {
+    <p class="p-0 text-info">Total Transfer  @Model.DicRepTrans.Count()</p>
+    <table class="table table-hover w-auto" width="100%" id="dttransferTab" style="background-color:#FFFFE0">
+        <thead>
+            <tr>
+                <th>New BinID</th>
+                <th>Old BinID</th>
+                <th>New LabReq #</th>
+                <th>Old LabReq #</th>
+                <th>New Category</th>
+                <th>Old Category</th>
+                <th>New Reg Assigned To</th>
+                <th>Old Reg Assigned To</th>
+                <th>New Processing Assigned To </th>
+                <th>Old Processing Assigned To </th>
+                <th>Transfer Type </th>
+                <th>Transfer By</th>
+                <th>Transfer Date</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tr in Model.DicRepTrans)
+            {
+            <tr>
+                <td>@tr.Value.BinID</td>
+                <td>@tr.Value.OldBinId</td>
+                <td>@tr.Value.LabReqNumber</td>
+                <td>@tr.Value.OldLabReqNumber</td>
+                <td>@tr.Value.CategoryName</td>
+                <td>@tr.Value.OldCategoryName</td>
+                <td>@tr.Value.RegAssignedTo</td>
+                <td>@tr.Value.OldRegAssignedTo</td>
+                <td>@tr.Value.Processing</td>
+                <td>@tr.Value.OldProcAssignedTo</td>
+                <td>@tr.Value.TransFerType</td>
+                <td>@tr.Value.TransferBy</td>
+                <td>@tr.Value.TransferTime.ToString("MM-dd-yyyy")</td>
+            </tr>
+                    }
+            </tbody>
+        </table>
+        }
+</body>
+</html>

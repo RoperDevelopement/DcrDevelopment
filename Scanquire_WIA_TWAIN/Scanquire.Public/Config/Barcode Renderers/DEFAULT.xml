@@ -1,0 +1,29 @@
+﻿<Complex name="Root" type="Scanquire.Public.Code128BarcodeRenderer, EdocsUSA.Utilities">
+  <Properties>
+    <Complex name="CaptionFont">
+      <Properties>
+        <Simple name="SerializedValue" value="Microsoft Sans Serif, 18pt" />
+      </Properties>
+    </Complex>
+    <Simple name="ModuleWidth" value="1" />
+    <Simple name="BarcodeHeight" value="36" />
+    <Complex name="BarcodeMargin">
+      <Properties>
+        <Simple name="All" value="-1" />
+        <Simple name="Bottom" value="0" />
+        <Simple name="Left" value="0" />
+        <Simple name="Right" value="0" />
+        <Simple name="Top" value="0" />
+      </Properties>
+    </Complex>
+    <Complex name="CaptionMargin">
+      <Properties>
+        <Simple name="All" value="-1" />
+        <Simple name="Bottom" value="0" />
+        <Simple name="Left" value="0" />
+        <Simple name="Right" value="0" />
+        <Simple name="Top" value="18" />
+      </Properties>
+    </Complex>
+  </Properties>
+</Complex>

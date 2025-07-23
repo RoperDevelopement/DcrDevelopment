@@ -1,0 +1,2 @@
+rem C:\Edocs\ServiceUtilityInstall\Utility\InstallUtil.exe /u C:\Edocs\Edocs.Service.BinMonitor.SendEmails\Edocs.Service.BinMonitor.SendEmails\bin\Release\Edocs.Service.BinMonitor.SendEmails.exe
+C:\Utilities\EdocsSendEmails\Utility\InstallUtil.exe /u C:\Utilities\EdocsSendEmails\Edocs.Service.BinMonitor.SendEmails.exe

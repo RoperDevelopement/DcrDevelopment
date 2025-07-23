@@ -1,0 +1,17 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQPhotoAlbumFilesystemArchiver, Scanquire.Public, Version=1.0.5001.14468, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="RootPath" value="C:\Archives\Photo\" />
+    <Simple name="HighQualityImageFormat" value="FIF_TIFF" />
+    <Simple name="HighQualityImageSaveFlags" value="TIFF_LZW" />
+    <Simple name="HighQualityImageExtension" value="tif" />
+    <Simple name="LowQualityImageFormat" value="FIF_TIFF" />
+    <Simple name="LowQualityImageSaveFlags" value="TIFF_LZW" />
+    <Simple name="LowQualityImageExtension" value="tif" />
+    <Null name="ScannerName" />
+    <Null name="ScannerSetting" />
+    <Simple name="DocumentBuilderName" value="DEFAULT" />
+    <Simple name="FileWriterName" value="DEFAULT" />
+    <Simple name="TextImageBuilderName" value="DEFAULT" />
+    <Simple name="BookmarkImageBuilderName" value="DEFAULT" />
+  </Properties>
+</Complex>

@@ -1,0 +1,140 @@
+﻿@page
+@model Edocs.Employees.Time.Clock.App.Service.Pages.E_docs_Employees.TimeClockAdminLoginViewModel
+@{
+
+    ViewData["Title"] = "e-Docs Login";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<body style="background-color:aqua;">
+    <div class="container-fluid">
+
+        <div id="headingSessionExp" style="display:none">
+            <h3 class="text-center text-danger border">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+        </div>
+
+        <div class="title modal " tabindex="-1" id="adminLogingModal"
+             data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4>e-Docs Admin Login </h4>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" id="fEmpClockInOut" name="fEmpClockInOut">
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="e-Docs Employee ID" id="EmpID" name="EmpID" value="@Model.EmpID" style="display:block" />
+                                <p class="p-0"></p>
+                                <input class="form-control" type="password" placeholder="e-Docs Emplyee Password" id="EmpPW" name="EmpPW" value="@Model.EmpPW" style="display:block" />
+
+                            </div>
+
+                            <p class="text-danger">@Model.RetMess</p>
+                            @*
+                                <div name="retMessage" id="retMessage" style="display:none"></div>
+        <a class="nav-link text-dark" asp-area="" asp-page="/Index" id="herfRPs" name="herfRPs">Privacy</a>
+                            *@
+                            <a href="/E-docs_Employees/AddNewEdocsEmployee">Rest Password</a>
+                            <div class="modal-footer">
+                                @*  <button type="button" class="btn btn-primary col-md-2">Clock In/Out</button>*@
+
+                                <button type="button" id="btnClockInOut" name="btnClockInOut" class="btn btn-pill btn-outline-primary">Log In</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+
+    @section scripts{
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle"></script>
+        <script type="text/javascript">
+            //const { Alert } = require("../../wwwroot/lib/bootstrap/dist/js/bootstrap.bundle");
+
+
+            $(document).ready(function () {
+                //$("#divMain").fadeIn(100);
+                $(this).bind("contextmenu", function (e) {
+
+                    e.preventDefault();
+
+                });
+                $("#herfRP").click(function (e) {
+                    
+                    window.open("AddNewEdocsEmployee");
+                });
+                $("#btnClockInOut").click(function (e) {
+                    if ($('#EmpID').val().length < 4) {
+                        alert('Invalid Employee ID:');
+                        return false;
+                    }
+                    if ($('#EmpPW').val().length < 8) {
+                        alert('Invalid Employee ID:');
+                        return false;
+                    }
+              
+                    $('#fEmpClockInOut').submit();
+                });
+                //  SessionExpireAlert(1);
+                // $('#clockInOutModal').css("display", "block");
+                $("#adminLogingModal").modal('show');
+
+                $("#btnClockInOut").click(function (e) {
+
+                    if ($('#empId').val().length < 4) {
+                        alert('Invalid Employee ID:');
+                        return false;
+                    }
+                    $("#clockInOutModal").modal('hide');
+
+                    var empClockInOutUrl = "/Partial_Pages/ClockInOutEmpView/";
+                    //  var empClockInOutUrl = "https://www.facebook.com/";
+                    //  alert(empClockInOutUrl);
+                    // alert($('#empId').val());
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Partial_Pages/ClockInOutEmpView/",
+                        contentType: 'application/html; charset=utf-8',
+                        data: "&empId=" + $('#empId').val() + '&isAdmin=false',
+                        datatype: "html",
+                        cache: false,
+
+                        success: function (result) {
+                            //
+                            // alert(result);
+                            // alert("done");
+
+                            $("#retMessage").html(result);
+                            $('#retMessage').attr("style", "display:block");
+                            $("#adminLogingModal").modal('show');
+                            $('#empId').val("")
+                            CheckMessage(result);
+                            //  alert(result);
+                        },
+                        complete: function () {
+                            // CompleteAjaxCall();
+                            // $("#sOptions").click();
+                            //CheckMessage(result);
+                            //  alert("done");
+                        },
+                        error: function (request, status, error) {
+                            //  $("#divLoading").hide();
+
+                            $("#adminLogingModal").modal('show');
+                            alert(error);
+                            alert(request.getAllResponseHeaders());
+                            alert(status.show);
+                        }
+                    });
+                });
+
+            });//end doc ready
+        </script>
+    }

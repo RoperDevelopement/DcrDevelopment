@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SqlCommands.Common.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DbUserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">edocsusa</Value>
+    </Setting>
+    <Setting Name="CloudServerName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">edocdevdan</Value>
+    </Setting>
+    <Setting Name="ServerName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">edocdevdan</Value>
+    </Setting>
+    <Setting Name="DataBaseName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">BinMonitorCloud</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

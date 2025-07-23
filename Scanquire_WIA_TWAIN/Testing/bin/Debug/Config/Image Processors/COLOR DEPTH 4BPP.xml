@@ -1,0 +1,5 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQImageProcessor_ConvertColorDepth, Scanquire.Public, Version=1.0.4835.17492, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="ColorDepth" value="FICD_04_BPP" />
+  </Properties>
+</Complex>

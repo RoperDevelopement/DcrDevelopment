@@ -1,0 +1,12 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQFilesystemArchiver, Scanquire.Public">
+  <Properties>
+    <Simple name="RootPath" value="C:\Archives\" />
+    <Simple name="EnableLogging" value="True" />
+    <Simple name="LogFilePath" value="C:\Archives\Scanquire Log - Local.csv" />
+    <Simple name="CommandReaderName" value="DEFAULT" />
+    <Simple name="DocumentBuilderName" value="BARCODE DEFAULT" />
+    <Simple name="FileWriterName" value="TIFF_CCITG4" />
+    <Simple name="TextImageBuilderName" value="DEFAULT" />
+    <Simple name="BookmarkImageBuilderName" value="DEFAULT" />
+  </Properties>
+</Complex>

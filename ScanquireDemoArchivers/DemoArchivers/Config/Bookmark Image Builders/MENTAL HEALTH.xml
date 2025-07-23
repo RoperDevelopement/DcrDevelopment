@@ -1,0 +1,50 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQBookmarkImageBuilder, Scanquire.Public, Version=1.0.4800.25753, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Simple name="CommandImageBuilderName" value="DEFAULT" />
+    <Complex name="CommandImageBuilder" type="Scanquire.Public.SQCommandImageBuilder, Scanquire.Public, Version=1.0.4800.25753, Culture=neutral, PublicKeyToken=null">
+      <Properties>
+        <Simple name="ImageDPI" value="300" />
+        <Simple name="ImageWidth" value="2550" />
+        <Simple name="ImageHeight" value="3300" />
+        <Complex name="ImageMargin">
+          <Properties>
+            <Simple name="All" value="300" />
+            <Simple name="Bottom" value="300" />
+            <Simple name="Left" value="300" />
+            <Simple name="Right" value="300" />
+            <Simple name="Top" value="300" />
+          </Properties>
+        </Complex>
+      </Properties>
+    </Complex>
+    <SingleArray name="Bookmarks">
+      <Items>
+        	<Simple value="ADMISSION FORMS" />
+        	<Simple value="PHYSICIAN ORDERS" />
+			<Simple value="PHYSICAL HISTORY" />
+        	<Simple value="CONSULTS" />
+    		<Simple value="NURSING EVAL" />
+      	<Simple value="PSYCHIATRIC EVAL" />
+      	<Simple value="PSYCHOLOGIC EVAL" />
+      	<Simple value="SOCIOMETRIC EVAL" />
+    		<Simple value="SOCIAL SERVICES" />
+    		<Simple value="CD THERAPY" />
+    		<Simple value="ED VOC EVAL" />
+    		<Simple value="REHAB EVAL" />
+    		<Simple value="TREATMENT PLAN" />
+    		<Simple value="PROGRESS NOTES" />
+    		<Simple value="NURSING FLOW SHEETS" />
+    		<Simple value="MEDICATION LOG" />
+    		<Simple value="MEDICAL GRAPHS" />
+    		<Simple value="LAB AND XRAY" />
+    		<Simple value="MEDICAL GRAPHS" />
+    		<Simple value="PRECAUTION RESTRAINT" />
+    		<Simple value="BEHAVIOR GRAPHS" />
+    		<Simple value="LOA EVAL" />
+    		<Simple value="RELEASE AND AUTH" />
+    		<Simple value="PREVIOUS RECORDS" />
+    		<Simple value="MISC" />    	
+      </Items>
+    </SingleArray>
+  </Properties>
+</Complex>

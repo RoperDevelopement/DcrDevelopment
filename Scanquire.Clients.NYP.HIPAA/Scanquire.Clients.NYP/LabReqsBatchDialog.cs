@@ -1,0 +1,109 @@
+﻿using Scanquire.Public.Sharepoint;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Scanquire.Clients.NYP
+{
+    public partial class LabReqsBatchDialog : Form
+    {
+        public void Clear()
+        {
+            dpReceiptDate.Value = DateTime.Now.Date;
+            rad_CatUncategorized.Checked = true;
+            cbReqReqNum.Checked = false;
+        }
+
+        public DateTime? ReceiptDate
+        {
+            get { return this.dpReceiptDate.Value; }
+            set { this.dpReceiptDate.Value = value; }
+        }
+
+        public string TotalImagesScanned
+        { 
+            get { return txtBoxTotalImages.Text; }
+            set { txtBoxTotalImages.Text = value; }
+        }
+     public bool RequireReqNumbers
+        { get; set; }
+      
+       
+        public string Category
+        {
+            get
+            {
+                if (radCat_AMStats.Checked)
+                { return "A.M. STATS"; }
+                else if (rad_CatUncategorized.Checked)
+                { return ""; }
+                else if (radCat_Routine.Checked)
+                { return "ROUTINE"; }
+                else if (radCat_Stats.Checked)
+                { return "STATS"; }
+                else
+                { return null; }
+            }
+            set
+            {
+
+                radCat_AMStats.Checked = value.Equals("A.M. STATS", StringComparison.OrdinalIgnoreCase);
+                rad_CatUncategorized.Checked = value.Equals("", StringComparison.OrdinalIgnoreCase);
+                radCat_Routine.Checked = value.Equals("ROUTINE", StringComparison.OrdinalIgnoreCase);
+                radCat_Stats.Checked = value.Equals("STATS", StringComparison.OrdinalIgnoreCase);
+
+            }
+        }
+
+        public LabReqsBatchDialog()
+        {
+            InitializeComponent();
+        }
+
+        private void SubmitButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Enabled = false;
+                this.DialogResult = DialogResult.OK;
+                int tImages = int.Parse(txtBoxTotalImages.Text);
+                if(tImages % 2 != 0)
+                {
+                    MessageBox.Show($"Total Images {txtBoxTotalImages.Text} Invalid", "Invald Count", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.DialogResult = DialogResult.Cancel;
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.Enabled = true;
+                this.StatusLabel.Text = string.Empty;
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void datePicker1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbReqReqNum_CheckedChanged(object sender, EventArgs e)
+        {
+            RequireReqNumbers = cbReqReqNum.Checked;
+        }
+    }
+}

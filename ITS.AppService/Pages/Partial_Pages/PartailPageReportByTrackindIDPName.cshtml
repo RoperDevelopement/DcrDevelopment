@@ -1,0 +1,72 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.Partial_Pages.PartailPageReportByTrackindIDPNameModel
+@{
+    Layout = null;
+}
+<div class="container-fluid">
+    @if ((@Model.DicTrackingIDS != null) && (@Model.DicTrackingIDS.Count() > 0))
+    {
+
+
+        <h2 class="text-center text-info">Report for TrackingID <span> @Model.TrackID</span></h2>
+        <h3 class="text-center text-info">Report Run Date <span>@Model.ReportDate </span></h3>
+        <p class="p-0"></p>
+        <table cellspacing="2" style="margin-left: auto; margin-right: auto; border: double; background-color: #7abdff" width="100%" id="dtlUsers" name="dtlUsers">
+            <thead>
+                <tr>
+
+                    <th class="border text-center">Document Name</th>
+                    <th class="border text-center">Number Pages Scanned</th>
+                    <th class="border text-center">Number Pages Uploaed</th>
+                    <th class="border text-center">Number Pages OCR</th>
+                    <th class="border text-center">Number Typed Char</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var items in Model.DicTrackingIDS)
+                {
+                    <tr onmouseover="$(this).css('background','white');" onmouseout="$(this).css('background','#7abdff');">
+                        <td class="border text-center">@items.Key</td>
+                        <td class="border text-center">@items.Value.TotalScanned</td>
+                        <td class="border text-center">@items.Value.TotalRecordsUploaded</td>
+
+                        <td class="border text-center">@items.Value.TotalDocsOCR</td>
+                        <td class="border text-center">@items.Value.TotalCharTyped</td>
+
+                    </tr>
+                }
+            <tbody>
+
+
+        </table>
+        <p class="p-1"></p>
+        <h3 class="text-center text-info">Summary</h3>
+        <table cellspacing="2" style="margin-left: auto; margin-right: auto; border: double; background-color: #c2c2c2" width="100%">
+            <thead>
+                <tr>
+                    <th class="border text-center">Scanned Pages </th>
+                    <th class="border text-center">Uploaded Pages</th>
+                    <th class="border text-center">OCR Pages  </th>
+                    <th class="border text-center">Typed Char</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr onmouseover="$(this).css('background','white');" onmouseout="$(this).css('background','#c2c2c2');">
+                    <td class="border text-center">@Model.TotalScanned</td>
+                    <td class="border text-center">@Model.TotalUploaded</td>
+                    <td class="border text-center">@Model.TotalOCR</td>
+
+                    <td class="border text-center">@Model.TotalTypedChar</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="p-1"></p>
+    }
+    else
+    {
+        <p style="text-align:center;color:red">No tracking id's found for tracking id @Model.TrackID</p>
+    }
+</div>

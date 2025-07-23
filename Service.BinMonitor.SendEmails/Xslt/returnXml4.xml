@@ -1,0 +1,138 @@
+﻿<BatchId>
+  <Bins>
+    <batchId>01F8E800-8C2B-4CAB-B535-18BBC70D9A5F</batchId>
+    <binId>001</binId>
+    <Registation>Register Bin</Registation>
+    <regCreatedBy>LMB9003</regCreatedBy>
+    <regAssginedBy>LMB9003</regAssginedBy>
+    <regAssignedTo>LMB9003</regAssignedTo>
+    <regStartedAt>2018-11-30T11:49:51</regStartedAt>
+    <regCompltedBy>LMB9003</regCompltedBy>
+    <regCompletedAt>2018-11-30T11:49:51</regCompletedAt>
+    <regDuration>regDuration</regDuration>
+    <Processing>Processing Bin</Processing>
+    <processAssignedBy>Not Assigned</processAssignedBy>
+    <processAssignedTo>Not Assigned</processAssignedTo>
+    <processStartAt>1989-01-01T00:00:00</processStartAt>
+    <processCompletedBy>Not Assigned</processCompletedBy>
+    <processCompletedAt>1989-01-01T00:00:00</processCompletedAt>
+    <prossDuration>processDuration</prossDuration>
+    <BinClosed>Closed Bin</BinClosed>
+    <binClosedBy />
+    <BinCompleted>1989-01-01T00:00:00</BinCompleted>
+    <closedCreatedAt>2018-11-30T11:49:52.073</closedCreatedAt>
+    <completeDuration>completeDuration</completeDuration>
+    <binComments />
+    <binContents />
+    <cat>ORDERED</cat>
+  </Bins>
+  <Bins>
+    <batchId>7090EAFB-5676-4E53-A702-2D5FF2D5F8EB</batchId>
+    <binId>002</binId>
+    <Registation>Register Bin</Registation>
+    <regCreatedBy>LMB9003</regCreatedBy>
+    <regAssginedBy>LMB9003</regAssginedBy>
+    <regAssignedTo>LMB9003</regAssignedTo>
+    <regStartedAt>2018-11-30T11:50:12</regStartedAt>
+    <regCompltedBy>LMB9003</regCompltedBy>
+    <regCompletedAt>2018-11-30T11:50:12</regCompletedAt>
+    <regDuration>regDuration</regDuration>
+    <Processing>Processing Bin</Processing>
+    <processAssignedBy>Not Assigned</processAssignedBy>
+    <processAssignedTo>Not Assigned</processAssignedTo>
+    <processStartAt>1989-01-01T00:00:00</processStartAt>
+    <processCompletedBy>Not Assigned</processCompletedBy>
+    <processCompletedAt>1989-01-01T00:00:00</processCompletedAt>
+    <prossDuration>processDuration</prossDuration>
+    <BinClosed>Closed Bin</BinClosed>
+    <binClosedBy />
+    <BinCompleted>1989-01-01T00:00:00</BinCompleted>
+    <closedCreatedAt>2018-11-30T11:50:12.527</closedCreatedAt>
+    <completeDuration>completeDuration</completeDuration>
+    <binComments />
+    <binContents />
+    <cat>PROBLEM</cat>
+  </Bins>
+  <Bins>
+    <batchId>9FC598BB-539C-4D84-9994-8486FFD24BA6</batchId>
+    <binId>003</binId>
+    <Registation>Register Bin</Registation>
+    <regCreatedBy>LMB9003</regCreatedBy>
+    <regAssginedBy>LMB9003</regAssginedBy>
+    <regAssignedTo>LMB9003</regAssignedTo>
+    <regStartedAt>2018-11-30T11:50:21</regStartedAt>
+    <regCompltedBy>LMB9003</regCompltedBy>
+    <regCompletedAt>2018-11-30T11:50:21</regCompletedAt>
+    <regDuration>regDuration</regDuration>
+    <Processing>Processing Bin</Processing>
+    <processAssignedBy>Not Assigned</processAssignedBy>
+    <processAssignedTo>Not Assigned</processAssignedTo>
+    <processStartAt>1989-01-01T00:00:00</processStartAt>
+    <processCompletedBy>Not Assigned</processCompletedBy>
+    <processCompletedAt>1989-01-01T00:00:00</processCompletedAt>
+    <prossDuration>processDuration</prossDuration>
+    <BinClosed>Closed Bin</BinClosed>
+    <binClosedBy />
+    <BinCompleted>1989-01-01T00:00:00</BinCompleted>
+    <closedCreatedAt>2018-11-30T11:50:21.863</closedCreatedAt>
+    <completeDuration>completeDuration</completeDuration>
+    <binComments />
+    <binContents />
+    <cat>QA</cat>
+  </Bins>
+  <Bins>
+    <batchId>50C239D1-8968-478E-82C5-820ED5BB9E99</batchId>
+    <binId>004</binId>
+    <Registation>Register Bin</Registation>
+    <regCreatedBy>LMB9003</regCreatedBy>
+    <regAssginedBy>LMB9003</regAssginedBy>
+    <regAssignedTo>BEN9016</regAssignedTo>
+    <regStartedAt>2018-11-30T11:51:10</regStartedAt>
+    <regCompltedBy>Not Assigned</regCompltedBy>
+    <regCompletedAt>1989-01-01T00:00:00</regCompletedAt>
+    <regDuration>regDuration</regDuration>
+    <Processing>Processing Bin</Processing>
+    <processAssignedBy>LMB9003</processAssignedBy>
+    <processAssignedTo>SHM9123</processAssignedTo>
+    <processStartAt>2018-11-30T11:51:10</processStartAt>
+    <processCompletedBy>Not Assigned</processCompletedBy>
+    <processCompletedAt>1989-01-01T00:00:00</processCompletedAt>
+    <prossDuration>processDuration</prossDuration>
+    <BinClosed>Closed Bin</BinClosed>
+    <binClosedBy />
+    <BinCompleted>1989-01-01T00:00:00</BinCompleted>
+    <closedCreatedAt>2018-11-30T11:51:10.470</closedCreatedAt>
+    <completeDuration>completeDuration</completeDuration>
+    <binComments>4444444444 - (at 2018-11-30 11:51:10 by LMB9003)</binComments>
+    <binContents>
+</binContents>
+    <cat>STAT</cat>
+  </Bins>
+  <Bins>
+    <batchId>74B61EAB-4743-4587-8F7C-E93DEF32D487</batchId>
+    <binId>005</binId>
+    <Registation>Register Bin</Registation>
+    <regCreatedBy>LMB9003</regCreatedBy>
+    <regAssginedBy>LMB9003</regAssginedBy>
+    <regAssignedTo>LMB9003</regAssignedTo>
+    <regStartedAt>2018-11-30T11:51:23</regStartedAt>
+    <regCompltedBy>LMB9003</regCompltedBy>
+    <regCompletedAt>2018-11-30T11:51:23</regCompletedAt>
+    <regDuration>regDuration</regDuration>
+    <Processing>Processing Bin</Processing>
+    <processAssignedBy>Not Assigned</processAssignedBy>
+    <processAssignedTo>Not Assigned</processAssignedTo>
+    <processStartAt>1989-01-01T00:00:00</processStartAt>
+    <processCompletedBy>Not Assigned</processCompletedBy>
+    <processCompletedAt>1989-01-01T00:00:00</processCompletedAt>
+    <prossDuration>processDuration</prossDuration>
+    <BinClosed>Closed Bin</BinClosed>
+    <binClosedBy />
+    <BinCompleted>1989-01-01T00:00:00</BinCompleted>
+    <closedCreatedAt>2018-11-30T11:51:23.170</closedCreatedAt>
+    <completeDuration>completeDuration</completeDuration>
+    <binComments>55 - (at 2018-11-30 11:51:23 by LMB9003)</binComments>
+    <binContents />
+    <cat>QA</cat>
+  </Bins>
+</BatchId>

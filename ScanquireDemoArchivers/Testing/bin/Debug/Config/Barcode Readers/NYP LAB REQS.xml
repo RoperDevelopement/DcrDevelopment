@@ -1,0 +1,52 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQBarcodeReader, Scanquire.Public">
+  <Properties>
+    <Complex name="BarcodeReader">
+      <Properties>
+        <Simple name="BarcodesToRead" value="1" />
+        <Complex name="ScanRectangle">
+          <Properties>
+            <Complex name="Location">
+              <Properties>
+                <Simple name="X" value="0" />
+                <Simple name="Y" value="0" />
+              </Properties>
+            </Complex>
+            <Complex name="Size">
+              <Properties>
+                <Simple name="Width" value="0" />
+                <Simple name="Height" value="0" />
+              </Properties>
+            </Complex>
+            <Simple name="X" value="0" />
+            <Simple name="Y" value="0" />
+            <Simple name="Width" value="0" />
+            <Simple name="Height" value="0" />
+          </Properties>
+        </Complex>
+        <Simple name="ReadCode11" value="False" />
+        <Simple name="ReadCode39" value="True" />
+        <Simple name="ReadCode93" value="False" />
+        <Simple name="ReadCode128" value="True" />
+        <Simple name="ReadCodabar" value="False" />
+        <Simple name="ReadInter2of5" value="False" />
+        <Simple name="ReadEAN13" value="False" />
+        <Simple name="ReadEAN8" value="False" />
+        <Simple name="ReadUPCA" value="False" />
+        <Simple name="ReadUPCE" value="False" />
+        <Simple name="ReadAdd2" value="False" />
+        <Simple name="ReadAdd5" value="False" />
+        <Simple name="ReadPDF417" value="False" />
+        <Simple name="ReadDataMatrix" value="False" />
+        <Simple name="ReadQRCode" value="False" />
+        <Simple name="ThresholdLevel" value="0" />
+        <Simple name="ScanPage" value="0" />
+        <Simple name="ScanInterval" value="3" />
+        <Simple name="ScanRight" value="True" />
+        <Simple name="ScanLeft" value="False" />
+        <Simple name="ScanUp" value="False" />
+        <Simple name="ScanDown" value="False" />
+      </Properties>
+    </Complex>
+    <Simple name="ScanRegion" value="All" />
+  </Properties>
+</Complex>

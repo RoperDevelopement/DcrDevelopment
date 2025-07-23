@@ -1,0 +1,63 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Edocs.Service.UploadAuditLogs.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SendEmailsErrorsOnly" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ThreadSleepSeconds" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">7000</Value>
+    </Setting>
+    <Setting Name="WebApi" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://edocsnypwebapi.azurewebsites.net/api/</Value>
+    </Setting>
+    <Setting Name="AzureBlobStorageConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DefaultEndpointsProtocol=https;AccountName=edocsnypstorageprod;AccountKey=XNvT1ZL9JwsPLtI/AXGu8pJ7aGtkcaU5GoF6ibbzJ0RTuU5reUqdquOqJEyohAeNFZDjoAxM/tEVQNyR1g5kCg==;EndpointSuffix=core.windows.net</Value>
+    </Setting>
+    <Setting Name="AzureBlobContanierAuditShare" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">auditlogs-prod</Value>
+    </Setting>
+    <Setting Name="AzureBlobContanierAuditUploadShare" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">auditlogsupload-prod</Value>
+    </Setting>
+    <Setting Name="AuditLogsScanQuire" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\ProgramData\E-docs Usa\AuditLogsUpload,C:\ProgramData\E-docs Usa\AuditLogs</Value>
+    </Setting>
+    <Setting Name="AzureBlobAccountName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">edocsnypstorageprod</Value>
+    </Setting>
+    <Setting Name="AzureBlobAccountKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">XNvT1ZL9JwsPLtI/AXGu8pJ7aGtkcaU5GoF6ibbzJ0RTuU5reUqdquOqJEyohAeNFZDjoAxM/tEVQNyR1g5kCg==</Value>
+    </Setting>
+    <Setting Name="AuditLogsDownLoadFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AdLogDLFolder\</Value>
+    </Setting>
+    <Setting Name="RegxMatchFiles" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Nyp_AuditLog_BinMonitorAppService|Nyp_LabReqs_AuditLog|ScanQuire</Value>
+    </Setting>
+    <Setting Name="RunOnWeekEnds" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RunStartTime" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="RunEndTime" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="UpLoadScanQuireAL" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RegxLogFileCompleted" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ManuelIndex Completed|Closing trace logging file</Value>
+    </Setting>
+    <Setting Name="RegxLogFilesToCheck" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ManualIndexing|Edocs.Upload.Batches.AzureCloud</Value>
+    </Setting>
+    <Setting Name="AuditLogErrorFilesFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AuditLogsNotUploaded\</Value>
+    </Setting>
+    <Setting Name="LogFileMaxSize" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,2 @@
+L:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Release\Testing.csprojAssemblyReference.cache
+L:\EdocsGitHub\Scanquire.Clients.NYP.HIPAA\Testing\obj\x86\Release\Testing.csproj.CoreCompileInputs.cache

@@ -1,0 +1,30 @@
+﻿<Complex name="Root" type="Scanquire.Clients.NYP.InvoiceArchiver, Scanquire.Clients.NYP">
+  <Properties>
+    <Simple name="ScanStationId" value="CS" />
+    <Simple name="OptixFileWriterName" value="TIFF_CCITG4" />
+    <Simple name="OptixBatchRootDir" value="C:\Archives\NYP\Invoices\Optix Batches" />
+    <Simple name="OptixScreenName" value="NYP - Invoices" />
+    <Simple name="OptixUploadScriptPath" value="C:\Archives\OptixBatchUploader\OptixBatchUploader.exe" />
+    <Simple name="OptixProcessName" value="optix" />
+    <Simple name="EnableOptixBatch" value="True" />
+    <Simple name="EnableOptixUpload" value="True" />
+    <Simple name="WaitForOptixUpload" value="True" />
+    <Simple name="DeleteOptixBatchOnSuccess" value="False" />
+    <Simple name="SharepointFileWriterName" value="PDF" />
+    <Simple name="SharepointBatchRootDir" value="C:\Archives\NYP\Invoices\Sharepoint Batches" />
+    <Simple name="SharepointSiteUrl" value="https://edocs.nyp.org/sites/lab_cs/" />
+    <Simple name="SharepointLibraryName" value="Invoices" />
+    <Simple name="SharepointUploadScriptPath" value="C:\Archives\SharepointBatchUploader\SharepointBatchUploader.exe" />
+    <Simple name="SharepointUserName" value="scan.cs" />
+    <Simple name="SharepointPassword" value="" />
+    <Simple name="EnableSharepointBatch" value="True" />
+    <Simple name="EnableSharepointUpload" value="True" />
+    <Simple name="WaitForSharepointUpload" value="False" />
+    <Simple name="DeleteSharepointBatchOnSuccess" value="False" />
+    <Null name="ScannerName" />
+    <Null name="ScannerSetting" />
+    <Simple name="CommandReaderName" value="DEFAULT" />
+    <Simple name="FileWriterName" value="PDF" />
+    <Simple name="CommandImageBuilderName" value="DEFAULT" />
+  </Properties>
+</Complex>

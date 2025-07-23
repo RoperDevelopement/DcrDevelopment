@@ -1,0 +1,31 @@
+"BinMonitorCloudConnectionString": "Server=10.0.2.4;Database=BinMonitorCloud;User=edocsusa;PassWord=6746edocs@;MultipleActiveResultSets=true;"
+ "BinMonitorApi": "https://edocswebapi.azurewebsites.net/api/"
+
+  "BinMonitorApi": "http://localhost:5555/api/"
+https://edocsbinmonitor.azurewebsites.net/
+
+
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "EmailSettings": {
+    "EmailServer": "smtp.gmail.com",
+    "EmailFrom": "AlertSender@edocsusa.com",
+    "EmailPassWord": "6746edocs",
+    "EmailPort": "587",
+    "EmailTo": "Dan.Roper@edocsusa.com",
+    "EmailCC": "",
+    "TextTo": "4065653465@vtext.com",
+    "TextCC": "4064908968@vtext.com"
+
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "BinMonitorCloudConnectionString": "Server=edocdevdan;Database=BinMonitorCloud;User=edocsusa;PassWord=6746edocs@;MultipleActiveResultSets=true;",
+    "LabRecsCloudConnectionString": "Server=edocdevdan;Database=Lab_Recs_NYP;User=edocsusa;PassWord=6746edocs@;MultipleActiveResultSets=true;"
+  }
+}

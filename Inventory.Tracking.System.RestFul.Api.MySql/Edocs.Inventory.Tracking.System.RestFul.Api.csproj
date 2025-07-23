@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>70441516-0e53-44b2-b853-42f136f0f78a</UserSecretsId>
+    <AssemblyName>Edocs.Inventory.Tracking.System.RestFul.Api.MySql</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.7" />
+    <PackageReference Include="MySql.Data" Version="8.0.31" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="copy L:\EdocsGitHub\Edocs.ITS.AppService\Interfaces\IETS.cs  L:\EdocsGitHub\Edocs.Inventory.Tracking.System.RestFul.Api\Interfaces\IETS.cs" />
+  </Target>
+
+
+</Project>

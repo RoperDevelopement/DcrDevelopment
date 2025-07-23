@@ -1,0 +1,59 @@
+FHP 9-1(4);U.S.A. Service
+S 21s(6);U.S.A. Service
+S 38(6);U.S.A. (Forest Service)
+S 38(3);U.S.A. (Forest Service)
+FHP 5 A(1)B;U.S.A. (Forest Service)
+S 38(5);U.S.A. (Forest Service)
+FHP 5 A(2);U.S.A. (Forest Service)
+S 38(4);U.S.A. (Forest Service)
+216(3);U.S.A. (Forest Service)
+FHP 9-1(1);U.S.A. (Forest Service)
+FHP 59;Wm. M.S Dobson, et ux
+FHP 59;Farmers Holding Co.
+FHP 59;J.C.F. Sieqfried,et ux
+S 72 (2);State ot Montana
+S 72(2);State Fish & Game
+L90-8(5h);columbus Water Users
+L90-8(5h);Assn. Agreement
+F 81 (3);United States of America
+FAP 130-B (4);U.S. of American FSA
+FAP 130-C(2);U.S. of American FSA
+FAP 158-C(2);U.S. Soil Conservation
+S 166(3);U.S.A
+FAP 170-A;Big Ditch Co.
+F192(6);Fish and Game Commission
+F208 (3);Bureau of Reclamation
+F 219(12);Northwest Improvement Co.
+F220(5);Montana Power Co.
+F 2311 (8);A.C.M. Co. & Mont. Power
+F231 (B-C):;A.C.M. Co. & Mont. Power
+F 235 F;Montana Power Co.
+F 237 (15)P.1;Fish & Game Comission
+F 237(15) P.8;Fish & Game Comission
+F 242(B);Anaconda Copper Mining Co.
+F 242(16);#338601
+F 242 (16);Anaconda Company
+F 242 (16);#338602	
+F 242 (16);Anaconda Company
+F 254 A;T.R. MckKinnon, et ux
+F 254 B;Harry J. Nichols, et al
+FAP 254-B (3);State ot Montana
+F 255 A;Anaconda Copper Mining
+F 256 (17);U.S.A.
+F 276;Sherburne Merc. Co
+S 286(3);U.S.A. (Soil Conser)
+S 302 D;U.S.A.
+DS 302 (14);U.S. Forest Service
+F 315(9);;Secretary of the Army
+F 333C;United States of America
+F 368C;United States of America
+F 333(12);U.S. Forest Service
+F 333(12);U.S.A.
+F 333 (20);U.S.A.
+F 370;Montana Power Gas Company
+FAP 386;St. Paul Stockyards
+FAP 386;NPRR,WILRINS & Co.
+U 386 (2);Yellowstone Co.
+U 386 (2);St.P. Union Stockyards
+AR 5063;U.S.A. (Forest Service)
+AR 5063;U.S.A. (Forest Ser. Correc.)

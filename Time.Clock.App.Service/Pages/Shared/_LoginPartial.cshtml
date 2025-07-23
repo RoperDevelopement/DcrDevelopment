@@ -1,0 +1,40 @@
+﻿@page
+@*
+
+    @using Edocs.Employees.Time.Clock.App.Service.Constants;
+    @using Edocs.Employees.Time.Clock.App.Service.WebApis;
+
+    @{
+        string edocsAdmin = GetSessionVariables.SessionVarInstance.GetSessionVariable(HttpContext.Session, TimeClockConst.SessionEdocsAdmin).ConfigureAwait(true).GetAwaiter().GetResult();
+        if (string.IsNullOrWhiteSpace(edocsAdmin))
+        {
+            Redirect($"/ClockInOut/ClockInOutView");
+        }
+        ViewData["EdocsAdmin"] = "1";
+    }
+
+        @if (((System.Security.Claims.ClaimsIdentity)User.Identity).IsAuthenticated)
+        {
+            @if (User.Identity.Name != null)
+            {
+                <span class="navbar-text text-info">Hello, @User.Identity.Name!</span>
+            }
+            else
+            {
+                <span class="navbar-text">Hello</span>
+            }
+*@
+@ViewData["EdocsAdmin"] = "1";
+<form method="post" class="form-inline" asp-page="/NypUsersInfo/LoginView" asp-page-handler="Logout">
+    <button type="submit" class="nav-link btn btn-link text-dark" onmouseover="$(this).css('background','LightGray');" onmouseout="$(this).css('background','white');">Logout</button>
+</form>
+@*}
+    else
+    {
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Auth" asp-action="Login">Login</a>
+        </li>
+    </ul>
+*@
+}

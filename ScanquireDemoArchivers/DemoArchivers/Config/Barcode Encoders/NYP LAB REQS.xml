@@ -1,0 +1,11 @@
+﻿<Complex name="Root" type="DemoArchivers.NYPBarcodeEncoder, DemoArchivers">
+  <Properties>
+    <SingleArray name="ValidBarcodeDefinitions">
+      <Items>
+        <Simple value="^(r|R|\d)\d{8}$" />
+        <Simple value="^\d{15}$" />
+      </Items>
+    </SingleArray>
+    <Simple name="IndexFieldName" value="Index_x0020_Number" />
+  </Properties>
+</Complex>

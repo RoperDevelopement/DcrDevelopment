@@ -1,0 +1,386 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authorization;
+using EDocs.Nyp.LabReqs.AppServices.LabReqsConstants;
+using Microsoft.AspNetCore.Http;
+using EDocs.Nyp.LabReqs.AppService.Logging;
+using EDocs.Nyp.LabReqs.AppServices.Identity;
+using ITfoxtec.Identity.Saml2;
+using ITfoxtec.Identity.Saml2.Schemas;
+using ITfoxtec.Identity.Saml2.MvcCore;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+using ITfoxtec.Identity.Saml2.Util;
+using System.Security.Authentication;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.IdentityModel;
+using Microsoft.AspNetCore.Hosting;
+using EDocs.Nyp.LabReqs.AppServices.Models;
+using EDocs.Nyp.LabReqs.AppServices.ApiClasses;
+using Microsoft.IdentityModel.Tokens.Saml2;
+using EDocs.Nyp.LabReqs.AppServices.LabReqInterfaces;
+using System.Xml;
+ //"NypContacts": {
+   // "EmailTo": "brd9098@nyp.org;chb9212@nyp.org",
+   // "EmailCC": "Dan.Roper@edocsusa.com",
+   // "EmailHtmlFile": "/htmlfiles/SendNewUserEmail.html"
+ // },
+namespace EDocs.Nyp.LabReqs.AppServices
+{
+    [IgnoreAntiforgeryToken(Order = 1001)]
+    [AllowAnonymous]
+    public class LoginView : PageModel
+    {
+        const string relayStateReturnUrl = "TargetResource";
+        private readonly Saml2Configuration config;
+        private readonly IConfiguration configuration;
+        private readonly IEmailSettings emailSettings;
+        private readonly IWebHostEnvironment env;
+        private   ILog log;
+        private string NypEmailTo
+        { get { return configuration.GetSection("NypContacts").GetValue<string>("EmailTo").ToString(); } }
+        private string NypEmailCC
+        { get { return configuration.GetSection("NypContacts").GetValue<string>("EmailCC").ToString(); } }
+        private string EmailHtmlFile
+        { get { return configuration.GetSection("NypContacts").GetValue<string>("EmailHtmlFile").ToString(); } }
+
+        private string WebApiUrl
+        { get { return configuration.GetValue<string>("LabResApi").ToString(); } }
+
+        private string AllowedAudienceUrisAppliesTo
+        { get { return configuration.GetSection("Saml2").GetValue<string>("AllowedAudienceUrisAppliesTo").ToString(); } }
+
+        private Uri SamlUrlDestinationSSO
+        { get { return new Uri(configuration.GetSection("Saml2").GetValue<string>("SamlUrlDestinationSSO").ToString()); } }
+
+        private Uri SamlUrlDestinationSLO
+        { get { return new Uri(configuration.GetSection("Saml2").GetValue<string>("SamlUrlDestinationSLO").ToString()); } }
+
+
+        public LoginView(IOptions<Saml2Configuration> configAccessor, IEmailSettings email, IWebHostEnvironment webHostEnvironment, IConfiguration configurationLR, ILog logConfig)
+        {
+            config = configAccessor.Value;
+            emailSettings = email;
+            log = logConfig;
+            env = webHostEnvironment;
+            configuration = configurationLR;
+            
+        }
+        public async Task<string> GetReturnUrl(string cwid, string urlRet)
+        {
+
+            log.LogInformation($"GetReturnUrl for cwid {cwid}");
+            try
+            {
+
+
+                if (System.IO.File.Exists($"{env.WebRootPath}//returnurl//{cwid}.txt"))
+                {
+                    log.LogInformation($"Writing return url to file {env.WebRootPath}//returnurl//{cwid}.txt");
+                    urlRet = System.IO.File.ReadAllText($"{env.WebRootPath}//returnurl//{cwid}.txt");
+                    DelReturnUrlFile(cwid).ConfigureAwait(false).GetAwaiter().GetResult();
+                }
+                log.LogInformation($"Found ReturnUrl {urlRet} for cwid {cwid}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"For cwid {cwid} {ex.Message}");
+            }
+            return urlRet;
+        }
+        public async Task SetReturnUrl(string cwid, string url)
+        {
+            try
+            {
+                log.LogInformation($"Method SetReturnUrl for cwid {cwid} return url {url}");
+                DelReturnUrlFile(cwid).ConfigureAwait(false).GetAwaiter().GetResult();
+                System.IO.File.WriteAllText($"{env.WebRootPath}//returnurl//{cwid}.txt", url);
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Method SetReturnUrl for cwid {cwid} return url {url} {ex.Message}");
+            }
+        }
+        public async Task DelReturnUrlFile(string cwid)
+        {
+            try
+            {
+                log.LogInformation($"Method DelReturnUrlFile for cwid {cwid}");
+                if (System.IO.File.Exists($"{env.WebRootPath}//returnurl//{cwid}.txt"))
+                {
+                    System.IO.File.Delete($"{env.WebRootPath}//returnurl//{cwid}.txt");
+                    log.LogInformation($"Del file {env.WebRootPath}//returnurl//{cwid}.txt  for cwid {cwid}");
+                }
+                else
+                {
+                    log.LogWarning($"File not found {env.WebRootPath}//returnurl//{cwid}.txt  for cwid {cwid}");
+                }
+            }
+            catch (Exception ex)
+            {
+                log.LogWarning($"File {env.WebRootPath}//returnurl//{cwid}.txt  for cwid {cwid} {ex.Message}");
+            }
+        }
+        private async Task SetCookie(string cookieKey, string cookieValue)
+        {
+            DelCookie(cookieKey).ConfigureAwait(false).GetAwaiter().GetResult();
+            CookieOptions options = new CookieOptions();
+            options.Expires = DateTime.Now.AddMinutes(20);
+            options.IsEssential = true;
+           
+            Response.Cookies.Append(cookieKey, cookieValue, options);
+            
+        }
+        private async Task DelCookie(string cookieKey)
+        {
+            if (!(string.IsNullOrWhiteSpace(GetCookie(cookieKey).ConfigureAwait(false).GetAwaiter().GetResult())))
+                Response.Cookies.Delete(cookieKey);
+        }
+        private async Task<string> GetCookie(string cookieKey)
+        {
+            return Request.Cookies[cookieKey];
+        }
+
+        private async Task GetLogInformaiton()
+        {
+
+            log = InitAuditLogs.LogAsync(log, HttpContext.Session).ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+
+
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            LabReqHelpers.StartStopWatch();
+            GetLogInformaiton().ConfigureAwait(false).GetAwaiter().GetResult();
+            log.LogInformation("Start LoginView OnPostAsync");
+            Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
+            var binding = new Saml2PostBinding();
+            var saml2AuthnResponse = new Saml2AuthnResponse(config);
+
+            Saml2Request saml2Request = binding.ReadSamlResponse(Request.ToGenericHttpRequest(), saml2AuthnResponse);
+            if (saml2AuthnResponse.Status != Saml2StatusCodes.Success)
+            {
+                log.LogError($"Colud not validate user SAML Response status: {saml2AuthnResponse.Status}");
+                throw new AuthenticationException($"SAML Response status: {saml2AuthnResponse.Status}");
+            }
+            log.LogInformation($"Checking cwid: {saml2Request.NameId.Value} has access to labreqs");
+            if (!(ValidateUser(saml2Request.NameId.Value, saml2Request.XmlDocument).ConfigureAwait(false).GetAwaiter().GetResult()))
+                return Redirect(Url.Content("/NypUsersInfo/ErrorLoggingInView"));
+            binding.Unbind(Request.ToGenericHttpRequest(), saml2AuthnResponse);
+            await saml2AuthnResponse.CreateSession(HttpContext, claimsTransform: (claimsPrincipal) => ClaimsTransform.Transform(claimsPrincipal));
+
+                  var relayStateQuery = binding.GetRelayStateQuery();
+            
+            var returnUrl = relayStateQuery.ContainsKey(relayStateReturnUrl) ? relayStateQuery[relayStateReturnUrl] : Url.Content("~/");
+            HttpContext.Session.SetString(GetSessionVariables.SessionKeyCwid, saml2Request.NameId.Value);
+            if (returnUrl.Length < 2)
+            {
+                if (returnUrl.Length < 2)
+                {
+                    returnUrl = GetReturnUrl(saml2Request.NameId.Value, returnUrl).ConfigureAwait(false).GetAwaiter().GetResult();
+                }
+
+            }
+            log.LogInformation($"End LoginView OnPostAsync total time: {LabReqHelpers.StopStopWatch()}");
+            return Redirect(returnUrl);
+           // return new RedirectToPageResult("/Index", "OnGetAsync");
+
+
+        }
+     
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
+        {
+            LabReqHelpers.StartStopWatch();
+            GetLogInformaiton().ConfigureAwait(false).GetAwaiter().GetResult();
+            log.LogInformation("Start LoginView OnGetAsync");
+            DelCookie(ConstNypLabReqs.LRCookieReturnUrl).ConfigureAwait(true).GetAwaiter().GetResult();
+            if (!(string.IsNullOrWhiteSpace(returnUrl)))
+            {
+                var userID = GetSessionVariables.SessionVarInstance.GetSessionVariable(HttpContext.Session, GetSessionVariables.SessionKeyCwid).ConfigureAwait(true).GetAwaiter().GetResult();
+                var qStr = Request.QueryString;
+                if (qStr.HasValue)
+                {
+                    if (qStr.Value.Contains("?"))
+                    {
+                        int indexEq = qStr.Value.IndexOf("=");
+                        returnUrl = qStr.Value.Substring(++indexEq);
+                    }
+                    log.LogInformation($"LoginViewModel OngetAsync return url: {returnUrl}");
+                    if (!(string.IsNullOrWhiteSpace(userID)))
+                        SetReturnUrl(userID, returnUrl).ConfigureAwait(false).GetAwaiter().GetResult();
+
+
+                }
+            }
+            var serviceProviderRealm = config.SingleSignOnDestination;
+          
+            var binding = new Saml2PostBinding();
+            binding.RelayState = $"RPID={Uri.EscapeDataString(serviceProviderRealm.ToString())}";
+            binding.SetRelayStateQuery(new Dictionary<string, string> { { relayStateReturnUrl, returnUrl ?? Url.Content("~/") } });
+
+            //var appliesToAddress = "azurewebsites.net";
+            //var appliesToAddress = config.AllowedAudienceUrisAppliesTo; "edocsnyplabreqs.azurewebsites.net";
+            var appliesToAddress = AllowedAudienceUrisAppliesTo; 
+
+            // var appliesToAddress = "fed.nyp.org";
+
+            var response = new Saml2AuthnResponse(config);
+          
+            response.Status = Saml2StatusCodes.Success;
+            //   response.Destination = new Uri("https://edocsnyplabreqsdev.azurewebsites.net/NypUsersInfo/LoginView");
+            // response.Destination = new Uri("https://fed.nyp.org/idp/startSSO.ping?PartnerSpId=edocsnyplabreqs.azurewebsites.net");
+            response.Destination = SamlUrlDestinationSSO;
+
+            //   response.Destination = new Uri("https://edocsnyplabreqs.azurewebsites.net/");
+            var claimsIdentity = new ClaimsIdentity(CreateClaims());
+            config.AudienceRestricted = true;
+            config.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.PeerOrChainTrust;
+            config.RevocationMode = System.Security.Cryptography.X509Certificates.X509RevocationMode.Online;
+            response.NameId = new Saml2NameIdentifier(claimsIdentity.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).Single(), NameIdentifierFormats.Persistent);
+            response.ClaimsIdentity = claimsIdentity;
+            var token = response.CreateSecurityToken(appliesToAddress);
+            log.LogInformation($"End LoginView OnGetAsync total time: {LabReqHelpers.StopStopWatch()} ms");
+            return binding.Bind(response).ToActionResult();
+           // }
+        }
+        
+        public async Task<IActionResult> OnPostLogoutAsync()
+        {
+            LabReqHelpers.StartStopWatch();
+            GetLogInformaiton().ConfigureAwait(false).GetAwaiter().GetResult();
+            log.LogInformation("Start LoginView OnPostLogoutAsync");
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect(Url.Content("~/"));
+            }
+            log.LogInformation($"Logging out user: {User.Identity.Name}");
+            var binding = new Saml2PostBinding();
+            // config.SingleLogoutDestination = new Uri("https://fed.nyp.org/idp/startSLO.ping?PartnerSpId=edocsnyplabreqs.azurewebsites.net");
+            config.SingleLogoutDestination = SamlUrlDestinationSLO;
+            var saml2LogoutRequest =  new Saml2LogoutRequest(config, User).DeleteSession(HttpContext).ConfigureAwait(true).GetAwaiter().GetResult();
+            HttpContext.Session.SetString(GetSessionVariables.SessionKeyCwid,string.Empty);
+            return binding.Bind(saml2LogoutRequest).ToActionResult();
+        }
+        public IActionResult LoggedOut()
+        {
+            var binding = new Saml2PostBinding();
+            binding.Unbind(Request.ToGenericHttpRequest(), new Saml2LogoutResponse(config));
+           
+            return Redirect(Url.Content("~/"));
+        }
+        private async Task<string> GetSamlAtt(XmlDocument samlXmlDoc,string value)
+        {
+            try
+            {
+
+            
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(samlXmlDoc.InnerXml);
+            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("saml", "urn:oasis:names:tc:SAML:2.0:assertion");
+            XmlNode xmlNode = doc.SelectSingleNode($"//saml:AttributeStatement/saml:Attribute[@Name='{value}']/saml:AttributeValue", nsmgr);
+            if (xmlNode != null)
+            {
+                    return xmlNode.InnerText;
+                //email = xmlNode.InnerText;
+            }
+            }
+            catch(Exception ex)
+            {
+                log.LogError($"Could not get saml attribute {value} {ex.Message}");
+            }
+            return "Not Supplied";
+        }
+        private async Task<bool> ValidateUser(string cwid, XmlDocument samlXmlDoc)
+        {
+            
+            
+          
+                string email = GetSamlAtt(samlXmlDoc, "mail").ConfigureAwait(false).GetAwaiter().GetResult();
+                string lastName = GetSamlAtt(samlXmlDoc, "lastName").ConfigureAwait(false).GetAwaiter().GetResult();
+                string firstName = GetSamlAtt(samlXmlDoc, "firstName").ConfigureAwait(false).GetAwaiter().GetResult();
+          
+            string userInfor = string.Format(ConstNypLabReqs.ApiNypLabReqsUsersParam, cwid,firstName,lastName, email, "Checkuser");
+            NypLabReqsUsersModel nypUserInfo = NypLabReqsUserInfo.NypLabReqsUserInfoApiIntance.GetNypUserInfor(new Uri($"{WebApiUrl}{ConstNypLabReqs.ApiNypLabReqsUsersController}"), userInfor, log).ConfigureAwait(true).GetAwaiter().GetResult();
+            if((nypUserInfo == null) || (string.IsNullOrEmpty(nypUserInfo.Cwid)))
+            {
+                 
+                SendEMail(cwid,email).ConfigureAwait(false).GetAwaiter().GetResult();
+                return false;
+            }
+            LabReqsIsAdminVeiwAuditLogs labReqsAdminReadAuditLogs = new LabReqsIsAdminVeiwAuditLogs();
+            labReqsAdminReadAuditLogs.IsAdmin = nypUserInfo.IsAdmin;
+            labReqsAdminReadAuditLogs.ViewAuditLogs = nypUserInfo.ViewAuditLogs;
+            LabReqsConstants.GetSessionVariables.SessionVarInstance.SetSessionOjbjectAsJson(HttpContext.Session, ConstNypLabReqs.SessionIsAdminVeiwAuditLogs, labReqsAdminReadAuditLogs).ConfigureAwait(false).GetAwaiter().GetResult();
+            return true;
+        }
+        private async Task SendEMail(string cwid, string emailAddress)
+        {
+            
+            EmailService emailService = new EmailService();
+            emailSettings.EmailTo = NypEmailTo;
+
+
+            if (!(string.IsNullOrWhiteSpace(emailSettings.EmailCC)))
+            {
+                emailSettings.EmailCC = $"{emailSettings.EmailCC};{NypEmailCC};{emailAddress}";
+
+            }
+            else
+            {
+                if (!(string.IsNullOrWhiteSpace(NypEmailCC)))
+                {
+                    emailSettings.EmailCC = $"{NypEmailCC};{emailAddress}";
+                }
+                else
+                    emailSettings.EmailCC = $"{emailAddress};";
+            }
+            emailService.SendHtmlEmail($"{env.WebRootPath}//{EmailHtmlFile}", $"New Request LabReqs System CWID {cwid}", emailSettings, cwid, emailAddress);
+        }
+        public async Task<IActionResult> OnPostSingleLogoutAsync()
+        {
+            Saml2StatusCodes status;
+            var requestBinding = new Saml2PostBinding();
+            var logoutRequest = new Saml2LogoutRequest(config, User);
+            try
+            {
+                requestBinding.Unbind(Request.ToGenericHttpRequest(), logoutRequest);
+                status = Saml2StatusCodes.Success;
+                logoutRequest.DeleteSession(HttpContext).ConfigureAwait(true).GetAwaiter().GetResult();
+            }
+            catch (Exception exc)
+            {
+                // log exception
+                throw new Exception(exc.Message);
+                
+                status = Saml2StatusCodes.RequestDenied;
+            }
+
+            var responsebinding = new Saml2PostBinding();
+            responsebinding.RelayState = requestBinding.RelayState;
+            var saml2LogoutResponse = new Saml2LogoutResponse(config)
+            {
+                InResponseToAsString = logoutRequest.IdAsString,
+                Status = status,
+            };
+            return responsebinding.Bind(saml2LogoutResponse).ToActionResult();
+        }
+     
+    private IEnumerable<Claim> CreateClaims()
+        {
+            yield return new Claim(ClaimTypes.NameIdentifier, "Cwid");
+            yield return new Claim(ClaimTypes.Email, "some-user@nyp.org");
+            yield return new Claim(ClaimTypes.UserData, "lastName");
+            yield return new Claim(ClaimTypes.UserData, "firstName");
+        }
+    }
+}

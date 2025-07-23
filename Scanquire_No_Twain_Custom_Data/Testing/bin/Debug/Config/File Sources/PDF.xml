@@ -1,0 +1,10 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQImageSource.PdfFileSource, Scanquire.Public, Version=1.0.5050.23412, Culture=neutral, PublicKeyToken=null">
+  <Properties>
+    <Collection name="OwnerPasswords">
+      <Properties>
+        <Simple name="Capacity" value="0" />
+      </Properties>
+      <Items />
+    </Collection>
+  </Properties>
+</Complex>

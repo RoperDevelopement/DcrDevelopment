@@ -1,0 +1,82 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.Invoice.Test2Model
+@{
+}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+@Html.AntiForgeryToken()
+<div class="row">
+    <h2>kjkljklj</h2>
+    <div class="form-group text-center offset-3">
+        <input type="file" id="fileUpload" />
+        <button id="btnUpload" class="btn btn-success">Upload</button>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#fileUpload").on('change', function (e) {
+                var files = $("#fileUpload").prop("files");
+                var url = "/Invoice/test2?handler=MyUploader";
+                //    var url =.cshtml.cs
+                var formData = new FormData();
+                formData.append("MyUploader", files[0]);
+                e.preventDefault();
+                jQuery.ajax({
+
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (repo) {
+                        alert(repo.filename);
+                    },
+
+                    error: function (request, status, error) {
+
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+
+                });
+            });
+            $("#btnUpload").click(function () {
+                var data = {};
+                data.Name = "Mudassar";
+                alert($('input:hidden[name="__RequestVerificationToken"]').val());
+                $.ajax({
+                    type: "POST",
+                    url: "/Invoice/test2/AjaxMethod",
+                    data: { "name": $("#txtName").val() },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    success: function (response) {
+                        alert("complete");
+                        alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (request, status, error) {
+
+                        alert(error);
+                        alert(request.getAllResponseHeaders());
+                        alert(status.show);
+                    }
+
+                });
+            });
+
+        });
+    </script>
+
+}

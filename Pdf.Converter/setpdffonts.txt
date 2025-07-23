@@ -1,0 +1,71 @@
+Create a new simple PDF form
+Quick PDF Library lets you create new PDF forms from scratch. In this example we’ll create four
+new text form fields with varying characteristics.
+/* Create a PDF form */
+// Tell the library that all co-ordinates should
+// begin from the top left corner of the page.
+QP.SetOrigin(1);
+// Add the first new form field
+var iDf1 = QP.NewFormField("First Name", 1);
+QP.SetFormFieldValue(iDf1, "Jane");
+QP.SetNeedAppearances(1);
+QP.SetFormFieldBounds(iDf1, 20, 20, 100, 20);
+QP.SetFormFieldAlignment(iDf1, 2);
+// Add the second new form field
+var iDf2 = QP.NewFormField("Second Name", 1);
+QP.SetFormFieldValue(iDf2, "Doe");
+QP.SetNeedAppearances(1);
+QP.SetFormFieldBounds(iDf2, 20, 50, 100, 20);
+fID = QP.AddTrueTypeFont("Myriad Pro Cond", 1);
+ffID = QP.AddFormFont(fID);
+QP.SetFormFieldFont(iDf2, ffID);
+// Add the third new form field
+var iDf3 = QP.NewFormField("Age", 1);
+QP.SetFormFieldValue(iDf3, "31");
+QP.SetNeedAppearances(1);
+QP.SetFormFieldBounds(iDf3, 20, 80, 100, 20);
+Copyright (c) 2011 Debenu (www.debenu.com) 30 | 68
+// Add the fourth new form field
+var iDf3 = QP.NewFormField("Nationality", 1);
+QP.SetFormFieldValue(iDf3, "Australian");
+QP.SetNeedAppearances(1);
+QP.SetFormFieldBounds(iDf3, 20, 110, 100, 20);
+// Save the new PDF form to the hard disk
+QP.SaveToFile("new_pdf_form.pdf");
+
+QP.AddStandardFont(5); // Helvetica bold
+QP.SetTextSize(10);
+FontID = QP.AddStandardFont(0); // Courier
+
+
+Push button form fields
+Use option 2 with the NewFormField function to create push button form fields.
+/* Create a PDF form with push button form fields */
+// Set the origin to the top-left corner
+QP.SetOrigin(1);
+// Add the heading font
+QP.AddStandardFont(5); // Helvetica bold
+QP.SetTextSize(10);
+ButtonText = "Big JavaScript Button:";
+ButtonWidth = QP.GetTextWidth(ButtonText);
+ButtonLocation = (QP.PageWidth()/2) - (ButtonWidth/2);
+QP.DrawText(ButtonLocation, 68, ButtonText);
+// Add the font to use for the form fields
+FontID = QP.AddStandardFont(0); // Courier
+QP.AddFormFont(FontID);
+FieldIndex = QP.NewFormField("JavaScript Button:", 2);
+QP.SetNeedAppearances(0);
+QP.SetFormFieldBounds(FieldIndex, ButtonLocation, 70, ButtonWidth, 20);
+QP.SetFormFieldFont(FieldIndex, QP.GetFormFontCount());
+QP.SetFormFieldTextSize(FieldIndex, 12);
+QP.SetFormFieldBorderColor(FieldIndex, 0.5, 0, 0);
+QP.SetFormFieldBorderStyle(FieldIndex, 1, 0, 0, 0);
+QP.SetFormFieldBackgroundColor(FieldIndex, 0.3, 0.3, 0.5);
+QP.SetFormFieldValue(FieldIndex, "");
+QP.SetFormFieldHighlightMode(FieldIndex, 3);
+QP.FormFieldJavaScriptAction(FieldIndex, "U", 'app.alert("Quick PDF Library
+rocks",3,0,"Something you should know...");');
+// Compress the contents of the file
+QP.CompressContent();
+// Save the file
+QP.SaveToFile("push_buttons.pdf");

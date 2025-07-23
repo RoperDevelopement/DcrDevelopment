@@ -1,0 +1,16 @@
+﻿<Complex name="Root" type="BinMonitor.Common.Bin, BinMonitor.Common">
+  <Properties>
+    <Simple name="Id" value="030" />
+    <SingleArray name="SupportedCategories">
+      <Items>
+        <Simple value="ORDERED" />
+        <Simple value="PROBLEM" />
+        <Simple value="QA" />
+        <Simple value="ROUTINE" />
+        <Simple value="STAT" />
+        <Simple value="TIMED" />
+      </Items>
+    </SingleArray>
+    <Null name="BatchId" />
+  </Properties>
+</Complex>

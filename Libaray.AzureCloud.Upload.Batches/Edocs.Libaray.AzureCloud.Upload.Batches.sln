@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edocs.Libaray.AzureCloud.Upload.Batches", "Edocs.Libaray.AzureCloud.Upload.Batches\Edocs.Libaray.AzureCloud.Upload.Batches.csproj", "{120C7326-9807-4A92-A9B3-8F2EF3D6D231}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{120C7326-9807-4A92-A9B3-8F2EF3D6D231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{120C7326-9807-4A92-A9B3-8F2EF3D6D231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{120C7326-9807-4A92-A9B3-8F2EF3D6D231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{120C7326-9807-4A92-A9B3-8F2EF3D6D231}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16EFDAD9-B418-4716-8BAF-0F6AFF285B6C}
+	EndGlobalSection
+EndGlobal

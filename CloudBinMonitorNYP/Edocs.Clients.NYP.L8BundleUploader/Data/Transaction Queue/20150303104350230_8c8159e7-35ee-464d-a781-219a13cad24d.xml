@@ -1,0 +1,138 @@
+﻿<Complex name="Root" type="BinMonitor.Common.SpecimenBatch, BinMonitor.Common">
+  <Properties>
+    <Simple name="Id" value="8c8159e7-35ee-464d-a781-219a13cad24d" />
+    <Simple name="BinId" value="012" />
+    <Simple name="TransferredFrom" value="" />
+    <Simple name="CategoryId" value="ORDERED" />
+    <Complex name="CheckPoint1">
+      <Properties>
+        <Simple name="Origin" value="03/03/2015 10:43:50" />
+        <Complex name="Configuration">
+          <Properties>
+            <Simple name="Duration" value="00:15:00" />
+            <Simple name="Flash" value="False" />
+            <Complex name="Color">
+              <Properties>
+                <Simple name="Text" value="Control" />
+              </Properties>
+            </Complex>
+            <Simple name="EmailImmediately" value="False" />
+            <Simple name="EmailUntilComplete" value="False" />
+            <Simple name="EmailFrequency" value="06:00:00" />
+            <Null name="EmailRecipients" />
+          </Properties>
+        </Complex>
+        <Simple name="EmailLastSentAt" value="01/01/0001 00:00:00" />
+      </Properties>
+    </Complex>
+    <Complex name="CheckPoint2">
+      <Properties>
+        <Simple name="Origin" value="03/03/2015 10:43:50" />
+        <Complex name="Configuration">
+          <Properties>
+            <Simple name="Duration" value="00:30:00" />
+            <Simple name="Flash" value="False" />
+            <Complex name="Color">
+              <Properties>
+                <Simple name="Text" value="Control" />
+              </Properties>
+            </Complex>
+            <Simple name="EmailImmediately" value="False" />
+            <Simple name="EmailUntilComplete" value="False" />
+            <Simple name="EmailFrequency" value="10675199.02:48:05.4775807" />
+            <Null name="EmailRecipients" />
+          </Properties>
+        </Complex>
+        <Simple name="EmailLastSentAt" value="01/01/0001 00:00:00" />
+      </Properties>
+    </Complex>
+    <Complex name="CheckPoint3">
+      <Properties>
+        <Simple name="Origin" value="03/03/2015 10:43:50" />
+        <Complex name="Configuration">
+          <Properties>
+            <Simple name="Duration" value="00:45:00" />
+            <Simple name="Flash" value="False" />
+            <Complex name="Color">
+              <Properties>
+                <Simple name="Text" value="Control" />
+              </Properties>
+            </Complex>
+            <Simple name="EmailImmediately" value="False" />
+            <Simple name="EmailUntilComplete" value="False" />
+            <Simple name="EmailFrequency" value="10675199.02:48:05.4775807" />
+            <Null name="EmailRecipients" />
+          </Properties>
+        </Complex>
+        <Simple name="EmailLastSentAt" value="01/01/0001 00:00:00" />
+      </Properties>
+    </Complex>
+    <Complex name="CheckPoint4">
+      <Properties>
+        <Simple name="Origin" value="03/03/2015 10:43:50" />
+        <Complex name="Configuration">
+          <Properties>
+            <Simple name="Duration" value="01:00:00" />
+            <Simple name="Flash" value="True" />
+            <Complex name="Color">
+              <Properties>
+                <Simple name="Text" value="Control" />
+              </Properties>
+            </Complex>
+            <Simple name="EmailImmediately" value="True" />
+            <Simple name="EmailUntilComplete" value="True" />
+            <Simple name="EmailFrequency" value="00:15:00" />
+            <Simple name="EmailRecipients" value="sam.brinly@edocsusa.com" />
+          </Properties>
+        </Complex>
+        <Simple name="EmailLastSentAt" value="01/01/0001 00:00:00" />
+      </Properties>
+    </Complex>
+    <Simple name="CheckpointOrigin" value="03/03/2015 10:43:50" />
+    <Simple name="CreatedBy" value="sam.brinly" />
+    <Simple name="CreatedAt" value="03/03/2015 10:43:50" />
+    <Complex name="Registration">
+      <Properties>
+        <Complex name="Configuration">
+          <Properties>
+            <Simple name="EmailOnStart" value="False" />
+            <Simple name="EmailOnCompletion" value="False" />
+            <Simple name="IncludeContentsInEmail" value="False" />
+            <Simple name="EmailRecipients" value="sam.brinly@edocsusa.com" />
+          </Properties>
+        </Complex>
+        <Simple name="StartedAt" value="03/03/2015 10:43:50" />
+        <Simple name="AssignedBy" value="sam.brinly" />
+        <Simple name="AssignedTo" value="sam.brinly" />
+        <Simple name="CompletedAt" value="03/03/2015 10:43:50" />
+        <Simple name="CompletedBy" value="sam.brinly" />
+      </Properties>
+    </Complex>
+    <Complex name="Processing">
+      <Properties>
+        <Complex name="Configuration">
+          <Properties>
+            <Simple name="EmailOnStart" value="False" />
+            <Simple name="EmailOnCompletion" value="False" />
+            <Simple name="IncludeContentsInEmail" value="False" />
+            <Simple name="EmailRecipients" value="sam.brinly@edocsusa.com" />
+          </Properties>
+        </Complex>
+        <Simple name="StartedAt" value="01/01/0001 00:00:00" />
+        <Null name="AssignedBy" />
+        <Null name="AssignedTo" />
+        <Simple name="CompletedAt" value="01/01/0001 00:00:00" />
+        <Null name="CompletedBy" />
+      </Properties>
+    </Complex>
+    <Null name="ClosedBy" />
+    <Simple name="ClosedAt" value="01/01/0001 00:00:00" />
+    <Collection name="Specimens">
+      <Properties>
+        <Simple name="Capacity" value="0" />
+      </Properties>
+      <Items />
+    </Collection>
+    <Null name="Comments" />
+  </Properties>
+</Complex>

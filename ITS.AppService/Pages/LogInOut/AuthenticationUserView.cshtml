@@ -1,0 +1,102 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.LogInOut.AuthenticationUserViewModel
+@{
+    ViewData["Title"] = "Authentication User";
+    Layout = null;
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/site.js"></script>
+    <style>
+        .bg {
+            margin: 0;
+            /* The image used */
+            background-image: url(~/wwwroot/img/Blurred-Background-Sunset-3c-Free.jpg);
+            /* Full height
+            height: 100%;
+            width: 100%;
+                 */
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: repeat;
+            background-size: cover;
+        }
+
+        .mar {
+            margin: 125px 50px 75px 100px;
+            background-color: whitesmoke;
+            font-family: Arial;
+            font-size: 15px;
+        }
+
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body class="mar bg">
+    <div class="container-fluid">
+
+        <h2 class="text-center">@Model.LoginTitle</h2>
+        <p class="p-1"></p>
+        @if (string.Compare(@Model.DisplayPage, "SendAuthCode", true) == 0)
+        {
+            <div class="container-fluid text-center">
+                <form method="post" id="sendCode">
+                    <input type="hidden" value="@Model.DisplayPage" id="displayPage" name="displayPage" />
+                    <table class="center">
+                        <tr>
+                            <td>
+                                @Html.RadioButtonFor(m => m.AuthMethod, "Email")
+                                @Model.UserLoginModel.EmailAddress
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-2"></td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                @Html.RadioButtonFor(m => m.AuthMethod, "CellPhone")
+                                @Model.UserLoginModel.CellPhoneNumber
+                            </td>
+                        </tr>
+                    </table>
+                    <p class="p-0"></p>
+                    <input type="submit" value="Send Code" class="btn-outline-info" />
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="container-fluid text-center">
+                <form method="post" id="valCode">
+                    <input type="hidden" value="@Model.AudCodeGen" id="audCode" name="audCode" />
+                    <input type="hidden" value="@Model.DisplayPage" id="displayPage" name="displayPage" />
+                    <div class="row">
+                        <div class="col-12">
+                            @Html.LabelFor(model => model.AuthCode, new { @class = "text-nowrap " })
+                            @Html.EditorFor(m => m.AuthCode, "AuthCode")
+                            @Html.ValidationMessage("InvalidAuthCode", new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+
+                    <p class="p-0"></p>
+                    <input type="submit" value="Verify Code" class="btn-outline-info" />
+                    <input type="button" value="Resend Code" class="btn-outline-secondary" onclick="OpenUrl('/LogInOut/AuthenticationUserView')" />
+                    @* <input type="submit" value="ReSend Code" class="btn-outline-info" />*@
+                </form>
+            </div>
+        }
+    </div>
+</body>
+</html>

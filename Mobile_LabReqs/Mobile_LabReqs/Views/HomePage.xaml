@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:local="clr-namespace:Mobile_LabReqs.ViewsModels"
+             x:Class="Mobile_LabReqs.Views.HomePage"
+             Padding="40">
+    <ContentPage.BindingContext>
+        <local:HomePageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+           
+        </Grid.RowDefinitions>
+        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                    <Image Source="NYP_Logo_Small" VerticalOptions="Center"  />
+                </ContentView>
+            </StackLayout>
+        </StackLayout>
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Label Text="NYP Lab Client Services" FontSize="Title" BackgroundColor="Red"/>
+                
+                <Label FontSize="16" Padding="0,24,0,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="The information in this system at New York Presbyterian Hospital is confidential and access is restricted to employees only. " FontAttributes="Bold"/>
+                                <Span Text="The information in use is on a need-to-know basis. Unauthorized or improper use of the system or the confidential information may result in dismissal and civil… and/or criminal penalties. Your actions are being monitored while logged in and you are responsible for your actions while logged in. Your user name and password are used to uniquely identify you. You are responsible for any actions taken under your user account." FontAttributes="Bold"/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Button  
+                    
+                         ImageSource="eDocs_Logo_Full.png"  
+                        Command="{Binding OpenWebCommand}"
+                       
+                          />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

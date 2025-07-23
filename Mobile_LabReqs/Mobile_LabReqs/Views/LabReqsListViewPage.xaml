@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile_LabReqs.Views.LabReqsListViewPage"
+               xmlns:local="clr-namespace:Mobile_LabReqs.ViewsModels"
+              
+               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+              ios:Page.UseSafeArea="true"
+             BackgroundColor="#F0FFFF"
+            Title="{Binding Title}" Padding="20">
+    
+        <ListView x:Name="MyListView"
+            ItemsSource="{Binding Items}"
+            ItemTapped="Handle_ItemTapped"
+            CachingStrategy="RecycleElement"
+                  HasUnevenRows="True" SeparatorVisibility="None" >
+
+            <!--Built in Cells 
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <TextCell Text="{Binding .}" />
+        </DataTemplate>
+    </ListView.ItemTemplate>
+        -->
+            <!--Custom View Cells-->
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid  BackgroundColor="{DynamicResource bgColor}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+
+                            </Grid.RowDefinitions>
+
+
+
+                            <Label Text="Index#"   Style="{DynamicResource ListItemTextStyle}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
+                            <Label Text="{Binding IndexNumber}"   Style="{DynamicResource ListItemDetailTextStyle}"  Grid.Row="0" Grid.Column="1"   />
+
+                            <Label Text="CSN#"  Style="{DynamicResource ListItemTextStyle}" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"/>
+                            <Label Text="{Binding FinancialNumber}"   Style="{DynamicResource ListItemDetailTextStyle}" Grid.Row="1" Grid.Column="1"  />
+                            <!-- 
+                              <Label Text="{Binding MRN}"  Style="{DynamicResource ListItemDetailTextStyle}" Grid.Row="2" Grid.Column="1" />
+                              -->
+                            <Label Text="Patient ID/MRN"     Style="{DynamicResource ListItemDetailTextStyle}"  Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" />
+                            <Label Text="123456"  Style="{DynamicResource ListItemDetailTextStyle}" Grid.Row="2" Grid.Column="1" />
+                            <Label Text="Date of Service"     Style="{DynamicResource ListItemDetailTextStyle}" Grid.Row="3" Grid.Column="0" Grid.RowSpan="2"  />
+                            <Label  Text="{Binding DateOfService}"  Style="{DynamicResource ListItemDetailTextStyle}"  Grid.Row="3" Grid.Column="1" />
+
+
+
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+   
+</ContentPage>

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <title>Send New User Email</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:lightblue">
+    <div>
+        <header>
+            <h1 class="text-center">New Request to access LabReq's Site:</h1>
+        </header>
+        <p class="p-1"></p>
+        <h2 class="text-left">There is a request for <strong> CWID {CWID} </strong> to access the "LabReqs System".</h2>
+        <p class="p-1"></p>
+        <h2 class="text-left">All request are approved by <strong>Bryan Deguzman</strong> or <strong>Chris Barrow</strong>.</h2>
+        <p class="p-1"></p>
+        <section>
+            <h3>If you approve of adding this User to the "LabReqs System" please add the User as follows.</h3>
+            <h3>Steps to add New Cwid</h3>
+            <p class="p-1"></p>
+            <ol class="b">
+                <li>Log into the NYP Azure<a href="https://edocsnyplabreqs.azurewebsites.net/" target="_blank"> LabReqs Web Site</a></li>
+                <li>If you have admin rights User Profiles will show up on the menu bar.</li>
+                <li>Click on User Profiles and <span class="text-dark">Edit Users Profile page will automatically open.</span></li>
+                <li>Click on Tab Create User</li>
+                <li>Enter CWID {CWID}</li>
+                <li>Click on "Add New User"</li>
+                <li>Afer the user is added,click on the link to send an email to <span><a href="mailto:{EmailAdddressNewUser}?subject=CWID {CWID} has been approved for the NYP LabReqs site.&body=You have know have access the LabReqs site.">{EmailAdddressNewUser}</a></span> and notified the user their CWID {CWID} they have been added to the NYP LabReqs site.</li>
+            </ol>
+        </section>
+        <br />
+        <div class="text-left">
+            <h4>NYP Outreach Lab Contact Information:</h4>
+            <address>
+                Bryan Deguzman<br />
+                Outreach/Clinical Laboratories<br />
+                <strong>NYP Support: </strong><abbr title="Office Phone">(o:) </abbr>
+                212-746-7639
+                <br />
+                <abbr title="NYP Outreach Lab Email">(e:)</abbr> <a href="mailto:brd9098@nyp.org">brd9098@nyp.org</a><br />
+            </address>
+            <p class="pb-4"></p>
+            <address>
+                Chris Barrow<br />
+                Outreach/Clinical Laboratories<br />
+                <strong>NYP Support: </strong><abbr title="Office Phone">(o:) </abbr> 212-746-7639
+                <br />
+                <abbr title="NYP Outreach Lab Email">(e:) </abbr> <a href="mailto:chb9212@nyp.org">chb9212@nyp.org</a><br />
+            </address>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+﻿@page
+@model Edocs.Employees.Time.Clock.App.Service.Pages.TestPages.TestTableViewModel
+@{
+    ViewData["Title"] = "Add New e-Docs Employee";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div id="divmain" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-lg-4">
+            <div class="hidden-xs">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Dropdown <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                     
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="DivTestSearch">
+        <table class="table table-hover" width="100%" id="dtEmpRep" style="background-color:antiquewhite">
+            <thead>
+                <tr>
+                    <th>EmpID</th>
+                    <th>Clock In</th>
+                    <th>Clock Out</th>
+                    <th>Hrs Worked</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var items in Model.TimeClockHrs)
+                {
+
+                    <tr class="w-50">
+                        <td>@items.EmpID</td>
+                        <td>@items.ClockInTime</td>
+                        <td>@items.ClockOutTime</td>
+                        <td>@items.TimeSpanDur</td>
+
+
+                        @*
+                            <td><button class="btn-block" onclick="UpDateTimeCard('@items.ID', this);">UpDate</button></td>
+                        *@
+
+
+                    </tr>
+
+
+                }
+            </tbody>
+            <tfoot>
+                <tr class="w-100">
+                    <td class="w-100">Total Hrs Worked: @Model.TotalHrsWorked</td>
+                    <td class="w-100">Total Records:@Model.TimeClockHrs.Count</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            CompleteAjaxCall();
+            //if ($("#dtEmpRep").length) {
+
+
+            //    $('#dtEmpRep').DataTable({ "pagingType": "full_numbers" });
+            //    $('.dataTables_length').addClass('bs-select');
+            //}
+
+        });
+    </script>
+}

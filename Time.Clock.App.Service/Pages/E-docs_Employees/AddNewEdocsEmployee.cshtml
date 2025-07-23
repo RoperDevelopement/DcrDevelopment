@@ -1,0 +1,148 @@
+﻿@page
+@model Edocs.Employees.Time.Clock.App.Service.Pages.E_docs_Employees.AddNewEdocsEmployeeModel
+@{
+    ViewData["Title"] = "Add New e-Docs Employee";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<body style="background-color:#C0C0C0;">
+    <div id="divmain" class="container-fluid" style="background-color:aqua">
+        <h1 class="text-center">e-Docs New Time Clock Employee</h1>
+        <p class="p-md-0"></p>
+        <form id="newEmployee" method="post" class="form-horizontal border" style="width:50%;margin:0 auto" role="form">
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.EmpID)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.EditorFor(model => model.Emp.EmpID, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required", style = "vertical-align: middle;" })
+
+            </div>
+
+            <p class="p-0"></p>
+
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.EmpFirstName)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.EditorFor(model => model.Emp.EmpFirstName, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required", style = "float: left; width: 50%;" })
+
+            </div>
+
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.EmpLastName)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.EditorFor(model => model.Emp.EmpLastName, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required" })
+
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.EmpEmailAddress)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.EditorFor(model => model.Emp.EmpEmailAddress, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required" })
+
+            </div>
+
+            <p class="p-0"></p>
+            <div class="form-inline">
+
+                @Html.LabelFor(model => model.Emp.EmpHomePhone)&nbsp;&nbsp;
+                @Html.EditorFor(model => model.Emp.EmpHomePhone)&nbsp;&nbsp;
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+
+                @Html.LabelFor(model => model.Emp.EmpCellPhone)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.EditorFor(model => model.Emp.EmpCellPhone)
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.EmpAddress)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.EditorFor(model => model.Emp.EmpAddress, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required" })
+
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.EmpCity)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.EditorFor(model => model.Emp.EmpCity, new { @rows = "1", @cols = "50", @maxlength = "50", @required = "required" })
+
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.EmpState)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                @*@Html.DropDownList("State", new SelectList(Model.StateAbb), Model.Emp.EmpState)*@
+                <select id="EmpState" name="EmpState">
+                    <option>Select State</option>
+                    @foreach (string stateAbb in Model.StateAbb)
+                    {
+                        @if (string.Compare(stateAbb, "MT", true) == 0)
+                        {
+                            <option selected>@stateAbb</option>
+                            continue;
+                        }
+                        else
+                        {
+                            <option>@stateAbb</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.EmpZipCode)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.EditorFor(model => model.Emp.EmpZipCode, new { @maxlength = "10", @required = "required" })
+
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.EmpPayRate)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.TextAreaFor(model => model.Emp.EmpPayRate, new { @maxlength = "5", @rows = "1", @cols = "13", @placeholder = "Not Required" })
+
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.EmpHolidayPayRate)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;
+                @Html.TextAreaFor(model => model.Emp.EmpHolidayPayRate, new { @maxlength = "5", @rows = "1", @cols = "13", @placeholder = "Not Required" })
+
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.FedTaxesPercent)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;
+                @Html.TextAreaFor(model => model.Emp.FedTaxesPercent, new { @maxlength = "5", @rows = "1", @cols = "13", @placeholder = "Not Required" })
+
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Emp.StateTaxPercent)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;
+                @Html.TextAreaFor(model => model.Emp.StateTaxPercent, new { @maxlength = "5", @rows = "1", @cols = "13", @placeholder = "Not Required" })
+
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+
+                @Html.CheckBoxFor(model => model.Emp.EdocsAdmin)&nbsp;&nbsp;
+                @Html.LabelFor(model => model.Emp.EdocsAdmin)
+
+
+            </div>
+            <p class="p-0"></p>
+            <div class="form-inline">
+
+                @Html.LabelFor(model => model.Emp.EmpStartDate)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.EditorFor(model => model.Emp.EmpStartDate)
+
+
+
+            </div>
+            <p class="p2"></p>
+            <h6 class="text-center text-info">Comments</h6>
+            <p class="p-2 text-center">
+
+                @Html.TextAreaFor(model => model.Emp.Comments, new { @rows = "10", @cols = "50" })
+            </p>
+            <p class="p-1">
+                <div class="p-2 text-center" style="margin:0 auto;">
+                    <button class="btn-outline-info btn-link btn" id="btnAddCust">Add Employee</button>
+                    <a type="button" class="btn btn-outline-dark btn-link" href="/EdocsITSCustomers/EdocsITSAddNewCustomers" id="btnReset" name="btnReset">Reset</a>
+                    <a type="button" class="btn btn-outline-dark btn-link" id="btnExit" href="/Index" name="btnExit">Exit</a>
+                </div>
+            </p>
+        </form>
+    </div>
+    </body>

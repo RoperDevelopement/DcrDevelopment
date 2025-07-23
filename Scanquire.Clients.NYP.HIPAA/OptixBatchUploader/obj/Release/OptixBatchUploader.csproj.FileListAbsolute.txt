@@ -1,0 +1,76 @@
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.exe.config
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.exe
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.pdb
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.dll
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Public.dll
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.Threading.Tasks.dll
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.pdb
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.Threading.Tasks.xml
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.csprojResolveAssemblyReference.cache
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.exe
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.pdb
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.SharePoint.Client.dll
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.SharePoint.Client.Runtime.dll
+C:\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\EdocsUSA.Utilities.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.exe.config
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.exe
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.pdb
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\EdocsUSA.OptixTools.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\EdocsUSA.Utilities.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Public.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.Threading.Tasks.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\EdocsUSA.Misc.IWin32WindowWrapper.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\EdocsUSA.Exceptions.dll
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.pdb
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.dll.config
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.Threading.Tasks.xml
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.csprojResolveAssemblyReference.cache
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.csproj.CoreCompileInputs.cache
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.exe
+D:\Sam Brinly\Code\NYP\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.pdb
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.exe.config
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.exe
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.pdb
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.dll
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Public.dll
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.Threading.Tasks.dll
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\EdocsUSA.Misc.IWin32WindowWrapper.dll
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\EdocsUSA.Exceptions.dll
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.pdb
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.dll.config
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.Threading.Tasks.xml
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.csprojAssemblyReference.cache
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.csproj.CoreCompileInputs.cache
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.csproj.CopyComplete
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.exe
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.pdb
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\database1.mdf
+C:\Users\e-Docs Admin\Documents\github\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\database1_log.ldf
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\database1.mdf
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\database1_log.ldf
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.exe.config
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.exe
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\OptixBatchUploader.pdb
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\EdocsUSA.Utilities.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Public.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.Threading.Tasks.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\FreeImageNET.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Polenter.SharpSerializer.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\DTK.Barcode.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Newtonsoft.Json.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.SharePoint.Client.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.SharePoint.Client.Runtime.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\DTK.Image.dll
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.pdb
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Clients.NYP.dll.config
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Scanquire.Public.dll.config
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Microsoft.Threading.Tasks.xml
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\Newtonsoft.Json.xml
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.csprojAssemblyReference.cache
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.csproj.CoreCompileInputs.cache
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.csproj.CopyComplete
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.exe
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\obj\Release\OptixBatchUploader.pdb
+C:\Edocs\Scanquire.Clients.NYP\OptixBatchUploader\bin\Release\EdocsUSA.Utilities.pdb

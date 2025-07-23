@@ -1,0 +1,106 @@
+﻿@page
+@model BinMonitorAppService.Pages.Partial_Pages.TransferPartialViewModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+
+
+<head>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</head>
+<html>
+
+<body>
+    <div class="container-fluid">
+        @if ((string.Compare(Model.TransFer, "transferCategores", true)) == 0)
+        {
+            @if ((Model.CatBins != null) && (Model.CatBins.Count > 0))
+            {
+                <div class="col-md-12">
+                    <label class="text-justify inlineblock margionZero">Select Multiple BinID'S-Categories to Transfer:</label>
+                    <select id="selNewCategoryName" multiple data-toggle="tooltip" title="Use ctrl or shift and select categories to TranFer">
+                        @foreach (var catb in Model.CatBins)
+                        {
+                            <option value="@catb">@catb</option>
+                        }
+                    </select>
+
+                    <p class="text-danger" id="parseloldcat" style="display:none">Select Multiple BinID-Categories to Transfer</p>
+
+
+                </div>
+                <p class="p-1"></p>
+                <div class="col-md-12">
+                    <label for="selCategoryName" class="text-justify inlineblock margionZero">Select New Category:</label>
+                    <select id="selCategoryName">
+                        <option value="string-empty"></option>
+                        @foreach (var cat in Model.TransFerCategoryName)
+                        {
+                            @if (string.IsNullOrWhiteSpace(@cat))
+                            {
+                                continue;
+                            }
+                            <option value="@cat">@cat</option>
+                        }
+
+                    </select>
+                    <p class="text-danger" id="parselnewcat" name="parselnewcat" style="display:none">Need to select a new category</p>
+                </div>
+            }
+            else
+            {
+                <p id="nothingtransfer" class="text-center text-dark">No Categories to Transfer</p>
+            }
+        }
+
+        else if ((string.Compare(Model.TransFer, "transferLabReqs", true)) == 0)
+        {
+            @if ((Model.LabReqNumbers != null) && (Model.LabReqNumbers.Count > 0))
+            {
+
+
+
+                <div class="col-md-12">
+                    <label class="text-justify inlineblock margionZero">Select Multiple BinID-Labreqs to Transfer:</label>
+                    <select id="selOldLRN" multiple data-toggle="tooltip" title="Use ctrl or shift and select labreqs to TranFer">
+                        @foreach (var lrn in Model.LabReqNumbers)
+                        {
+                            <option value="@lrn.Value.BinID-@lrn.Value.LabRecNumber">@lrn.Value.BinID-@lrn.Value.LabRecNumber</option>
+                        }
+                    </select>
+                    <p class="text-danger" id="parseloldlr" style="display:none">Need to select BinID's-Labreqs to Transfer</p>
+
+
+                </div>
+                <p class="p-1"></p>
+                <div class="col-md-12">
+                    <label for="selNewLRBin" class="text-justify inlineblock margionZero">Select BinID to Transfer too:</label>
+                    <select id="selNewLRBin">
+                        <option value="string-empty"></option>
+                        @foreach (var ab in Model.ActiveBins)
+                        {
+                            @if (string.IsNullOrWhiteSpace(@ab))
+                            {
+                                continue;
+                            }
+                            <option value="@ab">@ab</option>
+                        }
+
+                    </select>
+                    <p class="text-danger" id="parselnewlbbin" name="parselnewlbbin" style="display:none">Select BinID to Transfer to:</p>
+                </div>
+            }
+            else
+            {
+                <p id="nothingtransfer" class="text-center text-dark">No LabReq's to Transfer</p>
+            }
+        }
+
+    </div>
+
+</body>
+</html>

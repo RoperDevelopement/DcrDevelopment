@@ -1,0 +1,82 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.Partial_Pages.EdocsITSPartialPageScanningCostModel
+ @{
+    Layout = null;
+}
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/datatables-select.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <script src="~/lib/datatables/datatables-select.min.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+
+</head>
+<html>
+
+<body>
+    <div class="container-fluid">
+        @if ((@Model.ScanningCost != null) && (@Model.ScanningCost.Count() > 0))
+        {
+            <table class="table table-hover w-auto table-bordered  table-info" id="dtlScanningCost">
+                <thead>
+
+
+                    <tr class="w-auto">
+                        <th>TrackinID</th>
+                        <th>Scanned</th>
+                        <th>UpLoaded</th>
+                        <th>Price PerDocument</th>
+                        <th>Cost Documents</th>
+                        <th>OCR</th>
+                        <th>Price OCR</th>
+                        <th>Cost OCR</th>
+                        <th>Char Typed</th>
+                        <th>Price Char</th>
+                        <th>Cost Char</th>
+                        <th>Scan Date</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var items in Model.ScanningCost)
+                    {
+                        <tr class="w-auto">
+                            <td>@items.Value.TrackingID</td>
+                            <td>@items.Value.Scanned</td>
+                            <td>@items.Value.Uploaded</td>
+                            <td>$@string.Format("{0:0.00}", @items.Value.PricePerDocument)</td>
+                            <td>$@string.Format("{0:0.00}", @items.Value.CostPerDoc)</td>
+                            <td>@items.Value.DocsOCR</td>
+                            <td>$@string.Format("{0:0.00}", @items.Value.PriceOCR)</td>
+                            <td>$@string.Format("{0:0.00}", @items.Value.OcrCost)</td>
+                            <td>@items.Value.CharTyped</td>
+                            <td>$@string.Format("{0:0.00}", @items.Value.CostPerChar)</td>
+                            <td>$@string.Format("{0:0.00}", @items.Value.PriceCharTyped)</td>
+                            <td>@items.Value.ScannDate.ToString("MM-dd-yyyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p class="p-2"></p>
+            <h2>Summary</h2>
+            <p class="p-0"></p>
+            <p class="text-info text-left">Documents Scanned @Model.TotalDocuments</p>
+            <p class="text-info text-left">Cost Documents Scanned $@string.Format("{0:0.00}", @Model.TotalDocCost)</p>
+            <p class="text-info text-left">Cost Documents OCR $@string.Format("{0:0.00}", @Model.TotalOcrCost)</p>
+            <p class="text-info text-left">Cost Char Typed $@string.Format("{0:0.00}", @Model.TotalCharCost)</p>
+            <p class="text-info text-left">Total Cost $@string.Format("{0:0.00}", @Model.TotalCost)</p>
+            <p class="p-0"></p>
+          
+        }
+        else
+        {
+            <p class="text-center text-dark">No Scanning Cost Found</p>
+        }
+    </div>
+    </body>
+</html>

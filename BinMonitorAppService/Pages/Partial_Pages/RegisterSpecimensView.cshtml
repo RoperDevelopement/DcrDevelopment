@@ -1,0 +1,443 @@
+﻿@page
+@model BinMonitorAppService.Pages.Partial_Pages.RegisterSpecimensViewModel
+@{
+    Layout = null;
+}
+ 
+
+    <html lang="en">
+
+    <head>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/datatables-select.min.css" />
+        <link rel="stylesheet" href="~/css/datatables.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/datatables/datatables-select.min.js"></script>
+        <script src="~/lib/datatables/datatables.min.js"></script>
+    </head>
+
+    <body>
+        @if (string.Compare(@Model.ModelName, "beginProcessing", true) == 0)
+        {
+            <div class="col-md-4">
+                @if (Model.BeginProcessModel.Count > 0)
+                {
+                    <div class="container-fluid">
+
+                        <div class="col" style="display:table;margin:auto">
+                            <p class="inlineblock margionZero" style="white-space:nowrap">
+                                Select One or More BinID's
+                            </p>
+                            <p>
+                                @Html.DropDownList("BinIDProcssBegin", new SelectList(Model.BeginProcessModel.Select(x => x.Key), Model.BeginProcessModel), new { @class = "form-control", @multiple = "true" })
+                                @foreach (var cr in Model.BeginProcessModel)
+                                {
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BinID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BinIDbegProc" name="@Html.DisplayFor(model => cr.Value.BinID)BinIDbegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BatchID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BatchIdbegProc" name="@Html.DisplayFor(model => cr.Value.BinID)BatchIdbegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessAssignedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedBybegProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedBybegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessAssignedTo)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedTobegProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedToybegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessCompletedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedAtbegProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedAtbegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessCompletedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedBybegProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedBybegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessStartAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessStartAtbegProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessStartAtbegProc" />
+                                }
+                            </p>
+                        </div>
+                        <div class="col" style="display:table;margin:auto">
+                            <p class="inlineblock margionZero" style="white-space:nowrap">
+                                Assgin To Different CWID
+                            </p>
+                            <p>
+
+                                @Html.DropDownList("ProcessAssignedTo", new SelectList(Model.ProcessAssignedTo, Model.ProcessAssignedTo), new { @class = "form-control", @multiple = "false", width = "200px" })
+                            </p>
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    <p class="text-info text-nowrap">All Specimen Batches processing has been assigned</p>
+                }
+            </div>
+            @if (Model.BeginProcessModel.Count > 0)
+            {
+                <div class="row">
+                    <input type="submit" value="Begin Processing" class="btn btn-success" id="subBeginProcessing" />
+                </div>
+            }
+        }
+        else if (string.Compare(@Model.ModelName, "transFerProcessing", true) == 0)
+        {
+            <div class="col-md-4">
+                @if (Model.BeginProcessModel.Count > 0)
+                {
+                    <div class="container-fluid">
+
+                        <div class="col" style="display:table;margin:auto">
+                            <p class="inlineblock margionZero" style="white-space:nowrap">
+                                Select One or More BinID's
+                            </p>
+                            <p>
+                                @Html.DropDownList("BinIDProcssBegin", new SelectList(Model.BeginProcessModel.Select(x => x.Key), Model.BeginProcessModel), new { @class = "form-control", @multiple = "true" })
+                                @foreach (var cr in Model.BeginProcessModel)
+                                {
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BinID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BinIDbegProc" name="@Html.DisplayFor(model => cr.Value.BinID)BinIDbegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BatchID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BatchIdbegProc" name="@Html.DisplayFor(model => cr.Value.BinID)BatchIdbegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessAssignedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedBybegProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedBybegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessAssignedTo)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedTobegProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedToybegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessCompletedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedAtbegProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedAtbegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessCompletedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedBybegProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedBybegProc" />
+                                    <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessStartAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessStartAtbegProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessStartAtbegProc" />
+                                }
+                            </p>
+                        </div>
+                        <div class="col" style="display:table;margin:auto">
+                            <p class="inlineblock margionZero" style="white-space:nowrap">
+                                Transfer To CWID
+                            </p>
+                            <p>
+
+                                @Html.DropDownList("TransProcessAssignedTo", new SelectList(Model.ProcessAssignedTo, Model.ProcessAssignedTo), new { @class = "form-control", @multiple = "false", width = "200px", option = "value=bel2005" })
+                            </p>
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    <p class="text-info text-nowrap">No Specimen Batches Found To Be Transfered</p>
+                }
+            </div>
+            @if (Model.BeginProcessModel.Count > 0)
+            {
+                <div class="row">
+                    <input type="submit" value="Transfer Processing" class="btn btn-success" id="subTransProcessing" onclick="CloseDialog('modalTransProcessing');" />
+                </div>
+            }
+        }
+        else if (string.Compare(@Model.ModelName, "completeRegistration", true) == 0)
+        {
+            <div class="col-md-4">
+                @if (Model.CompleteRegModel.Count > 0)
+                {
+                    <p class="inlineblock margionZero">
+                        BinID
+                    </p>
+                    <p>
+                        @Html.DropDownList("BinID", new SelectList(Model.CompleteRegModel.Select(x => x.Key), Model.CompleteRegModel), new { @class = "form-control" })
+                        @foreach (var cr in Model.CompleteRegModel)
+                        {
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BinID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)crBinID" name="@Html.DisplayFor(model => cr.Value.BinID)crBinID" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BatchID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)CrBatchId" name="@Html.DisplayFor(model => cr.Value.BinID)CrBatchId" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegAssignedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedByCReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedByCReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.CategoryName)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)CategoryNameCReg" name="@Html.DisplayFor(model => cr.Value.BinID)CategoryNameCReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegAssignedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedByCReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedByCReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegAssignedTo)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedToCReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedToCReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegStartedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegStartedAtCReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegStartedAtCReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegCompletedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegCompltedByCReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegCompltedByCReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegCompletedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegCompletedAtCReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegCompletedAtCReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegCreatedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegCreatedByCReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegCreatedByCReg" />
+                        }
+
+                    </p>
+                }
+                else
+                {
+                    <p class="text-info text-nowrap">All Specimen Batchs have been registered</p>
+                }
+            </div>
+            @if (Model.CompleteRegModel.Count > 0)
+            {
+                <div class="row">
+                    <input type="submit" value="Complete Registration" class="btn btn-success" id="subCompReg" />
+                </div>
+            }
+        }
+
+        else if (string.Compare(@Model.ModelName, "binsStatus", true) == 0)
+        {
+            <div class="col">
+                @if (Model.BeginProcessModel.Count > 0)
+                {
+                    <p class="p-0 text-info">Total Lab Requisition's @Model.BeginProcessModel.Count</p>
+                    <table class="table table-hover w-auto" width="100%" id="dtBinStatus">
+                        <thead>
+                            <tr>
+                                <th>BinID</th>
+                                <th>LabReq #</th>
+                                <th>Category</th>
+                                <th>Created By</th>
+                                <th>Assigned By</th>
+                                <th>Assigned To</th>
+                                <th>Registon Started At</th>
+                                <th>Processing Started At</th>
+                                <th>Duration</th>
+                                <th>Manage Batch</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var bsm in Model.BeginProcessModel)
+                            {
+                                var dur = DateTime.UtcNow.AddHours(-5) - Convert.ToDateTime(bsm.Value.RegStartedAt);
+
+                                @*
+                                              var dur = DateTime.UtcNow.AddHours(-4) - Convert.ToDateTime(bsm.Value.RegStartedAt);
+                                var dur = Model.CurrentUtcTime - Convert.ToDateTime(bsm.Value.RegStartedAt);
+                                *@
+                                <tr>
+                                    <td>@bsm.Value.BinID</td>
+                                    <td>@bsm.Value.LabRecNumber</td>
+                                    <td>@bsm.Value.CategoryName</td>
+                                    <td>@bsm.Value.RegCreatedBy</td>
+                                    <td>@bsm.Value.RegAssignedBy</td>
+                                    <td>@bsm.Value.ProcessAssignedTo</td>
+                                    <td>@bsm.Value.RegStartedAt</td>
+                                    @if (@bsm.Value.ProcessStartAt.Year > 2000)
+                                    {
+                                        <td>@bsm.Value.ProcessStartAt</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Processing Not Started</td>
+                                    }
+
+
+                                    <td>@dur</td>
+                                    <td>
+                                        @*
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/BinManager/ViewManageBatch?BatchId=@bsm.Value.BatchID" class="btn btn-info" role="button" target="_blank">Manage</a></span>
+                                        *@
+                                        <span>&nbsp<a href="/BinManager/ViewManageBatch?BatchId=@bsm.Value.BatchID" class="btn btn-info" role="button" target="_self">Manage</a></span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>No Bins Opened</p>
+                }
+            </div>
+
+        }
+
+        else if (string.Compare(@Model.ModelName, "beginRegistration", true) == 0)
+        {
+            <div class="col-md-4">
+                @if (Model.BeginRegModel.Count > 0)
+                {
+                    <p class="inlineblock margionZero">
+                        Select One or More BinID's
+                    </p>
+                    <p>
+                        @Html.DropDownList("BinID", new SelectList(Model.BeginRegModel.Select(x => x.Key), Model.BeginRegModel), new { @class = "form-control", @multiple = "true" })
+                        @foreach (var cr in Model.BeginRegModel)
+                        {
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BinID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)begRegBinID" name="@Html.DisplayFor(model => cr.Value.BinID)begRegBinID" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BatchID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)begRegBatchId" name="@Html.DisplayFor(model => cr.Value.BinID)begRegBatchId" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegAssignedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedBybegReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedBybegReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.CategoryName)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)CategoryNamebegReg" name="@Html.DisplayFor(model => cr.Value.BinID)CategoryNamebegReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegAssignedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedBybegReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedBybegReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegAssignedTo)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedTobegReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedTobegReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegStartedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegStartedAtbegReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegStartedAtbegReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegCompletedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegCompltedBybegReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegCompltedBybegReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegCompletedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegCompletedAtbegReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegCompletedAtbegReg" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegCreatedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegCreatedBybegReg" name="@Html.DisplayFor(model => cr.Value.BinID)RegCreatedBybegReg" />
+                        }
+
+                    </p>
+                }
+                else
+                {
+                    <p class="text-info text-nowrap">All Specimen Batches have been assigned</p>
+                }
+            </div>
+            @if (Model.BeginRegModel.Count > 0)
+            {
+                <div class="row">
+                    <input type="submit" value="Begin Registration" class="btn btn-success" id="subBeginReg" />
+                </div>
+            }
+        }
+        else if (string.Compare(@Model.ModelName, "completeProcessing", true) == 0)
+        {
+            <div class="col-md-4">
+                @if (Model.CompleteProcessModel.Count > 0)
+                {
+                    <p class="inlineblock margionZero">
+                        BinID
+                    </p>
+                    <p>
+                        @Html.DropDownList("BinIDCompleteProc", new SelectList(Model.CompleteProcessModel.Select(x => x.Key), Model.CompleteProcessModel), new { @class = "form-control", @multiple = "true" })
+                        @foreach (var cr in Model.CompleteProcessModel)
+                        {
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BinID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BinIDcompProc" name="@Html.DisplayFor(model => cr.Value.BinID)BinIDcompProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BatchID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BatchIdcompProc" name="@Html.DisplayFor(model => cr.Value.BinID)BatchIdcompProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessAssignedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedBycompProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedBycompProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessAssignedTo)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedTocompProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedTocompProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessCompletedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedAtcompProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedAtcompProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessCompletedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedBycompProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedBycompProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessStartAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessStartAtcompProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessStartAtcompProc" />
+                        }
+
+                    </p>
+                }
+                else
+                {
+                    <p class="text-info text-nowrap">All Specimen Batches processing has been completed</p>
+                }
+            </div>
+            @if (Model.CompleteProcessModel.Count > 0)
+            {
+                <div class="row">
+                    <input type="submit" value="Complete Procesing" class="btn btn-success text-center" id="subCompleteProcessing" />
+                </div>
+            }
+        }
+
+        else if (string.Compare(@Model.ModelName, "closeBatch", true) == 0)
+        {
+            <div class="col-md-4">
+                @if (Model.CloseBatch.Count > 0)
+                {
+                    <p class="inlineblock margionZero" style="white-space:nowrap">
+                        Select One or More BinID's
+                    </p>
+                    <p>
+                        @Html.DropDownList("BinIDCloseBatch", new SelectList(Model.CloseBatch.Select(x => x.Key), Model.CloseBatch), new { @class = "form-control", @multiple = "true" })
+                        @foreach (var cr in Model.CloseBatch)
+                        {
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BinID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BinIDCloseBatch" name="@Html.DisplayFor(model => cr.Value.BinID)BinIDCloseBatch" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BatchID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BatchIdCloseBatch" name="@Html.DisplayFor(model => cr.Value.BinID)BatchIdCloseBatch" />
+
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ClosedCreatedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ClosedCreatedAtCloseBatch" name="@Html.DisplayFor(model => cr.Value.BinID)ClosedCreatedAtCloseBatch" />
+                            @*
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BinCompletedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BinCompletedAtCloseBatch" name="@Html.DisplayFor(model => cr.Value.BinID)BinCompletedAtCloseBatch" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BinClosedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BinClosedByCloseBatch" name="@Html.DisplayFor(model => cr.Value.BinID)BinClosedByCloseBatch" />
+                            *@
+                        }
+
+                    </p>
+                }
+                else
+                {
+                    <p class="text-info text-nowrap">No Bins Opened</p>
+                }
+            </div>
+            @if (Model.CloseBatch.Count > 0)
+            {
+                <div class="row">
+                    <input type="submit" value="Close Batches" class="btn btn-success" id="subCloseBatches" />
+                </div>
+            }
+        }
+
+        else if (string.Compare(@Model.ModelName, "transFrom", true) == 0)
+        {
+
+            <div class="col-md-4">
+                @if (Model.BinModels.Count > 0)
+                {
+                    <p class="text-justify inlineblock margionZero" style="white-space:nowrap">
+                        Select Multiple BinID
+                    </p>
+                    @*
+                    @Html.DropDownList("BinIDTF", new SelectList(Model.BinModels, Model.BinModels), new { @multiple = "true" })
+
+                    *@
+                    @Html.DropDownList("BinIDTF", new SelectList(Model.BinModels, Model.BinModels), new { @class = "form-control", @multiple = "true" })
+                    <p class="inlineblock margionZero">
+                        Transfer to BinID
+                    </p>
+                    @Html.DropDownList("BinIDAvailable", new SelectList(Model.AvaibleBins, Model.AvaibleBins), new { @class = "form-control" })
+                    <p class="p-0">Comments: <textarea id="tfComments" name="tfComments" rows="4" cols="50"></textarea></p>
+                    <p class="text-danger" id="tfAddComments" name="tfAddComments" style="display:none">Comments requires</p>
+
+                }
+                else
+                {
+                    <p class="text-info text-nowrap" id="noSPec" name="noSPec">Found no Opened Bins</p>
+                }
+            </div>
+
+            @if (Model.BinModels.Count > 0)
+            {
+                <div class="row">
+                    @* <input type="button" value="Save" class="btn btn-success" id="saveTF" name="saveTF" />
+                    <button class="btn btn-success" id="saveTF" name="saveTF" onlclick="Tdialog()">Save</button>
+                    *@
+
+
+                </div>
+            }
+
+
+            else
+            {
+                <p class="text-center text-dark">No Bins Opened</p>
+            }
+        }
+        else
+        {
+            <div class="col-md-4">
+                @if (Model.BeginBothModel.Count > 0)
+                {
+                    <p class="inlineblock margionZero">
+                        BinID
+                    </p>
+                    <p>
+                        @Html.DropDownList("BinIDCompRegStProc", new SelectList(Model.BeginBothModel.Select(x => x.Key), Model.BeginBothModel), new { @class = "form-control" })
+                        @foreach (var cr in Model.BeginBothModel)
+                        {
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BinID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BinIDCloseBatch" name="@Html.DisplayFor(model => cr.Value.BinID)BinIDCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.BatchID)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)BatchIdCloseBatch" name="@Html.DisplayFor(model => cr.Value.BinID)BatchIdCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegAssignedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.CategoryName)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)CategoryNameCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)CategoryNameCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegAssignedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedByCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedByCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegAssignedTo)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedToCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)RegAssignedToCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegStartedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegStartedAtCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)RegStartedAtCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegCompletedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegCompltedByCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)RegCompltedByCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegCompletedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegCompletedAtCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)RegCompletedAtCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.RegCreatedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)RegCreatedByCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)RegCreatedByCompRegStProc" />
+
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessAssignedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedByCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedByCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessAssignedTo)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessAssignedToCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessCompletedAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedAtCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedAtCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessCompletedBy)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedByCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessCompletedByCompRegStProc" />
+                            <input type="hidden" value="@Html.DisplayFor(model => cr.Value.ProcessStartAt)" class="form-control" id="@Html.DisplayFor(model => cr.Value.BinID)ProcessStartAtCompRegStProc" name="@Html.DisplayFor(model => cr.Value.BinID)ProcessStartAtCompRegStProc" />
+                        }
+
+                    </p>
+                }
+                else
+                {
+                    <p class="text-info text-nowrap">No Specimen Batches found</p>
+                }
+            </div>
+            @if (Model.BeginBothModel.Count > 0)
+            {
+                <div class="row">
+                    <input type="submit" value="Complete Reg Start Proc" class="btn btn-success" id="subCompRegStProc" />
+                </div>
+            }
+        }
+
+
+
+
+
+
+
+    </body>
+    </html>

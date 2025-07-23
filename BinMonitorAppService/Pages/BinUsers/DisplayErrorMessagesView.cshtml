@@ -1,0 +1,31 @@
+﻿@page
+@model BinMonitorAppService.DisplayErrorMessagesViewModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">An error occurred while processing your request. For BinMonitor.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+<div class="border">
+    <p class="p-0 alert-danger">
+        <strong>@Model.ErrorMessage</strong>
+    </p>
+</div>
+<p>
+    Call e-Docs USA support <strong> <abbr title="Telephone">(T:)</abbr>406-565-3465</strong>
+</p>
+<p>
+    e-Docs Support email:
+    <strong>
+        <abbr title="Support Email">(E:)</abbr>
+        <a href="mailto:dan.roper@edocsusa.com">dan.roper@edocsusa.com</a>
+    </strong>
+</p>
+<p class="p-lg-5"></p>
+<div class="text-center"><a href="http://edocsusa.com/" target="_blank"> <img align="middle" src="~/Images/logo_black_v2.png" /></a></div>

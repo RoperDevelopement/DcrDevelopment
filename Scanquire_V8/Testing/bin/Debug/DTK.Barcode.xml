@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DTK.Barcode</name>
+    </assembly>
+    <members>
+        <member name="T:DTK.Barcode.Barcode">
+            <summary>
+            Represents barcode 
+            </summary>
+        </member>
+        <member name="M:DTK.Barcode.Barcode.ToString">
+            <summary>
+            Converts the value of Barcode instance to its equivalent string representation. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:DTK.Barcode.Barcode.BarcodeString">
+            <summary>
+            Gets the barcode string
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.Barcode.Page">
+            <summary>
+            Gets the page number
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.Barcode.Type">
+            <summary>
+            Gets the barcode type
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.Barcode.Direction">
+            <summary>
+            Gets the barcode direction 
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.Barcode.BorderStartPoint1">
+            <summary>
+            Gets the first line point of the barcode start border 
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.Barcode.BorderStartPoint2">
+            <summary>
+            Gets the second line point of the barcode start border 
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.Barcode.BorderEndPoint1">
+            <summary>
+            Gets the first line point of the barcode end border 
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.Barcode.BorderEndPoint2">
+            <summary>
+            Gets the second line point of the barcode end border
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.Barcode.BoundingRect">
+            <summary>
+            Gets the bounding rectangle of the barcode
+            </summary>
+        </member>
+        <member name="T:DTK.Barcode.BarcodeDirection">
+            <summary>
+            Represents the direction (orientation) of the barcode. 
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeDirection.Left">
+            <summary>
+            Horizontal, right to left direction
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeDirection.Right">
+            <summary>
+            Horizontal, left to right direction
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeDirection.Up">
+            <summary>
+            Vertical, down to up direction
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeDirection.Down">
+            <summary>
+            Vertical, up to down direction
+            </summary>
+        </member>
+        <member name="T:DTK.Barcode.BarcodeReaderException">
+            <summary>
+            BarcodeReaderException class
+            </summary>
+        </member>
+        <member name="M:DTK.Barcode.BarcodeReaderException.#ctor(System.String)">
+            <summary>
+            BarcodeReaderException class constructor
+            </summary>
+            <param name="errorMessage"></param>
+        </member>
+        <member name="T:DTK.Barcode.ImageFormat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:DTK.Barcode.BarcodeReader">
+            <summary>
+            Barcode reader
+            </summary>	
+        </member>
+        <member name="M:DTK.Barcode.BarcodeReader.#ctor">
+            <summary>
+            Barcode reader constructor
+            </summary>
+        </member>
+        <member name="M:DTK.Barcode.BarcodeReader.Finalize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DTK.Barcode.BarcodeReader.Read(System.String)">
+            <summary>
+            Reads barcodes from image file
+            </summary>
+            <param name="fileName">Image file path</param>
+            <returns>Array of Barcode class instances</returns>
+        </member>
+        <member name="M:DTK.Barcode.BarcodeReader.Read(System.String,DTK.Barcode.ImageFormat)">
+            <summary>
+            Reads barcodes from image file
+            </summary>
+            <param name="fileName"></param>
+            <param name="imgFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DTK.Barcode.BarcodeReader.Read(System.Byte[],DTK.Barcode.ImageFormat)">
+            <summary>
+            Reads barcodes from memory buffer
+            </summary>
+            <param name="fileData"></param>
+            <param name="imgFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DTK.Barcode.BarcodeReader.Read(System.Drawing.Bitmap)">
+            <summary>
+            Reads barcodes from Bitmap instance
+            </summary>
+            <param name="bitmap">Bitmap instance</param>
+            <returns>Array of Barcode instances</returns>
+        </member>
+        <member name="M:DTK.Barcode.BarcodeReader.GetErrorText">
+            <summary>
+            Gets the last error text
+            </summary>
+            <returns>A string that describes the error.</returns>
+        </member>
+        <member name="M:DTK.Barcode.BarcodeReader.SetRegistrationCode(System.String)">
+            <summary>
+            Sets registration code
+            </summary>
+            <param name="sRegCode">Registration code</param>
+        </member>
+        <member name="M:DTK.Barcode.BarcodeReader.SetOption(System.String,System.Int32)">
+            <summary>
+            Set advanced option
+            </summary>
+            <param name="sOption"></param>
+            <param name="val"></param>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.BarcodesToRead">
+            <summary>
+            An expected number of barcodes to read on image.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ScanRectangle">
+            <summary>
+            The instance of the System.Drawing.Rectangle class that defines image zone to search for barcodes.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadCode11">
+            <summary>
+            Read Code 11 symbology. 
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadCode39">
+            <summary>
+            Read Code 39 symbology.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadCode93">
+            <summary>
+            Read Code 93 symbology
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadCode128">
+            <summary>
+            Read Code128 symbology.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadCodabar">
+            <summary>
+            Read Codabar symbology.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadInter2of5">
+            <summary>
+            Read Interleaved 2 of 5 symbology. 
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadEAN13">
+            <summary>
+            Read EAN13 symbology.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadEAN8">
+            <summary>
+            Read EAN8 symbology. 
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadUPCA">
+            <summary>
+            Read UPCA symbology.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadUPCE">
+            <summary>
+            Read UPCE symbology.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadAdd2">
+            <summary>
+            Read UPC-based 2 digits extention.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadAdd5">
+            <summary>
+            Read UPC-based 5 digits extention.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadPDF417">
+            <summary>
+            Read PDF417 symbology.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadDataMatrix">
+            <summary>
+            Read DataMatrix symbology.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ReadQRCode">
+            <summary>
+            Read QR symbology.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ThresholdLevel">
+            <summary>
+            Color threshold level from 0 to 255. The value 0 means that the color threshold level will be calculated automaticaly depending on image. 
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ScanPage">
+            <summary>
+            Page number of image to scan. Value 0 mean scan all pages.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ScanInterval">
+            <summary>
+            Defines scan interval in pixels (density) of image scanning.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ScanRight">
+            <summary>
+            Defines the "left to right" scan direction.
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ScanLeft">
+            <summary>
+            Defines the "right to left" scan direction. 
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ScanUp">
+            <summary>
+            Defines the "down to up" scan direction. 
+            </summary>
+        </member>
+        <member name="P:DTK.Barcode.BarcodeReader.ScanDown">
+            <summary>
+            Defines the "up to down" scan direction. 
+            </summary>
+        </member>
+        <member name="T:DTK.Barcode.BarcodeType">
+            <summary>
+             Represents the barcode symbology
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.Unknown">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.Code11">
+            <summary>
+            Code 11 symbology. Used to identify telecommunications equipment 
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.Code39">
+            <summary>
+            Code 39 symbology. U.S. Government and military use, required for DoD applications 
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.Code93">
+            <summary>
+            Code 93 symbology. Compressed form of Code 39.
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.Code128">
+            <summary>
+            Code128 symbology. Very dense code, used extensively worldwide.
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.Codabar">
+            <summary>
+            Codabar symbology. Used in libraries and blood banks. 
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.Inter2of5">
+            <summary>
+            Interleaved 2 of 5 symbology. Used in warehouse, industrial applications.
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.EAN13">
+            <summary>
+            EAN13 symbology. Used with consumer products internationally, 13 characters.
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.EAN8">
+            <summary>
+            EAN8 symbology. Short version of EAN-13, 8 characters.
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.UPCA">
+            <summary>
+            UPCA symbology. Used with consumer products in U.S., 12 characters.
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.UPCE">
+            <summary>
+            UPCE symbology. Short version of UPC symbol, 6 characters.
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.Add2">
+            <summary>
+            2 additional digits code for UPC-based symbologies.
+            </summary>	
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.Add5">
+            <summary>
+            5 additional digits code for UPC-based symbologies.
+            </summary>	
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.PDF417">
+            <summary>
+            Portable Data File is a two-dimensional barcode.
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.DataMatrix">
+            <summary>
+            DataMatrix two-dimensional barcode.
+            </summary>
+        </member>
+        <member name="F:DTK.Barcode.BarcodeType.QRCode">
+            <summary>
+            QR two-dimensional barcode.
+            </summary>
+        </member>
+    </members>
+</doc>

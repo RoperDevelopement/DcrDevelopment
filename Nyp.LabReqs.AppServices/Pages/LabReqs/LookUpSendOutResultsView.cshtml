@@ -1,0 +1,327 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.LookUpSendOutResultsViewModel
+@{
+    ViewData["Title"] = "LookUpSendOutResultsView";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div id="headingSessionExp" style="display:none">
+    <h3 class="text-center text-danger border">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+</div>
+@*
+    <partial name="Shared/_RecordsNetImage" />
+    *@
+    <div id="divMain" name="divMain">
+        <h1 class="text-center">SendOut Results</h1>
+        <p class="p-1" />
+
+
+        <div class="container-fluid" style="background-color:white;">
+            <p class="p-2" />
+            <a href="#searchOptions" name="sOptions" id="sOptions" class=" btn btn-primary text-center" data-toggle="collapse" onmouseout="document.getElementById('showmess').style.display = 'none'" onmouseover="document.getElementById('showmess').style.display = 'block'">Search Options</a>
+            <p class="alert-light" id="showmess" style="display:none">Click to expand/hide Search Options</p>
+
+            <input type="hidden" id="partsearch" name="partsearch" value="" />
+            <div id="searchOptions" class="collapse">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Date of Service - Scan Begin Date</th>
+                            <th class="text-center">Date of Service - Scan End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center"><input type="date" id="searchStartDate" name="searchStartDate" value="@Model.StartDate" /></td>
+                            <td class="text-center"><input type="date" id="searchEndDate" name="searchEndDate" value="@Model.EndDate" /></td>
+
+
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div id="checkboxSearchDates" style="display:none">
+                    <input type="hidden" id="searchBydate" name="searchBydate" />
+                    <div class="row alert-info">
+                        <div class="col-2">
+                            <p>Search By</p>
+                        </div>
+                        <div class="col-3">
+                            <input type="radio" name="lDate" id="lDate" />&nbsp;Date Of Service
+
+                        </div>
+                        <div class="col-2">
+                            <input type="radio" id="sDate" name="sDate" value="SDate" />&nbsp;Scan Date
+                        </div>
+                    </div>
+                    <p class="p-0"></p>
+                </div>
+                <form id="searchsendoutresults">
+                    <div class="row text-center" style="display:block">
+                        <p class="text-danger" id="perfLabumberBlank" name="perfLabumberBlank" style="display:none">* Need performing lab</p>
+                        <div class="col">
+                            @Html.LabelFor(m => m.SendOutResultsModel.PerformingLabCode, new { @class = "align-middle" })&nbsp;
+
+                            @if (@Model.PerformingLab != null)
+                            {
+                                <select id="selPerLab">
+                                    <option></option>
+                                    @foreach (string rej in Model.PerformingLab)
+                                    {
+                                        <option value="@rej">@rej</option>
+                                    }
+                                </select>
+                            }
+                            else
+                            {
+                                <p class="text-info">No Proforming Labbs found</p>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="row text-center" style="display:block">
+                        <div class="col">
+                            @Html.LabelFor(m => m.SendOutResultsModel.AccessionNumber, new { @class = "align-middle" })&nbsp;
+                            @Html.TextAreaFor(m => m.SendOutResultsModel.AccessionNumber, new { @maxlength = "16", @rows = "1", @cols = "40", @class = "align-middle border", @placeholder = "AccessionNumber Not Required " })
+                        </div>
+                    </div>
+                    <p class="p-0"></p>
+                    <div class="row text-center" style="display:block">
+                        <p class="text-danger" id="perfLabumberBlank" name="perfLabumberBlank" style="display:none">* Need performing lab</p>
+                        <div class="col">
+                            @Html.LabelFor(m => m.SendOutResultsModel.FinancialNumber, new { @class = "align-middle" })&nbsp;
+
+                            @Html.TextAreaFor(m => m.SendOutResultsModel.FinancialNumber, new { @maxlength = "16", @rows = "1", @cols = "40", @class = "align-middle border", @placeholder = "Financial Number Not Required " })
+                        </div>
+                    </div>
+                    <p class="p-0"></p>
+                    <div class="row text-center" style="display:block">
+                        <div class="col">
+                            @Html.LabelFor(m => m.SendOutResultsModel.MRN, new { @class = "align-middle" })&nbsp;
+
+                            @Html.TextAreaFor(m => m.SendOutResultsModel.MRN, new { @maxlength = "16", @rows = "1", @cols = "40", @class = "align-middle border", @placeholder = "Medical Record Number Not Required " })
+                        </div>
+                    </div>
+                    <p class="p-0"></p>
+                    <div class="row text-center" style="display:block">
+                        <div class="col">
+                            @Html.LabelFor(m => m.SendOutResultsModel.FirstName, new { @class = "align-middle" })&nbsp;
+
+                            @Html.TextAreaFor(m => m.SendOutResultsModel.FirstName, new { @maxlength = "30", @rows = "1", @cols = "60", @class = "align-middle border", @placeholder = "First Name Not Required " })
+                        </div>
+                    </div>
+                    <p class="p-0"></p>
+                    <div class="row text-center" style="display:block">
+                        <div class="col">
+                            @Html.LabelFor(m => m.SendOutResultsModel.LastName, new { @class = "align-middle" })&nbsp;
+
+                            @Html.TextAreaFor(m => m.SendOutResultsModel.LastName, new { @maxlength = "30", @rows = "1", @cols = "60", @class = "align-middle border", @placeholder = "Last Name Not Required " })
+                        </div>
+                        <p class="p-0"></p>
+                    </div>
+                    <div class="row text-center" style="display:block">
+                        <div class="col">
+                            @Html.LabelFor(m => m.SendOutResultsModel.ScanOperator, new { @class = "align-middle" })&nbsp;
+
+                            @Html.TextAreaFor(m => m.SendOutResultsModel.ScanOperator, new { @maxlength = "30", @rows = "1", @cols = "60", @class = "align-middle border", @placeholder = "Scan Operator Number Not Required " })
+                        </div>
+                        <p class="p-0"></p>
+                    </div>
+                    <p class="p-0"></p>
+                    <div class="row text-left">
+                        <div class="col">
+                            @Html.CheckBoxFor(m => m.SendOutResultsModel.SearchPartial)
+                            @Html.LabelFor(m => m.SendOutResultsModel.SearchPartial)
+                        </div>
+                    </div>
+
+                </form>
+                <p class="p-0" />
+                <div class="row">
+
+                    <div class="col" id="colPerLab">
+                        <button type="button" class="btn btn-outline-dark btn-block" id="btnSearchSOR" name="btnSearchSOR">Search SendOut Results</button>
+                    </div>
+                    <div class="col" ">
+                        <a class="btn btn-outline-warning btn-block btn-link" id="btnReset" href="/LabReqs/LookUpSendOutResultsView" name="btnReset" role="button">Reset</a>
+
+                    </div>
+                    <div class="col" ">
+                        <a class="btn btn-outline-danger btn-block btn-link" id="btnexit" href="/Index" name="btnexit" role="button">Exit</a>
+
+                    </div>
+
+                </div>
+                <p class="p-2"></p>
+            </div>@*end search options*@
+    </div>
+
+</div>
+@if ((@Model.IDicSendOutResultsModel != null))
+{
+    <div id="divLabReqs" class="container-fluid">
+        <p class="text-left">Total Query Time @Model.TotalQueryTime</p>
+        <p class="p-0" />
+
+        <table class="table table-hover w-auto" width="100%" id="dtLabReqs">
+            <thead>
+                <tr>
+                    <th>File URL</th>
+                    <th>Performing Lab</th>
+                    <th>Accession Number</th>
+                    <th>Financial Number</th>
+                    <th>Medical Record Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date Of Service</th>
+                    <th>Scan Date</th>
+                    <th>Scan Operator</th>
+                    <th>Scan Batch ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var items in Model.IDicSendOutResultsModel)
+                {
+
+                    <tr>
+
+                        <td> <a href="/Partial_Pages/DisplayPdfFilePartialView?pdfurl=@items.Value.FileUrl" target="_blank"><img src="~/Images/small_export-to-pdf-icon-pdf-export-toolbar-icon.png" width="20" height="25" /></a></td>
+                        <td>@items.Value.PerformingLabCode</td>
+                        <td>@items.Value.AccessionNumber</td>
+                        <td>@items.Value.FinancialNumber</td>
+                        <td>@items.Value.MRN</td>
+                        <td>@items.Value.FirstName</td>
+                        <td>@items.Value.LastName</td>
+                        <td>@items.Value.DateOFService.ToString("MM/dd/yyyy")</td>
+                        <td>@items.Value.ScanDate</td>
+                        <td>@items.Value.ScanOperator</td>
+                        <td>@items.Value.ScanBatch</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+}
+
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SessionExpireAlert(0);
+            $(this).bind("contextmenu", function (e) {
+
+                e.preventDefault();
+
+            });
+            if ($('#searchStartDate').val() != '') {
+                $('#checkboxSearchDates').css("display", "block");
+                $("#searchBydate").val('searchByLogDate');
+                $('#lDate').prop('checked', true);
+                $('#sDate').prop('checked', false);
+                //   $('#btnlookUpByDateofService').css("display", "block");
+            }
+            $("#divLoading").hide();
+            CompleteAjaxCall();
+            $('#searchStartDate').change(function () {
+
+                if ($('#searchEndDate').val() == '') {
+
+
+                    $('#checkboxSearchDates').css("display", "block");
+                    $("#searchBydate").val('searchByLogDate');
+
+                    //$("#searchBydate").val('searchByLogDate');
+                    $("#lDate").prop('checked', true);
+                    $('#colPerLab').css("display", "block");
+
+                }
+                GetSearchStartEndDate();
+
+            });
+            $('#lDate').change(function () {
+                $("#searchBydate").val('searchByLogDate');
+                $('#sDate').prop('checked', false);
+
+            });
+
+            $(document).keypress(function (e) {
+                if (e.which == 13) {
+
+                    $('#btnSearchSOR').click();
+                    return false;
+
+                }
+
+
+
+                return true;
+            });
+
+            $('#sDate').change(function () {
+                $("#lDate").prop('checked', false);
+                $("#searchBydate").val('scanDate');
+
+            });
+            $('#searchEndDate').change(function () {
+
+                if ($('#searchStartDate').val() == '') {
+
+
+                    $('#checkboxSearchDates').css("display", "block");
+                    $("#searchBydate").val('searchByLogDate');
+
+                    //$("#searchBydate").val('searchByLogDate');
+                    $("#lDate").prop('checked', true);
+                    $('#colPerLab').css("display", "block");
+
+                }
+                CheckSearchStartDate();
+
+            });
+            $('#btnSearchSOR').click(function () {
+                var message = "Looking up Send out Results ";
+                ShowLoadingDialog(message);
+                $("<input type='hidden'/>")
+                    .attr("value", $('#searchStartDate').val())
+                    .attr("id", "startSDate")
+                    .attr("name", "startSDate")
+                    .prependTo("#searchsendoutresults");
+                $("<input type='hidden'/>")
+                    .attr("value", $('#searchEndDate').val())
+                    .attr("id", "endSDate")
+                    .attr("name", "endSDate")
+                    .prependTo("#searchsendoutresults");
+
+                $("<input type='hidden'/>")
+                    .attr('value', $("#searchBydate").val())
+                    .attr("id", "searchby")
+                    .attr("name", "searchby")
+                    .prependTo("#searchsendoutresults");
+                $("<input type='hidden'/>")
+                    .attr("value", $('#selPerLab').val())
+                    .attr("id", "perfLabCode")
+                    .attr("name", "perfLabCode")
+                    .prependTo("#searchsendoutresults");
+                //  $("<input type='hidden' />")
+                //    .attr('value', $("#scanOpcon").val())
+                //    .attr("id", "searchPartial")
+                //    .attr("name", "searchPartial")
+                //    .prependTo("#searchmaintlogs");
+
+                //   $("<input type='hidden' />")
+                //    .attr('value', $("#scanopr").val())
+                //     .attr("id", "searchbyScanOperator")
+                //.attr("name", "searchbyScanOperator")
+                //   .prependTo("#searchmaintlogs");
+                $("#searchsendoutresults").submit();
+            });
+        });
+    </script>
+}

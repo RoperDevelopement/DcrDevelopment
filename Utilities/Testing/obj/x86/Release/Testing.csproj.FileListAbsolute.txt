@@ -1,0 +1,7 @@
+C:\Code\EdocsUSA.Utilities\Testing\bin\Release\Testing.exe
+C:\Code\EdocsUSA.Utilities\Testing\bin\Release\EdocsUSA.Utilities.dll
+C:\Code\EdocsUSA.Utilities\Testing\obj\x86\Release\Testing.MainForm.resources
+C:\Code\EdocsUSA.Utilities\Testing\obj\x86\Release\Testing.exe
+C:\Code\EdocsUSA.Utilities\Testing\obj\x86\Release\Testing.csprojResolveAssemblyReference.cache
+C:\Code\EdocsUSA.Utilities\Testing\obj\x86\Release\Testing.csproj.GenerateResource.Cache
+C:\Code\EdocsUSA.Utilities\Testing\bin\Release\Testing.exe.config

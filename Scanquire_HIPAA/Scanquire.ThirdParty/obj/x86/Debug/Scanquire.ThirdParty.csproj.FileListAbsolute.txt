@@ -1,0 +1,101 @@
+C:\CodeTest\Scanquire 4\Scanquire.ThirdParty\bin\Debug\DebenuPDFLibrary.dll
+C:\CodeTest\Scanquire 4\Scanquire.ThirdParty\bin\Debug\DTKBarcode.dll
+C:\CodeTest\Scanquire 4\Scanquire.ThirdParty\bin\Debug\DTKImage.dll
+C:\CodeTest\Scanquire 4\Scanquire.ThirdParty\bin\Debug\EZTW32.dll
+C:\CodeTest\Scanquire 4\Scanquire.ThirdParty\bin\Debug\FreeImage.dll
+C:\CodeTest\Scanquire 4\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.dll
+C:\CodeTest\Scanquire 4\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.pdb
+C:\CodeTest\Scanquire 4\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csprojResolveAssemblyReference.cache
+C:\CodeTest\Scanquire 4\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.dll
+C:\CodeTest\Scanquire 4\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.pdb
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\DebenuPDFLibraryDLL0915.dll
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\EZTwain Classic.txt
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\FreeImage.txt
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\SharpSerializer.txt
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\TwainNet.txt
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\DTKBarcode.dll
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\DTKImage.dll
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\EZTW32.dll
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\FreeImage.dll
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.dll
+C:\Code\Scanquire 4\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.pdb
+C:\Code\Scanquire 4\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.dll
+C:\Code\Scanquire 4\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.pdb
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\DebenuPDFLibraryDLL0915.dll
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\EZTwain Classic.txt
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\FreeImage.txt
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\SharpSerializer.txt
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\TwainNet.txt
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\DTKBarcode.dll
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\DTKImage.dll
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\EZTW32.dll
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\FreeImage.dll
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.dll
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.pdb
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csproj.CoreCompileInputs.cache
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.dll
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.pdb
+C:\Edocs\Scanquire_6\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csprojAssemblyReference.cache
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\DebenuPDFLibraryDLL0915.dll
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\EZTwain Classic.txt
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\FreeImage.txt
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\SharpSerializer.txt
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\TwainNet.txt
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\DTKBarcode.dll
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\DTKImage.dll
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\EZTW32.dll
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\FreeImage.dll
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.dll
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.pdb
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csproj.CoreCompileInputs.cache
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.dll
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.pdb
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Newtonsoft.Json.dll
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Newtonsoft.Json.xml
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csproj.CopyComplete
+C:\Edocs\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csprojAssemblyReference.cache
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\DebenuPDFLibraryDLL0915.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\EZTwain Classic.txt
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\FreeImage.txt
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\SharpSerializer.txt
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\TwainNet.txt
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\EZTW32.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\FreeImage.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.pdb
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Newtonsoft.Json.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Newtonsoft.Json.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csproj.CopyComplete
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.pdb
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\DebenuPDFLibraryDLL0915.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\EZTwain Classic.txt
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\FreeImage.txt
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\SharpSerializer.txt
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\TwainNet.txt
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\EZTW32.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\FreeImage.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.pdb
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Newtonsoft.Json.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\bin\Debug\Newtonsoft.Json.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csproj.CopyComplete
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.pdb
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csprojAssemblyReference.cache
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\DebenuPDFLibraryDLL0915.dll
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\EZTwain Classic.txt
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\FreeImage.txt
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\SharpSerializer.txt
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\3rd Party Licensing\TwainNet.txt
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\EZTW32.dll
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\FreeImage.dll
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.dll
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\Scanquire.ThirdParty.pdb
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\Newtonsoft.Json.dll
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\bin\Debug\Newtonsoft.Json.xml
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csproj.CoreCompileInputs.cache
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csproj.CopyComplete
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.dll
+L:\EdocsGitHub\Scanquire_HIPAA_MTSH\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.pdb
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.ThirdParty\obj\x86\Debug\Scanquire.ThirdParty.csproj.CoreCompileInputs.cache

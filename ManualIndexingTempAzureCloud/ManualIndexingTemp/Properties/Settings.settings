@@ -1,0 +1,96 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ManualIndexingTemp.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultScanStationID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">CS</Value>
+    </Setting>
+    <Setting Name="DefaultIndexNumber" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">55555</Value>
+    </Setting>
+    <Setting Name="OldIndexNumberRegex" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">^.{14}$|^.{18}$</Value>
+    </Setting>
+    <Setting Name="OldIndexNumberMessage" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">You have entered in an accession number using the old format.\nRecords starting 9/19/2010 should be entered as follows:\n{9 digit financial number}\n{6 digit client code}{9 digit patient id}\n{6 digit client code}{9 digit requisition number}\nTo continue using the old format, click Ok\nTo enter a different accession number, click Cancel</Value>
+    </Setting>
+    <Setting Name="ValidIndexNumberRegex" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">^[a-z A-Z \d \- _]{9}$|^[a-z A-Z \d \- _]{15}$|^[a-z A-Z \d \- _]{18}$|^[a-z A-Z \d \- _]{16}$</Value>
+    </Setting>
+    <Setting Name="ExtraPromptRegex" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">^(\d{9})\1+$</Value>
+    </Setting>
+    <Setting Name="ExtraPromptMessage" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">You have entered an index number that requires an additional check.</Value>
+    </Setting>
+    <Setting Name="ArchiveRoot" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">d:\Archives\NYP\LabReqs\</Value>
+    </Setting>
+    <Setting Name="UploadToSP" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ValidRequisitionNumberRegx" Type="System.String" Scope="User">
+      <Value Profile="(Default)">^[34]\d{9}$|^[4]\d{7}$|^[5]\d{7}$|^[6]\d{6}$|^[6]\d{7}$|^[W][C]\d{4}$|^[3]\d{7}$|^[1]\d{9}$|^WC\d{5}$|^7\d{6}$|5\d{8}$|^20\d{8}$|^63\d{6}$|^20\d{8}$|\d{9}$</Value>
+    </Setting>
+    <Setting Name="LogFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{ApplicationDir}\Local\EdocsManualIndexing\</Value>
+    </Setting>
+    <Setting Name="DaysToKeepLogFiles" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="EmailServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.gmail.com</Value>
+    </Setting>
+    <Setting Name="EmailFrom" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AlertSender@edocsusa.com</Value>
+    </Setting>
+    <Setting Name="EmailPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">6746edocs</Value>
+    </Setting>
+    <Setting Name="EmailPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+    <Setting Name="EmailTo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Dan.Roper@edocsusa.com</Value>
+    </Setting>
+    <Setting Name="EmailCC" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EmailSubject" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{ErrorSuccess} Running ManualIndexing runtime {runDate}</Value>
+    </Setting>
+    <Setting Name="EdocsSupport" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Call e-Docs USA support @(406)-565-3465 and tell them upload process did not start.</Value>
+    </Setting>
+    <Setting Name="Archiver" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">LABREQS</Value>
+    </Setting>
+    <Setting Name="SendErrorEmailsOnly" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AuditLogFolder" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UploadToSPScriptPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">d:\Archives\UploadBatchToAzureCloud\Edocs.Upload.Batches.AzureCloud.exe</Value>
+    </Setting>
+    <Setting Name="TextTo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">4064908968@vtext.com</Value>
+    </Setting>
+    <Setting Name="TextCc" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ValidCSNNumbers" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">^1\d{9}$|^1\d{8}$|^2\d{8}|^2\d{9}$</Value>
+    </Setting>
+    <Setting Name="ManuelIndexingJSFilesCurrent" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">L:\Archives\ManuelIndexingJSFilesCurrent</Value>
+    </Setting>
+    <Setting Name="ManuelIndexingJSBackUp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">d:\Archives\ManuelIndexingJSFilesCurrent\</Value>
+    </Setting>
+    <Setting Name="ShowUploadWindow" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

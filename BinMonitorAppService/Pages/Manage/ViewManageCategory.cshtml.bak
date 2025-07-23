@@ -1,0 +1,364 @@
+﻿@page
+@model BinMonitorAppService.Pages.Manage.ViewManageCategoryModel
+@{
+    ViewData["Title"] = "ViewManageCategoryModel";
+    Layout = "~/Pages/Shared/_Layout_BinMonitor.cshtml";
+}
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+    <div id="headingSessionExp" style="display:none">
+        <h3 class="text-center text-danger">Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br /></h3>
+    </div>
+<header>
+    <h1 class="text-center">Manage BinMonitor Categories</h1>
+</header>
+<p class="p-4" />
+<div style="background-color:white">
+    <p class="p-2"></p>
+    <div class="container-fluid">
+        <form method="post" id="fcolors" name="fcolors">
+            <div class="form-group">
+                <p class="alert-danger text-center" style="display:none" id="noChangesFound">*Not saving no changes found</p>
+                <input type="hidden" id="newColor" name="newColor" />
+                <input type="hidden" id="newColor1" name="newColor1" />
+                <input type="hidden" id="newColor2" name="newColor2" />
+                <input type="hidden" id="newColor3" name="newColor3" />
+                <input type="hidden" id="newColor4" name="newColor4" />
+                <input type="hidden" id="catid" name="catid" />
+                <input type="hidden" id="emTo" name="emTo" />
+                <input type="hidden" id="OldColor" name="OldColor" />
+                <input type="hidden" id="currentBtn" name="currentBtn" value="" />
+
+                <div class="row justify-content-center">
+                    @Html.ValidationMessage("CategoryNameInvaild", new { @class = "text-danger" })
+                    @*
+                        <select id="Categories" name="Categories" onchange="Color('Categories','catColor','')">
+                    *@
+                    <select id="Categories" name="Categories">
+                        <option value="Select Category">Select Category</option>
+                        @foreach (var color in Model.CategoryColors)
+                        {
+                            if (color.Value.Selected)
+                            {
+                        <option selected value="@color.Value.CategoryName">@color.Value.CategoryName</option>
+                            }
+                            else
+                            {
+                        <option value="@color.Value.CategoryName">@color.Value.CategoryName</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <p class="p-1" />
+
+                <h2 class="text-center" id="catSettings" name="catSettings" style="display:none">Category Settings</h2>
+
+
+            </div>
+
+            <div id="catDurFrq"></div>
+            <p class="p-0" />
+            <div class="row justify-content-md-center">
+
+                <button id="btnsave" name="btnsave" style="display:none" value="savechanges" class="btn btn-outline-info">Save</button>
+                <button id="btnreset" name="btnreset" style="display:none" value="reverthanges" class="btn btn-outline-info ">Reset</button>
+                <button id="btnexit" name="btnexit" class="btn btn-outline-info ">Exit</button>
+
+
+
+
+
+
+            </div>
+        </form>
+        <button id="btnChangeColor" name="btnChangeColor" style="display:none" />
+    </div>
+    <p class="p-2"></p>
+    <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:none">
+        <p id="parBmUpScreen" name="parCategory" style="position: absolute; top: 30%; left: 45%; color: White;">
+            Getting / Updating Category, please wait...<img src="~/Images/ajax-loading.gif">
+        </p>
+    </div>
+</div>
+<div id="modalChangeColors" class="modal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Change Category Color</h4>
+
+
+            </div>
+            <div class="modal-body">
+                @*
+
+                    <form method="post" id="fBegReg" name="fBegReg">
+                *@
+
+                <div class="form-group">
+
+                    <div class="col-md-4">
+                        <input type="hidden" value="" name="dialogNewColor" id="dialogNewColor" />
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-4">
+
+                            <select id="CategoryNewColor" name="CategoryNewColor" onchange="Color('CategoryNewColor','catNewColor')">
+
+                                <option value="Select a category">Select a color</option>
+                                @foreach (var color in Model.CategoryColorCodesModel)
+                                {
+
+                                    <option value="@color.Value.ColorHexValue">@color.Value.ColorName</option>
+                                }
+                            </select>
+
+                            <p id="catNewColor" name="catColor" style="display:none;" class="font-weight-bold text-nowrap">Category Color</p>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <input type="button" value="Save" class="btn btn-success close1" id="saveColor" name="saveColor" "  />
+                    </div>
+
+
+
+                    @*
+                                        </form>
+                        </div>
+
+                    *@
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default close" id="btncloseDial" name="btncloseDial" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+      @Html.ListBox("Categories", new SelectList(Model.CategoryColors.Select(p=>p.Value.CategoryName),Model.CategoryColors.Select(m=>m.Value.CategoryName)), new { @onchange = "Color()" })
+    @foreach (var color in CategoryColors)
+
+    <select style="background-color:#FF0000;" id="selectColor" name="selectColor" onchange="Color()">
+        <option style="background-color:#FF0000;" onselect="Color()" value="Burlywood">Burlywood</option>
+        <option style="background-color:blue" onselect="Color()" value="Blue">Vlue</option>
+    </select>
+*@
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            SessionExpireAlert(0);
+            $("#divLoading").hide();
+            $('#btnsave').click(function () {
+                //     if (!(CheckChanges())){
+                //       return false;
+                //  }
+                 var message = "Updating Category "+ $("#Categories").val();
+                ShowLoadingDialog(message);
+                document.getElementById("emTo").value = $("#selemail").val();
+
+                $("<input type = 'hidden' value = 'savechanges' /> ")
+                    .attr("id", "schanges")
+                    .attr("name", "schanges")
+                    .prependTo("#fcolors");
+
+                $("#fcolors").submit();
+            });
+
+
+
+
+            $('#btnreset').click(function () {
+                $("<input type ='text' value = 'reverthanges' /> ")
+                    .attr("id", "rchanges")
+                    .attr("name", "rchanges")
+                    .prependTo("#fcolors");
+                $("#fcolors").submit();
+            });
+
+            $('#btnexit').click(function () {
+                $("#fcolors").submit();
+            });
+
+
+            $("#saveColor").click(function () {
+
+                document.getElementById("modalChangeColors").style.display = "none";
+                UPdateColor();
+
+            });
+
+            $("#btncloseDial").click(function () {
+                document.getElementById("modalChangeColors").style.display = "none";
+            });
+            $("#Categories").change(function (e) {
+                var selValue = $("#Categories").val();
+                var message = "Getting Category " + selValue;
+                ShowLoadingDialog(message);
+                e.preventDefault();
+                
+                selValue = selValue.substring(selValue.indexOf(",") + 1);
+
+                document.getElementById("catid").value = selValue;
+                document.getElementById("catSettings").style.display = "block";
+                document.getElementById("btnsave").style.display = "block";
+                document.getElementById("btnreset").style.display = "block";
+                var pvUrl = "/Partial_Pages/CategoryCheckPointModelView?catName=" + selValue;
+                $.ajax({
+                    type: "GET",
+                    url: pvUrl,
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    success: function (result) {
+                        $("#catDurFrq").html(result);
+                        $("#resuts").val(result);
+
+
+                    },
+                    complete: function () {
+                        CompleteAjaxCall();
+                        
+                    },
+                    error: function (request, status, error) {
+                        alert("error");
+                    }
+                });
+                
+            });
+        });
+
+
+
+
+
+
+
+
+
+    </script>
+    <script type="text/javascript">
+
+        
+
+        function Color(selectId, parID) {
+            var value = document.getElementById(selectId).value;
+            var catId = null;
+
+
+            if (value.indexOf(",") > 0) {
+                catId = value.substring(value.indexOf(",") + 1);
+                value = value.substring(0, value.indexOf(","));
+                //document.getElementById("catid").value = catId;
+                document.getElementById("noChangesFound").style.display = "none";
+                document.getElementById("btnsave").style.display = "inline-block";
+                document.getElementById("btnreset").style.display = "inline-block";
+            }
+
+            //     if (document.getElementById("divCp").style.display == "none") {
+            //       document.getElementById("divCp").style.display = "block"
+            //  }
+            document.getElementById(parID).style.backgroundColor = value;
+            document.getElementById(parID).style.display = "inline-block";
+            document.getElementById("btnChangeColor").style.display = "inline-block";
+
+            if (selectId == 'CategoryNewColor') {
+                document.getElementById("dialogNewColor").value = value;
+            }
+
+            if (value == 'Select Category') {
+                document.getElementById(parID).style.display = "none";
+                document.getElementById("btnChangeColor").style.display = "none";
+                document.getElementById("btnsave").style.display = "none";
+                document.getElementById("btnsave").style.display = "none";
+            }
+
+
+        }
+
+        function UPdateColor() {
+            var newColor = document.getElementById("dialogNewColor").value;
+            var btnValue = document.getElementById("currentBtn").value;
+            //   document.getElementById("newColor").value = newColor;
+            //  document.getElementById("catColor").style.backgroundColor = newColor;
+            document.getElementById(btnValue).style.color = newColor;
+            document.getElementById("currentBtn").value = '';
+            document.getElementById("btnChangeColor").style.display = "none";
+
+            switch (btnValue) {
+                case 'btnChangeColor1':
+                    document.getElementById("newColor1").value = newColor;
+                    break;
+                case 'btnChangeColor2':
+                    document.getElementById("newColor2").value = newColor;
+                    break;
+                case 'btnChangeColor3':
+                    document.getElementById("newColor3").value = newColor;
+                    break;
+                default:
+
+                    document.getElementById("newColor4").value = newColor;
+
+
+            }
+
+        }
+
+    </script>
+
+    <script>
+        // Get the button that opens the modal
+        // Get the modal
+        var modalbegReg = document.getElementById("modalChangeColors");
+
+
+
+        // Get the <span> element that closes the modal
+        var spanbegReg = document.getElementsByClassName("close")[0];
+        //    var spanbegReg1 = document.getElementById("saveColor");
+
+        var btnbegReg = document.getElementById("btnChangeColor");
+        // When the user clicks the button, open the modal
+        btnbegReg.onclick = function () {
+            modalbegReg.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        spanbegReg.onclick = function () {
+            modalbegReg.style.display = "none";
+        }
+
+        //   spanbegReg1.onclick = function () {
+        //     UPdateColor();
+        //    modalbegReg.style.display = "none";
+        ///    }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modalbegReg.style.display = "none";
+
+            }
+        }
+
+    </script>
+}

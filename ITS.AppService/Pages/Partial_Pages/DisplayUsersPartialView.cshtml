@@ -1,0 +1,97 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.Partial_Pages.DisplayUsersPartialViewModel
+@{
+    Layout = null;
+}
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/datatables-select.min.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" />
+    <script src="~/lib/datatables/datatables-select.min.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+
+</head>
+<html>
+
+<body>
+    <div class="container-fluid">
+    </div>
+    @if ((@Model.ListUserModel != null) && (@Model.ListUserModel.Count > 0))
+    {
+<table class="table table-hover w-auto table-bordered  table-info" style="font-size: small"  id="dtlUsers">
+    <thead>
+
+
+        <tr class="w-auto"  >
+            <th>User ID</th>
+            <th>Customer Name</th>
+            <th>Login Name</th>
+            <th>Email Adress</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Cell Phone Number</th>
+            <th>Last Logged in</th>
+            <th>Password Last Changed</th>
+            <th>Edocs Admin</th>
+            <th>Site Admin</th>
+            <th>Active</th>
+            <th>Edit User</th>
+
+        </tr>
+    </thead>
+    @foreach (var items in Model.ListUserModel)
+    {
+<tr class="w-auto"  >
+    <td>@items.Key.ToString()</td>
+    <td>@items.Value.EdocsCustomerName</td>
+    <td>@items.Value.UserName</td>
+    <td>@items.Value.EmailAddress</td>
+    <td>@items.Value.FirstName</td>
+    <td>@items.Value.LastName</td>
+    <td>@items.Value.CellPhoneNumber</td>
+    <td>@items.Value.DateLastLogin</td>
+    <td>@items.Value.DatePasswordLastChanged</td>
+    
+    @if (@items.Value.IsEdocsAdmin)
+    {
+        <td>True</td>
+    }
+    else
+    {
+        <td>False</td>
+    }
+    @if (@items.Value.IsCustomerAdmin)
+    {
+        <td>True</td>
+    }
+    else
+    {
+        <td>False</td>
+    }
+    @if (@items.Value.IsUserActive)
+    {
+        <td>True</td>
+    }
+    else
+    {
+        <td>False</td>
+    }
+    <td> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/EdocsITSUsers/EdocsITSUsersView?SelUser=@items.Value.UserName" class="btn btn-info" role="button" target="_self">Edit</a></span></td>
+
+</tr>
+            }
+        <tbody>
+        </tbody>
+    </table>
+    }
+    else
+    {
+        <p class="text-center text-dark">No users found!!!</p>
+    }
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Scanquire.Public.Properties" GeneratedClassName="SQImageListViewer">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultCheckedItemBorderColor" Type="System.Drawing.Color" Scope="Application">
+      <Value Profile="(Default)">Control</Value>
+    </Setting>
+    <Setting Name="DefaultImageCheckedState" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DefaultItemBorderWidth" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="DefaultItemMarginWidth" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="DefaultLargeThumbnailSize" Type="System.Drawing.Size" Scope="Application">
+      <Value Profile="(Default)">255, 330</Value>
+    </Setting>
+    <Setting Name="DefaultSmallThumbnailSize" Type="System.Drawing.Size" Scope="Application">
+      <Value Profile="(Default)">85, 110</Value>
+    </Setting>
+    <Setting Name="DefaultUnCheckedItemBorderColor" Type="System.Drawing.Color" Scope="Application">
+      <Value Profile="(Default)">DarkRed</Value>
+    </Setting>
+    <Setting Name="DefaultMediumThumbnailSize" Type="System.Drawing.Size" Scope="Application">
+      <Value Profile="(Default)">170, 220</Value>
+    </Setting>
+    <Setting Name="DefaultSelectedThumbnailBorderColor" Type="System.Drawing.Color" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ThumbnailMargin" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="ThumbnailBorder" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="DefaultDeskewAngle" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DefaultSplitterDistance" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">150</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

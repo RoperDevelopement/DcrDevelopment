@@ -1,0 +1,9 @@
+﻿<Complex name="Root" type="BinMonitor.Common.User, BinMonitor.Common">
+  <Properties>
+    <Simple name="Id" value="sam.brinly" />
+    <Simple name="FirstName" value="SAM"/>
+    <Simple name="LastName" value="BRINLY"/>
+    <Simple name="UserProfileId" value="ADMIN" />
+    <Simple name="CardId" value="12345"/>
+  </Properties>
+</Complex>

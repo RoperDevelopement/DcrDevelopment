@@ -1,0 +1,113 @@
+﻿@page
+@model Edocs.ITS.AppService.Pages.Invoice.RePrintInvoiceViewModel
+@{
+}
+<div class="container-fluid">
+    <h1 class="text-center text-info">e-Docs USA Tracking System Reprint Invoice</h1>
+
+    <h3 class="text-center text-info">Select Customer</h3>
+    <form method="get" id="formCustId" role="form">
+        <div class="row text-center  form-inline">
+            <div class="col-*-* text-center" style="margin:0 auto;">
+                <select id="cusID" name="cusID">
+                    <option value="Customer Name">Customer Name</option>
+                    @foreach (var id in Model.EdocsITCustomerIDs)
+                    {
+                        <option value="@id.EdocsCustomerID">@id.EdocsCustomerName</option>
+                    }
+
+
+                </select>
+
+            </div>
+        </div>
+    </form>
+    <p class="p-0"></p>
+    @if ((@Model.InvNumDateSent != null) && (@Model.InvNumDateSent.Count() > 0))
+    {
+
+        <h3 class="text-center text-info">Select Invoice Number Invoice DateSend</h3>
+        <form method="get" id="formInvNumber" role="form">
+            <div class="row text-center  form-inline">
+                <div class="col-*-* text-center" style="margin:0 auto;">
+                    <select id="invNum" name="invNum">
+                        <option value="Invoice Number-DateSent">Invoice Number-DateSent</option>
+                        @foreach (var id in Model.InvNumDateSent)
+                        {
+                            <option value="@id.InvoiceNum">@id.InvoiceNum - @id.DateInvoiceSent.ToString("MM-dd-yyyy")</option>
+                        }
+
+
+                    </select>
+
+                </div>
+            </div>
+        </form>
+    }
+</div>
+<p class="p-2"></p>
+<div>
+    @if (@Model.HtmlFile.HtmlData != null)
+    {
+        @Html.Raw(@Model.HtmlFile.HtmlData)
+        <div id="pr">
+            <a type="button" class="btn btn-outline-danger btn-link" style="float:right;" id="btnExit" href="/Index" name="btnExit">Exit</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;<button button class="btn btn-primary btn-outline-primary" id="prInvoice" style="float: right; margin-right:5px">Print</button>
+        </div>
+    }
+
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+    <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+        Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+    </p>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            // printOut('printInvoice');
+            $('#prInvoice').click(function () {
+                printOut('saveHtml');
+            });
+
+            $('#cusID').change(function (e) {
+                //if (!(CheckEmptyString($("#repSDate").val(), 'Need a Report Begin Date:'))) {
+                //    $("#repSDate").focus();
+                //    return false;
+                //}
+                //if (!(CheckEmptyString($("#repSEndDate").val(), 'Need a Report Begin Date:'))) {
+                //    $("#repSEndDate").focus();
+                //    return false;
+                //}
+                $("#divLoading").show();
+                //  ShowLoading();
+
+
+
+                $("#formCustId").submit();
+
+            });
+            $('#invNum').change(function (e) {
+                //if (!(CheckEmptyString($("#repSDate").val(), 'Need a Report Begin Date:'))) {
+                //    $("#repSDate").focus();
+                //    return false;
+                //}
+                //if (!(CheckEmptyString($("#repSEndDate").val(), 'Need a Report Begin Date:'))) {
+                //    $("#repSEndDate").focus();
+                //    return false;
+                //}
+                $("#divLoading").show();
+                //  ShowLoading();
+
+
+
+                $("#formInvNumber").submit();
+
+            });
+            
+
+        });
+    </script>
+}

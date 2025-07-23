@@ -1,0 +1,447 @@
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\ThirdParty\DebenuPdfLibrary915.cs
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\DebenuPDFLibraryDLL0915.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\3rd Party Licensing\EZTwain Classic.txt
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\3rd Party Licensing\FreeImage.txt
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\3rd Party Licensing\SharpSerializer.txt
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\3rd Party Licensing\TwainNet.txt
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\DTKBarcode.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\DTKImage.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\EZTW32.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\FreeImage.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Barcode Encoders\DEFAULT.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Barcode Readers\DEFAULT.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Barcode Renderers\DEFAULT.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\BMP.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\GIF.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\TIFF_CCITG4.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\TIFF_LZW.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Graphics\logobw.bmp
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Image Processors\COLOR DEPTH 8BPP.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\ORIGINAL PAGE ARCHIVED.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\PAGES SCANNED TO SEPARATE FILE.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Archivers\LOCAL.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Command Image Builders\DEFAULT.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Command Readers\BARCODE DEFAULT.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Command Readers\DEFAULT.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\BMP.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\GIF.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\JPEG.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\JPG.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\PDF.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\PNG.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\TIF.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\TIFF.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\DEFAULT.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\JPEG_GOOD.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\JPEG_SUPERB.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\PDF ENCRYPTED.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\PDF.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\PNG.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Image Processors\COLOR DEPTH 4BPP.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 180 FLIP NONE.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 270 FLIP NONE.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\DAMAGED PAGE OMITTED.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\DAMAGED_PAGE.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\DEFAULT.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\FREE TYPE.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\UNREADABLE PAGE.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 90 FLIP NONE.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Scanquire.Public.dll.config
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Scanquire.Public.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\DTK.Barcode.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\DTK.Image.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\EdocsUSA.Utilities.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\FreeImageNET.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Polenter.SharpSerializer.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Scanquire.ThirdParty.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\System.Runtime.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\System.Threading.Tasks.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\DTK.Barcode.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\DTK.Image.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Polenter.SharpSerializer.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\System.Runtime.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\System.Threading.Tasks.xml
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.App.config
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.csprojResolveAssemblyReference.cache
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.Icons.resources
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.Sharepoint.SharepointCredentials.resources
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.Sharepoint.SharepointCredentialsManager.resources
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.ProgressDialog.resources
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.ProgressMonitor.resources
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SessionLogViewer.resources
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SQArchiverSelector.resources
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SQImageListViewer.resources
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.GenerateResource.Cache
+C:\Code\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Config\Archivers\LOCAL - TIFF.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\System.IO.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\System.IO.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.SharePoint.Client.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.SharePoint.Client.Runtime.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Newtonsoft.Json.dll
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\FreeImageNET.xml
+C:\Code\Scanquire 4\Scanquire.Public\bin\Release\Newtonsoft.Json.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\ThirdParty\DebenuPdfLibrary915.cs
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\DebenuPDFLibraryDLL0915.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\3rd Party Licensing\EZTwain Classic.txt
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\3rd Party Licensing\FreeImage.txt
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\3rd Party Licensing\SharpSerializer.txt
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\3rd Party Licensing\TwainNet.txt
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\DTKBarcode.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\DTKImage.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\EZTW32.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\FreeImage.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Archivers\LOCAL - TIFF.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Barcode Encoders\DEFAULT.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Barcode Readers\DEFAULT.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Barcode Renderers\DEFAULT.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\BMP.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\GIF.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\TIFF_CCITG4.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\TIFF_LZW.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Graphics\logobw.bmp
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Image Processors\COLOR DEPTH 8BPP.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\ORIGINAL PAGE ARCHIVED.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\PAGES SCANNED TO SEPARATE FILE.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Archivers\LOCAL.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Command Image Builders\DEFAULT.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Command Readers\BARCODE DEFAULT.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Command Readers\DEFAULT.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\BMP.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\GIF.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\JPEG.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\JPG.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\PDF.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\PNG.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\TIF.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Readers\TIFF.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\DEFAULT.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\JPEG_GOOD.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\JPEG_SUPERB.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\PDF ENCRYPTED.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\PDF.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\File Writers\PNG.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Image Processors\COLOR DEPTH 4BPP.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 180 FLIP NONE.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 270 FLIP NONE.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\DAMAGED PAGE OMITTED.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\DAMAGED_PAGE.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\DEFAULT.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\FREE TYPE.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Text Image Builders\UNREADABLE PAGE.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 90 FLIP NONE.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Scanquire.Public.dll.config
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Scanquire.Public.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\EdocsUSA.Utilities.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Newtonsoft.Json.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Scanquire.ThirdParty.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\System.IO.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\System.Runtime.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\System.Threading.Tasks.dll
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\EdocsUSA.Utilities.pdb
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\Newtonsoft.Json.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\System.IO.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\System.Runtime.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\bin\Release\System.Threading.Tasks.xml
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.App.config
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.csprojAssemblyReference.cache
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.Icons.resources
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.Sharepoint.SharepointCredentials.resources
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.Sharepoint.SharepointCredentialsManager.resources
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.ProgressDialog.resources
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.ProgressMonitor.resources
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SessionLogViewer.resources
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SQArchiverSelector.resources
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SQImageListViewer.resources
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.GenerateResource.cache
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.CoreCompileInputs.cache
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.CopyComplete
+C:\Edocs\Scanquire 4\Scanquire.Public\obj\x86\Release\Scanquire.Public.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\ThirdParty\DebenuPdfLibrary915.cs
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\DebenuPDFLibraryDLL0915.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\3rd Party Licensing\EZTwain Classic.txt
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\3rd Party Licensing\FreeImage.txt
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\3rd Party Licensing\SharpSerializer.txt
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\3rd Party Licensing\TwainNet.txt
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\DTKBarcode.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\DTKImage.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\EZTW32.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\FreeImage.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Archivers\LOCAL - TIFF.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Barcode Encoders\DEFAULT.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Barcode Readers\DEFAULT.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Barcode Renderers\DEFAULT.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Writers\BMP.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Writers\GIF.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Writers\TIFF_CCITG4.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Writers\TIFF_LZW.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Graphics\logobw.bmp
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Image Processors\COLOR DEPTH 8BPP.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Text Image Builders\ORIGINAL PAGE ARCHIVED.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Text Image Builders\PAGES SCANNED TO SEPARATE FILE.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Archivers\LOCAL.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Command Image Builders\DEFAULT.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Command Readers\BARCODE DEFAULT.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Command Readers\DEFAULT.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Readers\BMP.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Readers\GIF.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Readers\JPEG.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Readers\JPG.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Readers\PDF.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Readers\PNG.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Readers\TIF.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Readers\TIFF.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Writers\DEFAULT.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Writers\JPEG_GOOD.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Writers\JPEG_SUPERB.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Writers\PDF ENCRYPTED.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Writers\PDF.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\File Writers\PNG.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Image Processors\COLOR DEPTH 4BPP.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 180 FLIP NONE.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 270 FLIP NONE.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Text Image Builders\DAMAGED PAGE OMITTED.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Text Image Builders\DAMAGED_PAGE.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Text Image Builders\DEFAULT.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Text Image Builders\FREE TYPE.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Text Image Builders\UNREADABLE PAGE.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 90 FLIP NONE.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Scanquire.Public.dll.config
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Scanquire.Public.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\EdocsUSA.Utilities.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Newtonsoft.Json.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Scanquire.ThirdParty.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\System.IO.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\System.Runtime.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\System.Threading.Tasks.dll
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\EdocsUSA.Utilities.pdb
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\Newtonsoft.Json.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\System.IO.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\System.Runtime.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\bin\Release\System.Threading.Tasks.xml
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.App.config
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.csprojAssemblyReference.cache
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.Icons.resources
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.Sharepoint.SharepointCredentials.resources
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.Sharepoint.SharepointCredentialsManager.resources
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.ProgressDialog.resources
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.ProgressMonitor.resources
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SessionLogViewer.resources
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SQArchiverSelector.resources
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SQImageListViewer.resources
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.GenerateResource.cache
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.CoreCompileInputs.cache
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.CopyComplete
+C:\Edocs\Scanquire 6\Scanquire.Public\obj\x86\Release\Scanquire.Public.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.App.config
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csprojAssemblyReference.cache
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Interop.DTKBarReaderLib.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Interop.DTKImageLib.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.ResolveComReference.cache
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.Icons.resources
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.Sharepoint.SharepointCredentials.resources
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.Sharepoint.SharepointCredentialsManager.resources
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.SQTwainSettingsDialog.resources
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.ProgressDialog.resources
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.ProgressMonitor.resources
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SessionLogViewer.resources
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SQArchiverSelector.resources
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SQImageListViewer.resources
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.GenerateResource.cache
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ThirdParty\DebenuPdfLibrary915.cs
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\x86\liblept1753.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\x86\libtesseract3052.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\x64\liblept1753.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\x64\libtesseract3052.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Archivers\LOCAL - TIFF.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Barcode Encoders\DEFAULT.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Barcode Readers\DEFAULT.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Barcode Renderers\DEFAULT.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\BMP.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\GIF.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\TIFF_CCITG4.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\TIFF_LZW.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Graphics\logobw.bmp
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Image Processors\COLOR DEPTH 8BPP.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\ORIGINAL PAGE ARCHIVED.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\PAGES SCANNED TO SEPARATE FILE.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Archivers\LOCAL.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Command Image Builders\DEFAULT.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Command Readers\BARCODE DEFAULT.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Command Readers\DEFAULT.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\BMP.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\GIF.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\JPEG.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\JPG.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\PDF.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\PNG.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\TIF.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\TIFF.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\DEFAULT.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\JPEG_GOOD.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\JPEG_SUPERB.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\PDF ENCRYPTED.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\PDF.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\PNG.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Image Processors\COLOR DEPTH 4BPP.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 180 FLIP NONE.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 270 FLIP NONE.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\DAMAGED PAGE OMITTED.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\DAMAGED_PAGE.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\DEFAULT.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\FREE TYPE.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\UNREADABLE PAGE.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 90 FLIP NONE.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Scanquire.Public.dll.config
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Scanquire.Public.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\DTK.BarReader.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\EdocsUSA.Utilities.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.SharePoint.Client.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.SharePoint.Client.Runtime.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Newtonsoft.Json.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Scanquire.ThirdParty.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanquireLogin.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.IO.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.Runtime.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.Threading.Tasks.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Tesseract.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuireSqlCmds.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuire_SendEmails.dll
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\DTK.BarReader.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\EdocsUSA.Utilities.pdb
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\EdocsUSA.Utilities.dll.config
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Newtonsoft.Json.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Scanquire.ThirdParty.pdb
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Scanquire.ThirdParty.dll.config
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanquireLogin.pdb
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanquireLogin.dll.config
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.IO.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.Runtime.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.Threading.Tasks.xml
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuireSqlCmds.pdb
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuireSqlCmds.dll.config
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuire_SendEmails.pdb
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuire_SendEmails.dll.config
+I:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.CopyComplete
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ThirdParty\DebenuPdfLibrary915.cs
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\x86\liblept1753.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\x86\libtesseract3052.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\x64\liblept1753.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\x64\libtesseract3052.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Archivers\LOCAL - TIFF.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Barcode Encoders\DEFAULT.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Barcode Readers\DEFAULT.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Barcode Renderers\DEFAULT.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\BMP.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\GIF.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\TIFF_CCITG4.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\TIFF_LZW.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Graphics\logobw.bmp
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Image Processors\COLOR DEPTH 8BPP.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\ORIGINAL PAGE ARCHIVED.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\PAGES SCANNED TO SEPARATE FILE.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Archivers\LOCAL.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Command Image Builders\DEFAULT.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Command Readers\BARCODE DEFAULT.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Command Readers\DEFAULT.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\BMP.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\GIF.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\JPEG.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\JPG.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\PDF.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\PNG.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\TIF.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Readers\TIFF.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\DEFAULT.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\JPEG_GOOD.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\JPEG_SUPERB.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\PDF ENCRYPTED.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\PDF.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\File Writers\PNG.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Image Processors\COLOR DEPTH 4BPP.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 180 FLIP NONE.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 270 FLIP NONE.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\DAMAGED PAGE OMITTED.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\DAMAGED_PAGE.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\DEFAULT.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\FREE TYPE.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Text Image Builders\UNREADABLE PAGE.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Config\Image Processors\ROTATE 90 FLIP NONE.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Scanquire.Public.dll.config
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Scanquire.Public.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\DTK.BarReader.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\EdocsUSA.Utilities.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.SharePoint.Client.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.SharePoint.Client.Runtime.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Newtonsoft.Json.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Scanquire.ThirdParty.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanquireLogin.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.Data.SqlServerCe.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.IO.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.Runtime.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.Threading.Tasks.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Tesseract.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuireSqlCmds.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuire_SendEmails.dll
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\DTK.BarReader.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\EdocsUSA.Utilities.pdb
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\EdocsUSA.Utilities.dll.config
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Newtonsoft.Json.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Scanquire.ThirdParty.pdb
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\Scanquire.ThirdParty.dll.config
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanquireLogin.pdb
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanquireLogin.dll.config
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.IO.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.Runtime.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\System.Threading.Tasks.xml
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuireSqlCmds.pdb
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuireSqlCmds.dll.config
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuire_SendEmails.pdb
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\bin\Release\ScanQuire_SendEmails.dll.config
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.App.config
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csprojAssemblyReference.cache
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.ResolveComReference.cache
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.Icons.resources
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.Sharepoint.SharepointCredentials.resources
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.Sharepoint.SharepointCredentialsManager.resources
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.SQTwainSettingsDialog.resources
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.ProgressDialog.resources
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.ProgressMonitor.resources
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SessionLogViewer.resources
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SQArchiverSelector.resources
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.UserControls.SQImageListViewer.resources
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.GenerateResource.cache
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.CoreCompileInputs.cache
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.csproj.CopyComplete
+L:\EdocsGitHub\Scanquire_HIPAA\Scanquire.Public\obj\x86\Release\Scanquire.Public.dll

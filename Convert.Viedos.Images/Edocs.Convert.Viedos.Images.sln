@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32802.440
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edocs.Convert.Viedos.Images", "Edocs.Convert.Viedos.Images.csproj", "{2ABCAD8D-0083-4C64-A68E-46A05F136975}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6D5372D8-863E-4E64-AB1B-529DDD4F5AA5} = {6D5372D8-863E-4E64-AB1B-529DDD4F5AA5}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edocs.HelperUtilities", "..\Edocs.Helper.Utilities\Edocs.HelperUtilities\Edocs.HelperUtilities.csproj", "{6D5372D8-863E-4E64-AB1B-529DDD4F5AA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2ABCAD8D-0083-4C64-A68E-46A05F136975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ABCAD8D-0083-4C64-A68E-46A05F136975}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ABCAD8D-0083-4C64-A68E-46A05F136975}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ABCAD8D-0083-4C64-A68E-46A05F136975}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D5372D8-863E-4E64-AB1B-529DDD4F5AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D5372D8-863E-4E64-AB1B-529DDD4F5AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D5372D8-863E-4E64-AB1B-529DDD4F5AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D5372D8-863E-4E64-AB1B-529DDD4F5AA5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A90D99AD-79F2-4479-840B-98BB66A03FAF}
+	EndGlobalSection
+EndGlobal

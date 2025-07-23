@@ -1,0 +1,8 @@
+﻿<Complex name="Root" type="Scanquire.Public.SQFileWriter_Image, Scanquire.Public">
+  <Properties>
+    <Simple name="ImageFormat" value="FIF_BMP" />
+    <Simple name="SaveFlags" value="DEFAULT" />
+    <Simple name="MimeType" value="image/bmp" />
+    <Simple name="FileExtension" value=".bmp" />
+  </Properties>
+</Complex>

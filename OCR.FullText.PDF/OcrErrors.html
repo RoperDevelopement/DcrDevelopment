@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body style="background-color: #CCEEFF">
+    <div>
+        <h1 style="text-align:center">{Message}</h1>
+        <br />
+        <div style="text-align:center">
+            <h2 style="text-align:center">{scandates}</h2>
+            <br />
+            <h2 style="text-align:center">Lab Req Totals</h2>
+            {Totals}
+            <br />
+            <h2 style="text-align:center">Errors Found</h2>
+            <br />
+            <table style="width:100%;border:double">
+                <thead>
+                    <tr>
+                        <th>Lab Req ID</th>
+                        <th>Index Number</th>
+                        <th>Fin Number</th>
+                        <th>Message</th>
+                        <th>Scan Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {Errors}
+                </tbody>
+            </table>
+            <br />
+
+        </div>
+    </div>
+</body>
+</html>

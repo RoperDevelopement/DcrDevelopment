@@ -1,0 +1,68 @@
+﻿@page
+@model EDocs.Nyp.LabReqs.AppServices.LoadingPagePartialViewModel
+@*
+
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+
+
+<head>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+
+</head>
+<html>
+
+<body>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">Grant Receipt's - Scan Begin Date</th>
+                <th class="text-center">Grant Receipt's - Scan End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center"><input type="date" id="searchStartDate" name="searchStartDate" value="@Model.StartDate" /></td>
+                <td class="text-center"><input type="date" id="searchEndDate" name="searchEndDate" value="@Model.EndDate" /></td>
+
+
+            </tr>
+        </tbody>
+
+    </table>
+    <p class="p-1" />
+    <div id="checkboxSearchDates" style="display:none">
+
+
+        <input type="hidden" id="searchBydate" name="searchBydate" />
+        <div class="row alert-info">
+            <div class="col-2">
+                <p>Search By</p>
+            </div>
+            <div class="col-3">
+                <input type="radio" name="#lDate" id="lDate" />&nbsp;Document Date
+
+            </div>
+            <div class="col-2">
+                <input type="radio" id="sDate" name="sDate" value="SDate" />&nbsp;Scan Date
+            </div>
+        </div>
+    </div>
+
+
+    <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:none">
+        <p id="parLoading" style="position: absolute; top: 30%; left: 45%; color: White;">
+            Getting data, please wait...<img src="~/Images/ajax-loading.gif">
+        </p>
+    </div>
+</body>
+</html>

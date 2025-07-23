@@ -1,0 +1,183 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace BinMonitor.Common
+{
+    public sealed class Bins : SerializedObjectDictionary<Bin>
+    {
+        // private string _DirectoryPath = @"C:\Archives\Data\Bins";
+        //private string _DirectoryPath = @"C:\Archives\Data\Bins";
+        // private string _DirectoryPath = string.Format("{0}\\Local\\EdocsUsaBmC\\Data\\Bins", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+        private string _DirectoryPath = BinUtilities.BinMonBinsFolder;
+        public override string DirectoryPath
+        {
+            get { return _DirectoryPath; }
+            set { _DirectoryPath = value; }
+        }
+
+        //private string _ServerQueuePath = @"C:\Archives\Data\Server Queue";
+        private string _ServerQueuePath = string.Format("{0}\\Local\\EdocsUsaBmC\\Data\\Server Queue", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+        public string ServerQueuePath
+        {
+            get { return _ServerQueuePath; }
+            set { _ServerQueuePath = value; }
+        }
+
+        static readonly Bins _Instance = new Bins();
+        public static Bins Instance
+        { get { return _Instance; } }
+
+        public IEnumerable<Bin> ActiveBins
+        {
+            get
+            {
+                return from Bin bin in this.Values
+                       where bin.HasBatch
+                       select bin;
+            }
+        }
+
+        public IEnumerable<Bin> EmpbyBins
+        {
+            get
+            {
+                return from Bin bin in this.Values
+                       where bin.HasBatch == false
+                       select bin;
+            }
+        }
+
+        public IEnumerable<Bin> GetBinsByCategory(string categoryTitle)
+        {
+            return from Bin bin in ActiveBins
+                   where bin.Batch.Category.Title.Equals(categoryTitle, StringComparison.OrdinalIgnoreCase)
+                   select bin;
+        }
+
+        public IEnumerable<Bin> GetBinsByMasterCategory(string title)
+        {
+            return from Bin bin in ActiveBins
+                   where bin.Batch.Category.MasterCategoryTitle.Equals(title, StringComparison.OrdinalIgnoreCase)
+                   select bin;
+        }
+
+        public IEnumerable<Bin> GetBinsContainingSpecimenWithWildcard(string SpecimenId)
+        {
+            List<Bin> result;
+            result = this.Values.ToList();
+            List<Bin> test = new List<Bin>();
+            SpecimenId = SpecimenId.ToUpper();
+
+            for(int i = 0; i < result.Count; i ++)
+            {
+                Bin bin = result[i];
+                if (bin.HasBatch)
+                {
+                    List<String> test1 = new List<String>();
+                    List<String> test2 = new List<String>();
+                    test1 = bin.Batch.Specimens;
+                    
+                    test2 = test1.Where(x => x.Contains(SpecimenId)).ToList();
+                    if (test2.Count > 0)
+                    {
+                        test.Add(bin);
+                   }
+                }
+            }
+            return test;
+        }
+
+        public IEnumerable<Bin> GetBinsContainingSpecimenWildcard(string SpecimenId)
+        {
+            List<Bin> result;
+            result = this.Values.ToList();
+            List<Bin> test = new List<Bin>();
+            SpecimenId = SpecimenId.ToUpper().Replace("*","").Trim();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                Bin bin = result[i];
+                if (bin.HasBatch)
+                {
+                    List<String> test1 = new List<String>();
+                    test1 = bin.Batch.Specimens;
+                    if(bin.Batch.Specimens.Count != 0)
+                    {
+                        if(bin.BatchId.StartsWith(SpecimenId,StringComparison.InvariantCultureIgnoreCase))
+                            test.Add(bin);
+                    }
+                }
+            }
+            return test;
+        }
+        public IEnumerable<Bin> GetBinsContainingSpecimen(string SpecimenId)
+        {
+            /* Old version
+            return from Bin bin in this.Values
+                   where bin.HasBatch
+                   && bin.Batch.Specimens.Contains(SpecimenId, StringComparer.OrdinalIgnoreCase)
+                   select bin;*/
+            //New version checks if specimen contains the specimenID
+            List<Bin> result;
+            result = this.Values.ToList();
+            List<Bin> test = new List<Bin>();
+            SpecimenId = SpecimenId.ToUpper();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                Bin bin = result[i];
+                if (bin.HasBatch)
+                {
+                    List<String> test1 = new List<String>();
+                    List<String> test2 = new List<String>();
+
+                    test1 = bin.Batch.Specimens;
+                    test2 = test1.Where(x => x.StartsWith(SpecimenId)).ToList();
+                    if (test2.Count > 0)
+                    {
+                        test.Add(bin);
+                    }
+                }
+            }
+            return test;
+        }
+        public IEnumerable<Bin> ProblemBins
+        { get { return GetBinsByMasterCategory(MasterCategories.PROBLEM_TITLE); } }
+
+        public IEnumerable<Bin> RoutineBins
+        { get { return GetBinsByMasterCategory(MasterCategories.ROUTINE_TITLE); } }
+
+        public IEnumerable<Bin> StatBins
+        { get { return GetBinsByMasterCategory(MasterCategories.STAT_TITLE); } }
+
+        public IEnumerable<Bin> ReadyBins
+        { get { return GetBinsByMasterCategory(MasterCategories.READY_TITLE); } }
+        
+        protected override void RegisterObjectChangedEvents(string key, Bin value)
+        {
+            PropertyChangedEventHandler onValuePropertyChanged = (sender, e) =>
+            { 
+                OnObjectChanged(key, value);
+            };
+            value.PropertyChanged += onValuePropertyChanged;
+            EventHandler onValueBatchChanged = (sender, e) =>
+            { 
+                OnObjectChanged(key, value);
+                /*
+                if (value.Batch != null)
+                {
+                    string queueFileName = DateTime.Now.ToString("yyyyMMddhhmmssfff_" + value.BatchId);
+                    queueFileName = Path.ChangeExtension(queueFileName, "xml");
+                    string queueFilePath = Path.Combine(ServerQueuePath, queueFileName);
+                    Serializer.Serialize(value.Batch, queueFilePath);
+                }*/
+            };
+            value.BatchChanged += onValueBatchChanged;
+        }
+    }
+}

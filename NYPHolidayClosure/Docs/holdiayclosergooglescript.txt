@@ -1,0 +1,305 @@
+function myFunction() {
+  try {
+
+
+    PropertiesService.getScriptProperties().deleteAllProperties();
+    var clients = getClientEmailAddress();
+    
+
+    var clientNameEMail = getClientEmailAddress();
+    for (var i = 0; i < clientNameEMail.length; i++) {
+      findClient(clientNameEMail[i][0]);
+    }
+
+     
+  }
+  catch (err) {
+    displayMessage(err);
+  }
+}
+function UpDateMaster(resonseData)
+{
+  
+   var sheet = SpreadsheetApp.getActive().getSheetByName('MASTER');
+  var data = sheet.getDataRange().getValues();
+  for (var i = 0; i < data.length; i++) {
+    
+    
+   if(resonseData[5] == data[i][6])
+   {
+    
+      updateMasterSheet(sheet,i+1,3,resonseData[1],data[i][2]);//group
+      updateMasterSheet(sheet,i+1,4,resonseData[2],data[i][3]);//address
+      updateMasterSheet(sheet,i+1,5,resonseData[3],data[i][4]);//dep
+      updateMasterSheet(sheet,i+1,6,resonseData[4],data[i][5]);//dr name
+      updateMasterSheet(sheet,i+1,11,resonseData[8],data[i][10]);//phone
+      updateMasterSheet(sheet,i+1,10,resonseData[9],data[i][9]);//k09
+      updateMasterSheet(sheet,i+1,12,resonseData[11],data[i][11]);//cs rep
+      
+      break;
+      
+    
+     
+   }
+  }
+
+}
+function updateMasterSheet(googleSheet,rangeStart,rangeEnd,newText,oldText)
+{
+      if(newText != oldText)
+      {
+        var range = googleSheet.getRange(rangeStart,rangeEnd);
+        var newRichText =  SpreadsheetApp.newRichTextValue()
+      .setText(newText)
+        .build();
+        range.setRichTextValue(newRichText);
+      }
+}
+function upDateMasterResponsed()
+{
+  try{
+
+  
+  var sheet = SpreadsheetApp.getActive().getSheetByName('UPDATERMASTER');
+  var data = sheet.getDataRange().getValues();
+  if(data.length >1)
+  {
+  for (var i = 0; i < data.length; i++) {
+    if(i==0){
+      continue;
+    }
+              UpDateMaster(data[i]);
+  }
+  var clUp = data.length-1;
+  
+  displayMessage("Done updating master total clients updated "+clUp.toString());
+  }
+  else{
+    displayMessage("No clients found to update check tab UPDATERMASTER");
+  }
+  }
+  catch(err)
+  {
+    displayMessage("Error updating master "+err);
+  }
+
+}
+function sendClientURls() {
+  try {
+
+    var notFound = new Array();
+    //PropertiesService.getScriptProperties().deleteAllProperties();
+     
+    
+
+    var clientNameEMail = getClientEmailAddress();
+    if(clientNameEMail.length > 0)
+    {
+    for (var i = 0; i < clientNameEMail.length; i++) {
+      notFound = findClient(clientNameEMail[i][0], clientNameEMail[i][1], notFound);
+    }
+    if (notFound.length > 0) {
+      var strNF = "";
+      for (var k = 0; k < notFound.length; k++) {
+        strNF = strNF + notFound[0] + ";";
+      }
+      displayMessage("Done sending Reps urls and these Reps " + strNF.trim() + ' were not found');
+    }
+    else {
+      displayMessage("Done sending client Reps");
+    }
+    }
+    else{
+      displayMessage("No email address found in tab INFO colum EmailAddress");
+    }
+
+  }
+  catch (err) {
+    displayMessage(err);
+  }
+}
+
+function clientEmailTableHeader(clientNameHeader) {
+  var table = '<!DOCTYPE html><html><head></head><body>';
+  // table = table + '<h1 style="text-align: center;">Holiday Closure Open/Closed</h1>';
+  table = table + '<h1 style="text-align: center;">' + clientNameHeader + '</h1>';
+  table = table + '<table style="width:100%; border:1px solid black;text-align: center; border-collapse: collapse;"><tr>' + '<th style="border:1px solid black; border-collapse: collapse; ">CS REP</th>' + '<th style="border:1px solid black; border-collapse: collapse;">CLIENT ID</th>' + '<th style="border:1px solid black; border-collapse: collapse;">PHONE #</th>' + '<th style="border:1px solid black; border-collapse: collapse;">STATUS</th>' + '<th style="border:1px solid black; border-collapse: collapse;">Holiday Closure Url</th>' + '\n</tr>';
+
+  return table;
+}
+
+function findClient(clientName, clientEMailAddress, clientNotFound) {
+
+  var foundClint = false;
+  var sheet = SpreadsheetApp.getActive().getSheetByName('PUBLIC');
+  var data = sheet.getDataRange().getValues();
+  var table = null;
+  table = clientEmailTableHeader('Holiday Clouser for CS REP' + clientName);
+
+  for (var i = 0; i < data.length; i++) {
+    if (data[i][3] == clientName) {
+      foundClint = true;
+      var range = sheet.getRange(i, 1);
+      var cell = range;
+       
+      var cellValue = cell.getRichTextValue();
+      var cellText = cell.getValue();
+      var url = cellValue.getLinkUrl();
+      table = table + '<tr><td style="border:1px solid black; border-collapse: collapse;">' + data[i][3] + '</td><td style="border:1px solid black; border-collapse: collapse;">' + data[i][1] + '</td><td style="border:1px solid black; border-collapse: collapse;">' + data[i][2] + '</td><td style="border:1px solid black; border-collapse: collapse;">' + data[i][4] + '</td><td style="border:1px solid black; border-collapse: collapse;"><a href="' + url + '">Holiday Closure Form</a></td></tr>';
+    }
+  }
+  table = table + '</table></body></html>';
+  if (foundClint) {
+    //console.log(table);
+    var date = new Date();
+    var emailSubject = 'Holiday Clouser Form for CS REP' + clientName + ' Email sent at ' + date;
+       GmailApp.sendEmail(clientEMailAddress, emailSubject, "", { htmlBody: table });
+  }
+  else {
+    var indexNF = clientNotFound.length;
+    if (indexNF == 0) {
+      clientNotFound[indexNF++] = clientName;
+    }
+    else {
+      clientNotFound[indexNF++] = clientName;
+    }
+
+  }
+  return clientNotFound;
+  
+
+}
+
+
+
+function SetClientProperityValue(clientNameKey, clientNameValue) {
+  PropertiesService.getScriptProperties().setProperty(clientNameKey, clientNameValue);
+}
+function GetClientName(clientName) {
+  return PropertiesService.getScriptProperties().getProperty(clientName);
+
+}
+function GetClientKeys() {
+  var userProp = PropertiesService.getUserProperties();
+  var keys = userProp.getKeys();
+
+  return keys;
+
+}
+function getClientEmailAddress() {
+  var data = getSheetByNameData("INFO");
+  var dict = new Array();
+
+  var indexer = 0;
+  for (var i = 0; i < data.length; i++) {
+    if (i == 0) {
+      continue;
+    }
+    if (data[i][5] != "")  {
+      dict[indexer++] = [data[i][4], data[i][5]];
+    }
+    
+
+  }
+  return dict;
+}
+function htmlHeader(opendClosedHoliday) {
+  var table = '<!DOCTYPE html><html><head></head><body>';
+  // table = table + '<h1 style="text-align: center;">Holiday Closure Open/Closed</h1>';
+  table = table + '<h1 style="text-align: center;">' + opendClosedHoliday + '</h1>';
+  table = table + '<table style="width:100%; border:1px solid black;border-collapse: collapse;"><tr>' + '<th style="border:1px solid black; border-collapse: collapse;">ResponseTime</th>' + '<th style="border:1px solid black; border-collapse: collapse;">Holiday Date</th>' + '<th style="border:1px solid black; border-collapse: collapse;">CS REP</th>' + '<th style="border:1px solid black; border-collapse: collapse;">CLIENT NAME</th>'
+  table = table + '<th style=style="border:1px solid black; border-collapse: collapse;">ADDRESS</th>' + '<th style="border:1px solid black; border-collapse: collapse;">PHONE</th>' + '<th style="border:1px solid black; border-collapse: collapse;" >STATUS</th>' + '<th style="border:1px solid black; border-collapse: collapse;">OPENS AT</th>'
+  table = table + '<th style="border:1px solid black; border-collapse: collapse;">CLOSES AT</th>' + '<th style="border:1px solid black; border-collapse: collapse;">LAST PICKUP</th>' + '<th style="border:1px solid black; border-collapse: collapse;">VERIFIED WITH:</th>' + '<th style="border:1px solid black; border-collapse: collapse;">COMMENTS</th>\n</tr>';
+  return table;
+}
+function displayMessage(message) {
+  var ui = SpreadsheetApp.getUi();
+  ui.alert(message);
+}
+function getSheetByNameData(sheetName) {
+  var sheet = SpreadsheetApp.getActive().getSheetByName(sheetName);
+  var data = sheet.getDataRange().getValues();
+  return data;
+}
+function sendEmailClosed() {
+  try {
+    var table = htmlHeader("Holiday Closure Closed");
+    var data = getSheetByNameData("CLOSED");
+    
+
+    for (var i = 0; i < data.length; i++) {
+     
+
+      if ((i > 0) && (data[i][6] == "CLOSED")) {
+        table = table + '<tr>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][0] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][1] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][2] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][3] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][4] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][5] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][6] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][7] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][8] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][9] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][10] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][11] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][12] + '</td>' + '</tr>';
+      }
+
+
+    }
+     
+    table = table + '</table></body></html>';
+    console.log(table);
+    sendHtmlEmail(table, 'Holiday Closed');
+    displayMessage("Email sent Holiday Closed");
+  }
+  catch (err) {
+    displayMessage(err);
+  }
+}
+
+function sendEmailOpen() {
+  var table = htmlHeader("Holiday Closure Open");
+  var data = getSheetByNameData('OPEN');
+
+  for (var i = 0; i < data.length; i++) {
+     
+
+    if ((i > 0) && (data[i][6] == "OPEN")) {
+      table = table + '<tr">' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][0] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][1] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][2] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][3] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][4] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][5] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][6] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][7] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][8] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][9] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][10] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][11] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][12] + '</td>' + '</tr>';
+    }
+
+    
+  }
+  
+  table = table + '</table></body></html>';
+  sendHtmlEmail(table, 'Holiday Open');
+  displayMessage("Email sent Holiday Open");
+}
+function sendEmailOpenAndCLosed() {
+  try {
+    var table = htmlHeader("Holiday Closure Open/Closed");
+    var data = getSheetByNameData('RESPONSES');
+    var sheet = SpreadsheetApp.getActive().getSheetByName('OPEN');
+    var data = sheet.getDataRange().getValues();
+
+    for (var i = 0; i < data.length; i++) {
+      
+      
+      if (i > 0) {
+        table = table + '<tr>';
+        table = table + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][0] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][1] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][2] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][3] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][4] + '</td>';
+        table = table + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][5] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][6] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][7] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][8] + '</td>';
+        table = table + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][9] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][10] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][11] + '</td>' + '<td style="border:1px solid black; border-collapse: collapse;">' + data[i][12] + '</td>' + '</tr>';
+      }
+
+
+    }
+
+    table = table + '</table></body></html>';
+    sendHtmlEmail(table, 'Holiday Open/Closed');
+    displayMessage("Email sent Holiday Open/Closed");
+  }
+  catch (err) {
+    displayMessage(err);
+  }
+}
+
+function sendHtmlEmail(htmlBody, emailSubject) {
+  var rng = SpreadsheetApp.getActive().getSheetByName('SendEmailOpenClosed');
+  var emailAddress = rng.getRange('A2:C2').getValues();
+  console.log(emailAddress[0][0], emailAddress[0][1], emailAddress[0][2]);
+  var date = new Date();
+  emailSubject = emailSubject + ' ' + emailAddress[0][1] + ' Report sent at ' + date;
+  GmailApp.sendEmail(emailAddress[0][0], emailSubject, "", { htmlBody: htmlBody });
+}
+

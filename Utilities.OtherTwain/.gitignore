@@ -1,0 +1,8 @@
+
+*.cache
+bin/Debug/EdocsUSA.Utilities.dll
+bin/Debug/EdocsUSA.Utilities.pdb
+obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+obj/x86/Debug/EdocsUSA.Utilities.csproj.GenerateResource.cache
+obj/x86/Debug/EdocsUSA.Utilities.dll
+obj/x86/Debug/EdocsUSA.Utilities.pdb

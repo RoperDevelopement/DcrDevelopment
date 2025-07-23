@@ -1,0 +1,19 @@
+processor name ICROCRDocusments
+Name
+ICROCRDocusments
+ID
+69f825b3473f0ce6
+Status
+ Enabled
+Processor Type
+Document OCR
+Encryption Type
+Google-managed key
+https://us-documentai.googleapis.com/v1/projects/308372350131/locations/us/processors/69f825b3473f0ce6:process
+
+service account name IcrOcrImages
+
+id icrocrimages
+
+
+api key AIzaSyCRMpAKNMuLFi8K-EDrMIgGDaNkdC0CRUs
