@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BMRMobileApp.AddEditUsersPage"
+                xmlns:vm="clr-namespace:BMRMobileApp"
+              
+
+             Title="Users Profile">
+
+
+    <ScrollView>
+
+
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Grid>
+                <!-- Close Button in Top-Right -->
+                <Button Text="✕"
+            BackgroundColor="Transparent"
+            TextColor="Gray"
+            FontSize="24"
+            HorizontalOptions="End"
+            VerticalOptions="Start"
+            Margin="10"
+            Clicked="OnClickedCancel"/>
+
+                <!-- Page Content -->
+
+            </Grid>
+
+            <Label Text="Users Profile" FontAutoScalingEnabled="True" FontAttributes="Bold"  />
+            <Entry x:Name="PSUserDisplayName" Placeholder="Display Name" FontAutoScalingEnabled="True" IsSpellCheckEnabled="False" />
+            <!--
+            <Label Text="Display Name Required" TextColor="Red" FontSize="12" IsVisible="{Binding DisplayNameIsValid}" />
+            -->
+            <Entry x:Name="PSUserFirstName" Placeholder="First Name" FontAutoScalingEnabled="True"  IsSpellCheckEnabled="False"/>
+            <Entry x:Name="PSUserLastName" Placeholder="Last Name" FontAutoScalingEnabled="True" IsSpellCheckEnabled="False"/>
+            <HorizontalStackLayout>
+                <Label Text="Male:" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <CheckBox    
+                    x:Name="Male"
+                        Color="Black"  VerticalOptions="Center"
+                         />
+                <Label Text="Female" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <CheckBox HorizontalOptions="Center"
+    x:Name="Female" VerticalOptions="Center"
+        Color="HotPink"
+         />
+            </HorizontalStackLayout>
+            <Entry x:Name="PSEmail" Placeholder="Email Address"  Keyboard="Email" FontAutoScalingEnabled="True" IsSpellCheckEnabled="False" IsEnabled="{Binding DisplayRetype}"/>
+            <Entry x:Name="PSUserPassword" Placeholder="PassWord Must be at lest 8 Char"  IsPassword="True" FontAutoScalingEnabled="True" IsVisible="{Binding DisplayRetype}" />
+            <Entry x:Name="ReTypePassWord" Placeholder="Retype Password"  IsPassword="True"  FontAutoScalingEnabled="True" IsVisible="{Binding DisplayRetype}"/>
+            <Entry x:Name="PSUserPhoneNumber" Placeholder="Phone Number" FontAutoScalingEnabled="True" Keyboard="Telephone" />
+       
+            <!--
+            <Entry x:Name="PSUserAddress" Placeholder="Address" FontAutoScalingEnabled="True" />
+              <Entry x:Name="PSUserCity" Placeholder="City" FontAutoScalingEnabled="True"  />
+            -->
+          
+            <!--
+            <Entry x:Name="PSUserState" Placeholder="State" FontAutoScalingEnabled="True" />
+            
+            <Picker x:Name="StatusPickerStates"
+        Title="Select State"
+        TitleColor="DarkBlue"
+        SelectedIndexChanged="OnStatusChanged"/>
+                        <Picker Title="Select a State" x:DataType="vm:State"
+                            ItemsSource="{Binding States}"
+                            SelectedItem="{Binding SelectedOption}" />
+            -->
+            
+            <Entry x:Name="PSUserZipCode" Placeholder="ZipCode" FontAutoScalingEnabled="True" Keyboard="Numeric" />
+            <Entry x:Name="PSUserCountry" Placeholder="Country" FontAutoScalingEnabled="True" />
+            
+            
+            <Image x:Name="ProfileImage" HeightRequest="100" WidthRequest="100" Aspect="AspectFill" />
+            <Grid ColumnSpacing="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="PSProfilePicture" Text="Take Profile Picture" Clicked="OnClickTakePhoto" FontAutoScalingEnabled="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1"/>
+                <Button x:Name="PSProfilePictureUP" Text="Upload Profile Picture" Clicked="OnClickUploadPhoto" FontAutoScalingEnabled="True" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1"/>
+            </Grid>
+            <!-- <Entry x:Name="PSProfilePicture" Placeholder="Profile Picture" FontAutoScalingEnabled="True" /> -->
+            <Label Text="Date of Birth" FontAutoScalingEnabled="True" FontAttributes="Bold" />
+            <DatePicker x:Name="PSUserDateOfBirth" Format="MM/dd/yyyy" />
+            <!--
+            <Entry x:Name="PSUserDateOfBirth" Placeholder="Date Of Birth MM/dd/yyyy" Keyboard="Date" FontAutoScalingEnabled="True" />
+            -->
+          
+            <Picker x:Name="PSUserAvatar" Title="Avatar">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>🦊</x:String>
+                        <x:String>🐼</x:String>
+                        <x:String>🐙</x:String>
+                        <x:String>🦄</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Editor x:Name="PSUserNotes" Placeholder="Additional Notes" HeightRequest="100" FontAutoScalingEnabled="True"/>
+            <Button x:Name="DisplayText" Text="" Clicked="OnSaveUpdateClicked" FontAutoScalingEnabled="True"/>
+            <Button  x:Name="DisplayCancel" Text="Cancel" Clicked="OnClickedCancel" FontAutoScalingEnabled="True" />
+            <!--
+            
+               <Button Text="{Binding DisplayText}" Clicked="OnSaveUpdateClicked" />-->
+        </VerticalStackLayout>
+    </ScrollView>
+
+    <!--
+    Picker x:Name="AvatarPicker">
+    <Picker.ItemsSource>
+        <x:Array Type="{x:Type x:String}">
+            <x:String>🦊</x:String>
+            <x:String>🐼</x:String>
+            <x:String>🐙</x:String>
+            <x:String>🦄</x:String>
+        </x:Array>
+    </Picker.ItemsSource>
+    </Picker>
+    -->
+</ContentPage>

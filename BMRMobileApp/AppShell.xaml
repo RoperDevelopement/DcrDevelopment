@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="BMRMobileApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:BMRMobileApp"
+    Shell.FlyoutBehavior="Flyout"
+    Title="Peer Support Mobile App"
+     Shell.BackgroundColor="LightBlue"
+    Shell.TitleColor="White"
+    Shell.ForegroundColor="White">
+   
+     
+        <TabBar>
+        <ShellContent Title="DashBoard"  Icon="appicon.png"
+            ContentTemplate="{DataTemplate views:MainPage}"
+                          Route="mainpage"/>
+        <ShellContent Title="Journal"  Icon="journalfeelings.ico"
+     ContentTemplate="{DataTemplate views:SettingsPage}" Route="settingspage" />
+        <ShellContent Title="Settings"  Icon="settingscoloricon.ico"
+            ContentTemplate="{DataTemplate views:SettingsPage}" Route="settingspage" />
+        </TabBar>
+  
+    <ShellContent Title="DashBoard"
+                  ContentTemplate="{DataTemplate views:MainPage}"
+                  Route="mainpage" />
+    <ShellContent Title="Journal"
+         ContentTemplate="{DataTemplate views:FeelingPage}"
+         Route="feelingpage"  Icon="journalfeelings.ico"/>
+    <!--
+    <ShellContent Title="Edit Profile`"
+                   ContentTemplate="{DataTemplate views:AddEditUsersPage}"
+                  Route="addedituserspage" />
+    -->
+    <ShellContent Title="Chat`"
+         ContentTemplate="{DataTemplate views:ChatViewPage}"
+       Route="chatViewpage" />
+    <ShellContent Title="Record VIedo" Icon="{StaticResource Record}"
+ContentTemplate="{DataTemplate views:RecordViedoPage}" Route="recordviedopage" />
+    <ShellContent Title="Settings" 
+ContentTemplate="{DataTemplate views:SettingsPage}" Route="settingspage" Icon="settingscoloricon.ico"/>
+    <ShellContent Title="Record Voice" Icon="appicon.png"
+ContentTemplate="{DataTemplate views:RecordVoicePage}" Route="RecordVoicePage" />
+    <ShellContent Title="Search Web" Icon="appicon.png"
+ContentTemplate="{DataTemplate views:SearchWebPage}" Route="SearchWebPage" />
+    
+    <ShellContent Title="Drop Tables" Icon="appicon.png"
+ContentTemplate="{DataTemplate views:DropTablesPage}" Route="droptablespage" />
+    <!--
+    <FlyoutItem Title="Web Searc Engings" Icon="journal_icon.svg">
+      
+            <ShellContent Title="Search" ContentTemplate="{DataTemplate views:SearchWebPage}" />
+            <ShellContent Title="Tags" ContentTemplate="{DataTemplate views:SearchWebPage}" />
+      
+    </FlyoutItem>
+-->
+
+    <Shell.FlyoutHeader>
+        <Grid HorizontalOptions="Fill" VerticalOptions="Start">
+            <Image Source="psloadimg.png" WidthRequest="150" HeightRequest="150"
+              VerticalOptions="Start" 
+              HorizontalOptions="Fill"
+              Aspect="AspectFit"  BackgroundColor="AliceBlue" Background="Beige"/>
+        </Grid>
+    </Shell.FlyoutHeader>
+   
+
+</Shell>
+
+
+
+ 

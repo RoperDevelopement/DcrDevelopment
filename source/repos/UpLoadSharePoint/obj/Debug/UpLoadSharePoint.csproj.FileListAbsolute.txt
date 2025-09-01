@@ -1,0 +1,3 @@
+C:\Users\mtcha\source\repos\UpLoadSharePoint\obj\Debug\UpLoadSharePoint.csproj.AssemblyReference.cache
+C:\Users\mtcha\source\repos\UpLoadSharePoint\obj\Debug\UpLoadSharePoint.csproj.CoreCompileInputs.cache
+C:\Users\mtcha\source\repos\UpLoadSharePoint\obj\Debug\UpLoadSharePoint.exe.config

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BMRMobileApp.FeelingPage"
+                  BackgroundColor="{Binding BackgroundGradient}" 
+             Title="Journaling">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveFeelingCommand}" />
+        <ToolbarItem Text="X" Command="{Binding ExitFeelingCommand}"  />
+
+    </ContentPage.ToolbarItems>
+    <VerticalStackLayout Padding="20" Spacing="25">
+<!--
+        <TableView Intent="Menu" HorizontalOptions="Start">
+            <TableRoot>
+                <TableSection Title="Behaviors">
+                    <TextCell Text="Attached behavior"
+                       Command="{Binding NavigateCommand}"  
+                        />
+                    <TextCell Text=".NET MAUI behavior"
+                       Command="{Binding NavigateCommand}"
+                       />
+                    <TextCell Text=".NET MAUI behavior with a style"
+                       Command="{Binding NavigateCommand}"
+                        />
+                    <TextCell Text="Event to command behavior"
+                       Command="{Binding NavigateCommand}"
+                        />
+                    <TextCell Text="Platform behavior"
+                       Command="{Binding NavigateCommand}"
+                        />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        -->
+
+        <Image Source="journalfeelingspng.png" Aspect="AspectFill"
+               WidthRequest="100" 
+               HeightRequest="100" 
+               HorizontalOptions="Center" />
+        <Label 
+    Text="Speak or Type Your Thoughts 🗣️" 
+    FontAutoScalingEnabled="True"
+    HorizontalOptions="Center" />
+
+        
+        <!--
+        <Frame CornerRadius="20"
+       BorderColor="Gray"
+       BackgroundColor="White"
+       Padding="5"
+       HasShadow="True"
+       HorizontalOptions="End"
+       VerticalOptions="Start"
+       Margin="10">
+            <Button Text="✕"
+            BackgroundColor="Transparent"
+            TextColor="Black"
+            FontSize="20"
+            Clicked="OnCloseClicked"/>
+        </Frame>
+        <Label Text="How are you feeling today?"
+               FontSize="24"
+               HorizontalOptions="Center"
+               TextColor="White"/>
+-->
+        <!-- Emoji Mood Selector -->
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+            <Button Text="😊" Command="{Binding SelectFeelingCommand}" CommandParameter="Happy"   />
+            <Button Text="😢" Command="{Binding SelectFeelingCommand}" CommandParameter="Sad"/>
+            <Button Text="😠" Command="{Binding SelectFeelingCommand}" CommandParameter="Angry"/>
+            <Button Text="😌" Command="{Binding SelectFeelingCommand}" CommandParameter="Calm"/>
+            <Button Text="😶" Command="{Binding SelectFeelingCommand}" CommandParameter="Neutral"/>
+        </HorizontalStackLayout>
+
+        <!-- Journal Entry 
+           BackgroundColor="#FFFFFF20"-->
+        <Editor Placeholder="Journal or talk about how your feeling..."
+                HeightRequest="150"
+             
+                TextColor="White"
+                PlaceholderColor="White"
+                FontSize="16"
+                Text="{Binding JournalEntry}"/>
+
+        <!-- Save Button
+        BackgroundColor="#FFFFFF40"  -->
+        <HorizontalStackLayout Spacing="5"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start">
+            <!--      <Button 
+ x:Name="ButtonStartListing"
+       ImageSource="microrecord.png" WidthRequest="100" HeightRequest="50"
+       Command="{Binding StartVoiceRecordingCommand}"
+                 ToolTipProperties.Text="Start Recording"
+                IsVisible="{Binding IsSpeaking}"
+ BackgroundColor="#6200EE"
+ TextColor="White"  />
+            -->
+            <ImageButton
+                 
+      Source="{StaticResource StartRecord}"
+      
+    Command="{Binding StartVoiceRecordingCommand}"
+                 ToolTipProperties.Text="Start Recording"
+                IsVisible="{Binding IsSpeaking}" 
+                     WidthRequest="20" HeightRequest="20" />
+            
+            <ImageButton 
+                 Source="{StaticResource StopRecord}"  WidthRequest="20" HeightRequest="20" Command="{Binding StopVoiceRecordingCommand}"
+                IsVisible="{Binding IsNotSpeaking}"
+  BackgroundColor="#007AFF"
+ 
+                 ToolTipProperties.Text="Stop Recording"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Spacing="10"
+                HorizontalOptions="Center"
+                VerticalOptions="Start">
+            <ImageButton  Source="{StaticResource Save}"
+                Command="{Binding SaveFeelingCommand}"
+                ToolTipProperties.Text="Save"
+                BackgroundColor="#007AFF"
+                CornerRadius="12"
+                
+                     WidthRequest="20" HeightRequest="20"/>
+            <ImageButton Source="{StaticResource Exit}"
+         Command="{Binding ExitFeelingCommand}"
+         ToolTipProperties.Text="Close"
+                  CornerRadius="12"
+         BackgroundColor="#007AFF"
+                    WidthRequest="20" HeightRequest="20"/>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>
+ 

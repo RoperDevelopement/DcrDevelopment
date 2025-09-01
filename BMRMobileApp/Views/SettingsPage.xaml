@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BMRMobileApp.SettingsPage"
+             BackgroundColor ="White"
+             Title="Settings">
+    <ScrollView>
+    <VerticalStackLayout>
+            <Label  Text = "🛠️ App Settings"
+                    FontAutoScalingEnabled="True" HorizontalOptions="Center" />
+            <HorizontalStackLayout>
+                <Label Text="Opem Feeling Page on Start"  Margin="10,0,0,0"
+           HorizontalOptions="Start"
+                       VerticalOptions="Center"
+          FontAutoScalingEnabled="True"
+           TextColor="DarkSlateGray" />
+                <Switch IsToggled="{Binding IsSwitchOn}"  VerticalOptions="Center" ThumbColor="White" Toggled="OnSwitchToggled"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="Start" Spacing="5" >
+                <Label Text="Edit Profile" HorizontalOptions="Start" FontAutoScalingEnabled="True"   Margin="10,0,0,0"/>
+                <ImageButton Source="{StaticResource EditProfile}"  WidthRequest="10" VerticalOptions="Center" HeightRequest="10" BackgroundColor="#D1D1D6"
+                Clicked="OnEditProfileClicked"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

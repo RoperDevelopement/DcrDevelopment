@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BMRMobileApp.CommunityGuidelinesPage"
+             Title="Community Guidelines">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="24">
+            <!-- Header -->
+            <Label Text="🌱 PeerSupport Community Guidelines"
+             FontAutoScalingEnabled="True"
+             FontAttributes="Bold"
+             HorizontalOptions="Center"
+             TextColor="DarkSlateGray"/>
+
+            <!-- Core Values -->
+            <Border BackgroundColor="#F0F8FF" >
+                <VerticalStackLayout Padding="16" Spacing="12">
+                    <Label Text="🧡 Core Values" FontAutoScalingEnabled="True" FontAttributes="Bold"/>
+                    <Label Text="🛡️ Safety First: This is a judgment-free space." FontAutoScalingEnabled="True"/>
+                    <Label Text="🤝 Respect &amp; Consent: Always ask before offering advice." FontAutoScalingEnabled="True"/>
+                    <Label Text="💬 Empathy Over Expertise: Listening > fixing." FontAutoScalingEnabled="True"/>
+                    <Label Text="🔒 Confidentiality: What’s shared here stays here." FontAutoScalingEnabled="True"/>
+                    <Label Text="🧘 Voluntary Sharing: Speak when you’re ready." FontAutoScalingEnabled="True"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Participation Guidelines -->
+            <Border BackgroundColor="#FFF8DC">
+                <VerticalStackLayout Padding="16" Spacing="12">
+                    <Label Text="💬 Participation Guidelines" FontAutoScalingEnabled="True" FontAttributes="Bold"/>
+                    <Label Text="🗣️ One voice at a time—no interruptions." FontAutoScalingEnabled="True"/>
+                    <Label Text="🚫 No hate, harm, or triggering content." FontAutoScalingEnabled="True"/>
+                    <Label Text="🧑‍⚕️ Peer support, not therapy." FontAutoScalingEnabled="True"/>
+                    <Label Text="💡 Use SmartReply and emoji reactions." FontAutoScalingEnabled="True"/>
+                    <Label Text="🧵 Stay on topic in themed threads." FontAutoScalingEnabled="True"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Expressive Tools -->
+            <Border BackgroundColor="#E6FFE6">
+                <VerticalStackLayout Padding="16" Spacing="12">
+                    <Label Text="🎨 Expressive Tools" FontAutoScalingEnabled="True" FontAttributes="Bold"/>
+                    <Label Text="🌈 Emoji &amp;  Color Feedback: React with expressive sets."/>
+                    <Label Text="🎙️ Voice Journaling: Speak your truth."/>
+                    <Label Text="📊 Mood Check-ins: Reflect and connect daily."/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Moderation & Nudging -->
+            <Border BackgroundColor="#F5F5F5" >
+                <VerticalStackLayout Padding="16" Spacing="12">
+                    <Label Text="🛡️ Moderation &amp;  Nudging" FontSize="20" FontAttributes="Bold" FontAutoScalingEnabled="True"/>
+                    <Label Text="🧘 Calm Anchors may offer soft redirects." FontAutoScalingEnabled="True"/>
+                    <Label Text="🚩 Flag unsafe posts—mods will review." FontAutoScalingEnabled="True"/>
+                    <Label Text="🤖 AI nudges suggest calming replies or prompts." FontAutoScalingEnabled="True"/>
+                </VerticalStackLayout>
+            </Border>
+            <VerticalStackLayout Padding="20">
+                <Button x:Name="acceptButton"
+        Text="✅ I Accept the Community Guidelines"
+        BackgroundColor="#4CAF50"
+        TextColor="White"
+        FontAttributes="Bold"
+        CornerRadius="12"
+        Padding="12"
+        Clicked="OnAcceptButtonClicked" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Padding="20">
+                <Button x:Name="declineButton"
+ Text="✅ I Decline the Community Guidelines"
+ BackgroundColor="#4CAF50"
+ TextColor="White"
+ FontAttributes="Bold"
+ CornerRadius="12"
+ Padding="12"
+ Clicked="OnDeclineButtonClicked" />
+            </VerticalStackLayout>
+
+            <!-- Footer -->
+            <Label Text="📌 These guidelines evolve with our community. Feedback is always welcome."
+             FontSize="14"
+             HorizontalOptions="Center"
+             TextColor="Gray"/>
+        </VerticalStackLayout>
+
+
+
+    </ScrollView>
+
+</ContentPage>

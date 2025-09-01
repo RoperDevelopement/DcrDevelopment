@@ -1,0 +1,16 @@
+C:\Users\mtcha\source\repos\Sqlite\obj\Debug\Sqlite.csproj.AssemblyReference.cache
+C:\Users\mtcha\source\repos\Sqlite\obj\Debug\Sqlite.csproj.CoreCompileInputs.cache
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\Sqlite.exe.config
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\Sqlite.exe
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\Sqlite.pdb
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\EntityFramework.dll
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\System.Data.SQLite.dll
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\EntityFramework.xml
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\mtcha\source\repos\Sqlite\bin\Debug\System.Data.SQLite.xml
+C:\Users\mtcha\source\repos\Sqlite\obj\Debug\Sqlite.csproj.CopyComplete
+C:\Users\mtcha\source\repos\Sqlite\obj\Debug\Sqlite.exe
+C:\Users\mtcha\source\repos\Sqlite\obj\Debug\Sqlite.pdb

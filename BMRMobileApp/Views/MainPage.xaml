@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:BMRMobileApp"
+             x:Class="BMRMobileApp.MainPage"
+                xmlns:pages="clr-namespace:BMRMobileApp.Views"
+             Title="Home PeerSupport Mobile App"
+              
+             
+             Shell.FlyoutBehavior="Flyout">
+    <!--
+    <Shell.TitleView>
+    <Grid>
+        <Label Text="CircleUp"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="22"
+               FontAttributes="Bold" />
+    </Grid>
+</Shell.TitleView>
+           <NavigationPage.TitleView>
+    <Grid ColumnDefinitions="Auto,*" Padding="10" BackgroundColor="{Binding MoodColor}">
+        <toolkit:AvatarView 
+        ImageSource="{Binding AvatarImage}" 
+        WidthRequest="40" 
+        HeightRequest="40"
+        CornerRadius="20"
+        BorderColor="{Binding MoodAccentColor}"
+        BorderWidth="2"/>
+
+        <StackLayout Margin="10,0,0,0" VerticalOptions="Center">
+            <Label Text="{Binding DisplayName}" 
+             FontAttributes="Bold" 
+             FontSize="18" 
+             TextColor="White"/>
+            <Label Text="{Binding MoodStatus}" 
+             FontSize="14" 
+             TextColor="White"
+             Opacity="0.8"/>
+        </StackLayout>
+    </Grid>
+    </NavigationPage.TitleView>
+    -->
+    
+    <!-- This is the main page of the application, which includes a menu bar for navigation 
+        <ContentPage.BindingContext>
+        <pages:MainPage/>
+    </ContentPage.BindingContext>
+Shell.NavBarIsVisible="{OnPlatform False, WinUI=True}"
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="Login"
+                            Command="{Binding NavigateCommand}"
+                              CommandParameter="{x:Type local:LoginPage}" />
+        </MenuBarItem>
+        </ContentPage.MenuBarItems>
+          
+    <Grid>
+        <Image Source="peersupportloadimagevg.png" 
+        HorizontalOptions="Center"
+               VerticalOptions="Center"
+               
+               WidthRequest="200"
+               HeightRequest="200"/>
+    </Grid>
+      <Shell.TitleView>
+      <Grid>
+          <Label Text="CircleUp"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"
+             FontSize="22"
+             FontAttributes="Bold" />
+      </Grid>
+  </Shell.TitleView>
+     
+    <Shell.TitleView>
+        
+            <Image x:Name="ProfileImage" HeightRequest="500"  WidthRequest="500" Aspect="AspectFill"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+        
+    </Shell.TitleView>
+     
+    <Image x:Name="ProfileImage"   HeightRequest="{OnPlatform Android=100, iOS=200, WinUI=220}"  WidthRequest="{OnPlatform Android=100, iOS=200, WinUI=220}" Aspect="Center"
+    -->
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                         HorizontalOptions="Center"
+                         >
+     
+            <!--
+            
+            <Image x:Name="ProfileImage"   HeightRequest="100" WidthRequest="100" Aspect="AspectFit"  Source="{Binding ImgProfPic}" IsVisible="True"
+            Margin="0,0,0,10"    
+     HorizontalOptions="Center"
+     VerticalOptions="Center" />
+            -->
+            <Border Stroke="Aqua" StrokeThickness="1.0" StrokeShape="RoundRectangle">
+                
+            <Image     Source="{Binding ImgProfPic}"  Aspect="AspectFill" WidthRequest="150" VerticalOptions="Center" HeightRequest="150" />
+            </Border>
+            <Label x:Name="LabelEntry" Text="You’re not alone. Let’s find your circle."
+               FontAutoScalingEnabled="True" 
+HorizontalOptions="Center"
+Margin="0,20,0,0"/>
+            <Label Text="Welcome to PeerSupport Mobile App! Where shared experience becomes strength."
+        FontAutoScalingEnabled="True"
+        HorizontalOptions="Center"
+        Margin="0,20,0,0"
+         LineBreakMode="WordWrap" />
+            <Label Text="A world where no one has to face their struggles alone." TextColor="Black"
+FontAutoScalingEnabled="True"
+HorizontalOptions="Center"
+Margin="0,20,0,0"
+ LineBreakMode="WordWrap" />
+            
+           
+
+        <!-- Optional: Add other content below -->
+       <!--
+        <Label Text="Peer support is a cornerstone of the recovery journey, offering a unique form of encouragement and understanding. Sharing experiences with those who have walked a similar path can provide invaluable insights, comfort, and a sense of community. In these connections, individuals find solace in knowing they are not alone and gain strength from the collective wisdom and empathy of their peers. 
+Through shared stories and mutual support, peer relationships foster healing, growth, and resilience on the path to wellness." FontAutoScalingEnabled="True"
+               
+HorizontalOptions="Center"
+Margin="0,20,0,0"/>
+            <Image Source="{Binding ImgProfPic}"
+ WidthRequest="150"
+ HeightRequest="150"
+  />    <Image Source="peersupportloadimagevg.png"
+    WidthRequest="100"
+    HeightRequest="100"
+    HorizontalOptions="Center"/>
+        -->
+         
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

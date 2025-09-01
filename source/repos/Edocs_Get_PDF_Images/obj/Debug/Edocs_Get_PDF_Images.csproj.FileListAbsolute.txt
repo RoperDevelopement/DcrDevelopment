@@ -1,0 +1,6 @@
+C:\Users\mtcha\source\repos\Edocs_Get_PDF_Images\obj\Debug\Edocs_Get_PDF_Images.csproj.CoreCompileInputs.cache
+C:\Users\mtcha\source\repos\Edocs_Get_PDF_Images\bin\Debug\Edocs_Get_PDF_Images.exe.config
+C:\Users\mtcha\source\repos\Edocs_Get_PDF_Images\bin\Debug\Edocs_Get_PDF_Images.exe
+C:\Users\mtcha\source\repos\Edocs_Get_PDF_Images\bin\Debug\Edocs_Get_PDF_Images.pdb
+C:\Users\mtcha\source\repos\Edocs_Get_PDF_Images\obj\Debug\Edocs_Get_PDF_Images.exe
+C:\Users\mtcha\source\repos\Edocs_Get_PDF_Images\obj\Debug\Edocs_Get_PDF_Images.pdb

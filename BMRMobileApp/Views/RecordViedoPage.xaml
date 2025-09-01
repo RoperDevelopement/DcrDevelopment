@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="BMRMobileApp.RecordViedoPage"
+                 xmlns:viewmodels="clr-namespace:BMRMobileApp"
+    xmlns:models="clr-namespace:BMRMobileApp.ViewModels"
+              
+             Title="RecordViedoPage">
+
+     
+        <VerticalStackLayout    
+    Spacing="5"
+    HorizontalOptions="Start">
+        <HorizontalStackLayout  Spacing="5" HorizontalOptions="Center">
+            <Editor x:Name="ViedoSaveName" Text="" Placeholder="Enter the save name of the viedo" WidthRequest = "100" HeightRequest = "10"  HorizontalTextAlignment="Start" />
+            <ImageButton x:Name="RecordButton" Source="{StaticResource Record}" Clicked="OnRecordClicked"     BackgroundColor="#64D2FF"  />
+        </HorizontalStackLayout>
+
+
+        <!--
+    x:Name="videoPlayer"
+    Source="filesystem://dabbo.mp4"
+    ShouldAutoPlay="False"
+    ShouldShowPlaybackControls="True"
+    HeightRequest="300"
+    WidthRequest="400"
+                <toolkit:MediaElement
+    BackgroundColor="Black"/>
+        -->
+
+
+            <CollectionView ItemsSource="{Binding VideoNotes}"  VerticalScrollBarVisibility="Default"
+                    Margin="20"
+                    SelectionMode="None" ItemsLayout="HorizontalList" HorizontalScrollBarVisibility="Default">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                
+                            <VerticalStackLayout
+    Padding="20"
+    Spacing="10"
+    HorizontalOptions="Center">
+
+                                <!-- 🎭 Emotion Tag -->
+                                <Button Text="{Binding Emotion}" FontAutoScalingEnabled="True" HorizontalOptions="Center" BackgroundColor="White"
+                                       Clicked ="OnDeleteClicked"  CommandParameter="{Binding ViedoID}"  />
+                        
+                                <!-- 🎬 Video Playback -->
+                                <toolkit:MediaElement
+                                    x:Name="PlayViedo"
+                                  Source="{Binding VideoPath}"    
+                           
+                            ShouldAutoPlay="False"
+                           ShouldShowPlaybackControls="True"
+  WidthRequest="400" HeightRequest="300"       
+                             
+  HorizontalOptions="Center"
+        VerticalOptions="Center"
+                            BackgroundColor="Black" />
+
+                                <!-- 📝 Optional Transcription -->
+                                <Label Text="{Binding ViedoName}" FontAutoScalingEnabled="True" HorizontalOptions="Center"/>
+                                <Label Text="{Binding ViedoTaken}" FontAutoScalingEnabled="True" HorizontalOptions="Center"/>
+                                <!-- Action Buttons -->
+
+                                <!--
+                                      <HorizontalStackLayout Spacing="12">
+    <Button Text="▶️" Clicked="OnPlayClicked"  VerticalOptions="Center"/>
+    <Button Text="⏸" Clicked="OnPauseClicked" VerticalOptions="Center" />
+    <Button Text="⏹" Clicked="OnStopClicked" VerticalOptions="Center"/
+                                    <Button Text="▶️ Play" Command="{Binding PlayCommand}" CommandParameter="{Binding .}" />
+                                    <Button Text="⏸ Pause" Command="{Binding PauseCommand}" CommandParameter="{Binding .}" />
+                                    <Button Text="⏹ Stop" Command="{Binding StopCommand}" CommandParameter="{Binding .}" />
+                                </HorizontalStackLayout>
+                                    -->
+
+
+
+
+                            </VerticalStackLayout>
+
+                         
+                       
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+           
+        </VerticalStackLayout>
+ 
+</ContentPage>
