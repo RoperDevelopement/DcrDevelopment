@@ -1,0 +1,140 @@
+﻿<Page x:Class="AlanoClubInventory.Views.CreateReportPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AlanoClubInventory.Views"
+      xmlns:vm="clr-namespace:AlanoClubInventory.Utilites"
+   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+ Background="{DynamicResource ControlFillColorDefault}"
+      
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Create Report">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        
+
+        <Grid Margin="10,0,10,10" VerticalAlignment="Top"  HorizontalAlignment="Center">
+          
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" >
+                <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand">
+                    <MenuItem Header="Prices"  Click="Prices"  />
+                    <MenuItem Header="Inventory"  Click="InventoryPage"  />
+                    <MenuItem Header="Other Products"  Click="OtherProd"  />
+                    <MenuItem Header="Daily Till"  Click="Till"  />
+                    <MenuItem Header="Reports"  Click="Reports"  />
+                    <MenuItem Header="Reload Page"  Click="Categories"  />
+                    <MenuItem Header="Go Back"  Click="GoBack"  />
+
+
+                </DockPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="2"  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <TextBlock x:Name="textBlock"     Margin="0,10,0,0" TextWrapping="Wrap" Text="{Binding TxtTitle}"  Padding="10"  HorizontalAlignment="Center"  FontSize="14" VerticalAlignment="Center"/>
+            
+                <ComboBox ItemsSource="{Binding Items}"   DisplayMemberPath="Label" 
+         SelectedItem="{Binding SelectedYear, Mode=TwoWay}" Width="100"
+         
+          
+                          Visibility="{Binding IsStwertInvRep, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <Label Content="Stwert Report Start Date: " FontSize="12"   
+                       Visibility="{Binding IsStwertRep, Converter={StaticResource BoolToVisibilityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <DatePicker     
+                    SelectedDate="{Binding ReportSDate, StringFormat=MM-dd-yyyy}" 
+                    DisplayDateStart="2000-01-01" 
+                    DisplayDateEnd="2099-12-31"
+                    IsTodayHighlighted="True"
+                    FirstDayOfWeek="Monday"
+                    Background="Lavender"
+BorderBrush="SlateBlue"
+BorderThickness="2" Visibility="{Binding IsStwertRep, Converter={StaticResource BoolToVisibilityConverter}}"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                   />
+                <Label Content="Stwert Report End Date: "  FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Visibility="{Binding IsStwertRep, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <DatePicker  
+                    SelectedDate="{Binding ReportEDate, StringFormat=MM-dd-yyyy}" 
+                    DisplayDateStart="2000-01-01" 
+                    DisplayDateEnd="2099-12-31"
+                    IsTodayHighlighted="True"
+                    FirstDayOfWeek="Monday"
+                    Background="Lavender"
+BorderBrush="SlateBlue"
+BorderThickness="2" Visibility="{Binding IsStwertRep, Converter={StaticResource BoolToVisibilityConverter}}"
+                              VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="3"  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5,10,5,5">
+                <CheckBox Content="Stwert Report " IsChecked="{Binding InventorySold,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  FontSize="12"  Cursor="Hand"  Background="DeepSkyBlue"   Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="5,10,5,5" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"
+                          />
+
+
+                <CheckBox Content="UpDate Stwert Repot Date " IsChecked="{Binding UpDateRepDate}" FontSize="12"  Cursor="Hand"
+           Background="DeepSkyBlue"   Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" Visibility="{Binding IsStwertRep, Converter={StaticResource BoolToVisibilityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="5,10,5,5"/>
+                <Button Content="{Binding ButtonRepTyep}"  Command="{Binding CreateReport}"  Background="Ivory" Margin="5,10,5,5" Cursor="Hand"
+                         Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Button Content="Print Report "  Command="{Binding PrintReport}"   Margin="5,10,5,5" Visibility="{Binding IsGeneratingReport, Converter={StaticResource BoolToVisibilityConverter}}" Cursor="Hand"
+                        Background="LawnGreen"  Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="5" Grid.Column="0"  >
+                 
+                <ProgressBar Name="ExportProgressBar"
+      Minimum="0"
+      Maximum="100"
+      Height="20"
+      Width="300"
+       
+      Margin="10"
+      Foreground="MediumPurple"
+      Background="LightGray" Value="{Binding ExportProgress}"   Visibility="{Binding IsExporting, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                        Visibility="{Binding IsGeneratingReport, Converter={StaticResource BoolToVisibilityConverter}}" Width="1000">
+                <RichTextBox  Name="ReportRichTextBox" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0"   vm:RichTextBoxHelper.BoundDocument="{Binding ReportContent}"
+                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                   <!-- <FlowDocument>
+                        <Paragraph>
+                            <Run Text="{Binding ReportContent}"/>
+                        </Paragraph>
+                    </FlowDocument>
+                    -->
+                </RichTextBox>
+            </StackPanel>
+        </Grid>
+        
+
+
+    </ScrollViewer>
+
+</Page>

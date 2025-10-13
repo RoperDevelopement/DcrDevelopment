@@ -2,8 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BMRMobileApp.SearchWebPage"
+             Shell.FlyoutBehavior="Flyout"
              Title="Search">
     <VerticalStackLayout>
+        <Image Source="searchweb.png"  HeightRequest="{OnPlatform Android=100, iOS=200, WinUI=220}"  WidthRequest="{OnPlatform Android=105, iOS=205, WinUI=225}" Aspect="AspectFill"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
         <Entry x:Name="SearchEntry" Placeholder="Enter search term" Margin="20,40,20,10"/>
         <Button Text="Search" Clicked="OnSearchButtonClicked" BackgroundColor="LightBlue" TextColor="White"/>
     </VerticalStackLayout>

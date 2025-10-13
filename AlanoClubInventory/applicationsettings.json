@@ -1,0 +1,7 @@
+{
+  "SqlServerConnectionStrings": {
+    "AlanoClubSqlServer": "Server=dcr;Database=AlanoClub;User=AlanoClub;PassWord=AlanoCLub0317@@;MultipleActiveResultSets=true;Integrated Security=true;Connection Timeout=180;TrustServerCertificate=True;"
+    // "EdocsTimeClockCS": "Server=EDOCSHOMEOFFICE\\SQLEXPRESS;Database=EdocsEmployeeTimeClock;User=edocsusa;PassWord=6746edocs@;MultipleActiveResultSets=true;Integrated Security=false;Connection Timeout=180;"
+  }
+    //  "EdocsInventoryTrackingSystemCS": "Server=Queens;Database=EdocsITS;User=edocsusa;PassWord=6746edocs@;MultipleActiveResultSets=true;Integrated Security=false;Connection Timeout=180;"
+  }

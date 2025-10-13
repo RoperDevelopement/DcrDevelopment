@@ -1,0 +1,13 @@
+﻿<Application x:Class="AlanoClubInventory.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AlanoClubInventory"
+             xmlns:vm="clr-namespace:AlanoClubInventory.Utilites"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <vm:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <SolidColorBrush x:Key="ControlFillColorDefault" Color="#a6e7ff" />
+        <SolidColorBrush x:Key="MenuItems" Color="#808080"/>
+        
+    </Application.Resources>
+</Application>

@@ -5,17 +5,58 @@
              x:Class="BMRMobileApp.RecordViedoPage"
                  xmlns:viewmodels="clr-namespace:BMRMobileApp"
     xmlns:models="clr-namespace:BMRMobileApp.ViewModels"
-              
-             Title="RecordViedoPage">
+               
+              Shell.FlyoutBehavior="Flyout"
+             Title="{Binding CPText}"
+    BackgroundColor="{Binding CPBC}">
 
      
         <VerticalStackLayout    
     Spacing="5"
-    HorizontalOptions="Start">
-        <HorizontalStackLayout  Spacing="5" HorizontalOptions="Center">
-            <Editor x:Name="ViedoSaveName" Text="" Placeholder="Enter the save name of the viedo" WidthRequest = "100" HeightRequest = "10"  HorizontalTextAlignment="Start" />
-            <ImageButton x:Name="RecordButton" Source="{StaticResource Record}" Clicked="OnRecordClicked"     BackgroundColor="#64D2FF"  />
+    HorizontalOptions="Center">
+        <HorizontalStackLayout Padding="5" Margin="5,5,5,5" Spacing="5">
+            <Editor x:Name="ViedoTitle" Text="" Placeholder="Enter viedo title" WidthRequest = "250" HeightRequest = "10" VerticalOptions="Center" HorizontalTextAlignment="Start"  TextColor="Black"/>
+            
+            <Button  
+                           Text="🎙️"
+                          Clicked="OnClickStartRecordingViedoTitle"
+                
+                
+              
+            
+                            ToolTipProperties.Text="Start Recording Journal"
+                            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RecordViedoPage}}, Path=IsSpeaking}}" 
+                            BackgroundColor="Gray"
+                            WidthRequest="10" HeightRequest="10"
+                            
+                            />
+
+            <Button   Text="🛑"  WidthRequest="10" HeightRequest="10"  Clicked= "StopVoiceRecording"
+                        IsVisible="{Binding  Source={RelativeSource AncestorType={x:Type viewmodels:RecordViedoPage}}, Path=IsNotSpeaking}"  BackgroundColor="#8C92AC"
+                                    ToolTipProperties.Text="Stop Recording"/>
+            
         </HorizontalStackLayout>
+        <HorizontalStackLayout Padding="5" Margin="5,5,5,5" Spacing="5">
+            <Editor x:Name="ViedoSaveName" Text="" Placeholder="Enter the save name of the viedo" WidthRequest = "250" HeightRequest = "10" VerticalOptions="Center" HorizontalTextAlignment="Start"  TextColor="Black"/>
+            <Button  
+                 Text="🎙️"
+                    Clicked="OnClickStartRecordingViedoFN"
+                
+                  ToolTipProperties.Text="Start Recording Journal"
+
+                  IsVisible="{Binding IsNotSpeakingVFN}" 
+                  BackgroundColor="Gray"
+                  WidthRequest="10" HeightRequest="10"
+                    CommandParameter="ViedoSaveName"
+                  />
+
+            <Button   Text="🛑"  WidthRequest="10" HeightRequest="10" Clicked="StopVoiceRecording"
+                          IsVisible="{Binding IsSpeakingVFN}"  BackgroundColor="#8C92AC"
+                  
+                          ToolTipProperties.Text="Stop Recording"/>
+        </HorizontalStackLayout>
+        <ImageButton x:Name="RecordButton" Source="{StaticResource Record}" Clicked="OnRecordClicked"   VerticalOptions="Center" BackgroundColor="#64D2FF"  />
+            
 
 
         <!--
@@ -60,7 +101,8 @@
                             BackgroundColor="Black" />
 
                                 <!-- 📝 Optional Transcription -->
-                                <Label Text="{Binding ViedoName}" FontAutoScalingEnabled="True" HorizontalOptions="Center"/>
+                        <Label Text="{Binding ViedoTitle}" FontAutoScalingEnabled="True" HorizontalOptions="Center"/>
+                        <Label Text="{Binding ViedoName}" FontAutoScalingEnabled="True" HorizontalOptions="Center"/>
                                 <Label Text="{Binding ViedoTaken}" FontAutoScalingEnabled="True" HorizontalOptions="Center"/>
                                 <!-- Action Buttons -->
 

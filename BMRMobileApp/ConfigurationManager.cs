@@ -22,7 +22,8 @@ namespace BMRMobileApp
 
         // public static AppSettings SettingsApp { get;   set; }
         public static ChatHubModel ChatHubModel { get; set; }
-        public static async Task Initialize()
+        public static AzureMoodDetectionModel AzureMoodDetection { get; set; }
+        public static async  Task Initialize()
         {
             var filePath = Path.Combine(FileSystem.AppDataDirectory, "appsettings.json");
             if (File.Exists(filePath))
@@ -40,7 +41,8 @@ namespace BMRMobileApp
             string json = File.ReadAllText(filePath);
             SettingsApp = Deserialize<AppSettings>(json, "AppSettings");
             ChatHubModel = Deserialize<ChatHubModel>(json, "ChatHubModel");
-            EmailService emailService = new EmailService();
+            AzureMoodDetection = Deserialize<AzureMoodDetectionModel>(json, "AzureMoodDetection");
+         //   EmailService emailService = new EmailService();
          // await  emailService.SendEmailAsync(string.Empty,string.Empty,string.Empty);
 
             //        var jObj = JObject.Parse(json);

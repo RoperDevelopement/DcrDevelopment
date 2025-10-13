@@ -12,11 +12,13 @@ public partial class LoginPage : ContentPage
     {
 
         InitializeComponent();
+        BackgroundColor= Color.FromArgb(Utilites.Consts.DefaultBackgroundColor);
         //  pLogin = psUserLoginMode;
 
     }
     private async void OnLoginButtonClicked(object sender, EventArgs e)
     {
+        
         string username = UsernameEntry.Text;
         string password = PasswordEntry.Text;
         if (!(File.Exists(Path.Combine(FileSystem.AppDataDirectory, "dcrpeersuppotusers.db"))))
@@ -29,7 +31,7 @@ public partial class LoginPage : ContentPage
             {
                 await DisplayAlert("Success", "Login successful!", "OK");
                 // Navigate to the main page
-                await Navigation.PushModalAsync(new FeelingPage());
+                await Navigation.PushModalAsync(new FeelingPage(false));
             }
             //  else if (string.IsNullOrWhiteSpace(username))
             // {
@@ -55,7 +57,8 @@ public partial class LoginPage : ContentPage
     }
     private async Task CheckUserNamePassword()
     {
-        SQLiteDBCommands.SQLiteService sqliteService = new SQLiteDBCommands.SQLiteService();
+         SQLiteDBCommands.SQLiteService sqliteService = new SQLiteDBCommands.SQLiteService();
+     //  await sqliteService.DropCreteTables();
         // PsUserLoginModel psUserLoginModel = new PsUserLoginModel();
         //var t = await sqliteService.GetPSUsers();
         // Check if the user exists in the database
@@ -82,10 +85,10 @@ public partial class LoginPage : ContentPage
                 var psSetting = await sqliteService.GetPSSettings();
                 if (psSetting == null)
                 {
-                    await Navigation.PushModalAsync(new FeelingPage());
+                    await Navigation.PushModalAsync(new FeelingPage(false));
                 }
                 else if (psSetting.ShowFeelingsPage == 1)
-                    await Navigation.PushModalAsync(new FeelingPage());
+                    await Navigation.PushModalAsync(new FeelingPage(false));
                 else
                 {
                     if (Application.Current?.Windows.Count > 0 && Application.Current.Windows[0] is Window window)

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="BMRMobileApp.JournalPlayBackCardPage"
+               xmlns:vm="clr-namespace:BMRMobileApp.ViewModels"
+               xmlns:pageModels="clr-namespace:BMRMobileApp.ViewModels"
+              x:DataType="pageModels:JournalPlayBackCardView"
+              xmlns:models="clr-namespace:BMRMobileApp.Models"
+              xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+
+               Title="{Binding CPText}"
+    BackgroundColor="{Binding CPBC}">
+    <ScrollView>
+    <StackLayout>
+        
+        <Picker HorizontalOptions="End" VerticalOptions="End" ItemsSource="{Binding PickerChartTypes}" Title="Chart Types"     SelectedItem="{Binding SelectedSite , Mode=TwoWay}" ItemDisplayBinding="{Binding .}"  >
+
+        </Picker>
+
+
+        <Label Text="{Binding JournalEntriesNumberDays}" TextColor="Black" FontAutoScalingEnabled="True" BackgroundColor="{Binding EmotionsColor}" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <Image Source="jc2.png"  HeightRequest="{OnPlatform Android=100, iOS=200, WinUI=220}"  WidthRequest="{OnPlatform Android=105, iOS=205, WinUI=225}" Aspect="AspectFill" Margin="20,20,20,20"/>
+             
+        <toolkit:Expander>
+            <toolkit:Expander.Header>
+                <Label Text="Mood Chart" FontAttributes="Bold" FontAutoScalingEnabled="True" />
+            </toolkit:Expander.Header>
+
+                <ScrollView Orientation="Horizontal">
+                    <FlexLayout HorizontalOptions="Center" VerticalOptions="Center">
+                        <microcharts:ChartView  Chart="{Binding MoodChart}"
+   
+   VerticalOptions="Center"
+   HorizontalOptions="Center"
+                   WidthRequest="300" HeightRequest="300"  Margin="10,10,10,10"  x:Name="ChartV"/>
+                    </FlexLayout>
+                </ScrollView>
+            </toolkit:Expander>
+
+ 
+                <CarouselView ItemsSource="{Binding JournalEntries}"
+              Position="{Binding CurrentPosition, Mode=TwoWay}" HorizontalScrollBarVisibility="Default" IsScrollAnimated="False" ItemsUpdatingScrollMode="KeepItemsInView"  >
+            <CarouselView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"
+                           SnapPointsType="MandatorySingle"
+                           SnapPointsAlignment="Center" />
+            </CarouselView.ItemsLayout>
+
+
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:JournalEntriesModel">
+                    <VerticalStackLayout Padding="10">
+                        <VerticalStackLayout BackgroundColor="{Binding EmotionsColor}">
+                            <Label Text="{Binding JournalEntry,StringFormat='Journal Entry {0}'}" FontAutoScalingEnabled="True" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="{Binding EmotionsColor}" TextColor="Black" />
+                            <Label Text="{Binding DateAdded,StringFormat='Journal Date {0}'}" FontAutoScalingEnabled="True" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="{Binding EmotionsColor}" TextColor="Black"/>
+                            <Label Text="{Binding Emotion}" FontAutoScalingEnabled="True" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="{Binding EmotionsColor}"/>
+                            <Label Text="{Binding EmotionIcon}" FontAutoScalingEnabled="True" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="{Binding EmotionsColor}"/>
+                            <Label Text="{Binding JournalEntryGoals,StringFormat='Goal {0}'}" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="{Binding EmotionsColor}" TextColor="Black"/>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+
+        </CarouselView>
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Button Text="{Binding StopStartAS}"  TextColor="Black"  HorizontalOptions="Center"  BackgroundColor="Transparent" VerticalOptions="Center"   Margin="5,5,5,5" Command="{Binding StartStopAsCmd}" IsVisible="{Binding IsVisPB}" />
+        </HorizontalStackLayout>
+        
+        <!--
+        <local:JournalPlaybackCard />
+        <Button Text="{Binding IsPlaying, Converter={StaticResource PlaybackToggleTextConverter}}"
+        Command="{Binding TogglePlaybackCommand}" />
+        -->
+    </StackLayout>
+    </ScrollView>
+</ContentPage>
+

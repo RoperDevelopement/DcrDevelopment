@@ -7,7 +7,7 @@ using BMRMobileApp.Models;
 //https://outlook.live.com/mail/0/ dcrpsmobleapp@outlook.com
 namespace BMRMobileApp.InterFaces
 {
-    public interface IPeerSupportUsers : IPSUserID
+    public interface IPeerSupportUsers : IPSTablesIndexID
     {
         // Properties for Peer Support User details
 
@@ -30,17 +30,17 @@ namespace BMRMobileApp.InterFaces
         //bool IsFeelingAnonymous { get; set; }
         //bool IsFeelingVisibleToPeerSupportUsers { get; set; }
     }
-
-    public interface IPSUserID
+     
+    public interface IPSTablesIndexID
     {
         int ID { get; set; }
     }
-    public interface IPSUserCustID
+    public interface IUserID
     {
         int PSUserID { get; set; }
     }
 
-    public interface IPSUserLogin : IPSUserID
+    public interface IPSUserLogin : IPSTablesIndexID
     {
         //byte[] PSUserProfilePicture { get; set; } // URL or path to the profile picture
         string PSUserProfilePicture { get; set; } // URL or path to the profile picture
@@ -58,7 +58,7 @@ namespace BMRMobileApp.InterFaces
 
 
     }
-    public interface IPSSUerLoginInformation : IPSUserID
+    public interface IPSSUerLoginInformation : IPSTablesIndexID
     {
         string PSUserEmail { get; set; }
         string PSUserAvatar { get; set; } // URL or path to the user's avatar image
@@ -71,13 +71,26 @@ namespace BMRMobileApp.InterFaces
     {
         Task RequestExitAsync();
     }
-    public interface IPSUserFeelings : IPSUserID, IPSUserCustID
+    public interface IPSFeeling
+    {
+        string Feeling { get; set; } // The feeling expressed by the user   
+    }
+    public interface IPSEmotionTagID
+    {
+        int EmotionTagID { get; set; } // The feeling expressed by the user   
+    }
+    public interface IPSJournalGoalsID
+    {
+        int JournalGoalsID { get; set; } // The feeling expressed by the user   
+    }
+
+    public interface IPSJournalEntry 
     {
         string DateAdded { get; set; } // Date when the feeling was added
-        byte[] Feeling { get; set; } // The feeling expressed by the user   
-        string FeelingNotes { get; set; } // Additional notes about the feeling
+        
+        string JournalEntry { get; set; } // Additional notes about the feeling
     }
-    public interface IPSUserToDOList : IPSUserID, IPSUserCustID
+    public interface IPSUserToDOList : IPSTablesIndexID, IUserID
     {
         string TodoItem { get; set; } // The feeling expressed by the user   
         byte[] EmojiTag { get; set; } // Additional notes about the feeling
@@ -87,7 +100,7 @@ namespace BMRMobileApp.InterFaces
     {
         int PSGroupID { get; set; }
     }
-    public interface IPSChatMessage : IPSUserID, IPSUserCustID, IPSChatGroup
+    public interface IPSChatMessage : IPSTablesIndexID, IUserID, IPSChatGroup
     {
         string PSMessage { get; set; }
         string PSMessageTimestamp { get; set; }
@@ -98,7 +111,7 @@ namespace BMRMobileApp.InterFaces
     }
 
 
-    public interface IPSGroupMembers : IPSUserID, IPSChatGroup
+    public interface IPSGroupMembers : IPSTablesIndexID, IPSChatGroup
     {
         string PSUserDateJoined { get; set; }
         string PSUserRole { get; set; } // e.g., Admin, Member, Moderator
@@ -109,13 +122,13 @@ namespace BMRMobileApp.InterFaces
 
 
     }
-    public interface IPSChatUserRoles : IPSUserID
+    public interface IPSChatUserRoles : IPSTablesIndexID
     {
         string PSUserRole { get; set; } // e.g., Admin, Member, Moderator
         string PSRoleDescription { get; set; } // Description of the role
         string PSRolePermissions { get; set; } // Permissions associated with the role (e.g., Read, Write, Delete)
     }
-    public interface IPSChatGroups : IPSUserID, IPSUserCustID
+    public interface IPSChatGroups : IPSTablesIndexID, IUserID
     {
         string PSGroupName { get; set; }
         string PSGroupDescription { get; set; }

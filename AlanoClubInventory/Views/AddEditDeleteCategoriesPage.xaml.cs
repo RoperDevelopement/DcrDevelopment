@@ -1,0 +1,120 @@
+﻿using AlanoClubInventory.Models;
+using AlanoClubInventory.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+     
+namespace AlanoClubInventory.Views
+{
+    /// <summary>
+    /// Interaction logic for AddDeleteCategoriesPage.xaml
+    /// </summary>
+    public partial class AddEditDeleteCategoriesPage : Page
+    {
+        AddEditDeleteCategoriesViewModel model = new AddEditDeleteCategoriesViewModel();
+        public AddEditDeleteCategoriesPage()
+        {
+            InitializeComponent();
+            this.DataContext = model;
+         //   CheckGoHome();
+        }
+        private CategoryModel CategoryModel { get; set; }
+        private async void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //var grid = sender as DataGrid;
+            //if (grid?.CurrentCell != null && grid.DataContext is AddEditDeleteCategoriesViewModel vm)
+            //{
+            //    var cellInfo = grid.CurrentCell;
+            //    var column = cellInfo.Column.DisplayIndex;
+            //    // vm.SelectedColumnIndex = grid.CurrentCell.Column.DisplayIndex;
+            //    int rowIndex = grid.Items.IndexOf(grid.CurrentItem);
+            //    var currItem = grid.Items[rowIndex] as CategoryModel;
+            //    var header = grid.CurrentCell.Column.Header?.ToString();
+            //    //vm.SelectedColumnHeader = header;
+            //    if ((currItem == null) || (string.IsNullOrEmpty(currItem.CategoryName))) { return; }
+                 
+            //        vm.CModel = new Models.CategoryModel { ID = currItem.ID, CategoryName = currItem.CategoryName };
+
+            //    if (column == 2)
+            //    {
+            //        vm.AddNewCategory();
+            //    }
+            //    else if (column == 3)
+            //    {
+            //        vm.CategoryEdit();
+            //    }
+            //    else
+            //    {
+            //        vm.CategoryDel();
+            //    }
+            //}
+        }
+         
+
+       
+        private void dataGrid_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //var dataGrid = sender as DataGrid;
+            //if (dataGrid != null)
+            //{
+            //    int rowIndex = dataGrid.Items.IndexOf(dataGrid.CurrentItem);
+            //    var currItem = dataGrid.Items[rowIndex] as CategoryModel;
+            //    if ((currItem == null) || (string.IsNullOrEmpty(currItem.CategoryName)))
+            //    {  return; }
+            //                dataGrid.CommitEdit(); // Commit any pending edits
+            //}
+        }
+
+        private async void GoBack(object sender, RoutedEventArgs e)
+        {
+          
+            NavigationService.GoBack();
+        }
+        private async void InventoryPage(object sender, RoutedEventArgs e)
+        {
+            InvenntoryPage invPage = new InvenntoryPage();
+            this.NavigationService.Navigate(invPage);
+        }
+        private async void OtherProd(object sender, RoutedEventArgs e)
+        {
+            OtherProductsPage otherProductsPage = new OtherProductsPage();
+            this.NavigationService.Navigate(otherProductsPage);
+        }
+
+        private async void Prices(object sender, RoutedEventArgs e)
+        {
+            AddEditProductPricesPage addEditProductPricesPage = new AddEditProductPricesPage();
+            this.NavigationService.Navigate(addEditProductPricesPage);
+        }
+        private async void Categories(object sender, RoutedEventArgs e)
+        {
+            AddEditDeleteCategoriesPage addEditDeleteCategoriesPage = new AddEditDeleteCategoriesPage();
+            this.NavigationService.Navigate(addEditDeleteCategoriesPage);
+        }
+        private async void Reports(object sender, RoutedEventArgs e)
+        {
+            CreateReportPage createReportPage = new CreateReportPage();
+            this.NavigationService.Navigate(createReportPage);
+        }
+      
+
+        private async void Till(object sender, RoutedEventArgs e)
+        {
+            AddEditProductPricesPage addEditProductPricesPage1 = new AddEditProductPricesPage();
+            this.NavigationService.Navigate(addEditProductPricesPage1);
+        }
+    }
+}

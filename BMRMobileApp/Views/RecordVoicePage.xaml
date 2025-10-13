@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BMRMobileApp.RecordVoicePage"
                  xmlns:viewmodels="clr-namespace:BMRMobileApp.Views"
+             Shell.FlyoutBehavior="Flyout"
              Title="RecordVoicePage">
     <VerticalStackLayout Padding="20" Spacing="15">
         <Label 

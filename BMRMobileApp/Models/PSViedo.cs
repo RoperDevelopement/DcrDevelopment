@@ -9,17 +9,19 @@ using System.Threading.Tasks;
 using static BMRMobileApp.InterFaces.IID;
 namespace BMRMobileApp.Models
 {
-  public  class PSViedo: IViedoServiceDB
+    public class PSViedo : IViedoServiceDB
     {
         [AutoIncrement, PrimaryKey, Unique]
         public int ID { get; set; }
-        
+
         [NotNull]
-       public string VideoPath { get; set; }
+        public string VideoPath { get; set; }
         [NotNull]
         public string DateViedoTaken
         {
             get; set;
         }
+        [NotNull]
+        public string ViedoTitle {get;set;}
     }
 }

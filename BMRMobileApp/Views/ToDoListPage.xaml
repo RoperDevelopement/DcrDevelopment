@@ -1,12 +1,236 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BMRMobileApp.Views.ToDoListPage"
-             Title="ToDoListPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:pageModels="clr-namespace:BMRMobileApp.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="BMRMobileApp.ToDoListPage"
+             x:DataType="pageModels:ToDoListViewModel"
+             xmlns:vm="clr-namespace:BMRMobileApp.ViewModels"
+              xmlns:models="clr-namespace:BMRMobileApp.Models"
+              xmlns:calendar="clr-namespace:Syncfusion.Maui.Toolkit.Calendar;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:timepicker="clr-namespace:Syncfusion.Maui.Toolkit.Calendar;assembly=Syncfusion.Maui.Toolkit"
+           
+              Title="{Binding CPText}"
+    BackgroundColor="{Binding CPBC}"
+>
+    <!--
+    <ContentPage.BindingContext>
+        <vm:ToDoListViewModel />
+
+    </ContentPage.BindingContext>
+    -->
+    <ScrollView>
+        <VerticalStackLayout Padding="5">
+            <Image Source="taskgols.png" VerticalOptions="Center" HorizontalOptions="Center"  Margin="5,5,5,5" HeightRequest="{OnPlatform Android=100, iOS=200, WinUI=220}" WidthRequest="{OnPlatform Android=105, iOS=205, WinUI=225}"  />
+         
+
+            <Label Text="Todo Items"
+                TextColor="Black" 
+                FontAutoScalingEnabled="True"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                VerticalTextAlignment="Center" Padding="5"/>
+            
+            <!--editor for task name and desc-->
+                <Border StrokeShape="RoundRectangle 22" 
+                    Stroke="Blue"
+                    StrokeThickness="2"
+                    Padding="{OnPlatform '18,0,18,8',Android='18,0,18,0'}"
+                     SemanticProperties.Description="Task" BackgroundColor="{Binding RandomColorEditor}" SemanticProperties.Hint="Add task items">
+                <StackLayout>
+                    
+                        <Editor Placeholder="Task Item" Text="{Binding TaskName}" x:Name="TaskNameFocous" AutomationId="TaskNameFocous"   
+                            AutoSize="TextChanges" Focused="TaskNameFocous_Focused" 
+                            TextColor="Black"
+                            BackgroundColor="White"
+                            PlaceholderColor="Black"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           SemanticProperties.Description="Todo Item" SemanticProperties.Hint="Add New Todo Item"
+                           Unfocused="TaskNameFocous_Unfocused" 
+                           Margin="5,5,5,5"     />
+                    
+                        <Editor Placeholder="Task Description Notes" Text="{Binding TaskDescription}" x:Name="TaskNameDesc" AutomationId="TaskNameDesc"  
+                            AutoSize="TextChanges" Focused="TaskNameFocous_Focused"
+                            TextColor="Black"
+                            BackgroundColor="White"
+                            PlaceholderColor="Black"
+                            WidthRequest="{OnPlatform Android=105, iOS=205, WinUI=225}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            SemanticProperties.Description="Task Item Description" SemanticProperties.Hint="Task Item Description"
+                           Unfocused="TaskNameFocous_Unfocused"
+                            Margin="5,5,5,5"/>
+     
+
+                    <Button  
+                        Text="🎙️"
+                        Command="{Binding StartVoiceRecordingCommand}"
+                        ToolTipProperties.Text="Start Recording Journal"
+                        IsVisible="{Binding IsSpeaking}" 
+                        BackgroundColor="Gray"
+                        WidthRequest="10" HeightRequest="10"
+                        SemanticProperties.Description="Record Voice" SemanticProperties.Hint="Record Voice"
+                        Margin="5,5,5,5"/>
+                    
+                    <Button
+                        Text="🛑"  WidthRequest="10" HeightRequest="10" Command="{Binding StopVoiceRecordingCommand}"
+                        IsVisible="{Binding IsNotSpeaking}"  BackgroundColor="#8C92AC"
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        ToolTipProperties.Text="Stop Recording"
+                        SemanticProperties.Description="Stop Record Voice" SemanticProperties.Hint="Stop Record Voice"
+                        Margin="5,5,5,5"/>
+                    <Picker ItemsSource="{Binding Catgories}"
+         Title="Select Catagory" 
+         ItemDisplayBinding="{Binding TaskCategoryName}"
+         SelectedItem="{Binding SelectedCatagory, Mode=TwoWay}"
+         
+         Margin="5,5,5,5"
+          />
+                </StackLayout>
+            </Border>
+            
+           
+
+            <!--Region icon task-->
+            <toolkit:Expander BackgroundColor="{Binding RandomColor}">
+                <toolkit:Expander.Header>
+                    <Label Text="Task Emontion" FontAttributes="Bold" FontAutoScalingEnabled="True" />
+                </toolkit:Expander.Header>
+                <StackLayout>
+                    <Label Text="{Binding MoodTask}" TextColor="Black" FontAutoScalingEnabled="True" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <CollectionView ItemsSource="{Binding EmotionsTag}"  WidthRequest="300"  
+                                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                    HorizontalOptions="Center" VerticalOptions="Center">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="4"  />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:PSEmotionsTag">
+                                <StackLayout>
+                                    <Button  
+                                        Text="{Binding EmotionIcon}" 
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Command="{Binding EmoTag,Source={RelativeSource AncestorType={x:Type pageModels:ToDoListViewModel}}}"
+                                        SemanticProperties.Description="{Binding Emotion}" SemanticProperties.Hint="{Binding Emotion}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="{Binding EmotionsColor}"
+                                        Margin="5,5,5,5"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </toolkit:Expander>
+            <toolkit:Expander Margin="5,5,5,5" BackgroundColor="{Binding RandomColorTT}">
+                <toolkit:Expander.Header>
+                    <Label Text="Task Tags" FontAttributes="Bold" FontAutoScalingEnabled="True" />
+                    </toolkit:Expander.Header>
+                <CollectionView ItemsSource="{Binding TaskTags,Source={RelativeSource AncestorType={x:Type pageModels:ToDoListViewModel}}}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" WidthRequest="400" >
+                    <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="3"  />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:PSTaskTags">
+                                <StackLayout>
+                                    <Button  
+                                        Text="{Binding  TagName}" 
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Command="{Binding TagChangeTagColor,Source={RelativeSource AncestorType={x:Type pageModels:ToDoListViewModel}}}"
+                                         CommandParameter="{Binding .}"
+                                        TextColor="Black"
+                                        BackgroundColor="{Binding TagColor}" 
+                                           Margin="5,5,5,5"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </toolkit:Expander>
+
+
+            <toolkit:Expander  x:Name="DueDateBC">
+                <toolkit:Expander.Header>
+                    <Label Text="Task Due Date" FontAttributes="Bold" FontAutoScalingEnabled="True"/>
+                </toolkit:Expander.Header>
+                <Border StrokeShape="RoundRectangle 22" 
+      Stroke="Blue"
+      StrokeThickness="2"
+      Padding="{OnPlatform '18,0,18,8',Android='18,0,18,0'}"
+       SemanticProperties.Description="ToDo"  SemanticProperties.Hint="Add items">
+                    <StackLayout >
+
+                    <Label Text="{Binding TaskDueDate}" FontAttributes="Bold" FontAutoScalingEnabled="True" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,5,5,5" />
+
+
+                    <calendar:SfCalendar 
+                        
+                            SelectionMode="Single"
+                            AllowViewNavigation="True"
+                            CanToggleDaySelection="True"
+                            CornerRadius="8"
+                            SelectionShape="Circle"
+                            BackgroundColor="White"
+                            WidthRequest="200"
+                            HeightRequest="200"
+                            Padding="10" 
+                            HorizontalOptions="Center" VerticalOptions="Center"
+                            SelectionChanged="SfCalendar_SelectionChanged" />
+
+
+                    <Label Text="Start Time" TextColor="Black" FontAutoScalingEnabled="True" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,5,5,5"/>
+                    <TimePicker TimeSelected="TimePicker_TimeSelected"  Format="HH:mm" Time="12:00" HorizontalOptions="Center" VerticalOptions="Center"></TimePicker>
+                    <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <CheckBox  SemanticProperties.Description="Set Notifaction" IsChecked="{Binding SendNotications}"
+SemanticProperties.Hint="Set Notifaction" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Text="Set Notifaction" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                    </HorizontalStackLayout>
+                </StackLayout>
+            </Border>
+            </toolkit:Expander>
+
+
+
+
+            <Border StrokeShape="RoundRectangle 22" 
+    Stroke="Blue"
+    StrokeThickness="2"
+    Padding="{OnPlatform '18,0,18,8',Android='18,0,18,0'}"
+     SemanticProperties.Description="ToDo" BackgroundColor="{Binding RandomColorEditor}" SemanticProperties.Hint="Add items">
+            
+            <HorizontalStackLayout Spacing="10"
+       HorizontalOptions="Center"
+       VerticalOptions="Start" Padding="5">
+        
+                <ImageButton  Source="{StaticResource Save}" 
+      Command="{Binding SaveToDoCommand}"
+      ToolTipProperties.Text="Save Task"
+      BackgroundColor="#FFE5B4"
+      CornerRadius="12"
+      Grid.Row="1"
+      Grid.Column="4"
+     
+      WidthRequest="10" HeightRequest="10"/>
+                <ImageButton Source="{StaticResource ClearText}"
+  Command="{Binding ClearTextCommand}"
+  ToolTipProperties.Text="Clear Text"
+  CornerRadius="12"
+  BackgroundColor="#4FC3F7"
+  WidthRequest="20" HeightRequest="20"          
+  />
+ 
+                <ImageButton Source="{StaticResource Exit}"
+Command="{Binding ExitToDoCommand}"
+ToolTipProperties.Text="Close"
+         CornerRadius="12"
+BackgroundColor="#37474F"
+           WidthRequest="20" HeightRequest="20"/>
+
+            </HorizontalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

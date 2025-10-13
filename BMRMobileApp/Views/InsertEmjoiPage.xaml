@@ -1,0 +1,73 @@
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    
+    x:TypeArguments="system:String"
+    x:Class="BMRMobileApp.InsertEmjoiPage">
+    
+<AbsoluteLayout VerticalOptions="Fill" HorizontalOptions="Fill">
+            <Image Source="loadingemjoitags.png" x:Name="Loading"></Image>
+        <Border Stroke="Gray"  StrokeThickness="1.0" StrokeShape="RoundRectangle">
+            <Grid Padding="1">
+                <Grid.RowDefinitions Height="Auto"/>
+           
+            <CollectionView ItemsSource="{Binding Emojis}"
+                        RemainingItemsThreshold="10"  
+                  
+                          RemainingItemsThresholdReached="MyCollectionView_RemainingItemsThresholdReached"
+                              Scrolled="MyCollectionView_Scrolled"
+                           x:Name="MyCollectionView" 
+                            HeightRequest="300" 
+                            WidthRequest="300">
+                <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="3"  />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                <DataTemplate>
+                        
+
+                            <Label Text="{Binding}"
+                             FontSize="24"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Start"
+                                   HeightRequest="150"  WidthRequest="150">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEmojiTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                      
+                    </DataTemplate>
+            </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+        </Border>
+        <HorizontalStackLayout  Spacing="10"
+                HorizontalOptions="Center"
+                VerticalOptions="Start" x:Name="SlButtons"
+                                     AbsoluteLayout.LayoutBounds="0.5, 1, AutoSize, AutoSize"
+        AbsoluteLayout.LayoutFlags="PositionProportional">
+                <ImageButton Source="{StaticResource IconAdd}" x:Name="AddEmjo"
+ 
+ToolTipProperties.Text="Add Emjoi"
+         CornerRadius="12"
+BackgroundColor="#37474F"
+           WidthRequest="20" HeightRequest="20" VerticalOptions="Center"   HorizontalOptions="Center"
+                             Clicked="AddIcons_Clicked"
+           />
+                <ImageButton Source="{StaticResource Exit}"
+ Clicked="ImageButton_Clicked"
+ ToolTipProperties.Text="Close"
+          CornerRadius="12"
+ BackgroundColor="#37474F"
+            WidthRequest="20" HeightRequest="20" VerticalOptions="Center" HorizontalOptions="Center"
+           />
+    
+        </HorizontalStackLayout>
+    </AbsoluteLayout>
+   
+</toolkit:Popup>
+    

@@ -124,6 +124,28 @@ namespace BMRMobileApp.Utilites
                 return null;
             }
         }
+        public static bool IsValidUrlFormat(string url)
+        {
+            return Uri.TryCreate(url, UriKind.Absolute, out Uri? uriResult)
+                   && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+        }
+        public static async Task<bool> IsWebsiteReachableAsync(string url)
+        {
+            if (!IsValidUrlFormat(url))
+                return false;
+
+            try
+            {
+                using var client = new HttpClient();
+                client.Timeout = TimeSpan.FromSeconds(15); // Optional: set timeout
+                var response = await client.GetAsync(url);
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
     }
 }

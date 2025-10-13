@@ -96,27 +96,48 @@
                 
                 Size="{StaticResource IconSize}" />
 
-        <FontImageSource x:Key="IconClean"
-                Glyph="{x:Static f:FluentUI.broom_32_regular}"
+        <FontImageSource x:Key="Journal"
+                Glyph="{x:Static f:FluentUI.document_48_regular}"
                 FontFamily="{x:Static f:FluentUI.FontFamily}"
                 
                 Size="{StaticResource size240}" />
 
-        <FontImageSource x:Key="IconLight"
-                Glyph="{x:Static f:FluentUI.weather_sunny_28_regular}"
+    <FontImageSource x:Key="Chat"
+                Glyph="{x:Static f:FluentUI.chat_48_regular}"
                 FontFamily="{x:Static f:FluentUI.FontFamily}"
               
                 Size="{StaticResource size240}" />
-        <FontImageSource x:Key="IconDark"
-                Glyph="{x:Static f:FluentUI.weather_moon_28_regular}"
+        <FontImageSource x:Key="Home"
+                Glyph="{x:Static f:FluentUI.home_48_regular}"
                 FontFamily="{x:Static f:FluentUI.FontFamily}"
               
                 Size="{StaticResource size240}" />
-
-    
-   
- 
+    <FontImageSource x:Key="ArrowRight"
+        Glyph="{x:Static f:FluentUI.comment_edit_24_regular}"
+        FontFamily="{x:Static f:FluentUI.FontFamily}"
+      
+        Size="{StaticResource size240}" />
+    <FontImageSource x:Key="ClearText"
+    Glyph="{x:Static f:FluentUI.text_clear_formatting_24_regular}"
+    FontFamily="{x:Static f:FluentUI.FontFamily}"
   
-     
+    Size="{StaticResource size240}" />
+    <FontImageSource x:Key="IconAdd"
+             Glyph="{x:Static f:FluentUI.add_32_regular}"
+             FontFamily="{x:Static f:FluentUI.FontFamily}"
+              Size="{StaticResource IconSize}" />
+
+    <FontImageSource x:Key="Delete"
+             Glyph="{x:Static f:FluentUI.delete_48_regular}"
+             FontFamily="{x:Static f:FluentUI.FontFamily}"
+              Size="{StaticResource IconSize}" />
+    <FontImageSource x:Key="Close"
+         Glyph="{x:Static f:FluentUI.closed_caption_off_48_regular}"
+         FontFamily="{x:Static f:FluentUI.FontFamily}"
+          Size="{StaticResource IconSize}" />
+   
+
+
+
 
 </ResourceDictionary>

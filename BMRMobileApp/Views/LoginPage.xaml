@@ -8,18 +8,20 @@
         <VerticalStackLayout Padding="20" Spacing="15">
             <Label Text="Welcome! Please Log In" 
                FontAutoScalingEnabled="True" 
-              VerticalOptions="Center" />
+              VerticalOptions="Center" TextColor="Black" />
 
             <Entry x:Name="UsernameEntry" 
                Placeholder="Username" 
                    FontAutoScalingEnabled="True"
                    VerticalOptions="Center"
+                   Background="White" TextColor="Black"
                Keyboard="Text" IsSpellCheckEnabled="False" />
 
             <Entry x:Name="PasswordEntry" 
                    FontAutoScalingEnabled="True"
                Placeholder="Password" 
-               IsPassword="True" />
+               IsPassword="True" 
+                   Background="White" TextColor="Black"/>
 
             <ImageButton Source="login1.png" 
                 Clicked="OnLoginButtonClicked" 

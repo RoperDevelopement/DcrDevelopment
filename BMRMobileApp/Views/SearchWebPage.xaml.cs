@@ -8,6 +8,8 @@ public partial class SearchWebPage : ContentPage
 	public SearchWebPage()
 	{
 		InitializeComponent();
+		Title = "Search Web";
+		BackgroundColor = Color.FromArgb(Utilites.Consts.DefaultBackgroundColor);
     }
     private async void OnSearchButtonClicked(object sender, EventArgs e)
 	{
@@ -18,4 +20,16 @@ public partial class SearchWebPage : ContentPage
 			await searchWeb.SearchBingAsync(query);
         }
     }
+
+    private async void GetMood()
+    {
+        SQLiteDBCommands.SQLiteService sQLiteService = new SQLiteDBCommands.SQLiteService();
+        var mood = sQLiteService.GetUserCurrentMoodNonAsync();
+        if (mood != null)
+        {
+            Title = $"{Title} {mood.Mood} {mood.MoodTag}";
+            BackgroundColor = Color.FromArgb(mood.BackgroundColor);
+        }
+    }
+
 }

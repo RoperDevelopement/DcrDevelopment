@@ -8,6 +8,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using Plugin.Maui.Audio;
+using Syncfusion.Maui.Toolkit.Hosting;
+using Microcharts.Maui;
+using SkiaSharp;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 namespace BMRMobileApp
 {
     public static class MauiProgram
@@ -66,8 +70,16 @@ namespace BMRMobileApp
             builder.UseMauiCommunityToolkit();
             builder.UseMauiCommunityToolkitMediaElement();
             builder.AddAudio();
+            builder.ConfigureSyncfusionToolkit();
+            builder.Services.AddSingleton(AudioManager.Current);
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<FeelingPage>();
+            builder.UseSkiaSharp();
+            // Register the page
+            //   builder.Services.AddSingleton<UserMoodModle>();
             // builder.UseMauiCommunityToolkitCamera();
-            ConfigurationManager.Initialize();
+            ///  builder.AddSingleton<ITextSpeaker, TextSpeakerService>();
+            _ = ConfigurationManager.Initialize();
             return builder.Build();
         }
     }

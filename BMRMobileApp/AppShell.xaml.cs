@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.Maui.Controls;
 using BMRMobileApp.Utilites;
-using BMRMobileApp.Utilites;
+ 
 namespace BMRMobileApp
 {
     public partial class AppShell : Shell
@@ -29,20 +29,26 @@ namespace BMRMobileApp
         }
         private void InitRoutes()
         {
-            //Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
-            Routing.RegisterRoute("mainpage", typeof(MainPage));
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+          //  Routing.RegisterRoute("mainpage", typeof(MainPage));
             //Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             
-           Routing.RegisterRoute("feelingpage", typeof(FeelingPage));
-          Routing.RegisterRoute("loginpage", typeof(LoginPage));
-            Routing.RegisterRoute("addedituserspage", typeof(AddEditUsersPage));
-            Routing.RegisterRoute("chatviewpage", typeof(ChatViewPage));
-            Routing.RegisterRoute("settingspage", typeof(SettingsPage));
+           Routing.RegisterRoute(nameof(FeelingPage), typeof(FeelingPage));
+          Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute( nameof(AddEditUsersPage), typeof(AddEditUsersPage));
+            Routing.RegisterRoute(nameof(ChatViewPage), typeof(ChatViewPage));
+            Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
             Routing.RegisterRoute(nameof(RecordViedoPage), typeof(RecordViedoPage));
-            Routing.RegisterRoute("droptablespage", typeof(DropTablesPage));
+            Routing.RegisterRoute(nameof(DropTablesPage), typeof(DropTablesPage));
             Routing.RegisterRoute(nameof(RecordVoicePage), typeof(RecordVoicePage));
             Routing.RegisterRoute(nameof(SearchWebPage), typeof(SearchWebPage));
+            Routing.RegisterRoute(nameof(ToDoListPage), typeof(ToDoListPage));
+            Routing.RegisterRoute(nameof(GoalsPage), typeof(GoalsPage));
+            Routing.RegisterRoute(nameof(ResourcesPage), typeof(ResourcesPage));
+            Routing.RegisterRoute(nameof(OpenWebPagePhonePage), typeof(OpenWebPagePhonePage));
+            Routing.RegisterRoute(nameof(JournalPlayBackCardPage), typeof(JournalPlayBackCardPage));
             
+
 
 
             //    Routing.RegisterRoute(nameof(PayPage), typeof(PayPage));

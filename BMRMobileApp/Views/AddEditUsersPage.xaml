@@ -4,8 +4,10 @@
              x:Class="BMRMobileApp.AddEditUsersPage"
                 xmlns:vm="clr-namespace:BMRMobileApp"
               
-
-             Title="Users Profile">
+Shell.TabBarIsVisible="True"
+             Shell.FlyoutBehavior="Flyout"
+                 Title="{Binding CPText}"
+  BackgroundColor="{Binding CPBC}">
 
 
     <ScrollView>
@@ -27,29 +29,29 @@
 
             </Grid>
 
-            <Label Text="Users Profile" FontAutoScalingEnabled="True" FontAttributes="Bold"  />
-            <Entry x:Name="PSUserDisplayName" Placeholder="Display Name" FontAutoScalingEnabled="True" IsSpellCheckEnabled="False" />
+            <Label Text="Users Profile" FontAutoScalingEnabled="True" FontAttributes="Bold" TextColor="Black" Background="White"/>
+            <Entry x:Name="PSUserDisplayName" Placeholder="Display Name" FontAutoScalingEnabled="True" IsSpellCheckEnabled="False" TextColor="Black" Background="White"/>
             <!--
             <Label Text="Display Name Required" TextColor="Red" FontSize="12" IsVisible="{Binding DisplayNameIsValid}" />
             -->
-            <Entry x:Name="PSUserFirstName" Placeholder="First Name" FontAutoScalingEnabled="True"  IsSpellCheckEnabled="False"/>
-            <Entry x:Name="PSUserLastName" Placeholder="Last Name" FontAutoScalingEnabled="True" IsSpellCheckEnabled="False"/>
+            <Entry x:Name="PSUserFirstName" Placeholder="First Name" FontAutoScalingEnabled="True"  IsSpellCheckEnabled="False" TextColor="Black" Background="White"/>
+            <Entry x:Name="PSUserLastName" Placeholder="Last Name" FontAutoScalingEnabled="True" IsSpellCheckEnabled="False" TextColor="Black" Background="White"/>
             <HorizontalStackLayout>
-                <Label Text="Male:" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <Label Text="Male:" HorizontalOptions="Start" VerticalOptions="Center" TextColor="Black" Background="White"/>
                 <CheckBox    
                     x:Name="Male"
-                        Color="Black"  VerticalOptions="Center"
+                        Color="Black"  VerticalOptions="Center" 
                          />
-                <Label Text="Female" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <Label Text="Female" HorizontalOptions="Start" VerticalOptions="Center" TextColor="Black" Background="White"/>
                 <CheckBox HorizontalOptions="Center"
     x:Name="Female" VerticalOptions="Center"
         Color="HotPink"
          />
             </HorizontalStackLayout>
-            <Entry x:Name="PSEmail" Placeholder="Email Address"  Keyboard="Email" FontAutoScalingEnabled="True" IsSpellCheckEnabled="False" IsEnabled="{Binding DisplayRetype}"/>
-            <Entry x:Name="PSUserPassword" Placeholder="PassWord Must be at lest 8 Char"  IsPassword="True" FontAutoScalingEnabled="True" IsVisible="{Binding DisplayRetype}" />
-            <Entry x:Name="ReTypePassWord" Placeholder="Retype Password"  IsPassword="True"  FontAutoScalingEnabled="True" IsVisible="{Binding DisplayRetype}"/>
-            <Entry x:Name="PSUserPhoneNumber" Placeholder="Phone Number" FontAutoScalingEnabled="True" Keyboard="Telephone" />
+            <Entry x:Name="PSEmail" Placeholder="Email Address"  Keyboard="Email" FontAutoScalingEnabled="True" IsSpellCheckEnabled="False" IsEnabled="{Binding DisplayRetype}" TextColor="Black" Background="White"/>
+            <Entry x:Name="PSUserPassword" Placeholder="PassWord Must be at lest 8 Char"  IsPassword="True" FontAutoScalingEnabled="True" IsVisible="{Binding DisplayRetype}" TextColor="Black" Background="White"/>
+            <Entry x:Name="ReTypePassWord" Placeholder="Retype Password"  IsPassword="True"  FontAutoScalingEnabled="True" IsVisible="{Binding DisplayRetype}" TextColor="Black" Background="White"/>
+            <Entry x:Name="PSUserPhoneNumber" Placeholder="Phone Number" FontAutoScalingEnabled="True" Keyboard="Telephone" TextColor="Black" Background="White"/>
        
             <!--
             <Entry x:Name="PSUserAddress" Placeholder="Address" FontAutoScalingEnabled="True" />
@@ -66,10 +68,13 @@
                         <Picker Title="Select a State" x:DataType="vm:State"
                             ItemsSource="{Binding States}"
                             SelectedItem="{Binding SelectedOption}" />
+                   <Picker Title="Select a State" 
+ItemsSource="{Binding States}"
+SelectedItem="{Binding SelectedOption}" />
             -->
-            
-            <Entry x:Name="PSUserZipCode" Placeholder="ZipCode" FontAutoScalingEnabled="True" Keyboard="Numeric" />
-            <Entry x:Name="PSUserCountry" Placeholder="Country" FontAutoScalingEnabled="True" />
+       
+            <Entry x:Name="PSUserZipCode" Placeholder="ZipCode" FontAutoScalingEnabled="True" Keyboard="Numeric" TextColor="Black" Background="White" />
+            <Entry x:Name="PSUserCountry" Placeholder="Country" FontAutoScalingEnabled="True" TextColor="Black" Background="White"/>
             
             
             <Image x:Name="ProfileImage" HeightRequest="100" WidthRequest="100" Aspect="AspectFill" />
@@ -103,7 +108,7 @@
                 </Picker.ItemsSource>
             </Picker>
 
-            <Editor x:Name="PSUserNotes" Placeholder="Additional Notes" HeightRequest="100" FontAutoScalingEnabled="True"/>
+            <Editor x:Name="PSUserNotes" Placeholder="About" HeightRequest="100" FontAutoScalingEnabled="True" TextColor="Black" Background="White"/>
             <Button x:Name="DisplayText" Text="" Clicked="OnSaveUpdateClicked" FontAutoScalingEnabled="True"/>
             <Button  x:Name="DisplayCancel" Text="Cancel" Clicked="OnClickedCancel" FontAutoScalingEnabled="True" />
             <!--

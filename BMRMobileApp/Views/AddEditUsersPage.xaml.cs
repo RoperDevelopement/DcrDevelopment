@@ -11,6 +11,9 @@ namespace BMRMobileApp
 {
     public partial class AddEditUsersPage : ContentPage
     {
+private        string cPText;
+      private  Color cPBC;
+
         private readonly SQLiteService sqliteService = new SQLiteService();
         private readonly bool isAddUser;
         private bool DisplayNameIsValid = true;
@@ -22,7 +25,10 @@ namespace BMRMobileApp
             InitializeComponent();
             BindingContext = this;
             isAddUser = addUser;
-
+            BackgroundColor = Color.FromArgb(Utilites.Consts.DefaultBackgroundColor);
+            Title = "User Profile";
+            if(addUser)
+                Title = " Edit User Profile";
 
             if (addUser)
             {
@@ -41,10 +47,40 @@ namespace BMRMobileApp
             }
             // Uncomment the following line if you want to bind the page to a ViewModel
             //	BindingContext = new UsersModel();
-          //  GetStateNames();
+          //   GetStateNames();
             if (!addUser)
                 GetUserInformation();
             ProfilePictureFolderPath = Microsoft.Maui.Storage.FileSystem.AppDataDirectory;
+            GetMood();
+        }
+        public string CPText
+        {
+            get => cPText;
+            set
+            {
+                cPText = value;
+                OnPropertyChanged(nameof(CPText));
+            }
+        }
+        public Color CPBC
+        {
+            get => cPBC;
+            set
+            {
+                cPBC = value;
+                OnPropertyChanged(nameof(CPBC));
+            }
+        }
+
+
+        private async void GetMood()
+        {
+            var mood = sqliteService.GetUserCurrentMoodNonAsync();
+            if( mood != null )
+            {
+                Title = $"{Title} {mood.Mood} {mood.MoodTag}";
+                BackgroundColor = Color.FromArgb(mood.BackgroundColor);
+            }
         }
         private async Task GetUserInformation()
         {
@@ -174,7 +210,10 @@ namespace BMRMobileApp
         {
           // var ext = Path.GetExtension(profilePic);
            ProfilePictureFolderPath = Path.Combine(Microsoft.Maui.Storage.FileSystem.AppDataDirectory, $"profilepictures.png");
-            if(File.Exists(ProfilePictureFolderPath))
+           string cachePath = Path.Combine(FileSystem.CacheDirectory, "profilepictures.png"); 
+            if (File.Exists(cachePath))
+                File.Delete(cachePath);
+            if (File.Exists(ProfilePictureFolderPath))
             {
                 File.Delete(ProfilePictureFolderPath);
             }
@@ -182,6 +221,7 @@ namespace BMRMobileApp
            var image = PlatformImage.FromStream(inputStream);
             using var outputStream = File.Create(ProfilePictureFolderPath);
             image.Save(outputStream, ImageFormat.Png);
+            
             // byte[] currPic = File.ReadAllBytes(profilePic);
             // File.WriteAllBytes(ProfilePictureFolderPath, currPic);
         }
@@ -341,7 +381,7 @@ namespace BMRMobileApp
                 //"StatusPickerStates.SelectedItem.ToString(),
                 //  PSUserState = SelectedOption,
                 PSUserCountry = PSUserCountry.Text,
-                PSUserCity = "N/A"PSUserCity.Text,
+                PSUserCity = "N/A",//PSUserCity.Text,
                 PSUserAddress = "N/A", // Assuming address is not required for now
                 PSUserDateOfBirth = PSUserDateOfBirth.Date.ToString("MM/dd/yyyy"), // Format as needed
                 PSUserZipCode = PSUserZipCode.Text,

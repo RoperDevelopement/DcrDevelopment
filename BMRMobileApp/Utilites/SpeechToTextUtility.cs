@@ -13,7 +13,8 @@ namespace BMRMobileApp.Utilites
     {
         private readonly ISpeechToText speechToText = SpeechToText.Default;
         private CancellationToken _cancellationToken;
-
+        private List<float> waveData = new List<float>(); // Simulated wave data
+       
         public event EventHandler<string>? PartialResultReceived;
         public event EventHandler<string>? FinalResultReceived;
 
@@ -26,8 +27,8 @@ namespace BMRMobileApp.Utilites
 
         public async Task StartListeningAsync()
         {
-
-            speechToText.RecognitionResultUpdated += HandlePartialResult;
+             WaveformDrawable waveformDrawable = new WaveformDrawable(waveData);
+        speechToText.RecognitionResultUpdated += HandlePartialResult;
             speechToText.RecognitionResultCompleted += HandleFinalResult;
 
             await speechToText.StartListenAsync(new SpeechToTextOptions

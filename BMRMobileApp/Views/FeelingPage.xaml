@@ -1,136 +1,296 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="BMRMobileApp.FeelingPage"
+              xmlns:local="clr-namespace:BMRMobileApp"
                   BackgroundColor="{Binding BackgroundGradient}" 
-             Title="Journaling">
+             Shell.FlyoutBehavior="Flyout"
+             Title="Journaling Emontions">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Command="{Binding SaveFeelingCommand}" />
         <ToolbarItem Text="X" Command="{Binding ExitFeelingCommand}"  />
 
     </ContentPage.ToolbarItems>
-    <VerticalStackLayout Padding="20" Spacing="25">
-<!--
-        <TableView Intent="Menu" HorizontalOptions="Start">
-            <TableRoot>
-                <TableSection Title="Behaviors">
-                    <TextCell Text="Attached behavior"
-                       Command="{Binding NavigateCommand}"  
-                        />
-                    <TextCell Text=".NET MAUI behavior"
+    <ScrollView>
+         
+        
+        <VerticalStackLayout Padding="20" Spacing="25" x:Name="MainPage">
+            <!--
+            <TableView Intent="Menu" HorizontalOptions="End" VerticalOptions="End">
+                <TableRoot>
+                    <TableSection Title="Behaviors">
+                        <TextCell Text="Attached behavior"
+                       Command="{Binding NavigateCommand}"
+                                 CommandParameter="GoalsPage"
+                      />
+                        <TextCell Text=".NET MAUI behavior"
+                       Command="{Binding NavCommand}"
+                                            CommandParameter="ToDoListPage"
+                      />
+                        <TextCell Text=".NET MAUI behavior with a style"
                        Command="{Binding NavigateCommand}"
                        />
-                    <TextCell Text=".NET MAUI behavior with a style"
+                        <TextCell Text="Event to command behavior"
                        Command="{Binding NavigateCommand}"
-                        />
-                    <TextCell Text="Event to command behavior"
+                       />
+                        <TextCell Text="Platform behavior"
                        Command="{Binding NavigateCommand}"
-                        />
-                    <TextCell Text="Platform behavior"
-                       Command="{Binding NavigateCommand}"
-                        />
-                </TableSection>
-            </TableRoot>
-        </TableView>
-        -->
+                       />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+           -->
 
-        <Image Source="journalfeelingspng.png" Aspect="AspectFill"
+            <Picker HorizontalOptions="End" VerticalOptions="End" ItemsSource="{Binding PM}" Title="Jounaling"     SelectedItem="{Binding SelectedSite , Mode=TwoWay}"  ItemDisplayBinding="{Binding Label}"  x:Name="PickerVisable" SelectedIndexChanged="PickerVisable_SelectedIndexChanged">
+                
+            </Picker>
+            
+             
+         
+
+
+
+
+            <Image Source="journalfeelingspng.png" Aspect="AspectFill"
                WidthRequest="100" 
                HeightRequest="100" 
                HorizontalOptions="Center" />
-        <Label 
+            <Label 
     Text="Speak or Type Your Thoughts 🗣️" 
     FontAutoScalingEnabled="True"
     HorizontalOptions="Center" />
+            <toolkit:Expander>
 
+                <toolkit:Expander.Header>
+                    <Label Text="Select How You Feeling Today" FontAttributes="Bold" FontAutoScalingEnabled="True" />
+                    <!--   <ImageButton Source="\ue3f0" VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="{OnPlatform Android=10, iOS=10, WinUI=10}" BackgroundColor="Blue"/>-->
+                </toolkit:Expander.Header>
+
+                <Border StrokeShape="RoundRectangle 20" Padding="0" StrokeThickness="1" Stroke="#FF8A65">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+      ColumnDefinitions="*,*,*,*"
+       Padding="10"
+        RowSpacing="5"
+        ColumnSpacing="5" VerticalOptions="Start">
+                        <Button Text="😊" Command="{Binding SelectFeelingCommand}" CommandParameter="Happy"   ToolTipProperties.Text="Happy" 
+                           Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="0" />
+                        <Button Text="😢" Command="{Binding SelectFeelingCommand}" CommandParameter="Sad"  ToolTipProperties.Text="Sad"
+                                 Grid.Row="0"  Grid.Column="1" />
+                        <Button Text="😠" Command="{Binding SelectFeelingCommand}" CommandParameter="Angry"  ToolTipProperties.Text="Angry"
+                                Grid.Row="0"  Grid.Column="2"/>
+                        <Button Text="😌" Command="{Binding SelectFeelingCommand}" CommandParameter="Calm"  ToolTipProperties.Text="Calm" 
+                                Grid.Row="0"  Grid.Column="3"/>
+                        <Button Text="😐" Command="{Binding SelectFeelingCommand}" CommandParameter="Neutral"  ToolTipProperties.Text="Neutral"
+                                Grid.Row="1"  Grid.Column="0"/>
+                        <Button Text="😕" Command="{Binding SelectFeelingCommand}" CommandParameter="Confused"  ToolTipProperties.Text="Confused"
+                                Grid.Row="1"  Grid.Column="1" />
+                        <Button Text="⚡" Command="{Binding SelectFeelingCommand}" CommandParameter="Energized"  ToolTipProperties.Text="Energized"
+                                Grid.Row="1"  Grid.Column="2"/>
+                        <Button Text="🧠" Command="{Binding SelectFeelingCommand}" CommandParameter="Reflective"  ToolTipProperties.Text="Reflective"
+                                Grid.Row="1"  Grid.Column="3"/>
+                        
+                        <Button Text="😰" Command="{Binding SelectFeelingCommand}" CommandParameter="Anxious"  ToolTipProperties.Text="Anxious"
+                                Grid.Row="2"  Grid.Column="0"/>
+                        <Button Text="🌈" Command="{Binding SelectFeelingCommand}" CommandParameter="Hopeful"  ToolTipProperties.Text="Hopeful"
+                                Grid.Row="2"  Grid.Column="1"/>
+                        <Button Text="😄" Command="{Binding SelectFeelingCommand}" CommandParameter="Joyful"  ToolTipProperties.Text="Joyful"
+                                Grid.Row="2"  Grid.Column="2"/>
+                        <Button Text="😔" Command="{Binding SelectFeelingCommand}" CommandParameter="Lonely"  ToolTipProperties.Text="Lonely"
+                                Grid.Row="2"  Grid.Column="3"/>
+                        <Button Text="🙏" Command="{Binding SelectFeelingCommand}" CommandParameter="Grateful"  ToolTipProperties.Text="Grateful"
+                                Grid.Row="3"  Grid.Column="0"/>
+                        <Button Text="🌿" Command="{Binding SelectFeelingCommand}" CommandParameter="Peaceful"  ToolTipProperties.Text="Peaceful"
+         Grid.Row="3"  Grid.Column="1"/>
+                        <Button Text="❤️" Command="{Binding SelectFeelingCommand}" CommandParameter="Loved"  ToolTipProperties.Text="Loved"
+     Grid.Row="3"  Grid.Column="2"/>
+
+                    </Grid>
+                     
+                    <!--
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                 
+                        <Button Text="😢" Command="{Binding SelectFeelingCommand}" CommandParameter="Sad"  ToolTipProperties.Text="Sad"/>
+                        <Button Text="😠" Command="{Binding SelectFeelingCommand}" CommandParameter="Angry"  ToolTipProperties.Text="Angry"/>
+                        <Button Text="😌" Command="{Binding SelectFeelingCommand}" CommandParameter="Calm"  ToolTipProperties.Text="Calm" />
+                        <Button Text="😐" Command="{Binding SelectFeelingCommand}" CommandParameter="Neutral"  ToolTipProperties.Text="Neutral"/>
+                        <Button Text="😕" Command="{Binding SelectFeelingCommand}" CommandParameter="Confused"  ToolTipProperties.Text="Confused"/>
+                        <Button Text="⚡" Command="{Binding SelectFeelingCommand}" CommandParameter="Energized"  ToolTipProperties.Text="Energized"/>
+                        <Button Text="🧠" Command="{Binding SelectFeelingCommand}" CommandParameter="Reflective"  ToolTipProperties.Text="Reflective"/>
+                        <Button Text="😰" Command="{Binding SelectFeelingCommand}" CommandParameter="Anxious"  ToolTipProperties.Text="Anxious"/>
+                        <Button Text="🌈" Command="{Binding SelectFeelingCommand}" CommandParameter="Hopeful"  ToolTipProperties.Text="Hopeful"/>
+                        <Button Text="😄" Command="{Binding SelectFeelingCommand}" CommandParameter="Joyful"  ToolTipProperties.Text="Joyful"/>
+                        <Button Text="😔" Command="{Binding SelectFeelingCommand}" CommandParameter="Lonely"  ToolTipProperties.Text="Lonely"/>
+                        <Button Text="🙏" Command="{Binding SelectFeelingCommand}" CommandParameter="Grateful"  ToolTipProperties.Text="Grateful"/>
+
+                    </HorizontalStackLayout>
+                    -->
+                </Border>
+            </toolkit:Expander>
+            <!--Journal your feeelings-->
+            <Label  Text="{Binding JournalLabel}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" FontAutoScalingEnabled="True"/>
+            <Border StrokeShape="RoundRectangle 20" Padding="0" StrokeThickness="1" Stroke="#FF8A65"  IsEnabled="{Binding IsEmableJournal}" >
+                <Grid RowDefinitions="Auto,Auto"
+                     ColumnDefinitions="*,Auto,Auto,Auto,Auto"
+                      Padding="10"
+                       RowSpacing="10"
+                       ColumnSpacing="5" VerticalOptions="Start">
+                    <Editor Placeholder="Journal or talk about your Emontio  ns..."
+                           AutoSize="TextChanges"
+                            TextColor="Black"
+                            BackgroundColor="White"
+                            PlaceholderColor="Black"
+                            FontAutoScalingEnabled="True"
+                            Text="{Binding JournalEntry}"
+                             Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4" 
+                           TextChanged="Editor_TextChanged"
+                          x:Name="EdJournal"
+                            />
+
+                    <ImageButton  Source="{StaticResource IconAdd}" 
+    Command="{Binding InsertEmjoiJournalEntry}"
+                                  CommandParameter="Journal"
+    ToolTipProperties.Text="Insert Emoji"
+   BackgroundColor="#81D4FA"
+    CornerRadius="12"
+    Grid.Row="1"
+    Grid.Column="1"
+   Grid.ColumnSpan="0"
+    WidthRequest="10" HeightRequest="10"
+                                
+                                  />
+
+                    <ImageButton  Source="{StaticResource Save}" 
+                        Command="{Binding SaveFeelingCommand}"
+                        ToolTipProperties.Text="Save Journal"
+                        BackgroundColor="#FFE5B4"
+                        CornerRadius="12"
+                        Grid.Row="1"
+                        Grid.Column="4"
+                       
+                        WidthRequest="10" HeightRequest="10"/>
+                        <Button  
+                           Text="🎙️"
+                          Command="{Binding StartVoiceRecordingCommand}"
+                            ToolTipProperties.Text="Start Recording Journal"
+                            IsVisible="{Binding IsSpeaking}" 
+                            BackgroundColor="Gray"
+                            WidthRequest="10" HeightRequest="10"
+                            Grid.Row="1"
+                            Grid.Column="3"/>
+
+                    <Button   Text="🛑"  WidthRequest="10" HeightRequest="10" Command="{Binding StopVoiceRecordingCommand}"
+                                    IsVisible="{Binding IsNotSpeaking}"  BackgroundColor="#8C92AC"
+                                    Grid.Row="1"
+                                    Grid.Column="3"
+                                    ToolTipProperties.Text="Stop Recording"/>
+                    <Button  Text="▶"  WidthRequest="20" HeightRequest="20" Command="{Binding PlayTextCommand}" CommandParameter="Journal"
+IsVisible="{Binding IsSpeaking}"  BackgroundColor="#8C92AC"
+Grid.Row="1"
+Grid.Column="2"
+ToolTipProperties.Text="Paly Text"/>
+
+                </Grid>
+            </Border>
+            <Label Text="Add what you can do to help with your Emontions today" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center"  FontAutoScalingEnabled="True" IsVisible="{Binding JournalEntryGoalsVisable}"/>
+            
+            
+            <Border StrokeShape="RoundRectangle 20" Padding="0" StrokeThickness="1" Stroke="#64B5F6" IsVisible="{Binding JournalEntryGoalsVisable}">
+                <Grid RowDefinitions="Auto,Auto"
+                    ColumnDefinitions="*,Auto,Auto,Auto,Auto"
+                    Padding="10"
+                    RowSpacing="10"
+                    ColumnSpacing="5" VerticalOptions="Start">
+                    <Editor Placeholder="Todays Goals to improve your Emontions..."
+         AutoSize="TextChanges"
+      TextColor="Black"
+        BackgroundColor="White"
+         
+         PlaceholderColor="Black"
+         FontAutoScalingEnabled="True"
+         Text="{Binding JournalEntryGoals}"
+                            
+                             Grid.Row="0"
+ Grid.Column="0"
+Grid.ColumnSpan="4"
+                             
+
+                            />
+                    <ImageButton  Source="{StaticResource IconAdd}" 
+   Command="{Binding InsertEmjoiJournalEntry}"
+                               CommandParameter="JournalGoals"
+                                   
+  ToolTipProperties.Text="Insert Emoji"
+  BackgroundColor="#81D4FA"
+  CornerRadius="12"
+  Grid.Row="1"
+  Grid.Column="1"
+ Grid.ColumnSpan="0"
+  WidthRequest="10" HeightRequest="10"/>
+
+                    <ImageButton  Source="{StaticResource Save}" 
+    Command="{Binding SaveJournalGoalsCommand}"
+    ToolTipProperties.Text="Save Journal"
+    BackgroundColor="#FFE5B4"
+    CornerRadius="12"
+    Grid.Row="1"
+    Grid.Column="4"
+
+    WidthRequest="20" HeightRequest="20"/>
+                    <Button  
+      Text="🎙️"
+      Command="{Binding StartJournalGoalsVoiceRecordingCommand}"
+        ToolTipProperties.Text="Start Recording Journal"
+        IsVisible="{Binding IsSpeakingJournalGoals}" 
+        BackgroundColor="Gray"
+        WidthRequest="20" HeightRequest="20"
+        Grid.Row="1"
+        Grid.Column="3"/>
+
+                    <Button  Text="🛑"  WidthRequest="20" HeightRequest="20" Command="{Binding StopRecJournalGoalsCommand}"
+                IsVisible="{Binding IsNotVoiceSpeakingJournalGoals}"  BackgroundColor="#8C92AC"
+                Grid.Row="1"
+                Grid.Column="3"
+                ToolTipProperties.Text="Stop Recording"/>
+                    <Button  Text="▶"  WidthRequest="20" HeightRequest="20" Command="{Binding PlayTextCommand}" CommandParameter="JournalGoals"
+IsVisible="{Binding IsSpeakingJournalGoals}"  BackgroundColor="#8C92AC"
+Grid.Row="1"
+Grid.Column="2"
+ToolTipProperties.Text="Paly Text"         />
+
+                </Grid>
+            </Border>
         
-        <!--
-        <Frame CornerRadius="20"
-       BorderColor="Gray"
-       BackgroundColor="White"
-       Padding="5"
-       HasShadow="True"
-       HorizontalOptions="End"
-       VerticalOptions="Start"
-       Margin="10">
-            <Button Text="✕"
-            BackgroundColor="Transparent"
-            TextColor="Black"
-            FontSize="20"
-            Clicked="OnCloseClicked"/>
-        </Frame>
-        <Label Text="How are you feeling today?"
-               FontSize="24"
-               HorizontalOptions="Center"
-               TextColor="White"/>
--->
-        <!-- Emoji Mood Selector -->
-        <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
-            <Button Text="😊" Command="{Binding SelectFeelingCommand}" CommandParameter="Happy"   />
-            <Button Text="😢" Command="{Binding SelectFeelingCommand}" CommandParameter="Sad"/>
-            <Button Text="😠" Command="{Binding SelectFeelingCommand}" CommandParameter="Angry"/>
-            <Button Text="😌" Command="{Binding SelectFeelingCommand}" CommandParameter="Calm"/>
-            <Button Text="😶" Command="{Binding SelectFeelingCommand}" CommandParameter="Neutral"/>
-        </HorizontalStackLayout>
-
-        <!-- Journal Entry 
-           BackgroundColor="#FFFFFF20"-->
-        <Editor Placeholder="Journal or talk about how your feeling..."
-                HeightRequest="150"
-             
-                TextColor="White"
-                PlaceholderColor="White"
-                FontSize="16"
-                Text="{Binding JournalEntry}"/>
-
-        <!-- Save Button
-        BackgroundColor="#FFFFFF40"  -->
-        <HorizontalStackLayout Spacing="5"
+            <HorizontalStackLayout Spacing="5"
                        HorizontalOptions="Center"
                        VerticalOptions="Start">
-            <!--      <Button 
- x:Name="ButtonStartListing"
-       ImageSource="microrecord.png" WidthRequest="100" HeightRequest="50"
-       Command="{Binding StartVoiceRecordingCommand}"
-                 ToolTipProperties.Text="Start Recording"
-                IsVisible="{Binding IsSpeaking}"
- BackgroundColor="#6200EE"
- TextColor="White"  />
-            -->
-            <ImageButton
-                 
-      Source="{StaticResource StartRecord}"
-      
-    Command="{Binding StartVoiceRecordingCommand}"
-                 ToolTipProperties.Text="Start Recording"
-                IsVisible="{Binding IsSpeaking}" 
-                     WidthRequest="20" HeightRequest="20" />
-            
-            <ImageButton 
-                 Source="{StaticResource StopRecord}"  WidthRequest="20" HeightRequest="20" Command="{Binding StopVoiceRecordingCommand}"
-                IsVisible="{Binding IsNotSpeaking}"
-  BackgroundColor="#007AFF"
- 
-                 ToolTipProperties.Text="Stop Recording"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout Spacing="10"
+  
+           
+
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10"
                 HorizontalOptions="Center"
                 VerticalOptions="Start">
-            <ImageButton  Source="{StaticResource Save}"
-                Command="{Binding SaveFeelingCommand}"
-                ToolTipProperties.Text="Save"
-                BackgroundColor="#007AFF"
-                CornerRadius="12"
-                
-                     WidthRequest="20" HeightRequest="20"/>
-            <ImageButton Source="{StaticResource Exit}"
+                <ImageButton Source="{StaticResource ClearText}"
+           Command="{Binding ClearTextCommand}"
+           ToolTipProperties.Text="Clear Text"
+           CornerRadius="12"
+           BackgroundColor="#4FC3F7"
+           WidthRequest="20" HeightRequest="20"          
+           />
+
+                <ImageButton Source="{StaticResource Exit}"
          Command="{Binding ExitFeelingCommand}"
          ToolTipProperties.Text="Close"
                   CornerRadius="12"
-         BackgroundColor="#007AFF"
+         BackgroundColor="#37474F"
                     WidthRequest="20" HeightRequest="20"/>
-        </HorizontalStackLayout>
 
-    </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
  

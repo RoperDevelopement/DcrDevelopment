@@ -19,6 +19,7 @@ namespace BMRMobileApp.InterFaces
     public interface IID
     {
         int ID { get; set; }
+    }
         public interface IAudioRecordingService
         {
             Task StartRecordingAsync();
@@ -31,6 +32,7 @@ namespace BMRMobileApp.InterFaces
             {
                 get; set;
             }
+        string ViedoTitle { get; set; }
         }
         public interface ISpeechService
         {
@@ -45,5 +47,17 @@ namespace BMRMobileApp.InterFaces
              string Link { get; set; }
              string Snippet { get; set; }
         }
+        public interface ITxtSpeaker
+        {
+           // Task  SpeakAsync(string text, float pitch = 1.0f, float volume = 1.0f, string? locale = null);
+            Task SpeakWithOptions(string message);
+             Task SpeakText(string message);
+        }
+        public interface IAudioInputService
+        {
+            event Action<float[]> OnAudioSample;
+            void Start();
+            void Stop();
+        }
     }
-}
+ 

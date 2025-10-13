@@ -4,8 +4,10 @@
              x:Class="BMRMobileApp.ChatViewPage"
              xmlns:viewmodels="clr-namespace:BMRMobileApp.ViewModels"
               xmlns:models="clr-namespace:BMRMobileApp.ViewModels"
-              
-                Title="Chat">
+              Shell.TabBarIsVisible="True"
+             Shell.FlyoutBehavior="Flyout"
+                Title="{Binding CPText}"
+                 BackgroundColor="{Binding CPBC}">
 
 
     <!-- Chat Messages  <Button Text="Send" Command="{Binding SendCommand}" /> -->

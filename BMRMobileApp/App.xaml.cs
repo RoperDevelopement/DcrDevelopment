@@ -80,7 +80,7 @@ bool deleteFile = false;
             // Optional: Show user-friendly message
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                await Application.Current.MainPage.DisplayAlert("Oops!", "Something went wrong. Please try again.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Oops!", $"Something went wrong. Please try again. {ex.Message}", "OK");
             });
         }
 

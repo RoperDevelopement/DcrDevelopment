@@ -23,6 +23,13 @@ namespace BMRMobileApp.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private string sentMessage;
         public bool noChatHub = true;
+        string cPText;
+        Color cPBC;
+        
+        public ChatViewModel()
+        {
+            GetMood();
+        }
         private ObservableCollection<ChatMessageModel> chatMess = new ObservableCollection<ChatMessageModel>();
         //    ObservableCollection<ChatMessageModel> PSMessages = new ObservableCollection<ChatMessageModel>();
         //  public ObservableCollection<ChatMessageModel> PSMessages { get; set; }
@@ -44,7 +51,40 @@ namespace BMRMobileApp.ViewModels
                 OnPropertyChanged(nameof(InputText));
             }
         }
-        
+        public string CPText
+        {
+            get => cPText;
+            set
+            {
+                cPText = value;
+                OnPropertyChanged(nameof(CPText));
+            }
+        }
+        public Color CPBC
+        {
+            get => cPBC;
+            set
+            {
+                cPBC = value;
+                OnPropertyChanged(nameof(CPBC));
+            }
+        }
+
+        private async void GetMood()
+        {
+            
+            SQLiteDBCommands.SQLiteService sQLiteDB = new SQLiteDBCommands.SQLiteService();
+            var mood = sQLiteDB.GetUserCurrentMoodNonAsync();
+            CPText = "Chat";
+            CPBC=Color.FromArgb(Utilites.Consts.DefaultBackgroundColor);
+            if (mood != null)
+            {
+                CPText = $"{CPText} {mood.Mood} {mood.MoodTag}";
+                CPBC = Color.FromArgb(mood.BackgroundColor);
+            }
+        }
+
+
         private HubConnection _hubConnection;
         // public ICommand SendCommand => new Command(SendMessage);
         public ICommand ExitCommand => new Command(ExitChat);

@@ -15,5 +15,6 @@ namespace BMRMobileApp.ViewModels
         public string ViedoTaken { get; set; }
         public int ViedoID { get; set; }
         public string  ViedoName { get; set; }
+        public string ViedoTitle { get; set; }
     }
 }

@@ -9,21 +9,26 @@
      Shell.BackgroundColor="LightBlue"
     Shell.TitleColor="White"
     Shell.ForegroundColor="White">
-   
+  
      
         <TabBar>
-        <ShellContent Title="DashBoard"  Icon="appicon.png"
-            ContentTemplate="{DataTemplate views:MainPage}"
-                          Route="mainpage"/>
-        <ShellContent Title="Journal"  Icon="journalfeelings.ico"
-     ContentTemplate="{DataTemplate views:SettingsPage}" Route="settingspage" />
-        <ShellContent Title="Settings"  Icon="settingscoloricon.ico"
+        <ShellContent Title="DashBoard"  Icon="{StaticResource Home}"
+            ContentTemplate="{DataTemplate views:MainPage}" Route="mainpage"/>
+            
+        <ShellContent Title="Journal"  Icon="{StaticResource Journal}"
+                ContentTemplate="{DataTemplate views:FeelingPage}" Route="feelingpage" />
+            
+            <ShellContent Title="Record Viedo"  Icon="{StaticResource Record}"
+                    ContentTemplate="{DataTemplate views:RecordViedoPage}" Route="recordviedopage" />
+        <ShellContent Title="Chat"  ContentTemplate="{DataTemplate views:ChatViewPage}"
+                            Route="chatViewpage" Icon="{StaticResource Chat}" />
+        <ShellContent Title="Settings"  Icon="{StaticResource Settings}"
             ContentTemplate="{DataTemplate views:SettingsPage}" Route="settingspage" />
         </TabBar>
   
     <ShellContent Title="DashBoard"
                   ContentTemplate="{DataTemplate views:MainPage}"
-                  Route="mainpage" />
+                  Route="mainpage" Icon="{StaticResource Home}" />
     <ShellContent Title="Journal"
          ContentTemplate="{DataTemplate views:FeelingPage}"
          Route="feelingpage"  Icon="journalfeelings.ico"/>
@@ -34,15 +39,23 @@
     -->
     <ShellContent Title="Chat`"
          ContentTemplate="{DataTemplate views:ChatViewPage}"
-       Route="chatViewpage" />
-    <ShellContent Title="Record VIedo" Icon="{StaticResource Record}"
+       Route="chatViewpage" Icon="chatico.ico" />
+    <ShellContent Title="Record Viedo" Icon="microrecordicon.ico"
 ContentTemplate="{DataTemplate views:RecordViedoPage}" Route="recordviedopage" />
     <ShellContent Title="Settings" 
 ContentTemplate="{DataTemplate views:SettingsPage}" Route="settingspage" Icon="settingscoloricon.ico"/>
     <ShellContent Title="Record Voice" Icon="appicon.png"
 ContentTemplate="{DataTemplate views:RecordVoicePage}" Route="RecordVoicePage" />
-    <ShellContent Title="Search Web" Icon="appicon.png"
+    <ShellContent Title="Search Web" Icon="searchwebicon.ico"
 ContentTemplate="{DataTemplate views:SearchWebPage}" Route="SearchWebPage" />
+
+    <ShellContent Title="TasK" Icon="taskgolsicon.ico"
+ContentTemplate="{DataTemplate views:ToDoListPage}" Route="todolistpage" />
+    <ShellContent Title="Resources" Icon="taskgolsicon.ico"
+ContentTemplate="{DataTemplate views:ResourcesPage}" Route="ResourceViewModel" />
+    <ShellContent Title="JE" Icon="taskgolsicon.ico"
+ContentTemplate="{DataTemplate views:JournalPlayBackCardPage}" Route="JournalPlayBackCardPage" />
+
     
     <ShellContent Title="Drop Tables" Icon="appicon.png"
 ContentTemplate="{DataTemplate views:DropTablesPage}" Route="droptablespage" />
@@ -56,8 +69,8 @@ ContentTemplate="{DataTemplate views:DropTablesPage}" Route="droptablespage" />
 -->
 
     <Shell.FlyoutHeader>
-        <Grid HorizontalOptions="Fill" VerticalOptions="Start">
-            <Image Source="psloadimg.png" WidthRequest="150" HeightRequest="150"
+        <Grid HorizontalOptions="Fill" VerticalOptions="Start" WidthRequest="150" HeightRequest="150">
+            <Image Source="psloadimg.png" 
               VerticalOptions="Start" 
               HorizontalOptions="Fill"
               Aspect="AspectFit"  BackgroundColor="AliceBlue" Background="Beige"/>

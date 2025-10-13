@@ -1,0 +1,68 @@
+﻿<NavigationWindow  x:Class="AlanoClubInventory.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+
+        xmlns:local="clr-namespace:AlanoClubInventory"
+        mc:Ignorable="d"
+                     Background="{DynamicResource ControlFillColorDefault}"
+        
+                  
+        Title="Home Alano Club Inventory Mangement" Height="450" Width="800" WindowStyle="ThreeDBorderWindow" VerticalAlignment="Center" HorizontalAlignment="Center" WindowStartupLocation="CenterScreen"
+                   
+          >
+    
+    <NavigationWindow.Content>
+        
+        <Page>
+            
+            <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand" >
+                <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                        <MenuItem Header="Exit" Click="Exit" Cursor="Hand"/>
+                </MenuItem>
+                    <MenuItem Header="Daily Till">
+                        <MenuItem Header="Receipts"  Click="DailyRecpts" Cursor="Hand"/>
+                    </MenuItem>
+                    <MenuItem Header="Prices">
+                        <MenuItem Header="Club Prices" Click="AddEditProductPrices" Cursor="Hand"/>
+                    </MenuItem>
+                <MenuItem Header="Inventory">
+                        <MenuItem Header="Categories" Click="AddEditDeleteCategories" Cursor="Hand"/>
+                        <MenuItem Header="Bar Items Products" Click="AddEditDeleteInventory" Cursor="Hand"/>
+                        <MenuItem Header="UpDate Inventory" Click="UpDateInventory" Cursor="Hand"/>
+
+                        <MenuItem Header="Other Products" Click="AddEditDeleteOtherProducts" Cursor="Hand"/>
+
+
+                    </MenuItem>
+                    <MenuItem Header="Reports">
+                        <MenuItem Header="Alano CLub Stwert Reports" Click="AlanoCLubReports"/>
+                        
+
+
+                    </MenuItem>
+
+
+                </Menu>
+            <!-- Your page content goes here -->
+
+
+
+                <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+                <StackPanel DockPanel.Dock="Top" Background="GhostWhite"  Margin="0,0,0,5">
+                    <TextBlock Text="Alano Club Inventory Till Register" FontSize="15"
+              VerticalAlignment="Top" HorizontalAlignment="Center"  Foreground="Black"/>
+                    <Image Source="/Resources/Images/480782709_1440388930358317_178499286582280879_n.jpg"  Stretch="Uniform"/>
+                </StackPanel>
+
+
+
+            </DockPanel>
+        </Page>
+    </NavigationWindow.Content>
+
+</NavigationWindow>
