@@ -18,10 +18,11 @@ namespace AlanoClubInventory.ViewModels
     public class OtherProductsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        private bool inventoryItem;
         private string productName;
         private string price;
         private string totalOnHand;
+        private string itemsPerCase;
         ReadJsonFile readJson = new ReadJsonFile();
         private ObservableCollection<ItemListModel> itemList;
         private ObservableCollection<InventoryModel> currInv;
@@ -89,6 +90,19 @@ namespace AlanoClubInventory.ViewModels
                 OnPropertyChanged(nameof(deleteInventory));
             }
         }
+        public bool InventoryItem
+        {
+
+            get => inventoryItem;
+            set
+            {
+                inventoryItem = value;
+                OnPropertyChanged(nameof(InventoryItem));
+            }
+
+
+
+        }
         public ObservableCollection<InventoryModel> CurrentInv
         {
             get
@@ -137,6 +151,23 @@ namespace AlanoClubInventory.ViewModels
             {
                 productName = value;
                 OnPropertyChanged(nameof(ProductName));
+                //  addCategory.Execute(true);
+            }
+        }
+        public string ItemsPerCase
+        {
+            get => itemsPerCase;
+
+
+
+            //   doSomething = new RelayCommandNew<CategoryModel>(ExecuteMyButtonLogic, CanExecuteAddEdit);
+
+
+
+            set
+            {
+                itemsPerCase = value;
+                OnPropertyChanged(nameof(ItemsPerCase));
                 //  addCategory.Execute(true);
             }
         }
@@ -280,12 +311,18 @@ namespace AlanoClubInventory.ViewModels
                 Utilites.ALanoClubUtilites.ShowMessageBox($"Invalid Quanity {TotalOnHand}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            var ipc = await Utilites.ALanoClubUtilites.ConvertToInt(ItemsPerCase);
+            if (ipc == int.MinValue)
+            {
+                Utilites.ALanoClubUtilites.ShowMessageBox($"Invalid Items Per case {ItemsPerCase}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if ((CurrentID == 0) && (ChekProductExists(ProductName)))
             {
                 Utilites.ALanoClubUtilites.ShowMessageBox($"Error Product Name {ProductName} found need to edit", "Error Product Name", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            var products = new AddEditInventoryModel { ID = CurrentID, CategoryID = int.Parse(itemsListCategoryID.Value), ProductName = ProductName, Price = (float)cost, Quantity = quanity };
+            var products = new AddEditInventoryModel { ID = CurrentID, CategoryID = int.Parse(itemsListCategoryID.Value), ProductName = ProductName, Price = (float)cost, Quantity = quanity,ItemsPerCase=ipc,InventoryItem=InventoryItem };
             await Scmd.AlClubSqlCommands.SqlCmdInstance.AddEditDeleteInventory(SqlConnectionStr, products, Scmd.SqlConstProp.SPAddEditDeleteAlconProducts, 0,0);
             RestValues();
             GetProdInventory();
@@ -300,6 +337,7 @@ namespace AlanoClubInventory.ViewModels
             ProductName = string.Empty;
             Price = "0.00";
             TotalOnHand = "0";
+            ItemsPerCase = "0";
         }
         private bool CanExecuteAction()
         {
@@ -328,6 +366,7 @@ namespace AlanoClubInventory.ViewModels
                 Price = cerCell.Price.ToString();
                 TotalOnHand = cerCell.Quantity.ToString();
                 CurrentID = cerCell.ID;
+                ItemsPerCase = cerCell.ItemsPerCase.ToString();
                 // GetCategories();
                 var i = ItemsList.FirstOrDefault(i => i.Label == cerCell.CategoryName);
                 ItemsListCategoryID = i;
@@ -343,7 +382,7 @@ namespace AlanoClubInventory.ViewModels
                 var cerCell = pn.CurrentItem as InventoryModel;
                 if (await Utilites.ALanoClubUtilites.ShowMessageBoxResults($"Delete Product Name {cerCell.ProductName}", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    var products = new AddEditInventoryModel { ID = cerCell.ID, CategoryID = 0, ProductName = "NA", Price = 0.0f, Quantity = 0 };
+                    var products = new AddEditInventoryModel { ID = cerCell.ID, CategoryID = 0, ProductName = "NA", Price = 0.0f, Quantity = 0,ItemsPerCase=0 };
                     await Scmd.AlClubSqlCommands.SqlCmdInstance.AddEditDeleteInventory(SqlConnectionStr, products, Scmd.SqlConstProp.SPAddEditDeleteAlconProducts,1);
                     //await Scmd.AlClubSqlCommands.SqlCmdInstance.AddEditDeleteInventory(SqlConnectionStr, products, Scmd.SqlConstProp.SPAddEditDeleteAlconCLubInventory, 1);
                     RestValues();

@@ -14,16 +14,16 @@ namespace AlanoClubInventory.Interfaces
     {
         int CategoryID { get; set; }
     }
-    
+
     public interface ICaegoryName
     {
         string CategoryName { get; set; }
     }
     public interface ICategories
     {
-        
-         string MemberPrice { get; set; }
-         string NonMemberPrice { get; set; }
+
+        string MemberPrice { get; set; }
+        string NonMemberPrice { get; set; }
     }
     public interface IAlanoClubPrices
     {
@@ -36,18 +36,18 @@ namespace AlanoClubInventory.Interfaces
         string ProductName { get; set; }
         //  int TotalSold { get; set; }
     }
-    public interface IInventoryProductName: IAlanoClubProductName
+    public interface IInventoryProductName : IAlanoClubProductName
     {
-       
+
         float Price { get; set; }
-     
+
         //  int TotalSold { get; set; }
     }
     public interface IInventoryQuanity
     {
-     
-      int Quantity {  get; set; }
-    //  int TotalSold { get; set; }
+
+        int Quantity { get; set; }
+        //  int TotalSold { get; set; }
     }
     public interface IBarItem
     {
@@ -69,25 +69,59 @@ namespace AlanoClubInventory.Interfaces
     {
         int TotalMemberSold { get; set; }
         int TotalNonMemberSold { get; set; }
-        
+
     }
-    public interface IDailyTill
+    public interface IDailyProductTotal
+    {
+        float DailyProductTotal { get; set; }
+    }
+    public interface IDailyTill: IDailyProductTotal
     {
         float DailyTotal { get; set; }
         float DailyTillTotal { get; set; }
-        float DailyProductTotal { get; set; }
+        
     }
     public interface IalanoClubProdID
     {
-               int AlanoClubProductID { get; set; }
+        int AlanoClubProductID { get; set; }
     }
-    public interface IALanoCLubCurrentInventory: IID, IAlanoClubProductName
+    public interface IALanoCLubCurrentInventory : IID, IAlanoClubProductName, ItemsSold
     {
-        int Quantity { get; set; }
-       int InStock { get; set; }
-        int ItemsSold { get; set; }
+        
+        int InStock { get; set; }
+    
         int InventoryCurrent { get; set; }
         int NewCount { get; set; }
 
     }
+    public interface ItemsSold
+    {
+        int ItemsSold { get; set; }
+    }
+
+    public interface IALanoCLubCurrentInventoryItemsByUnit
+    {
+        int ItemsPerCase { get; set; }
+    }
+    public interface IAlanoClubProfitLoss : IID, IAlanoClubProductName, IALanoCLubCurrentInventoryItemsByUnit, IInventoryQuanity
+    {
+        float Volume { get; set; }
+        float TotalPrice { get; set; }
+        float CostPerIteam { get; set; }
+        float ProfitMemnber { get; set; }
+        float ProfitNonMemnber { get;set; }
+        float TotalProfitMember { get; set; }
+     
+        float TotalProfitNonMember { get; set; }
+    }
+    public interface IAlanoClubInventoryItem
+    {
+        bool InventoryItem { get; set; }
+    }
+    public interface IALanoClubInventoryDate
+    {
+        DateTime? DateInventory {  get; set; }
+    }
+
 }
+

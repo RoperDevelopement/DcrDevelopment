@@ -210,5 +210,30 @@ namespace AlanoClubInventory.Views
             DailyTillReceiptsPage dailyTillReceiptsPage = new DailyTillReceiptsPage();
             this.NavigationService.Navigate(dailyTillReceiptsPage);
         }
+        private async void UpDateInventory(object sender, RoutedEventArgs e)
+        {
+            AlanoClubCurrentInventoryPage alanoClubCurrentInventoryPage = new AlanoClubCurrentInventoryPage();
+            this.NavigationService.Navigate(alanoClubCurrentInventoryPage);
+
+
+        }
+        private async void AddEditProductPrices(object sender, RoutedEventArgs e)
+        {
+            AddEditProductPricesPage addEditProductPricesPage = new AddEditProductPricesPage();
+            this.NavigationService.Navigate(addEditProductPricesPage);
+        }
+        private async void DailyRecpts(object sender, RoutedEventArgs e)
+        {
+            DailyTillReceiptsPage dailyTillReceiptsPage = new DailyTillReceiptsPage();
+            this.NavigationService.Navigate(dailyTillReceiptsPage);
+        }
+
+        private async void Till(object sender, RoutedEventArgs e)
+        {
+            DailyTillReceiptsPage dailyTillReceiptsPage = new DailyTillReceiptsPage();
+            this.NavigationService.Navigate(dailyTillReceiptsPage);
+        }
+
+
     }
 }

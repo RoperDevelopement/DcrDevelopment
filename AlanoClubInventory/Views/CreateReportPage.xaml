@@ -49,26 +49,51 @@ xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" >
-                <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand">
-                    <MenuItem Header="Prices"  Click="Prices"  />
-                    <MenuItem Header="Inventory"  Click="InventoryPage"  />
-                    <MenuItem Header="Other Products"  Click="OtherProd"  />
-                    <MenuItem Header="Daily Till"  Click="Till"  />
-                    <MenuItem Header="Reports"  Click="Reports"  />
-                    <MenuItem Header="Reload Page"  Click="Categories"  />
-                    <MenuItem Header="Go Back"  Click="GoBack"  />
+                <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand" >
+                    <Menu BorderBrush="DarkBlue" >
 
+                        <MenuItem Header="Prices"  Click="Prices" FontSize="12">
+                            <MenuItem Header="Club Prices"  Click="Prices" FontSize="12" Cursor="Hand"/>
+                        </MenuItem>
+                        <MenuItem Header="Inventory"   FontSize="12">
+                            <MenuItem Header="Bar Items"  Click="InventoryPage" Cursor="Hand"/>
+                            <MenuItem Header="UpDate Inventory"  Click="UpDateInventory" Cursor="Hand"/>
+                            <MenuItem Header="Other Products"  Click="OtherProd" FontSize="12" Cursor="Hand"/>
+                            <MenuItem Header="Categories"  Click="Categories" FontSize="12" Cursor="Hand" />
+                        </MenuItem>
+                        <MenuItem Header="Prices">
+                            <MenuItem Header="Club Prices" Click="AddEditProductPrices" Cursor="Hand"/>
+                            <MenuItem Header="Receipts"  Click="DailyRecpts" Cursor="Hand"/>
+                        </MenuItem>
+                        <MenuItem Header="Till"  Click="Till"  FontSize="12" Cursor="Hand">
+                            <MenuItem Header="Daily Till Sales" Click="Till" FontSize="12" Cursor="Hand"/>
+                        </MenuItem>
+                        <MenuItem Header="Reports"    FontSize="12">
+                            <MenuItem Header="Reload page"  Click="Reports"  FontSize="12"/>
+                        </MenuItem>
+
+                        <MenuItem Header="Go Back"  Click="GoBack"  FontSize="12"/>
+                    </Menu>
 
                 </DockPanel>
+
+
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="2"  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <TextBlock x:Name="textBlock"     Margin="0,10,0,0" TextWrapping="Wrap" Text="{Binding TxtTitle}"  Padding="10"  HorizontalAlignment="Center"  FontSize="14" VerticalAlignment="Center"/>
             
                 <ComboBox ItemsSource="{Binding Items}"   DisplayMemberPath="Label" 
-         SelectedItem="{Binding SelectedYear, Mode=TwoWay}" Width="100"
+         SelectedItem="{Binding SelectedYear, Mode=TwoWay}" Width="150"
          
           
-                          Visibility="{Binding IsStwertInvRep, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding IsStwertInvRep, Converter={StaticResource BoolToVisibilityConverter}}"  Margin="0,10,10,0"/>
+                
+                <ComboBox ItemsSource="{Binding ItemsEndMonthYear}"   DisplayMemberPath="Label" 
+    SelectedItem="{Binding SelectedEndMonthYear, Mode=TwoWay}" Width="150" 
+    
+     
+                     Visibility="{Binding IsStwertInvRep, Converter={StaticResource BoolToVisibilityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                          Margin="0,10,10,0" />
                 <Label Content="Stwert Report Start Date: " FontSize="12"   
                        Visibility="{Binding IsStwertRep, Converter={StaticResource BoolToVisibilityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 <DatePicker     

@@ -14,5 +14,6 @@ namespace AlanoClubInventory.Utilites
        public const string CoffeeClub = "Club";
         //public const string RegXInv = @"\b(Club|Rent|Group|Events|Donations|Clubs|Groups)\b";
         public const string RegXInv = @"(Club|Rent|Group|Events|Donations|Clubs|Groups|Family|Single|membership)";
+        public const string CarrageReturnLineFeed = "\r\n";
     }
 }

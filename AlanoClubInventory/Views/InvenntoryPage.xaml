@@ -12,22 +12,44 @@
               HorizontalScrollBarVisibility="Auto"
               Padding="10">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <DockPanel Background="{DynamicResource MenuItems}" Cursor="Hand">
-                <MenuItem Header="Prices"  Click="Prices"  />
-                <MenuItem Header="Other Products"  Click="OtherProd"  />
-                <MenuItem Header="Daily Till"  Click="Till"  />
-                <MenuItem Header="Reports"  Click="Reports"  />
-                <MenuItem Header="Reload Page"  Click="InventoryPage"  />
-                <MenuItem Header="Go Back"  Click="GoBack"  />
+            <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand" >
+                <Menu BorderBrush="DarkBlue" >
 
+                    <MenuItem Header="Prices"  Click="Prices" FontSize="12">
+                        <MenuItem Header="Club Prices"  Click="Prices" FontSize="12" Cursor="Hand"/>
+                    </MenuItem>
+                    <MenuItem Header="Inventory"   FontSize="12">
+                        <MenuItem Header="Bar Items"  Click="InventoryPage" Cursor="Hand"/>
+                        <MenuItem Header="UpDate Inventory"  Click="UpDateInventory" Cursor="Hand"/>
+                        <MenuItem Header="Other Products"  Click="OtherProd" FontSize="12" Cursor="Hand"/>
+                        <MenuItem Header="Reload Page"  Click="Categories" FontSize="12" Cursor="Hand" />
+                    </MenuItem>
+                    <MenuItem Header="Prices">
+                        <MenuItem Header="Club Prices" Click="AddEditProductPrices" Cursor="Hand"/>
+                        <MenuItem Header="Receipts"  Click="DailyRecpts" Cursor="Hand"/>
+                    </MenuItem>
+                    <MenuItem Header="Till"  Click="Till"  FontSize="12" Cursor="Hand">
+                        <MenuItem Header="Daily Till Sales" Click="Till" FontSize="12" Cursor="Hand"/>
+                    </MenuItem>
+                    <MenuItem Header="Reports"    FontSize="12">
+                        <MenuItem Header="Stwert Reports"  Click="Reports"  FontSize="12"/>
+                    </MenuItem>
+
+                    <MenuItem Header="Go Back"  Click="GoBack"  FontSize="12"/>
+                </Menu>
 
             </DockPanel>
+
             <Grid Margin="10,0,10,10" VerticalAlignment="Top"  HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -55,14 +77,18 @@
                 <TextBox Text="{Binding ProductName}" FontWeight="Bold" Margin="1,0,0,0" Grid.Column="1" Grid.Row="2"  VerticalAlignment="Center" Width="300"/>
 
                 <Label Content="Product Price:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Margin="5,0,0,0"  HorizontalAlignment="Right" />
-                <TextBox Text="{Binding Price}" Foreground="Gray" Grid.Column="2" Grid.Row="3" Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50"     />
-                <Label Content="Product Total:" Grid.Column="0" VerticalAlignment="Center" Grid.Row="4" Margin="5,0,0,0"  HorizontalAlignment="Right"/>
-                <TextBox Text="{Binding TotalOnHand}" Grid.Column="1" Grid.Row="4" Foreground="Gray" Margin="5,0,0,0" VerticalAlignment="Center" Width="50"/>
-                <Button Grid.Column="2" Grid.Row="5" Content="Add Edit" VerticalAlignment="Center" HorizontalAlignment="Center"
+                <TextBox Text="{Binding Price}" Foreground="Gray" Grid.Column="3" Grid.Row="3" Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" />
+                <Label Content="Items Per Case:" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" Margin="5,0,0,0"  HorizontalAlignment="Right" />
+                <TextBox Text="{Binding ItemsPerCase}" Foreground="Gray" Grid.Column="3" Grid.Row="4" Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" />
+                <Label Content="Product Total:" Grid.Column="0" VerticalAlignment="Center" Grid.Row="5" Margin="5,0,0,0"  HorizontalAlignment="Right"/>
+                <TextBox Text="{Binding TotalOnHand}" Grid.Column="3" Grid.Row="5" Foreground="Gray" Margin="5,0,0,0" VerticalAlignment="Center" Width="50"/>
+                <Label Content="Inventory Item:" Grid.Column="0" VerticalAlignment="Center" Grid.Row="6" Margin="5,0,0,0"  HorizontalAlignment="Right"/>
+                <CheckBox IsChecked="{Binding InventoryItem}" Grid.Column="3" Grid.Row="6" Foreground="Gray" Margin="5,0,0,0" VerticalAlignment="Center" Width="50"/>
+                <Button Grid.Column="2" Grid.Row="8" Content="Add Edit" VerticalAlignment="Center" HorizontalAlignment="Center"
                     Command="{Binding AddInventory}" Background="DeepSkyBlue"  Foreground="White" BorderBrush="DarkBlue"  BorderThickness="2"
                 Cursor="Hand"/>
 
-                <DataGrid     Grid.Row="6" Grid.Column="0"  Grid.ColumnSpan="5" x:Name="dataGrid"  AutoGenerateColumns="False" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                <DataGrid     Grid.Row="10" Grid.Column="0"  Grid.ColumnSpan="5" x:Name="dataGrid"  AutoGenerateColumns="False" HorizontalAlignment="Right" VerticalAlignment="Top" 
    ItemsSource="{Binding CurrentInv}" Margin="24,17,0,0" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"  
      GridLinesVisibility="All" SelectionUnit="FullRow"  IsReadOnly="True" CanUserAddRows="False" CanUserSortColumns="True" Padding="10" CanUserDeleteRows="False"  SelectionMode="Extended"  >
                     <DataGrid.RowStyleSelector>
@@ -78,8 +104,17 @@
                         <DataGridTextColumn Header="ID" Binding="{Binding ID}" Visibility="Hidden" Width="SizeToCells"/>
                         <DataGridTextColumn Header="Category  Name" Binding="{Binding CategoryName}"  Width="SizeToCells" />
                         <DataGridTextColumn Header="Name" Binding="{Binding ProductName}" Width="SizeToCells"/>
+                        <DataGridTemplateColumn Header="Inventory Item">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding InventoryItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="SizeToCells"/>
                         <DataGridTextColumn Header="Quanity" Binding="{Binding Quantity}" Width="SizeToCells"/>
+                        <DataGridTextColumn Header="Items Per Case" Binding="{Binding ItemsPerCase}" Width="SizeToHeader"/>
+                        
                         <DataGridTemplateColumn Width="SizeToCells">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

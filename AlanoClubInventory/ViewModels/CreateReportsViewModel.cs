@@ -19,7 +19,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Scmd = AlanoClubInventory.SqlServices;
-
+using AlanoClubInventory.Reports;
 
 namespace AlanoClubInventory.ViewModels
 {
@@ -43,7 +43,9 @@ namespace AlanoClubInventory.ViewModels
         private string txtTitle;
         private bool isGeneratingSWReport;
         private ObservableCollection<ItemListModel> items;
+        private ObservableCollection<ItemListModel> itemsEndMonthYear;
         private ItemListModel selectedYear;
+        private ItemListModel selectedEndMonthYear;
         private bool isStwertInvRep;
         private bool upDateRepDate;
         public CreateReportsViewModel()
@@ -94,21 +96,40 @@ namespace AlanoClubInventory.ViewModels
                 }
             }
         }
+        public ItemListModel SelectedEndMonthYear
+        {
+            get => selectedEndMonthYear;
+            set
+            {
+                if (selectedEndMonthYear != value)
+                {
+                    selectedEndMonthYear = value;
+                    OnPropertyChanged(nameof(SelectedEndMonthYear));
+                    // Trigger journaling overlay or animation here
+                }
+            }
+        }
         public async void GetItemsByYear()
         {
             Items = new ObservableCollection<ItemListModel>();
             var itemsSold = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetACProductsList<AlanoCLubItemsSoldByYear>(SqlConnectionStr, SqlServices.SqlConstProp.SPGetAlanClubInventoryYears);
             Items = new ObservableCollection<ItemListModel>();
+            ItemsEndMonthYear = new ObservableCollection<ItemListModel>();
             if ((itemsSold != null) && (itemsSold.Count > 0))
             {
-                Items.Add(new ItemListModel { Label = $"Select Report Year", Value = "0" });
+                Items.Add(new ItemListModel { Label = $"Start Month Year", Value = "0" });
+                ItemsEndMonthYear.Add(new ItemListModel { Label = $"End Month Year", Value = "0" });
                 foreach (var item in itemsSold)
                 {
-                    Items.Add(new ItemListModel { Label = $"Year {item.ItemsYear}", Value = item.ItemsYear.ToString() });
+                    Items.Add(new ItemListModel { Label = $"{item.ItemsYear}", Value = item.ItemsYear.ToString() });
+                    ItemsEndMonthYear.Add(new ItemListModel { Label = $"{item.ItemsYear}", Value = item.ItemsYear.ToString() });
                 }
                 SelectedYear = Items.FirstOrDefault(m => m.Value == "0");
+                SelectedEndMonthYear = ItemsEndMonthYear.FirstOrDefault(m => m.Value == "0");
             }
+             
         }
+         
         public async void InventorySetting()
         {
             IsStwertRep = false;
@@ -159,6 +180,18 @@ namespace AlanoClubInventory.ViewModels
 
                 items = value;
                 OnPropertyChanged(nameof(Items));
+
+            }
+
+        }
+            public ObservableCollection<ItemListModel> ItemsEndMonthYear
+        {
+            get => itemsEndMonthYear;
+            set
+            {
+
+                itemsEndMonthYear = value;
+                OnPropertyChanged(nameof(ItemsEndMonthYear));
 
             }
         }
@@ -331,7 +364,7 @@ namespace AlanoClubInventory.ViewModels
                 var eDate = ReportEDate;
 
                 IList<AlanoClubReportModel> rep = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetReport(SqlConnectionStr, Scmd.SqlConstProp.SPGetAlanoCLubReport, sDate, eDate);
-                IList<AlanoCLubDailyTillTapeModel> tillDep = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetDailyTillDateEDate<AlanoCLubDailyTillTapeModel>(SqlConnectionStr, Scmd.SqlConstProp.SPGetAlanoCLubDailyTapeTill, sDate, eDate);
+                IList<AlanoCLubDailyTillTapeModel> tillDep = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetDailyTillReport(SqlConnectionStr, Scmd.SqlConstProp.SPGetAlanoCLubDailyTapeTill, sDate, eDate);
                 ReportModel = await aLanoClubReport.InitReportWithDates(sDate, eDate);
                 var barItems = await aLanoClubReport.GetAsyncBarItems(rep);
                 var res = await aLanoClubReport.GenerateReportAsync(barItems);
@@ -358,14 +391,18 @@ namespace AlanoClubInventory.ViewModels
             }
 
         }
-        public async void InventorySoldReport(int repYear)
+       
+
+        public async void InventorySoldReport()
         {
             try
             {
+                string repSYear = SelectedYear.Value.Replace("-", "-01-");
+                string repEYear = SelectedEndMonthYear.Value.Replace("-", "-01-");
                 //IList<AlanoCLubDailyTillTapeModel> tillDep = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetDailyInventoryByMonth<AlanoCLubDailyTillTapeModel>(SqlConnectionStr,
-                var tm = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetReportMonthlyTotalsByYear(SqlConnectionStr, Scmd.SqlConstProp.SPGetAlanoCLubReportItemsSoldByMonth, repYear);
+                var tm = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetReportMonthlyTotalsByYear(SqlConnectionStr, Scmd.SqlConstProp.SPGetAlanoCLubReportItemsSoldByMonth,repSYear,repEYear );
                 var totalMontlySales = await aLanoClubReport.GenerateMonthlyInventorySalesAsync(tm);
-                var title = $"Alano Club Items Sold Report For The Current Year {repYear}";
+                var title = $"Alano Club Items Sold Report For The Month Year {repSYear} to {repEYear}";
                 ReportContent = await createFlowDocument.CreateAlanoMontlyInvReport(title, totalMontlySales);
                 IsGeneratingReport = true;
             }
@@ -373,6 +410,29 @@ namespace AlanoClubInventory.ViewModels
             {
                 Utilites.ALanoClubUtilites.ShowMessageBox($"Error {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private async Task<bool> CheckReportYears()
+        {
+           int indexDash= SelectedEndMonthYear.Value.IndexOf("-");
+            int eMonth = await Utilites.ALanoClubUtilites.ConvertToInt(SelectedEndMonthYear.Value.Substring(0,indexDash).Trim());
+            string endYear = SelectedEndMonthYear.Value.Substring(++indexDash).Trim();
+            
+            indexDash = SelectedYear.Value.IndexOf("-");
+            int sMonth = await Utilites.ALanoClubUtilites.ConvertToInt(SelectedYear.Value.Substring(0, indexDash).Trim());
+            string sYear = SelectedYear.Value.Substring(++indexDash).Trim();
+            
+            if(string.Compare(sYear,endYear, StringComparison.OrdinalIgnoreCase) != 0)
+            {
+                Utilites.ALanoClubUtilites.ShowMessageBox($"Error years have to be the same {sYear} and {endYear}", "Error Years", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+           }
+            if (sMonth > eMonth)
+            {
+                Utilites.ALanoClubUtilites.ShowMessageBox($"Error months start month {sMonth} has to be smaller then end month {eMonth}", "Error Months", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+
         }
         public async Task ClearReportContent()
         {
@@ -391,24 +451,40 @@ namespace AlanoClubInventory.ViewModels
                 ClearReportContent();
                 // ReportContent.BeginInit();
             
-                if (ReportSDate >ReportEDate)
-                {
-                    Utilites.ALanoClubUtilites.ShowMessageBox($"Error Report dates End Date Invalid {ReportEDate.ToString("MM-dd-yyyy")} has to be bigger or equal to Start Date {ReportSDate.ToString("MM-dd-yyyy")}", "Invalid Report Dates", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                }
+                
+
                 //  ReportContent.EndInit();
                 if (InventorySold)
+                {
+                    if (ReportSDate > ReportEDate)
+                    {
+                        Utilites.ALanoClubUtilites.ShowMessageBox($"Error Report dates End Date Invalid {ReportEDate.ToString("MM-dd-yyyy")} has to be bigger or equal to Start Date {ReportSDate.ToString("MM-dd-yyyy")}", "Invalid Report Dates", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    if (ReportSDate.Year != ReportEDate.Year)
+                    {
+                        Utilites.ALanoClubUtilites.ShowMessageBox($"Error report years have to be the same {ReportSDate.Year} and {ReportEDate.Year}", "Error Years", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                     RunReportStwert();
+                }
+                    
                 else
                 {
-                    var repYear = await Utilites.ALanoClubUtilites.ConvertToInt(SelectedYear.Value);
-                    if (repYear <= 0)
+                    //var repYear = await Utilites.ALanoClubUtilites.ConvertToInt(SelectedYear.Value);
+                    if ((SelectedEndMonthYear.Value == "0"))
                     {
-                        Utilites.ALanoClubUtilites.ShowMessageBox($"Error Invalid Year {repYear}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        Utilites.ALanoClubUtilites.ShowMessageBox($"Error Invalid End Month Year", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    if ((SelectedYear.Value == "0"))
+                    {
+                        Utilites.ALanoClubUtilites.ShowMessageBox($"Error Invalid Start Month Year", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
-                    InventorySoldReport(repYear);
+                    if(await CheckReportYears())
+                        InventorySoldReport();
                 }
 
 
@@ -426,7 +502,7 @@ namespace AlanoClubInventory.ViewModels
         {
             if (ReportContent != null)
             {
-                if (Utilites.PrintHelper.PrintFlowDocument(ReportContent))
+                if (PrintHelper.PrintFlowDocument(ReportContent))
                 {
                     IsGeneratingReport = false;
                     if ((isStwertRep) && (UpDateRepDate))

@@ -41,9 +41,10 @@ xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
                     </MenuItem>
                     <MenuItem Header="Reports">
                         <MenuItem Header="Alano CLub Stwert Reports" Click="AlanoCLubReports"/>
+                        <MenuItem Header="Inventory Report" Click="CurrentInv" Cursor="Hand"/>
+                        <MenuItem Header="Profit Loss BarItems Report" Click="ProfitLossPage" Cursor="Hand"/>
+                        <MenuItem Header="Graph Report" Click="AlanoClubDashBoard" Cursor="Hand"/>
                         
-
-
                     </MenuItem>
 
 

@@ -47,16 +47,33 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" >
-                <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand">
-                    <MenuItem Header="Prices"  Click="Prices"  />
-                    <MenuItem Header="Inventory"  Click="InventoryPage"  />
-                    <MenuItem Header="Other Products"  Click="OtherProd"  />
-                    <MenuItem Header="Daily Till"  Click="Till"  />
-                    <MenuItem Header="Reports"  Click="Reports"  />
-                    <MenuItem Header="Reload Page"  Click="Categories"  />
-                    <MenuItem Header="Go Back"  Click="GoBack"  />
+            <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" >
+                <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand" >
+                    <Menu BorderBrush="DarkBlue" >
 
+                        <MenuItem Header="Prices"  Click="Prices" FontSize="12">
+                            <MenuItem Header="Club Prices"  Click="Prices" FontSize="12" Cursor="Hand"/>
+                        </MenuItem>
+                        <MenuItem Header="Inventory"   FontSize="12">
+                            <MenuItem Header="Bar Items"  Click="InventoryPage" Cursor="Hand"/>
+                            <MenuItem Header="Categories"  Click="Categories" FontSize="12" Cursor="Hand" />
+                            <MenuItem Header="Other Products"  Click="OtherProd" FontSize="12" Cursor="Hand"/>
+                            
+                            <MenuItem Header="Reload Page"  Click="UpDateInventory" FontSize="12" Cursor="Hand" />
+                        </MenuItem>
+                        <MenuItem Header="Prices">
+                            <MenuItem Header="Club Prices" Click="AddEditProductPrices" Cursor="Hand"/>
+                            <MenuItem Header="Receipts"  Click="DailyRecpts" Cursor="Hand"/>
+                        </MenuItem>
+                        <MenuItem Header="Till"  Click="Till"  FontSize="12" Cursor="Hand">
+                            <MenuItem Header="Daily Till Sales" Click="Till" FontSize="12" Cursor="Hand"/>
+                        </MenuItem>
+                        <MenuItem Header="Reports"    FontSize="12">
+                            <MenuItem Header="Stwert Reports"  Click="Reports"  FontSize="12"/>
+                        </MenuItem>
+
+                        <MenuItem Header="Go Back"  Click="GoBack"  FontSize="12"/>
+                    </Menu>
 
                 </DockPanel>
             </StackPanel>
@@ -64,7 +81,73 @@
                 <TextBlock x:Name="textBlock"     Margin="0,10,0,0" TextWrapping="Wrap" Text="UpDate Alano Club Inventory"  Padding="10"  HorizontalAlignment="Center"  FontSize="14" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Grid.Row="4" Grid.Column="0">
+                <ProgressBar Minimum="0" Maximum="100" Height="30" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center"
+       Value="{Binding ProgressValue, Mode=OneWay}" Visibility="{Binding IsProgressBar, Converter={StaticResource BoolToVisibilityConverter}}" Width="500"/>
+                <ComboBox  ItemsSource="{Binding ItemsList}"
+          SelectedItem="{Binding  SelectedDate, Mode=TwoWay}" Visibility="{Binding IsOldRep, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding IsOldRep, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <TextBlock Text="{Binding Label }" FontSize="15" Margin="0,0,10,0" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <ListView x:Name="MyListView" ItemsSource="{Binding Inventory}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2"  Grid.RowSpan="1" 
+                                          ScrollViewer.CanContentScroll="False"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto"
+ScrollViewer.VerticalScrollBarVisibility="Auto"
+ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" FontSize="20" Visibility="{Binding IsListViewRep, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <ListView.View>
+                        <GridView >
+                            <GridViewColumn Header="Item">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ProductName}" TextWrapping="Wrap" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Quanity" Width="Auto">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Quantity}" Width="Auto" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Items Sold" Width="Auto">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ItemsSold}" Width="Auto" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Current InStock" Width="Auto">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding InStock}" Width="Auto" TextWrapping="Wrap" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Count InStock" Width="Auto">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding InventoryCurrent}"  FontSize="12"  Margin="0,0,10,0" Width="50"  Background="SeaShell" LostFocus="InvCountLostFocus" GotFocus="InvCountGotFocus"  />
+
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Stock Difference" Width="Auto" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock  Text="{Binding NewCount}"  Background="SeaShell"   IsEnabled="False"  x:Name="TxtInv"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+
+                </ListView>
+                <!--
                 <ListView x:Name="MyListView" ItemsSource="{Binding Inventory}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"  Grid.RowSpan="1" 
                                           ScrollViewer.CanContentScroll="False"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto"
 ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -78,7 +161,7 @@ ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectedItem="{Binding Selecte
                         <DataTemplate >
                             <Border CornerRadius="8" Margin="5" Padding="10">
                                 <StackPanel  Orientation="Horizontal" Margin="5">
-                                    <TextBlock Text="{Binding ProductName, StringFormat='Item Description {0:C}'}" FontWeight="Bold" FontSize="12"   Margin="0,0,10,0" Width="150" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding ProductName, StringFormat='Item {0:C}'}" FontWeight="Bold" FontSize="12"   Margin="0,0,10,0" Width="150" VerticalAlignment="Center"/>
 
                                     
                                     <Label Content="Quanity Total Stock " FontWeight="Bold" FontSize="12"  Margin="0,0,10,0" />
@@ -108,13 +191,17 @@ ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectedItem="{Binding Selecte
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                -->
             </StackPanel>
             <StackPanel Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                <Button Content="UpDate Inventory"  Command="{Binding CreateReport}"  Background="Ivory" Margin="5,10,5,5" Cursor="Hand"
-          Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Button Content="UpDate Inventory"  Command="{Binding UpDateInventory}"  Background="Ivory" Margin="5,10,5,5" Cursor="Hand"
+          Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Visibility="{Binding IsInvUpDated, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 <Button Content="Generate Inventory Sheet "  Command="{Binding GetInvSheet}"   Margin="5,10,5,5" Cursor="Hand"
          Background="LawnGreen"  Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-               
+                <Button Content="{Binding ButtonText}"  Command="{Binding PrintOldInv}"   Margin="5,10,5,5" Cursor="Hand"
+Background="BlanchedAlmond"  Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
             </StackPanel>
             <StackPanel Grid.Row="8" Grid.Column="0" Visibility="{Binding IsGeneratingInvSheet, Converter={StaticResource BoolToVisibilityConverter}}"
                          Width="1000" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">

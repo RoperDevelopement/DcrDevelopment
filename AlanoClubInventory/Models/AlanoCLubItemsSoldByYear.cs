@@ -8,6 +8,6 @@ namespace AlanoClubInventory.Models
 {
     public class AlanoCLubItemsSoldByYear
     {
-        public int ItemsYear { get; set; }
+        public string ItemsYear { get; set; }
     }
 }

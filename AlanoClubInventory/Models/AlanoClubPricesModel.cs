@@ -16,5 +16,6 @@ namespace AlanoClubInventory.Models
         public bool BarItem { get; set; }
         public  float ClubPrice { get; set; }
       public  float ClubNonMemberPrice { get; set; }
+        
     }
 }

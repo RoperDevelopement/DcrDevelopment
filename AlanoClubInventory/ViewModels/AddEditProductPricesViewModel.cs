@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Scmd = AlanoClubInventory.SqlServices;
@@ -162,75 +163,97 @@ namespace AlanoClubInventory.ViewModels
         }
         private async Task AddTillPrices()
         {
-            AlanoClubTillPricesModel alanoClubTillPrices = new AlanoClubTillPricesModel()
+            try
             {
-                ID = ID,
-                ClubPrice = float.Parse(ClubPrice.ToString()),
-                ClubNonMemberPrice = float.Parse(ClubNonMemberPrice.ToString()),
-              
-            };
-            if(alanoClubTillPrices.ClubNonMemberPrice == 0f)
-            {
-                alanoClubTillPrices.ClubNonMemberPrice = alanoClubTillPrices.ClubPrice;
+                AlanoClubTillPricesModel alanoClubTillPrices = new AlanoClubTillPricesModel()
+                {
+                    ID = ID,
+                    ClubPrice = float.Parse(ClubPrice.ToString()),
+                    ClubNonMemberPrice = float.Parse(ClubNonMemberPrice.ToString()),
+
+                };
+                if (alanoClubTillPrices.ClubNonMemberPrice == 0f)
+                {
+                    alanoClubTillPrices.ClubNonMemberPrice = alanoClubTillPrices.ClubPrice;
+                }
+                await Scmd.AlClubSqlCommands.SqlCmdInstance.AlanoCLubTillPrices(SqlConnectionStr, alanoClubTillPrices, SqlServices.SqlConstProp.SPAlanoClubTillPrices);
+                GetProducts();
+                await Task.CompletedTask;
             }
-            await Scmd.AlClubSqlCommands.SqlCmdInstance.AlanoCLubTillPrices(SqlConnectionStr,alanoClubTillPrices,SqlServices.SqlConstProp.SPAlanoClubTillPrices);
-            GetProducts();
-            await Task.CompletedTask;
+            catch (Exception ex)
+            {
+                Utilites.ALanoClubUtilites.ShowMessageBox($"Error Adding Till Prices {ex.Message}","Error",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private async void GetProducts()
         {
-            Products.Clear();
-            var conStr = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
-            SqlConnectionStr = conStr.AlanoClubSqlServer;
-            var items = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetAlanoCLubProducts(SqlConnectionStr, SqlServices.SqlConstProp.SPGetAlanoCLubProducts);
-            if ((items != null) && (items.Count > 0))
+            try
             {
-                
-                foreach (var item in items)
+                Products.Clear();
+                var conStr = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
+                SqlConnectionStr = conStr.AlanoClubSqlServer;
+                var items = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetAlanoCLubProducts(SqlConnectionStr, SqlServices.SqlConstProp.SPGetAlanoCLubProducts);
+                if ((items != null) && (items.Count > 0))
                 {
-                    Products.Add(item);
+
+                    foreach (var item in items)
+                    {
+                        Products.Add(item);
+                    }
+                    SetTxt();
+
                 }
-                SetTxt();
+                else
+                {
+                    return;
+                }
+
 
             }
-            else
+            catch(Exception ex)
             {
-                return;
+                Utilites.ALanoClubUtilites.ShowMessageBox($"Error Getting Products {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-          
-
 
         }
         public async void UpDateACPrices(object prices)
         {
-            var acPrice = prices as DataGrid;
-            acPrice.CommitEdit();
-            if (acPrice != null)
+            try
             {
-                var cerPriceCell = acPrice.CurrentItem as AlanoClubPricesModel;
-                CategoryName = cerPriceCell.CategoryName;
-                ProductName =  cerPriceCell.ProductName;
-                ClubPrice =  cerPriceCell.ClubPrice.ToString();
-                
-                ClubNonMemberPrice = cerPriceCell.ClubNonMemberPrice.ToString();
-                ID = cerPriceCell.ID;
-                IsTextEnable = true;
-                OnPropertyChanged(nameof(IsTextEnable));
-              //  if ((string.IsNullOrWhiteSpace(ClubPrice)) || ClubPrice.StartsWith("0"))
-              //  {
-                //    ClubPrice = "0.00";
-               // }
-                //if ((string.IsNullOrWhiteSpace(ClubNonMemberPrice)) || ClubNonMemberPrice.StartsWith("0"))
-                //{
-                //    ClubNonMemberPrice = "0.00";
-                //}
-             
-            }
+                var acPrice = prices as DataGrid;
+                acPrice.CommitEdit();
+                if (acPrice != null)
+                {
+                    var cerPriceCell = acPrice.CurrentItem as AlanoClubPricesModel;
+                    CategoryName = cerPriceCell.CategoryName;
+                    ProductName = cerPriceCell.ProductName;
+                    ClubPrice = cerPriceCell.ClubPrice.ToString();
+
+                    ClubNonMemberPrice = cerPriceCell.ClubNonMemberPrice.ToString();
+                    ID = cerPriceCell.ID;
+                    IsTextEnable = true;
+                    OnPropertyChanged(nameof(IsTextEnable));
+                    //  if ((string.IsNullOrWhiteSpace(ClubPrice)) || ClubPrice.StartsWith("0"))
+                    //  {
+                    //    ClubPrice = "0.00";
+                    // }
+                    //if ((string.IsNullOrWhiteSpace(ClubNonMemberPrice)) || ClubNonMemberPrice.StartsWith("0"))
+                    //{
+                    //    ClubNonMemberPrice = "0.00";
+                    //}
+
+                }
                 await Task.CompletedTask;
+            }
+            catch(Exception ex)
+            {
+                Utilites.ALanoClubUtilites.ShowMessageBox($"Error Updating Prices {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private async void ACNewPrice(object par)
         {
+            try 
+            { 
             var cp = await ALanoClubUtilites.ConvertToFloat(ClubPrice.ToString());
             if(cp < 1f)
             {
@@ -252,6 +275,11 @@ namespace AlanoClubInventory.ViewModels
 
             await AddTillPrices();
             await Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                Utilites.ALanoClubUtilites.ShowMessageBox($"Error Adding New Prices {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         protected void OnPropertyChanged(string propertyName) =>
           PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

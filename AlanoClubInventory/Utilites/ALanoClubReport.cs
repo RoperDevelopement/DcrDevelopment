@@ -226,7 +226,9 @@ namespace AlanoClubInventory.Utilites
         }
         public async Task<IList<AlanClubPrintReportModel>> AddOtherItems(IList<CategorySoldModel> categorySolds, IList<AlanClubPrintReportModel>? clubPrintReportModels)
         {
-            var distinctDates = categorySolds
+           // IList<AlanClubPrintReportModel> retModle = new List<AlanClubPrintReportModel>();
+
+           var distinctDates = categorySolds
                                 .Select(dt => dt.Date.Date)
                                 .Distinct()
                                 .ToList();
@@ -239,7 +241,8 @@ namespace AlanoClubInventory.Utilites
                     foreach (var cat in catItems)
                     {
                         if (cat.CategoryName.Equals(Utilites.AlanoCLubConstProp.Dues, StringComparison.OrdinalIgnoreCase))
-                        {
+                        { 
+
                             report.Dues += cat.CateogoryITtemsCost;
                         }
                         else if (cat.CategoryName.StartsWith(Utilites.AlanoCLubConstProp.CoffeeClub, StringComparison.OrdinalIgnoreCase))
@@ -258,7 +261,9 @@ namespace AlanoClubInventory.Utilites
                         {
                             report.MiscItems += cat.CateogoryITtemsCost;
                         }
+
                     }
+                   // retModle.Add(report);
 
                     // report.TillDate = item.Date;
                     // report.BarItemsTotal = item.BarITtemsCost;

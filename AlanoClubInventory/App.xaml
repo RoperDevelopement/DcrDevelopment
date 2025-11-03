@@ -6,8 +6,10 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <vm:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <vm:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
         <SolidColorBrush x:Key="ControlFillColorDefault" Color="#a6e7ff" />
         <SolidColorBrush x:Key="MenuItems" Color="#808080"/>
+        
         
     </Application.Resources>
 </Application>

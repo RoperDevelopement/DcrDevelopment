@@ -22,5 +22,6 @@ namespace AlanoClubInventory.Models
         public float Tape { get; set; } = 0.0f;
         public float OverShort { get; set; } = 0.0f;
         public float MiscItems { get; set; } = 0.0f;
+        public float Rent { get; set; } = 0.0f;
     }
 }

@@ -22,19 +22,23 @@ namespace AlanoClubInventory.Views
     public partial class OtherProductsPage : Page
     {
         private readonly OtherProductsViewModel otherProductsPage = new OtherProductsViewModel();
-        
+
         public OtherProductsPage()
         {
             InitializeComponent();
-            DataContext=otherProductsPage;
-           // CheckCategories();
+         
+            DataContext = otherProductsPage;
             
+            // CheckCategories();
+
 
         }
 
+
+
         private async void GoBack(object sender, RoutedEventArgs e)
         {
-
+            
             NavigationService.GoBack();
         }
         private async void InventoryPage(object sender, RoutedEventArgs e)
@@ -73,6 +77,23 @@ namespace AlanoClubInventory.Views
         {
             AddEditProductPricesPage addEditProductPricesPage1 = new AddEditProductPricesPage();
             this.NavigationService.Navigate(addEditProductPricesPage1);
+        }
+        private async void UpDateInventory(object sender, RoutedEventArgs e)
+        {
+            AlanoClubCurrentInventoryPage alanoClubCurrentInventoryPage = new AlanoClubCurrentInventoryPage();
+            this.NavigationService.Navigate(alanoClubCurrentInventoryPage);
+
+
+        }
+        private async void DailyRecpts(object sender, RoutedEventArgs e)
+        {
+            DailyTillReceiptsPage dailyTillReceiptsPage = new DailyTillReceiptsPage();
+            this.NavigationService.Navigate(dailyTillReceiptsPage);
+        }
+        private async void AddEditProductPrices(object sender, RoutedEventArgs e)
+        {
+            AddEditProductPricesPage addEditProductPricesPage = new AddEditProductPricesPage();
+            this.NavigationService.Navigate(addEditProductPricesPage);
         }
 
 

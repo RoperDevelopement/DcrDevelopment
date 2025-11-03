@@ -10,8 +10,9 @@ namespace AlanoClubInventory.Models
     public class AlanoClubCurrentInventoryModel : IALanoCLubCurrentInventory
     {
         public int ID { get; set; }
+        public int Quantity { get; set; }
         public string ProductName { get; set; }
-       public int Quantity { get; set; }
+       
        public int InStock { get; set; }
        public int ItemsSold { get; set; }
         public int   InventoryCurrent {  get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AlanoClubInventory.Models
 {
-    public class InventoryModel : IID, IInventoryProductName, ICaegoryName, IInventoryQuanity
+    public class InventoryModel : IID, IInventoryProductName, ICaegoryName, IInventoryQuanity, IALanoCLubCurrentInventoryItemsByUnit,IAlanoClubInventoryItem
     {
         public int ID { get; set; }
         public string CategoryName { get; set; }
@@ -16,5 +16,7 @@ namespace AlanoClubInventory.Models
         public float Price { get; set; }
         public int Quantity { get; set; }
         // public int TotalSold { get; set; }
+        public int ItemsPerCase { get; set; }
+        public bool  InventoryItem {  get; set; }
     }
 }

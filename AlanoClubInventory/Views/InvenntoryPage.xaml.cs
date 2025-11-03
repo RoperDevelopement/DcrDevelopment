@@ -31,15 +31,7 @@ namespace AlanoClubInventory.Views
             
 
         }
-        private async void CheckCategories()
-        {
-            if ((inventoryViewModel.ItemsList == null) || (inventoryViewModel.ItemsList.Count == 0))
-            {
-                Utilites.ALanoClubUtilites.ShowMessageBox("Need to add Categories...", "No Categories", MessageBoxButton.OK, MessageBoxImage.Error);
-                
-            }
-            
-        }
+     
 
 
         private async void GoBack(object sender, RoutedEventArgs e)
@@ -84,6 +76,26 @@ namespace AlanoClubInventory.Views
             AddEditProductPricesPage addEditProductPricesPage1 = new AddEditProductPricesPage();
             this.NavigationService.Navigate(addEditProductPricesPage1);
         }
+        private async void UpDateInventory(object sender, RoutedEventArgs e)
+        {
+            AlanoClubCurrentInventoryPage alanoClubCurrentInventoryPage = new AlanoClubCurrentInventoryPage();
+            this.NavigationService.Navigate(alanoClubCurrentInventoryPage);
+
+
+        }
+
+
+        private async void AddEditProductPrices(object sender, RoutedEventArgs e)
+        {
+            AddEditProductPricesPage addEditProductPricesPage = new AddEditProductPricesPage();
+            this.NavigationService.Navigate(addEditProductPricesPage);
+        }
+        private async void DailyRecpts(object sender, RoutedEventArgs e)
+        {
+            DailyTillReceiptsPage dailyTillReceiptsPage = new DailyTillReceiptsPage();
+            this.NavigationService.Navigate(dailyTillReceiptsPage);
+        }
+
     }
-     
+
 }

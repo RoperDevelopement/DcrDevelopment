@@ -34,8 +34,18 @@ namespace AlanoClubInventory.SqlServices
         public const string SPGetAlanoClubDailyTillReceiptDate = "spGetAlanoClubDailyTillReceiptDate";
         public const string SPGetAlanoCLubCurrentInventory = "spGetAlanoCLubCurrentInventory";
         public const string SPAlanoCLubCurrentInventory = "spAlanoCLubCurrentInventory";
-
+        public const string SPGetAlanoClubInventoryProfitLoss = "[dbo].[spGetAlanoClubInventoryProfitLoss]";
+        public const string SPALanoClubInventroyCount = "spALanoClubInventroyCount";
+        public const string SPGetInventoryDates = "spGetInventoryDates";
+        public const string SPALanoClubRePrintInventory = "spALanoClubRePrintInventory";
+        public const string SPlanoCLubOldDailyTapeTill = "spAlanoCLubOldDailyTapeTill";
+        public const string SPGetDailyOldTillReceipts = "spGetDailyOldTillReceipts";
+        public const string SPUpdateOldDailyTellReceipts = "spUpdateOldDailyTellReceipts";
+        public const string SPUpDateAlanoClubOldTillDrop = "spUpDateAlanoClubOldTillDrop";
+        public const string SPALanoClubGetDailySalesGraphChart = "spALanoClubGetDailySalesGraphChart";
         
+
+
         #endregion
         #region sp parmas
         public const string SPParmaCategoryName = "@CategoryName";
@@ -54,6 +64,8 @@ namespace AlanoClubInventory.SqlServices
         public const string SPParmaNonMemberITems = "@NonMemberITems";
         public const string SPParmaDailyProductTotal = "@DailyProductTotal";
         public const string SPParmaDailyTotalSales = "@DailyTotalSales";
+        public const string SPParmaItemsPerCase = "@ItemsPerCase";
+        
 
         public const string SPParmaTapeTotal = "@TapeTotal";
 
@@ -62,9 +74,18 @@ namespace AlanoClubInventory.SqlServices
         public const string SPParmaDepsoit = "@Depsoit";
         public const string SPParmaQuanitySold = "@QuanitySold";
         public const string SPParmaInventoryCount = "@InventoryCount";
-        
+        public const string SPParmaInventoryItem = "@InventoryItem";
+        public const string SPParmaInStock = "@InStock";
+        public const string SPParmaItemsSold = "@ItemsSold";
+        public const string SPParmaInventoryCurrent = "@InventoryCurrent";
+        public const string SPParmaDate = "@Date";
+        public const string SPParmaInventorySales = "@InventorySales";
 
         public const string SPParmaYear = "@Year";
+        public const string SPParmaStartMonthYear = "@StartMonthYear";
+        public const string SPParmaEndMonthYear = "@EndMonthYear";
+
+
 
 
 

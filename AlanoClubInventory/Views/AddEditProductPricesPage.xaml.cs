@@ -78,6 +78,17 @@ namespace AlanoClubInventory.Views
             }
 
         }
+        private async void DailyRecpts(object sender, RoutedEventArgs e)
+        {
+            DailyTillReceiptsPage dailyTillReceiptsPage = new DailyTillReceiptsPage();
+            this.NavigationService.Navigate(dailyTillReceiptsPage);
+        }
+        private async void UpDateInventory(object sender, RoutedEventArgs e)
+        {
+            AlanoClubCurrentInventoryPage alanoClubCurrentInventoryPage = new AlanoClubCurrentInventoryPage();
+            this.NavigationService.Navigate(alanoClubCurrentInventoryPage);
+
+        }
         private void TextBoxClubPriceLostFocus(object sender, RoutedEventArgs e)
         {
             var but = sender as TextBox;

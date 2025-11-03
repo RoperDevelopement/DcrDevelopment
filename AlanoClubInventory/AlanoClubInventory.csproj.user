@@ -11,6 +11,9 @@
     <Compile Update="Views\AlanoCLubChartsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AlanoClubDashBoardPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AlanoClubICurrentnventoryPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -21,6 +24,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\InvenntoryPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ProfitLossPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
