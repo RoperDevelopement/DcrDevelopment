@@ -1,10 +1,42 @@
 {
   "SqlServerConnectionStrings": {
-    "AlanoClubSqlServer": "Server=dcr;Database=AlanoClub;User=AlanoClub;PassWord=AlanoCLub0317@@;MultipleActiveResultSets=true;Integrated Security=true;Connection Timeout=180;TrustServerCertificate=True;"
+    "AlanoClubSqlServer": "Server=dcr\\SQLEXPRESS;Database=AlanoClub;User=AlanoClub;PassWord=AlanoCLub0317@@;MultipleActiveResultSets=true;Integrated Security=true;Connection Timeout=180;TrustServerCertificate=True;",
+    "AlanoClubBackUpSqlConnection": "Server=dcr;Database={SqlConnBackupDataBase};User=AlanoClub;PassWord=AlanoCLub0317@@;MultipleActiveResultSets=true;Integrated Security=true;Connection Timeout=180;TrustServerCertificate=True;"
     // "EdocsTimeClockCS": "Server=EDOCSHOMEOFFICE\\SQLEXPRESS;Database=EdocsEmployeeTimeClock;User=edocsusa;PassWord=6746edocs@;MultipleActiveResultSets=true;Integrated Security=false;Connection Timeout=180;"
+    // "AlanoClubSqlServer": "Server=dcr;Database=AlanoClub;User=AlanoClub;PassWord=AlanoCLub0317@@;MultipleActiveResultSets=true;Integrated Security=true;Connection Timeout=180;TrustServerCertificate=True;",
+    //"AlanoClubSqlServer": "Server=dcr\\SQLEXPRESS;Database=AlanoClub;User=AlanoClub;PassWord=AlanoCLub0317@@;MultipleActiveResultSets=true;Integrated Security=true;Connection Timeout=180;TrustServerCertificate=True;"
   },
   "RegXExpressionsModel": {
     "RegXMatchStr": "Coffee"
+  },
+
+  "SendEmailModel": {
+    "EmailFrom": "Buttealano@gmail.com",
+    "EmailCC": "",
+    "SmtpServer": "smtp.gmail.com",
+    "Port": 587,
+    "EnableSsl": true,
+    "Password": "vwaq sldy fzxe mzkr"
+  },
+  "AlanoClubInformaitonModel": {
+    "ClubName": "Butte Alano Club",
+    "ClubAddress": "721 Utah Ave",
+    "ClubPOBox": "P.O. Box 4151",
+    "ClubCity": "Butte",
+    "ClubSt": "MT.",
+    "ClubZipCode": "59702",
+    "ClubPhone": "(406) 723-9809",
+    "ClubEmail": "buttealano@gmail.com",
+    "FacebookLink": "https://www.facebook.com/ButteAlanoClub"
+    //  "EdocsInventoryTrackingSystemCS": "Server=Queens;Database=EdocsITS;User=edocsusa;PassWord=6746edocs@;MultipleActiveResultSets=true;Integrated Security=false;Connection Timeout=180;"
+  },
+  "DiskSpaceDBSizeModel": {
+    "DiskSpace": 1.0,
+    "DataBaseSize": 4.0,
+    "DaysToKeepBackups": 10
+  },
+  "AlanoClubSessionTimeOutModel": {
+    "SessionTimeOutMinutes":5
+    
   }
-  //  "EdocsInventoryTrackingSystemCS": "Server=Queens;Database=EdocsITS;User=edocsusa;PassWord=6746edocs@;MultipleActiveResultSets=true;Integrated Security=false;Connection Timeout=180;"
 }

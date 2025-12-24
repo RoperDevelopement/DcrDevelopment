@@ -145,11 +145,13 @@ namespace AlanoClubInventory.ViewModels
         {
             if (ReportContent != null)
             {
+               /// CreateDataGridToPrint printDataGrid = new CreateDataGridToPrint();
+              //  await printDataGrid.PrintDataGrid(ProfitLosses.ToList());
                 if (PrintHelper.PrintFlowDocument(ReportContent))
-                {
-                   await ClearReportContent();
-                    GetProcucts();
-                }
+                 {
+                  await ClearReportContent();
+                 GetProcucts();
+                 }
             }
         }
         private bool CanGenerateReport()
@@ -159,6 +161,10 @@ namespace AlanoClubInventory.ViewModels
         }
         private async void GetProcucts()
         {
+            if((ProfitLosses!=null) && (ProfitLosses.Count>0))
+            {
+                ProfitLosses.Clear();
+            }
             IsRunningRep = true;
             IsGeneratingReport = false;
             var prod = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetACProductsList<AlanoCLubProfitLossModel>(SqlConnectionStr, Scmd.SqlConstProp.SPGetAlanoClubInventoryProfitLoss);
@@ -221,11 +227,8 @@ namespace AlanoClubInventory.ViewModels
         {
 
             ReadJsonFile readJson = new ReadJsonFile();
-            var appSettings = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
-            if (appSettings != null)
-            {
-                SqlConnectionStr = appSettings.AlanoClubSqlServer;
-            }
+            SqlConnectionStr = Utilites.ALanoClubUtilites.GetSqlConnectionStrings(Utilites.ALanoClubUtilites.AlanoClubDatabaseName);
+
             var ex = readJson.GetJsonData<RegXExpressionsModel>(nameof(RegXExpressionsModel)).Result;
                 if (ex != null)
             {

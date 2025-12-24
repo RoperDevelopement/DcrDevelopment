@@ -1,0 +1,217 @@
+﻿<Page x:Class="AlanoClubInventory.Views.AlanoCLubMembersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AlanoClubInventory.Views" 
+      xmlns:viewmodels="clr-namespace:AlanoClubInventory.ViewModels"
+      d:DataContext="{d:DesignInstance Type=viewmodels:AlanoClubMembersViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Alano CLub Members"
+    Background="{DynamicResource ControlFillColorDefault}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+        <Grid Margin="10,0,10,10" VerticalAlignment="Top"  HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="textBlock"   Margin="0,10,0,0" TextWrapping="Wrap" Text="Alano CLub Membership" VerticalAlignment="Top" Padding="10"  HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+
+            <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" Margin="0,10,0,0" >
+                <Label Content="Member ID:"   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBox   Text="{Binding MemberID ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Foreground="Gray"  VerticalAlignment="Center" Width="50" HorizontalAlignment="Center" LostFocus="TextBox_LostFocus"  />
+                    <Label Content="First Name:"   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox   Text="{Binding MemberFirstName, Mode=TwoWay}"  Foreground="Gray" VerticalAlignment="Center" Width="150"
+                               HorizontalAlignment="Center" />
+                    <Label Content="Last Name:"   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox   Text="{Binding MemberLastName, Mode=TwoWay}"  Foreground="Gray"  VerticalAlignment="Center" Width="150" HorizontalAlignment="Center"/>
+            </StackPanel>
+         
+                <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Email:"   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBox   Text="{Binding MemberEmail}" Foreground="Gray" VerticalAlignment="Center" Width="150" HorizontalAlignment="Center" />
+                <Label Content="Phone:"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox   Text="{Binding MemberPhoneNumber}"  Foreground="Gray"  VerticalAlignment="Center" Width="150" HorizontalAlignment="Center"  Margin="5,0,0,0"/>
+
+                <Label Content="Sobriety Date:"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <DatePicker  
+                    SelectedDate="{Binding SobrietyDate, StringFormat=MM-dd-yyyy}" 
+                    DisplayDateStart="01-01-2000" 
+                    DisplayDateEnd="12-31-2099"
+                    IsTodayHighlighted="True"
+                    FirstDayOfWeek="Monday"
+                    Background="Lavender"
+                         Margin="5,0,0,0"
+BorderBrush="SlateBlue"
+BorderThickness="2" 
+                    
+                              VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="5" Grid.Column="2" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <CheckBox IsChecked="{Binding IsActiveMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                    <Label Content="Active Member:"  HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5,0,0,0"/>
+                    <CheckBox IsChecked="{Binding IsBoardMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                    <Label Content="Board Member:"  HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5,0,0,0"/>
+                </StackPanel>
+            
+          <!--  
+                <StackPanel Grid.Row="5" Grid.Column="2" Orientation="Horizontal" Margin="0,10,0,0">
+                    <Label Content="Start Date:"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <DatePicker  
+                    SelectedDate="{Binding MembershipStartDate, StringFormat=MM-dd-yyyy}" 
+                    DisplayDateStart="2000-01-01" 
+                    DisplayDateEnd="2099-12-31"
+                    IsTodayHighlighted="True"
+                    FirstDayOfWeek="Monday"
+                    Background="Lavender"
+                         Margin="5,0,0,0"
+BorderBrush="SlateBlue"
+BorderThickness="2" 
+                              VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Label Content="End: Date"   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                
+                    <DatePicker  
+                    SelectedDate="{Binding MembershipStartDate, StringFormat=MM-dd-yyyy}" 
+                    DisplayDateStart="2000-01-01" 
+                    DisplayDateEnd="2099-12-31"
+                    IsTodayHighlighted="True"
+                    FirstDayOfWeek="Monday"
+                    Background="Lavender"
+                         Margin="5,0,0,0"
+BorderBrush="SlateBlue"
+BorderThickness="2" 
+                              VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </StackPanel>
+            -->
+          
+            <StackPanel Grid.Row="8" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+               
+                    <TextBlock    Margin="0,10,0,0" TextWrapping="Wrap" Text="Click on Member to Edit" FontSize="12" FontWeight="Bold" 
+                              VerticalAlignment="Top" Padding="10"  HorizontalAlignment="Center" />
+               
+            </StackPanel>
+            <StackPanel Grid.Row="9" Grid.Column="2">
+                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2" >
+                    <ListView x:Name="MyListView" ItemsSource="{Binding Members,Mode=TwoWay}" 
+                                          ScrollViewer.CanContentScroll="True"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto"
+ScrollViewer.VerticalScrollBarVisibility="Auto"
+ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" FontSize="14" SelectionMode="Single" SelectionChanged="MyListView_SelectionChanged" >
+
+                        <ListView.View>
+
+                            <GridView>
+                                <GridViewColumn Header="Member ID" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MemberID}" TextWrapping="Wrap" Padding="5"  />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="First Name" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MemberFirstName}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Last Name" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MemberLastName}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="EMail" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MemberEmail}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Phone Number" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MemberPhoneNumber}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Sobriety Date" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding SobrietyDate,StringFormat='MM-dd-yyyy'}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <!--
+                                <GridViewColumn Header="End Date" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MembershipEndDate}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                -->
+                                <GridViewColumn Header="IsActive" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        
+                                            <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsActiveMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+                                            </DataTemplate>
+                                            
+                                        
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="IsBoardMember" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsBoardMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+                                        </DataTemplate>
+
+
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+
+                        </ListView.View>
+
+                    </ListView>
+                </Border>
+                <StackPanel Grid.Row="8" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                    <Button Content="Add Update Member"  Command="{Binding AddUpdateMembers}"  Background="Ivory"  Width="125" Margin="5" Cursor="Hand"
+                            Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" />
+                    <Button Content="Clear"  Command="{Binding ClearMembers}"  Background="WhiteSmoke"  Width="80" Margin="5" Cursor="Hand" Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2"/>
+                    <Button Content="Exit"  Click="Button_Click"  Background="Red"   Width="80" Margin="5" Cursor="Hand" Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2"/>
+                    
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

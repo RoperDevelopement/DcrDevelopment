@@ -37,6 +37,7 @@ namespace AlanoClubInventory.ViewModels
         public AlanoClubDashBoardModle()
         {
             IsGraphVisable = false;
+            GetSqlConn();
             GetDatesReport();
            // GetSalesData();
 
@@ -99,7 +100,8 @@ namespace AlanoClubInventory.ViewModels
         }
         private async void GetSqlConn()
         {
-            SqlConnectionStr = await Utilites.ALanoClubUtilites.GetConnectionStr();
+            SqlConnectionStr = Utilites.ALanoClubUtilites.GetSqlConnectionStrings(Utilites.ALanoClubUtilites.AlanoClubDatabaseName);
+
         }
         private string SqlConnectionStr { get; set; }
         private IList<AlanoCLubGraphModel> ACGraphModel { get; set; }
@@ -245,7 +247,7 @@ namespace AlanoClubInventory.ViewModels
             tempPath = $"{tempPath}\\Temp\\AlanoClubInventory";
             Utilites.ALanoClubUtilites.CreateFolder(tempPath);
             string filePath = System.IO.Path.Combine(tempPath, "AlanoClubSalesGraph.png");
-            bmp.Save(filePath, ImageFormat.Png);
+            bmp.Save(filePath,ScottPlot.ImageFormat.Png);
             Utilites.ALanoClubUtilites.ShowMessageBox($"Graph saved to {filePath}", "Graph Saved", MessageBoxButton.OK, MessageBoxImage.Information);   
             PGraphPrint(filePath);
         }
@@ -275,7 +277,7 @@ namespace AlanoClubInventory.ViewModels
                 }
             }
 
-         
+        
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

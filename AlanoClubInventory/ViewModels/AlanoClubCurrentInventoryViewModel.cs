@@ -18,6 +18,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using Scmd = AlanoClubInventory.SqlServices;
+
 namespace AlanoClubInventory.ViewModels
 {
     public class AlanoClubCurrentInventoryViewModel : INotifyPropertyChanged
@@ -42,6 +43,8 @@ namespace AlanoClubInventory.ViewModels
         private double progressValue;
         public AlanoClubCurrentInventoryViewModel()
         {
+
+            GetConnectionStr();
             IsProgressBar = true;
             GetInventory();
             IsInvUpDated = true;
@@ -274,12 +277,8 @@ namespace AlanoClubInventory.ViewModels
         private async void GetConnectionStr()
         {
 
-            ReadJsonFile readJson = new ReadJsonFile();
-            var appSettings = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
-            if (appSettings != null)
-            {
-                SqlConnectionStr = appSettings.AlanoClubSqlServer;
-            }
+            SqlConnectionStr = Utilites.ALanoClubUtilites.GetSqlConnectionStrings(Utilites.ALanoClubUtilites.AlanoClubDatabaseName);
+
         }
         public ObservableCollection<AlanoClubCurrentInventoryModel> Inventory
         {

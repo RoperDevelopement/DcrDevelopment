@@ -7,6 +7,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Assets\acicon.ico</ApplicationIcon>
+   <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  <FileVersion>1.0.0.0</FileVersion>
+  <InformationalVersion>1.0.0</InformationalVersion>
+	  <Company>Dcr Software</Company>
+	  <Product>Alano Club Inventory</Product>
+  <Copyright>"Copyright ©  2025"</Copyright>
+	  <Description>To Keep Track of Inventory At Alano Club</Description>
+	  <Platforms>AnyCPU;x64</Platforms>
+	  <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+	  <PackageIcon>alcpic.jpg</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,20 +29,66 @@
   <ItemGroup>
     <None Remove="applicationsettings.json" />
     <None Remove="Assets\acicon.ico" />
+    <None Remove="Models\MenuItemModel.cs~RFacb5fb4.TMP" />
+    <None Remove="Resources\FRImages\Bold.png" />
+    <None Remove="Resources\FRImages\Italic.png" />
+    <None Remove="Resources\FRImages\Underline.png" />
+    <None Remove="Resources\Images\10-Open-file.512.png" />
     <None Remove="Resources\Images\480782709_1440388930358317_178499286582280879_n.jpg" />
     <None Remove="Resources\Images\acicon.ico" />
-    <None Remove="Resources\Images\alcpic.jpg" />
+    <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\addspace.png" />
+    <None Remove="Resources\Images\bforbold.png" />
+    <None Remove="Resources\Images\bold.png" />
+    <None Remove="Resources\Images\butteac.ico" />
+    <None Remove="Resources\Images\butteac.png" />
+    <None Remove="Resources\Images\center.png" />
+    <None Remove="Resources\Images\clip.png" />
+    <None Remove="Resources\Images\create.png" />
+    <None Remove="Resources\Images\email.png" />
+    <None Remove="Resources\Images\exit.png" />
+    <None Remove="Resources\Images\insert-button-png-hi.png" />
+    <None Remove="Resources\Images\insert-image-icon-28.jpg" />
+    <None Remove="Resources\Images\insert.png" />
+    <None Remove="Resources\Images\inserttab.png" />
+    <None Remove="Resources\Images\inserttable.png" />
+    <None Remove="Resources\Images\italic.png" />
+    <None Remove="Resources\Images\itlic.png" />
+    <None Remove="Resources\Images\left-align.png" />
+    <None Remove="Resources\Images\leftuse.png" />
+    <None Remove="Resources\Images\mail %281%29.png" />
+    <None Remove="Resources\Images\mail.png" />
+    <None Remove="Resources\Images\minus.png" />
+    <None Remove="Resources\Images\printer.png" />
+    <None Remove="Resources\Images\right-align.png" />
+    <None Remove="Resources\Images\rightuse.png" />
+    <None Remove="Resources\Images\save-button-HD.png" />
+    <None Remove="Resources\Images\save-button-hi.png" />
+    <None Remove="Resources\Images\table %281%29.png" />
+    <None Remove="Resources\Images\text-center.png" />
+    <None Remove="Resources\Images\underline-u.png" />
+    <None Remove="Resources\Images\underline.png" />
+    <None Remove="Views\AboutWindow.xaml~RF4ec9ba3.TMP" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Fluent.Ribbon" Version="11.0.1" />
+    <PackageReference Include="HarfBuzzSharp" Version="8.3.1.2" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.4" />
+    <PackageReference Include="itextsharp.xmlworker" Version="5.5.13.4" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.3" />
+    <PackageReference Include="Microsoft.Data.SqlClient.SNI" Version="6.0.2" />
     <PackageReference Include="Microsoft.ReportViewer.Common" Version="10.0.40219.1" />
     <PackageReference Include="Microsoft.ReportViewer.WinForms" Version="10.0.40219.1" />
+    <PackageReference Include="Microsoft.SqlServer.Scripting" Version="11.0.2100.61" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="PDFsharp" Version="6.2.2" />
+    <PackageReference Include="PDFsharp" Version="6.2.3" />
+    <PackageReference Include="PdfSharpCore" Version="1.3.67" />
+    <PackageReference Include="RtfPipe" Version="2.0.7677.4303" />
     <PackageReference Include="ScottPlot.WPF" Version="5.1.57" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,15 +96,65 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\acicon.ico" />
+    <Resource Include="Resources\FRImages\Bold.png" />
+    <Resource Include="Resources\FRImages\Italic.png" />
+    <Resource Include="Resources\FRImages\Underline.png" />
+    <Resource Include="Resources\Images\10-Open-file.512.png" />
     <Resource Include="Resources\Images\480782709_1440388930358317_178499286582280879_n.jpg" />
     <Resource Include="Resources\Images\acicon.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\add.png" />
+    <Resource Include="Resources\Images\addspace.png" />
     <Resource Include="Resources\Images\alcpic.jpg" />
+    <Resource Include="Resources\Images\bforbold.png" />
+    <Resource Include="Resources\Images\bold.png" />
+    <Resource Include="Resources\Images\butteac.ico" />
+    <Resource Include="Resources\Images\butteac.png" />
+    <Resource Include="Resources\Images\center.png" />
+    <Resource Include="Resources\Images\clip.png" />
+    <Resource Include="Resources\Images\create.png" />
+    <Resource Include="Resources\Images\email.png" />
+    <Resource Include="Resources\Images\exit.png" />
+    <Resource Include="Resources\Images\insert-button-png-hi.png" />
+    <Resource Include="Resources\Images\insert-image-icon-28.jpg" />
+    <Resource Include="Resources\Images\insert.png" />
+    <Resource Include="Resources\Images\inserttab.png" />
+    <Resource Include="Resources\Images\inserttable.png" />
+    <Resource Include="Resources\Images\italic.png" />
+    <Resource Include="Resources\Images\itlic.png" />
+    <Resource Include="Resources\Images\left-align.png" />
+    <Resource Include="Resources\Images\leftuse.png" />
+    <Resource Include="Resources\Images\mail (1).png" />
+    <Resource Include="Resources\Images\mail.png" />
+    <Resource Include="Resources\Images\minus.png" />
+    <Resource Include="Resources\Images\printer.png" />
+    <Resource Include="Resources\Images\right-align.png" />
+    <Resource Include="Resources\Images\rightuse.png" />
+    <Resource Include="Resources\Images\save-button-HD.png" />
+    <Resource Include="Resources\Images\save-button-hi.png" />
+    <Resource Include="Resources\Images\table (1).png" />
+    <Resource Include="Resources\Images\text-center.png" />
+    <Resource Include="Resources\Images\underline-u.png" />
+    <Resource Include="Resources\Images\underline.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Service Include="{3259aa49-8aa1-44d3-9025-a0b520596a8c}" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="CreateNewDatabases\CreateNewDatabase.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Images\alcpic.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="mkdir &quot;$(TargetDir)\StoreProcdScripts\&quot;&#xD;&#xA;mkdir &quot;$(TargetDir)\DataBaseTableScripts\&quot;&#xD;&#xA;&#xD;&#xA;copy &quot;L:\EdocsGItHub\AlanoClubInventory\CreateNewDatabases\*.sql&quot; &quot;$(TargetDir)\DataBaseTableScripts\*.*&quot; &#xD;&#xA;copy &quot;L:\EdocsGItHub\AlanoClubInventory\CreateNewDatabases\StoreProcdScripts\*.sql&quot; &quot;$(TargetDir)\StoreProcdScripts\*.*&quot; " />
+  </Target>
 
 </Project>

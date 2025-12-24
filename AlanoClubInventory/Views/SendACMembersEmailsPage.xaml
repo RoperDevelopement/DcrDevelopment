@@ -1,0 +1,347 @@
+﻿<Page x:Class="AlanoClubInventory.Views.SendACMembersEmailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AlanoClubInventory.Views"
+       xmlns:vm="clr-namespace:AlanoClubInventory.Utilites" xmlns:viewmodels="clr-namespace:AlanoClubInventory.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SendACMembersEmailsViewModel}"
+      xmlns:vmitems="clr-namespace:AlanoClubInventory.Models"
+      
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Create Alano CLub News Letters"
+      Background="{StaticResource ControlFillColorDefault}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalAlignment="Top" HorizontalAlignment="Center">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="0,0,0,0" VerticalAlignment="Top">
+                <TextBlock  Margin="0,10,0,0" TextWrapping="Wrap" Text="Send Alano Club Members Emails"  Padding="10"  HorizontalAlignment="Center"  FontSize="14" VerticalAlignment="Center"/>
+
+
+            </StackPanel>
+            <!--
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+               <ListBox ItemsSource="{Binding ACMembers}"
+         SelectionMode="Extended"
+         Width="200" Height="150">
+                <ListBoxItem>Apple</ListBoxItem>
+                <ListBoxItem>Banana</ListBoxItem>
+                <ListBoxItem>Cherry</ListBoxItem>
+                <ListBoxItem>Date</ListBoxItem>
+            </ListBox>
+            
+
+            <ItemsControl ItemsSource="{Binding ACMembers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding}" IsChecked="{Binding IsSelected}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+            -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                <TextBlock Text="Select One Member or Hold down Ctrl key and Click on Members" HorizontalAlignment="Center" FontSize="12" Background ="LightYellow"
+     Margin="5" Foreground="Black"  />
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+
+
+                <ToggleButton x:Name="DropDownButton" Content="{Binding SelectedMembers}"  HorizontalAlignment="Center" Width="250"/>
+                <Popup IsOpen="{Binding IsChecked, ElementName=DropDownButton}"
+           PlacementTarget="{Binding ElementName=DropDownButton}"
+           StaysOpen="False">
+                    <Border BorderBrush="Gray" BorderThickness="1" Background="White">
+                        <ListBox SelectionMode="Extended" Width="200"  ItemsSource="{Binding ACMembers}"
+                            SelectionChanged="ListBox_SelectionChanged" 
+                             >
+
+                        </ListBox>
+                    </Border>
+                </Popup>
+
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Email Subject"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Text="{Binding EmailSubject}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" TextWrapping="Wrap" Foreground="Black" Background="LightGray"/>
+            </StackPanel>
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <CheckBox Content="Send Indivalual Emails" IsChecked="{Binding SendIndivalualEmails}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" FontSize="12"  Background="LightYellow" Foreground="Black" Cursor="Hand" />
+            </StackPanel>
+            <StackPanel Grid.Row="5">
+                <ToolBar VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <!-- Existing toolbar buttons here -->
+                    <Menu VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8">
+                        <MenuItem Header="File" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                            <MenuItem Header="Open" Click="Button_Click"  Cursor="Hand" Margin="10">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/10-Open-file.512.png" Width="30" Height="30"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+
+
+                            <MenuItem Header="Save"  Command="{Binding SaveDoc}" Cursor="Hand" Margin="10">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/save-button-HD.png"  Width="30" Height="30"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Create New Document"  Click="BtnCreate" Cursor="Hand" Margin="10">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/center.png"  Width="30" Height="30"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Exit"  Click="BtnExit" Cursor="Hand" Margin="10">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/exit.png"  Width="30" Height="30"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                        </MenuItem>
+
+                    </Menu>
+                    <Menu VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8">
+                        <MenuItem Header="Insert" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <MenuItem Header="Inset File Picture"  Cursor="Hand"  Click="BtnInsertImage"  Margin="10">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/add.png" Width="30" Height="30"/>
+                                </MenuItem.Icon>
+
+                            </MenuItem>
+
+                            <MenuItem Header="Inset Table"  Cursor="Hand"  Click="BtnInsertTable" Margin="10">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/Images/table (1).png" Width="30" Height="30" />
+                                </MenuItem.Icon>
+
+                            </MenuItem>
+                        </MenuItem>
+                    </Menu>
+
+                 
+                    <!-- Font family -->
+                    <ComboBox x:Name="FontFamilyCombo" Width="150" Margin="2,0,0,0"
+                  SelectionChanged="FontFamilyCombo_SelectionChanged">
+                        <ComboBoxItem>Arial</ComboBoxItem>
+                        <ComboBoxItem>Calibri</ComboBoxItem>
+                        <ComboBoxItem>Times New Roman</ComboBoxItem>
+                        <ComboBoxItem>Verdana</ComboBoxItem>
+                    </ComboBox>
+
+                    <!-- Font size -->
+                    <ComboBox x:Name="FontSizeCombo" Width="60" Margin="2,0,0,0"
+                  SelectionChanged="FontSizeCombo_SelectionChanged">
+                        <ComboBoxItem>9</ComboBoxItem>
+                        <ComboBoxItem>10</ComboBoxItem>
+                        <ComboBoxItem>11</ComboBoxItem>
+                        <ComboBoxItem>12</ComboBoxItem>
+                        <ComboBoxItem>14</ComboBoxItem>
+                        <ComboBoxItem>16</ComboBoxItem>
+                        <ComboBoxItem>18</ComboBoxItem>
+                        <ComboBoxItem>20</ComboBoxItem>
+                        <ComboBoxItem>22</ComboBoxItem>
+                        <ComboBoxItem>24</ComboBoxItem>
+                        <ComboBoxItem>26</ComboBoxItem>
+                        <ComboBoxItem>28</ComboBoxItem>
+                        <ComboBoxItem>36</ComboBoxItem>
+                        <ComboBoxItem>48</ComboBoxItem>
+                        <ComboBoxItem>72</ComboBoxItem>
+                    </ComboBox>
+
+                    <!-- Bold / Italic / Underline -->
+                    <ToggleButton x:Name="BoldButton"  FontWeight="Bold" Margin="2,0,0,0"
+                  Click="Bold_Click"  ToolTip="Bold"  Cursor="Hand">
+                        <Image Source="/Resources/FRImages/Bold.png"  Width="30" Height="30"/>
+                    </ToggleButton>
+                    <ToggleButton x:Name="ItalicButton"  FontStyle="Italic" Margin="2,0,0,0"
+                  Click="Italic_Click" ToolTip="Italic"  Cursor="Hand">
+                        <Image Source="/Resources/FRImages/Italic.png"  Width="30" Height="30"/>
+                    </ToggleButton>
+                    <ToggleButton x:Name="UnderlineButton"  Click="Underline_Click" ToolTip="Underline" Margin="2,0,0,0"  Cursor="Hand">
+                        <Image Source="/Resources/FRImages/Underline.png"  Width="30" Height="30"/>
+                    </ToggleButton>
+                    <ComboBox x:Name="ColorComboBox" Width="150" SelectionChanged="ColorChange" Margin="2,0,0,0"/>
+                    <!-- Text color 
+                    
+                    <ComboBox x:Name="ColorComboBox" Width="150" SelectionChanged="ColorChange" Margin="2,0,0,0">
+                        <ComboBoxItem Content="Text Color" Background="White"/>
+                        <ComboBoxItem Content="Red" Background="Red"/>
+                        <ComboBoxItem Content="Green" Background="Green"/>
+                        <ComboBoxItem Content="Blue" Background="Blue"/>
+                        <ComboBoxItem Content="Yellow" Background="Yellow"/>
+                        <ComboBoxItem Content="Orange" Background="Orange"/>
+                        <ComboBoxItem Content="Purple" Background="Purple"/>
+                        <ComboBoxItem Content="Pink" Background="Pink"/>
+                        <ComboBoxItem Content="Black" Background="Black"/>
+                        <ComboBoxItem Content="White" Background="White"/>
+                        <ComboBoxItem Content="AliceBlue" Background="AliceBlue"/>
+
+                        <ComboBoxItem Content="AntiqueWhite" Background="AntiqueWhite"/>
+
+                        <ComboBoxItem Content="BlanchedAlmond" Background="BlanchedAlmond"/>
+
+                        <ComboBoxItem Content="Gray" Background="Gray"/>
+
+                        <ComboBoxItem Content="LightGray" Background="LightGray"/>
+
+                      
+
+                    </ComboBox>
+                    -->
+
+                    <!-- Alignment -->
+                    <ToggleButton x:Name="AlignLeftButton"  Click="AlignLeft_Click" ToolTip="Align Document Left" Margin="2,0,0,0"  Cursor="Hand">
+                        <Image Source="/Resources/Images/left-align.png" Width="30" Height="30"/>
+                    </ToggleButton>
+                    <ToggleButton x:Name="AlignCenterButton" Click="AlignCenter_Click" ToolTip="Align Document Center" Margin="2,0,0,0"  Cursor="Hand">
+                        <Image Source="/Resources/Images/text-center.png" Width="30" Height="30"/>
+                    </ToggleButton>
+                    <ToggleButton x:Name="AlignRightButton" Click="AlignRight_Click"  Cursor="Hand">
+                        <Image Source="/Resources/Images/right-align.png" Width="30" Height="30" ToolTip="Align Document Right" Margin="2,0,0,0"/>
+                    </ToggleButton>
+                    <!--
+                <Button Click="Button_Click" >
+                    <Image Source="/Resources/Images/10-Open-file.512.png" Width="24" Height="24"/>
+                </Button>
+                <Button  Click="ButtonSave">
+                    <Image Source="/Resources/Images/save-button-HD.png"  Width="24" Height="24"/>
+                </Button>
+                
+                <Button  Click="BtnInsertImage" Content="Inset" Width="24" Height="24">
+                    
+                    <Image Source="/Resources/Images/insert.png" Width="24" Height="24"/>
+                    
+                </Button>
+                <Button  Click="BtnInsertTable" Content="Inset Table" Width="24" Height="24">
+                    
+                   
+                    <Image Source="/Resources/Images/inserttable.png" Width="24" Height="24"/>
+                   
+                </Button>
+                
+                    <TextBox Text="{Binding LineSpacing}" Margin="2,0,0,0"/>
+                    <Button  Command="{Binding IncrementCommand}" Margin="2,0,0,0" Width="30" Height="30"  ToolTip="Increase Line Spacing">
+                        <Image Source="/Resources/Images/addspace.png"/>
+                    </Button>
+                    <Button  Command="{Binding DecrementCommand}" Margin="2,0,0,0" Width="30" Height="30" ToolTip="Decrease Line Spacing">
+                        <Image Source="/Resources/Images/minus.png"/>
+                    </Button>
+                    -->
+                    <ComboBox Name="LineSpacingCombo"
+              Width="100"
+              SelectionChanged="LineSpacingCombo_SelectionChanged">
+                        <ComboBoxItem Content="Single" Tag="12" IsSelected="True"/>
+                        <ComboBoxItem Content="1.5" Tag="18"/>
+                        <ComboBoxItem Content="Double" Tag="24"/>
+                    </ComboBox>
+                    <Button  Click="BtnCreate" Width="30" Height="30" ToolTip="Create New Document" Margin="2,0,0,0">
+
+
+                        <Image Source="/Resources/Images/create.png" />
+
+                    </Button>
+                    <Button  Command="{Binding PrintDoc}" Width="30" Height="30" ToolTip="Print Document" Margin="2,0,0,0"  Cursor="Hand">
+
+
+                        <Image Source="/Resources/Images/printer.png" />
+
+                    </Button>
+
+                    <Button  Command ="{Binding AttachFile}" Width="30" Height="30" ToolTip="Attach File Content Menu Right Mouse Click" Margin="2,0,0,0"  Cursor="Hand">
+                        <Image Source="/Resources/Images/clip.png" />
+
+                        <Button.ContextMenu >
+                            <ContextMenu ItemsSource="{Binding ButtonMenuItems}" Width="300" Height="100" Background="GhostWhite"  Visibility="{Binding IsContMenuVis, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <ContextMenu.Resources>
+                                    
+                                    <HierarchicalDataTemplate DataType="{x:Type vmitems:MenuItemModel}" ItemsSource="{Binding ButtonMenuItems}">
+                            <MenuItem Header="{Binding Header}" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" />
+                                    </HierarchicalDataTemplate>
+                                   
+                                </ContextMenu.Resources>
+
+                            </ContextMenu>
+                            
+                                
+                             
+                        </Button.ContextMenu>
+
+
+
+                    </Button>
+
+
+                    <Button  Command="{Binding EmailDoc}" Width="30" Height="30" ToolTip="Email Document" Margin="2,0,0,0"  Cursor="Hand">
+
+
+                        <Image Source="/Resources/Images/mail (1).png" />
+
+                    </Button>
+                    <Button  Click="BtnExit" Width="30" Height="30" ToolTip="Exit" Margin="2,0,0,0"  Cursor="Hand">
+
+
+                        <Image Source="/Resources/Images/exit.png" />
+
+                    </Button>
+
+                </ToolBar>
+                <RichTextBox     AcceptsTab="True" SpellCheck.IsEnabled="True"   Width="1500" Height="900" x:Name="MyRichTextBox"  TextChanged="MyRichTextBox_TextChanged"  Padding="0"    AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" 
+                                SelectionChanged="MyRichTextBox_SelectionChanged" 
+                              PreviewKeyDown="MyRichTextBox_KeyDown">
+                    
+                    <!-- <RichTextBox    Margin="0"  AcceptsTab="True" SpellCheck.IsEnabled="True"   Width="1500" Height="900" x:Name="MyRichTextBox" SelectionChanged="MyRichTextBox_SelectionChanged" TextChanged="MyRichTextBox_TextChanged"     AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                  vm:RichTextBoxHelperXAML.Xaml="{Binding MyDocXaml, Mode=TwoWay}">
+                    <FlowDocument x:Name="FlowDoc">
+                        <Paragraph x:Name="FDPar" Margin="{Binding MarginSpace,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+
+                        </Paragraph>
+
+                        
+                                           </FlowDocument>
+                      <FlowDocument>
+                    <Paragraph TextAlignment="Center">
+                        <Bold>Centered Bold Text</Bold>
+                    </Paragraph>
+                    <Paragraph>
+                        <Italic>Italic text</Italic> and
+                        <Underline>underlined text</Underline> .
+                    </Paragraph>
+                    <Paragraph>
+                        <Hyperlink NavigateUri="https://www.microsoft.com">Microsoft</Hyperlink>
+                    </Paragraph>
+                </FlowDocument>
+                -->
+
+                </RichTextBox>
+                
+            </StackPanel>
+            <!--
+            <StatusBar Grid.Row="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" >
+                <StatusBarItem>
+                    <TextBlock Text="sddd"  />
+                </StatusBarItem>
+            </StatusBar>
+            -->
+        </Grid>
+    </ScrollViewer>
+</Page>

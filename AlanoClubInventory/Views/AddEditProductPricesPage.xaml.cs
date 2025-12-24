@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//<Control Margin="left,top,right,bottom" />
 
 namespace AlanoClubInventory.Views
 {
@@ -69,7 +70,18 @@ namespace AlanoClubInventory.Views
 
         private async void TextBoxClubPriceGotFocus(object sender, RoutedEventArgs e)
         {
+            viewModel.ClubPrice=string.Empty;
+            var but = sender as TextBox;
+            if (but != null)
+            {
+                but.Background = Brushes.LightYellow;
 
+            }
+
+        }
+        private async void TextBoxClubPriceNoMemberGotFocus(object sender, RoutedEventArgs e)
+        {
+            viewModel.ClubNonMemberPrice = string.Empty;
             var but = sender as TextBox;
             if (but != null)
             {
@@ -99,14 +111,7 @@ namespace AlanoClubInventory.Views
             }
         }
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
+        
     }
 }

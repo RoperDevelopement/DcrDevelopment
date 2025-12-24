@@ -46,27 +46,8 @@
                 <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Menu BorderBrush="DarkBlue" >
 
-                        <MenuItem Header="Prices"  Click="Prices" FontSize="12">
-                            <MenuItem Header="Club Prices"  Click="Prices" FontSize="12" Cursor="Hand"/>
-                        </MenuItem>
-                        <MenuItem Header="Inventory"   FontSize="12">
-                            <MenuItem Header="Bar Items"  Click="InventoryPage" Cursor="Hand"/>
-                            <MenuItem Header="UpDate Inventory"  Click="UpDateInventory" Cursor="Hand"/>
-                            <MenuItem Header="Other Products"  Click="OtherProd" FontSize="12" Cursor="Hand"/>
-                            <MenuItem Header="Categories"  Click="Categories" FontSize="12" Cursor="Hand" />
-                        </MenuItem>
-                        <MenuItem Header="Prices">
-                            <MenuItem Header="Club Prices" Click="AddEditProductPrices" Cursor="Hand"/>
-                            <MenuItem Header="Receipts"  Click="DailyRecpts" Cursor="Hand"/>
-                        </MenuItem>
-                        <MenuItem Header="Till"  Click="Till"  FontSize="12" Cursor="Hand">
-                            <MenuItem Header="Reload Page" Click="Till" FontSize="12" Cursor="Hand"/>
-                        </MenuItem>
-                        <MenuItem Header="Reports"    FontSize="12">
-                            <MenuItem Header="Stwert Reports"  Click="Reports"  FontSize="12"/>
-                        </MenuItem>
-
-                        <MenuItem Header="Go Back"  Click="GoBack"  FontSize="12"/>
+                        
+                        <MenuItem Header="Exit"  Click="GoBack"  FontSize="12"/>
                     </Menu>
 
                 </DockPanel>

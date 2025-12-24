@@ -354,13 +354,8 @@ namespace AlanoClubInventory.ViewModels
         {
 
             Progress.ProgressValue = 20;
-           // System.Threading.Thread.Sleep(10000);
-          ReadJsonFile readJson = new ReadJsonFile();
-            var appSettings = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
-            if (appSettings != null)
-            {
-                SqlConnectionStr = appSettings.AlanoClubSqlServer;
-            }
+            SqlConnectionStr = Utilites.ALanoClubUtilites.GetSqlConnectionStrings(Utilites.ALanoClubUtilites.AlanoClubDatabaseName);
+
         }
         public ICommand UpDateTotalPrice
         {

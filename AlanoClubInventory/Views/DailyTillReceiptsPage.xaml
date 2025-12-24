@@ -48,34 +48,22 @@
                     <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Menu BorderBrush="DarkBlue" >
 
-                        <MenuItem Header="Prices"  Click="Prices" FontSize="12">
-                            <MenuItem Header="Club Prices"  Click="Prices" FontSize="12" Cursor="Hand"/>
-                        </MenuItem>
-                        <MenuItem Header="Inventory"   FontSize="12">
-                            <MenuItem Header="Bar Items"  Click="InventoryPage" Cursor="Hand"/>
-                            <MenuItem Header="UpDate Inventory"  Click="UpDateInventory" Cursor="Hand"/>
-                            <MenuItem Header="Other Products"  Click="OtherProd" FontSize="12" Cursor="Hand"/>
-                            <MenuItem Header="Categories"  Click="Categories" FontSize="12" Cursor="Hand" />
-                        </MenuItem>
-                        <MenuItem Header="Prices">
-                            <MenuItem Header="Club Prices" Click="AddEditProductPrices" Cursor="Hand"/>
-                            <MenuItem Header="Receipts"  Click="DailyRecpts" Cursor="Hand"/>
-                        </MenuItem>
-                        <MenuItem Header="Till"  Click="Till"  FontSize="12" Cursor="Hand">
-                            <MenuItem Header="Reload Page" Click="Till" FontSize="12" Cursor="Hand"/>
-                        </MenuItem>
-                        <MenuItem Header="Reports"    FontSize="12">
-                            <MenuItem Header="Stwert Reports"  Click="Reports"  FontSize="12"/>
-                        </MenuItem>
+                        
 
-                        <MenuItem Header="Go Back"  Click="GoBack"  FontSize="12"/>
+                        <MenuItem Header="Exit"  Click="GoBack"  FontSize="12"/>
                     </Menu>
 
                 </DockPanel>
 
                
             </StackPanel>
-            <TextBlock x:Name="textBlock"   Margin="0,10,0,0" TextWrapping="Wrap" Text="Alano Daily Till Receipts" VerticalAlignment="Center" Padding="10"  HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6">
+                <Label Content="Total Tape:" FontWeight="Bold" FontSize="16" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBlock Text="{Binding TotalSales, UpdateSourceTrigger=PropertyChanged,StringFormat=C}" FontWeight="Bold" FontSize="16"
+                           Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                
+            </StackPanel>
+            <TextBlock x:Name="textBlock"   Margin="0,10,0,0" TextWrapping="Wrap" Text="Alano Daily Till Receipts" VerticalAlignment="Center" Padding="10"  HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" FontWeight="Bold" FontSize="12"/>
             <ComboBox  ItemsSource="{Binding OldRecList}"
  SelectedItem="{Binding  SelectedItemDate, Mode=TwoWay}" Visibility="{Binding IsOldRec, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2">
                 <ComboBox.ItemTemplate>
@@ -162,7 +150,7 @@ ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectedItem="{Binding Selecte
 
             <Label Grid.Row="8" Grid.Column="2" Content="Club Depsoit:"  VerticalAlignment="Center"  Margin="0,0,0,0"  HorizontalAlignment="Left" FontWeight="Bold" FontSize="14" Width="150"  Visibility="{Binding IsListView, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-            <TextBox Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding ClubDeposit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  VerticalAlignment="Center"   Margin="0,0,0,0" Foreground="Black"   HorizontalAlignment="Right" FontWeight="Bold" FontSize="14" IsEnabled="True"  GotFocus="TotalMemberSold_GotFocus"  LostFocus="DepsopitLostFocous" Visibility="{Binding IsListView, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <TextBox Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding ClubDeposit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  VerticalAlignment="Center"   Margin="0,0,0,0" Foreground="Black"   HorizontalAlignment="Right" FontWeight="Bold" FontSize="14" IsEnabled="True"  GotFocus="TotalMemberSold_GotFocus"   LostFocus="DepsopitLostFocous" Visibility="{Binding IsListView, Converter={StaticResource BoolToVisibilityConverter}}"/>
             <StackPanel Grid.Row="11" Grid.Column="3" Orientation="Horizontal">
             <Button  Content="Add Receipts"  Command="{Binding UpdateTillReceiptsCommand}" CommandParameter="{Binding ElementName=MyListView}"  Margin="0,0,5,0"   Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Background="DeepSkyBlue"  Foreground="White" BorderBrush="DarkBlue"  BorderThickness="2"
                 Cursor="Hand" Visibility="{Binding IsButtonVis, Converter={StaticResource BoolToVisibilityConverter}}"/>

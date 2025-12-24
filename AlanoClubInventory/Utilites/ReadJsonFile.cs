@@ -11,7 +11,8 @@ using AlanoClubInventory.Utilites;
 
 namespace AlanoClubInventory.Models
 {
-   public class ReadJsonFile
+   public class ReadJsonFile : IDisposable
+
     {
         public async Task<T> GetJsonData<T>(string model) where T : new()
         {
@@ -28,5 +29,14 @@ namespace AlanoClubInventory.Models
             }
             return default(T);
         }
+        public void Dispose()
+        {
+
+
+            // Suppress finalization to avoid calling the finalizer if already disposed
+            GC.SuppressFinalize(this);
+        }
+
+
     }
 }

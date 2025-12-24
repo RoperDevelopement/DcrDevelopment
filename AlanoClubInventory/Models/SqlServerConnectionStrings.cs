@@ -9,5 +9,6 @@ namespace AlanoClubInventory.Models
    public class SqlServerConnectionStrings
     {
         public string AlanoClubSqlServer { get; set; }
+        public string AlanoClubBackUpSqlConnection { get; set; }
     }
 }

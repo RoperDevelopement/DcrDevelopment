@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:AlanoClubInventory"
              xmlns:vm="clr-namespace:AlanoClubInventory.Utilites"
-             StartupUri="MainWindow.xaml">
+              StartupUri="MainWindow.xaml"
+            >
     <Application.Resources>
         <vm:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <vm:PasswordBoxHelper x:Key="PasswordBoxHelper"/>
         <vm:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
-        <SolidColorBrush x:Key="ControlFillColorDefault" Color="#a6e7ff" />
-        <SolidColorBrush x:Key="MenuItems" Color="#808080"/>
+        <SolidColorBrush x:Key="ControlFillColorDefault" Color="#ADDFFF" />
+        <SolidColorBrush x:Key="MenuItems" Color="#3B2F2F"/>
         
         
     </Application.Resources>

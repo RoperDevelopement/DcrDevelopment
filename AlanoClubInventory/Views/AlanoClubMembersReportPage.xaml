@@ -1,0 +1,153 @@
+﻿<Page x:Class="AlanoClubInventory.Views.AlanoClubMembersReportPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AlanoClubInventory.Views"
+       xmlns:vm="clr-namespace:AlanoClubInventory.Utilites"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Alano Club Members List"
+      Background="{DynamicResource ControlFillColorDefault}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+        <Grid Margin="10,0,10,10" VerticalAlignment="Top"  HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="textBlock"   Margin="0,10,0,0" TextWrapping="Wrap" Text="Alano CLub Current Membership" VerticalAlignment="Top" Padding="10"  HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+            <StackPanel Grid.Row="4" Grid.Column="2" Visibility="{Binding IsGeneratingReport, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2" >
+                    <ListView x:Name="MyListView" ItemsSource="{Binding Members,Mode=TwoWay}" 
+                                          ScrollViewer.CanContentScroll="True"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto"
+ScrollViewer.VerticalScrollBarVisibility="Auto"
+ScrollViewer.HorizontalScrollBarVisibility="Auto"  FontSize="14" SelectionMode="Single" >
+                        <ListView.View>
+
+                            <GridView>
+                                <GridViewColumn Header="Member ID" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MemberID}" TextWrapping="Wrap" Padding="5"  />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="First Name" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MemberFirstName}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Last Name" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MemberLastName}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="EMail" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MemberEmail}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Phone Number" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MemberPhoneNumber}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Sobriety Date" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding SobrietyDate,StringFormat='MM-dd-yyyy'}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <!--
+                                <GridViewColumn Header="End Date" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MembershipEndDate}" Width="Auto" TextWrapping="Wrap" Padding="2"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                -->
+                                <GridViewColumn Header="IsActive" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsActiveMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+                                        </DataTemplate>
+
+
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="IsBoardMember" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsBoardMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+                                        </DataTemplate>
+
+
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                            </GridView>
+
+                        </ListView.View>
+
+                    </ListView>
+                </Border>
+            </StackPanel>
+
+
+            <StackPanel  Grid.Row="4" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+               Visibility="{Binding IsPrintingReport, Converter={StaticResource BoolToVisibilityConverter}}" Width="1000">
+                <RichTextBox  Name="ReportRichTextBox" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0"   vm:RichTextBoxHelper.BoundDocument="{Binding ReportContent}"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <!-- <FlowDocument>
+               <Paragraph>
+                   <Run Text="{Binding ReportContent}"/>
+               </Paragraph>
+           </FlowDocument>
+           -->
+                </RichTextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <Button Content="{Binding ButtPrint}"  Command="{Binding PrintReport}"  Background="Ivory" Margin="5" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100"/>
+                <Button Content="Exit"  Click="Button_Click"  Background="Red"  Margin="5" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

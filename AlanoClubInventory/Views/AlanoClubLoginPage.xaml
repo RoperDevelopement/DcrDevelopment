@@ -1,0 +1,93 @@
+﻿<Page x:Class="AlanoClubInventory.Views.AlanoClubLoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AlanoClubInventory.Views"
+      mc:Ignorable="d" 
+      xmlns:vm="clr-namespace:AlanoClubInventory.Utilites" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Alano Club Login"
+      Background="{StaticResource ControlFillColorDefault}"
+      >
+
+   
+
+        <Grid Margin="10,0,10,10" VerticalAlignment="Top"  HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+           
+            <StackPanel Grid.Column="2" Grid.Row="0"  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" >
+            <TextBlock x:Name="textBlock"     Margin="0,10,0,0" TextWrapping="Wrap" Text="Login Alano Club Inventory"  Padding="10"  HorizontalAlignment="Center"  FontSize="14" VerticalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center"  Visibility="{Binding IsSendingPassword, Converter={StaticResource BoolToVisibilityConverter}}">
+            <TextBlock Text="{Binding TxtRandomNumEmail}"  VerticalAlignment="Center" Margin="0,5,0,5"/>
+            <TextBox Width="200" Text="{Binding Username,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsLoggingIn, Converter={StaticResource BoolToVisibilityConverter}}">
+            <TextBlock Text="User Name:"  VerticalAlignment="Center" Margin="0,5,0,5"/>
+            <TextBox Width="200" Text="{Binding Username,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="12"/>
+            <TextBlock Text="User PassWord:"  VerticalAlignment="Center" Margin="0,5,0,5"/>
+            <PasswordBox Width="200"  x:Name="PasswordBoxLogin" vm:PasswordBoxHelper.BoundPassword="{Binding UserPassword, Mode=TwoWay}"  PasswordChar="*" PasswordChanged="PasswordHidden_PasswordChanged"/>
+            <TextBox x:Name="PasswordVisible"
+             Width="200"
+            
+             Visibility="Collapsed"
+                     TextChanged="PasswordVisible_TextChanged"
+            />
+
+            <CheckBox x:Name="ShowPasswordToggle"
+              Content="Show Password"
+              VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="0,5,0,5"
+                      Checked="ShowPasswordToggle_Checked"
+              Unchecked="ShowPasswordToggle_Unchecked"
+                      FontSize="12"
+
+            />
+
+        </StackPanel>
+            
+            <StackPanel Grid.Column="2" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="{Binding LoginResendCode}"   Background="Ivory" Margin="5,10,5,5" Cursor="Hand"
+                Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Command="{Binding LogIn}" Visibility="{Binding IsLoggingInResendCode, Converter={StaticResource BoolToVisibilityConverter}}" Width="150"/>
+                
+            <Button Content="Forgot User Name/Password"   Background="Ivory" Margin="5,10,5,5" Cursor="Hand"
+         Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" 
+         HorizontalAlignment="Center" Command="{Binding ForgotPassword}" Visibility="{Binding IsForgotPassWord, Converter={StaticResource BoolToVisibilityConverter}}" Width="150"/>
+                
+            <Button Content="{Binding SendPWCode}"   Background="Ivory" Margin="5,10,5,5" Cursor="Hand"
+     Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" Command="{Binding SendPassCode}"
+     HorizontalAlignment="Center"  Visibility="{Binding IsSendingPassword, Converter={StaticResource BoolToVisibilityConverter}}" Width="150"/>
+                
+            <Button Content="Cancel"   Background="Ivory" Margin="5,10,5,5" Cursor="Hand"
+                Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" 
+                HorizontalAlignment="Center" Click="ButtonCancel" Width="150"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="2">
+            <TextBlock Text="{Binding RemainingSeconds, StringFormat='Time left: {0:D2} s'}" 
+                   FontSize="15" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                       Visibility="{Binding IsTimmerOn, Converter={StaticResource BoolToVisibilityConverter}}"
+                       />
+        </StackPanel>
+                        
+    </Grid>
+</Page>

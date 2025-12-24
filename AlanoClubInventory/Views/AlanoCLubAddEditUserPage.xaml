@@ -1,0 +1,143 @@
+﻿<Page x:Class="AlanoClubInventory.Views.AlanoCLubAddEditUserPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AlanoClubInventory.Views"
+        mc:Ignorable="d"
+         xmlns:vm="clr-namespace:AlanoClubInventory.Utilites" 
+        Title="Alano CLub Add Edit User" Height="450" Width="800"
+      Background="{StaticResource ControlFillColorDefault}"
+       Margin="0" 
+      >
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+         HorizontalScrollBarVisibility="Auto"       
+                  Padding="10" Margin="0,0,-35,-197">
+
+        <Grid Margin="10,0,0,0" VerticalAlignment="Top"  HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                
+            </Grid.RowDefinitions>
+            
+           
+
+            <TextBlock x:Name="textBlock" Grid.Column="3"   Margin="10" TextWrapping="Wrap" VerticalAlignment="Top"
+                        HorizontalAlignment="Center" Text="{Binding TextTitle}" Grid.Row="0"/>
+            
+            <StackPanel Grid.Row="2" Grid.Column="3" Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}" HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center">
+                <ComboBox  ItemsSource="{Binding ItemList}"
+  SelectedItem="{Binding MembersModel, Mode=TwoWay}" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" IsTextSearchCaseSensitive="True" Width="250" Margin="10">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Label}" FontSize="12" Margin="0,0,10,0" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            </StackPanel>
+
+
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Column="3"   Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="User First Name:"  VerticalAlignment="Center" Margin="10" HorizontalAlignment="Left"/>
+                <TextBox Width="200" Text="{Binding UserFirstName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="3"   Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <TextBlock Text="User Last Name:"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" />
+                <TextBox Width="200" Text="{Binding UserLastName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            </StackPanel>
+            
+            <StackPanel Grid.Column="3"   Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="User Email:"  VerticalAlignment="Center" Margin="10"  HorizontalAlignment="Left"/>
+                <TextBox Width="200" Text="{Binding UserEmailAddress,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" LostFocus="TextBox_LostFocus" 
+                         VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="3"   Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <TextBlock Text="User Phone Number:"  VerticalAlignment="Center" Margin="10" HorizontalAlignment="Left"/>
+                <TextBox Width="200" Text="{Binding UserPhoneNumber,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="3"   Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <TextBlock Text="User Name:"  VerticalAlignment="Center" Margin="10" HorizontalAlignment="Left"/>
+                <TextBox Width="200" Text="{Binding UserName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="UName" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            
+            </StackPanel>
+
+            <StackPanel Grid.Column="3"   Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center"  Visibility="{Binding IsPWVis, Converter={StaticResource BoolToVisibilityConverter}}" >
+                <TextBlock Text="User PassWord:"  VerticalAlignment="Center" Margin="10" HorizontalAlignment="Left"/>
+                <TextBox Width="200" Text="{Binding UserPasswordString,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            </StackPanel>
+            
+            <StackPanel Grid.Column="3"   Grid.Row="12" Orientation="Vertical" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.ColumnSpan="3" >
+                <CheckBox  
+              Content="User Admin:" HorizontalAlignment="Center"
+                           IsChecked="{Binding IsAdmin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Margin="5" VerticalAlignment="Center"
+                    
+              />
+                <CheckBox  
+Content="User Active:"
+VerticalAlignment="Center" HorizontalAlignment="Center"
+             IsChecked="{Binding IsAcvite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Margin="5"
+      
+/>
+                <CheckBox  
+Content="{Binding EditACUser}" HorizontalAlignment="Center"
+             IsChecked="{Binding EditUsers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                         VerticalAlignment="Center"
+                         Checked="CheckEditUsers" Unchecked="UnCheckEditUsers"
+      
+/>
+                <CheckBox  
+ Content="Email User Login Informaion:"
+ VerticalAlignment="Center" HorizontalAlignment="Center"
+              IsChecked="{Binding EmailInfoUser,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                          Checked="EmailToggle_Checked" Unchecked="CheckBox_Unchecked"
+                          
+       
+ />
+                
+
+            </StackPanel>
+            <StackPanel Grid.Column="3" Grid.Row="13" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Button Content="{Binding TxtButSaveUpDate}" Width="100" Margin="5,0,5,0"  Background="Ivory"  Cursor="Hand"
+                        Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" Command="{Binding AddEditUser}" />
+                
+                <Button Content="Clear" Width="100" Margin="5,0,5,0"  Background="Chocolate"  Cursor="Hand"
+         Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" Command="{Binding ClearTxt}" />
+                
+                <Button Content="Delete User" Width="100" Margin="5,0,5,0"  Background="OrangeRed"  Cursor="Hand"
+             Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" Command="{Binding DelUser}" Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}" />
+                <Button Content="Exit" Width="100" Margin="5,0,5,0"  Background="DodgerBlue"  Cursor="Hand"
+                        Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" Click="ButtonClickCan" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

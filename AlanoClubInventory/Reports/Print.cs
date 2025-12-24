@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
 using static System.Net.Mime.MediaTypeNames;
@@ -83,16 +84,67 @@ namespace AlanoClubInventory.Reports
         }
         public void PrintDataGrid(DataGrid dataGrid)
         {
+            dataGrid.EnableRowVirtualization = false;
+            dataGrid.EnableColumnVirtualization = false;
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
-                Size pageSize = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
-                dataGrid.Measure(pageSize);
-                dataGrid.Arrange(new Rect(new Point(0, 0), pageSize));
-                printDialog.PrintVisual(dataGrid, "Sales Report");
+                //   Size pageSize = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
+                // dataGrid.Measure(pageSize);
+                // dataGrid.Arrange(new Rect(new Point(0, 0), pageSize));
+                dataGrid.Measure(new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight));
+                dataGrid.Arrange(new Rect(new Point(0, 0),
+                    new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight)));
+                printDialog.PrintVisual(dataGrid, "DataGrid Print");
+                
             }
+            dataGrid.EnableRowVirtualization = true;
+            dataGrid.EnableColumnVirtualization = true;
         }
-       
+        public void PrintDataGridAllRows(DataGrid dataGrid)
+        {
+            FlowDocument doc = new FlowDocument();
+            doc.ColumnWidth = double.PositiveInfinity;
+            Table table = new Table();
+            table.CellSpacing = 1;
+            table.BorderThickness = new Thickness(1);
+            table.BorderBrush = Brushes.Black;
+            table.FontSize = 10;
+            table.Margin = new Thickness(0, 0, 0, 0);
+            doc.Blocks.Add(table);
+
+            // Add columns
+            foreach (var col in dataGrid.Columns)
+                table.Columns.Add(new TableColumn { Width = new GridLength(75) });
+
+            // Header row
+            TableRow headerRow = new TableRow();
+            foreach (var col in dataGrid.Columns)
+                headerRow.Cells.Add(new TableCell(new Paragraph(new Run(col.Header?.ToString() ?? ""))));
+            table.RowGroups.Add(new TableRowGroup());
+            table.RowGroups[0].Rows.Add(headerRow);
+
+            // Data rows
+            foreach (var item in dataGrid.ItemsSource)
+            {
+                TableRow row = new TableRow();
+                foreach (var col in dataGrid.Columns)
+                {
+                    var binding = (col as DataGridBoundColumn)?.Binding as Binding;
+                    string propName = binding?.Path.Path;
+                    string text = item.GetType().GetProperty(propName)?.GetValue(item)?.ToString() ?? "";
+                    row.Cells.Add(new TableCell(new Paragraph(new Run(text))));
+                }
+                table.RowGroups[0].Rows.Add(row);
+            }
+            PrintHelper.PrintFlowDocument(doc);
+            //printHelper.PrintFlowDocument(doc);
+            //PrintDialog pd = new PrintDialog();
+            //if (pd.ShowDialog() == true)
+              //  pd.PrintDocument(((IDocumentPaginatorSource)doc).DocumentPaginator, "DataGrid Print");
+        }
+
+
 
 
 

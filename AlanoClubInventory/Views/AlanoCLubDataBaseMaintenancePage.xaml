@@ -1,0 +1,81 @@
+﻿<Window x:Class="AlanoClubInventory.Views.AlanoCLubDataBaseMaintenancePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AlanoClubInventory.Views"
+        xmlns:viewmodels="clr-namespace:AlanoClubInventory.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:AlanoCLubDataBaseMaintenancePageModel}"
+        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:AlanoClubInventory.Utilites"
+        Title="AlanoCLub Database Maintenance" Height="450" Width="800"
+        Background="{DynamicResource ControlFillColorDefault}">
+    <!--
+    <Window.Resources>
+        <vm:BoolToVisibilityConverter x:Key="WindowRes"/>
+    </Window.Resources>
+    -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalAlignment="Top" HorizontalAlignment="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="10">
+                <TextBlock Text="Alano Club Database Maintenance" FontSize="16" FontWeight="Bold"  VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <Button Grid.Row="1" Content="Backup Database" Width="200" Height="30" Margin="10" HorizontalAlignment="Center" Command="{Binding BackUpDataBaseCommand}"
+                    Background="DodgerBlue"  Cursor="Hand" Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2"/>
+            <Button Grid.Row="2" Content="Check Database Optimize" Width="200" Height="30" Margin="10" HorizontalAlignment="Center" Command="{Binding CheckDatabaseOptimizeCommand}"
+                    Background="DodgerBlue"  Cursor="Hand" Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2"/>
+            <Button Grid.Row="3" Content="Check Database Integrity" Width="200" Height="30" Margin="10" HorizontalAlignment="Center" Command="{Binding CheckDatabaseIntegrityCommand}" 
+                    Background="DodgerBlue"  Cursor="Hand" Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2"/>
+            <Button Grid.Row="4" Content="View Error Logs" Width="200" Height="30" Margin="10" HorizontalAlignment="Center"  Click="ClickViewErrorLogs"
+                    Background="DodgerBlue"  Cursor="Hand" Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2"/>
+            <Button Grid.Row="5" Content="Clear Cache" Width="200" Height="30" Margin="10" HorizontalAlignment="Center" Command="{Binding ClearCachecCommand}"
+                    Background="DodgerBlue"  Cursor="Hand" Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2"/>
+            <Button Grid.Row="6" Content="Rebuild Indexes" Width="200" Height="30" Margin="10" HorizontalAlignment="Center"  Command="{Binding RebuildIndexesCommand}"
+                    Background="DodgerBlue"  Cursor="Hand" Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2"/>
+            <Button Grid.Row="7" Content="Clear DataBase Logs" Width="200" Height="30" Margin="10" HorizontalAlignment="Center"  Command="{Binding ClearLogCommand}"
+         Background="Yellow"  Cursor="Hand" Foreground="Black"  BorderBrush="Red"  BorderThickness="2"/>
+            <Button Grid.Row="8" Content="Purge DataBase" Width="200" Height="30" Margin="10" HorizontalAlignment="Center"  Command="{Binding PurgeDataBaseCommand}"
+            Background="Yellow"  Cursor="Hand" Foreground="Black"  BorderBrush="Red"  BorderThickness="2" 
+                     Visibility="{Binding IsPurgeDataBase, Converter={StaticResource BoolToVisibilityConverter}}" />
+            <Button Grid.Row="9" Content="Restore DataBase" Width="200" Height="30" Margin="10" HorizontalAlignment="Center"  Command="{Binding RestoreDataBaseCommand}"
+Background="Yellow"  Cursor="Hand" Foreground="Black"  BorderBrush="Red"  BorderThickness="2"/>
+            <Button Grid.Row="10" Content="Close Maintenance Page" Width="200" Height="30" Margin="10" HorizontalAlignment="Center" Click="CloseMaintenancePage_Click"
+                    Background="GhostWhite"  Cursor="Hand" Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2"/>
+            <StatusBar Grid.Row="13" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StatusBarItem>
+                    <TextBlock Text="{Binding SBMessage}" Background="Yellow" TextAlignment="Left" Foreground="Black" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="12" Width="150" Height="auto"/>
+                </StatusBarItem>
+                <!--
+                    <StatusBarItem>
+                        <ProgressBar Minimum="0" Maximum="1000" Height="30" Margin="2" VerticalAlignment="Center"  HorizontalAlignment="Center"
+Value="{Binding ProgressValue, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Visibility="Hidden">
+                            <ProgressBar.Foreground>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="LimeGreen" Offset="0"/>
+                                    <GradientStop Color="DarkGreen" Offset="1"/>
+                                </LinearGradientBrush>
+                            </ProgressBar.Foreground>
+                        </ProgressBar>
+                    </StatusBarItem>
+                    -->
+            </StatusBar>
+        </Grid>
+    </ScrollViewer>
+</Window>

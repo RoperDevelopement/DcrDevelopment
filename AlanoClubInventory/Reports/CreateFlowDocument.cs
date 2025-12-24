@@ -38,7 +38,7 @@ namespace AlanoClubInventory.Reports
         {
             Document = new FlowDocument
             {
-                PagePadding = new Thickness(3,0,0,0),
+                PagePadding = new Thickness(20),
                 ColumnWidth = double.PositiveInfinity,
                 FontFamily = new FontFamily("Segoe UI"),
                 FontSize = 12
@@ -460,10 +460,10 @@ namespace AlanoClubInventory.Reports
             AlanoClubReportTotals clubReportTotals = new AlanoClubReportTotals();
             var doc = new FlowDocument
             {
-                PagePadding = new Thickness(5,0,0,0),
+                PagePadding = new Thickness(5),
                 ColumnWidth = double.PositiveInfinity,
                 FontFamily = new FontFamily("Segoe UI"),
-                FontSize = 12
+                FontSize = 10
             };
             Paragraph titleParagraph = new Paragraph();
             titleParagraph.TextAlignment = TextAlignment.Center;
@@ -491,8 +491,8 @@ namespace AlanoClubInventory.Reports
                 CellSpacing = 1, // No spacing between cells
                 BorderThickness = new Thickness(1), // Outer border thickness
                 BorderBrush = Brushes.Gray,
-                Margin = new Thickness(10),
-                FontSize =12// Outer border color
+                Margin = new Thickness(5),
+                FontSize =10// Outer border color
             };
             doc.Blocks.Add(table);
 
@@ -519,7 +519,7 @@ namespace AlanoClubInventory.Reports
             table.Columns.Add(new TableColumn { Width = new GridLength(75) }); // Daily Total Other
             table.Columns.Add(new TableColumn { Width = new GridLength(75) }); // TotalTotal
             table.Columns.Add(new TableColumn { Width = new GridLength(70) }); // tape
-            table.Columns.Add(new TableColumn { Width = new GridLength(75) }); // overshort
+            table.Columns.Add(new TableColumn { Width = new GridLength(70) }); // overshort
             var header = new TableRow();
             header.Cells.Add(new TableCell(new Paragraph(new Run("Date")))
             {
@@ -601,7 +601,7 @@ namespace AlanoClubInventory.Reports
                 BorderBrush = Brushes.Gray, // Cell border color
                 Padding = new Thickness(1)
             });
-            header.Cells.Add(new TableCell(new Paragraph(new Run("Till Over/Short")))
+            header.Cells.Add(new TableCell(new Paragraph(new Run("Till OS")))
             {
 
                

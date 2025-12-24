@@ -1,6 +1,7 @@
 ﻿using AlanoClubInventory.Interfaces;
 using AlanoClubInventory.Models;
 using AlanoClubInventory.SqlServices;
+using AlanoClubInventory.Utilites;
 using Microsoft.Data.SqlClient;
 using Microsoft.Identity.Client;
 using Microsoft.ReportingServices.RdlExpressions.ExpressionHostObjectModel;
@@ -16,10 +17,12 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using static OpenTK.Graphics.OpenGL.GL;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace AlanoClubInventory.SqlServices
 {
-    public class AlClubSqlCommands
+    public class AlClubSqlCommands :  IDisposable
+ 
     {
         private static AlClubSqlCommands sqlCmdInstance;
         private static readonly object _lock = new object();
@@ -327,12 +330,13 @@ namespace AlanoClubInventory.SqlServices
 
         public async Task<IList<T>> GetACProductsList<T>(string sqlConnectionStr, string storedProcedueName)
         {
+            //ALanoClubUtilites.ShowMessageBox("Connection to database established successfully.", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
             IList<T> retList = new List<T>();
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
                 {
-                    await sqlConnection.OpenAsync();
+                    sqlConnection.OpenAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                     using (SqlCommand sqlCmd = new SqlCommand(storedProcedueName, sqlConnection))
                     {
                         sqlCmd.CommandTimeout = 180;
@@ -344,28 +348,27 @@ namespace AlanoClubInventory.SqlServices
                             {
 
 
-                                if (await reader.ReadAsync())
+                                if (reader.ReadAsync().ConfigureAwait(false).GetAwaiter().GetResult())
                                 {
 
-                                    if(!(reader.IsDBNull(0)))
-                                    { 
-                                    //SqlDataAdapter adapter = new SqlDataAdapter();
-                                    //  DataTable dataTable = new DataTable();
-                                    //dataTable.Load(reader);
+                                    if (!(reader.IsDBNull(0)))
+                                    {
+                                        //SqlDataAdapter adapter = new SqlDataAdapter();
+                                        //  DataTable dataTable = new DataTable();
+                                        //dataTable.Load(reader);
 
-                                    // Convert DataTable to JSON
-                                    // string cat = JsonConvert.SerializeObject(dataTable);
-                                    // categories = JsonConvert.DeserializeObject<IList<CategoryModel>>(cat).ToList();
+                                        // Convert DataTable to JSON
+                                        // string cat = JsonConvert.SerializeObject(dataTable);
+                                        // categories = JsonConvert.DeserializeObject<IList<CategoryModel>>(cat).ToList();
 
-                                    string json = reader.GetString(0);
-                                    retList = JsonConvert.DeserializeObject<IList<T>>(json).ToList();
+                                        string json = reader.GetString(0);
+                                        retList = JsonConvert.DeserializeObject<IList<T>>(json).ToList();
                                     }
 
 
                                 }
                             }
-                            await reader.CloseAsync();
-
+                            reader.CloseAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                         }
 
 
@@ -379,6 +382,7 @@ namespace AlanoClubInventory.SqlServices
             }
             catch (Exception ex)
             {
+
                 throw new Exception($"Error Method GetACProductsList<T> for {storedProcedueName} {typeof(T)} {ex.Message}");
             }
             return retList;
@@ -448,7 +452,7 @@ namespace AlanoClubInventory.SqlServices
                     {
                         sqlCmd.CommandTimeout = 180;
                         sqlCmd.CommandType = CommandType.StoredProcedure;
-                        if(string.Compare(storedProcedueName,SqlConstProp.SPUpDateAlanoClubOldTillDrop,true) == 0)
+                        if (string.Compare(storedProcedueName, SqlConstProp.SPUpDateAlanoClubOldTillDrop, true) == 0)
                         {
                             sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaID, cLubDailyTillTapeModel.ID));
                         }
@@ -872,7 +876,7 @@ namespace AlanoClubInventory.SqlServices
 
         }
 
-        public async Task<IList<AlanoClubReportModel>> GetReportMonthlyTotalsByYear(string sqlConnectionStr, string storedProcedueName, string sMonthYear,string eMonthYear)
+        public async Task<IList<AlanoClubReportModel>> GetReportMonthlyTotalsByYear(string sqlConnectionStr, string storedProcedueName, string sMonthYear, string eMonthYear)
         {
             IList<AlanoClubReportModel> retList = new List<AlanoClubReportModel>();
             try
@@ -1108,9 +1112,9 @@ namespace AlanoClubInventory.SqlServices
             return retList;
         }
 
-        public async Task UpDateInventory(string sqlConnectionStr, string storedProcedueName,AlanoClubCurrentInventoryModel currentInventoryModel)
+        public async Task UpDateInventory(string sqlConnectionStr, string storedProcedueName, AlanoClubCurrentInventoryModel currentInventoryModel)
         {
-           
+
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
@@ -1121,8 +1125,8 @@ namespace AlanoClubInventory.SqlServices
                         sqlCmd.CommandTimeout = 180;
                         sqlCmd.CommandType = CommandType.StoredProcedure;
                         sqlCmd.CommandType = CommandType.StoredProcedure;
-                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaID,currentInventoryModel.ID));
-                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaQuantity,currentInventoryModel.Quantity));
+                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaID, currentInventoryModel.ID));
+                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaQuantity, currentInventoryModel.Quantity));
                         sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaInStock, currentInventoryModel.InStock));
                         sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaItemsSold, currentInventoryModel.ItemsSold));
                         sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaInventoryCurrent, currentInventoryModel.InventoryCurrent));
@@ -1144,33 +1148,33 @@ namespace AlanoClubInventory.SqlServices
                 throw new Exception($"Error Method UpDateInventory for {storedProcedueName} for Product ID {currentInventoryModel.ID} {ex.Message}");
             }
 
-           
+
         }
-        public async Task<IList<T>> CallStoreProdByParmaters<T>(string sqlConnectionStr, string storedProcedueName,IList<StoredParValuesModel> storedParValues) where T : new()
+        public async Task<IList<T>> CallStoreProdByParmaters<T>(string sqlConnectionStr, string storedProcedueName, IList<StoredParValuesModel> storedParValues) where T : new()
         {
             IList<T> retList = new List<T>();
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
                 {
-                    await sqlConnection.OpenAsync();
+                    sqlConnection.OpenAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                     using (SqlCommand sqlCmd = new SqlCommand(storedProcedueName, sqlConnection))
                     {
                         sqlCmd.CommandTimeout = 180;
                         sqlCmd.CommandType = CommandType.StoredProcedure;
                         foreach (var item in storedParValues)
                         {
-                            sqlCmd.Parameters.Add(new SqlParameter(item.ParmaName,item.ParmaValue));
+                            sqlCmd.Parameters.Add(new SqlParameter(item.ParmaName, item.ParmaValue));
                         }
 
-                        using (SqlDataReader reader = await sqlCmd.ExecuteReaderAsync())
+                        using (SqlDataReader reader = sqlCmd.ExecuteReaderAsync().ConfigureAwait(false).GetAwaiter().GetResult())
                         {
                             if (reader.HasRows)
                             {
                                 //SqlDataAdapter adapter = new SqlDataAdapter();
                                 //  DataTable dataTable = new DataTable();
                                 //dataTable.Load(reader);
-                                await reader.ReadAsync();
+                                reader.Read();
                                 if (!reader.IsDBNull(0))
                                 {
                                     // Convert DataTable to JSON
@@ -1215,13 +1219,13 @@ namespace AlanoClubInventory.SqlServices
             {
                 throw new Exception($"Error Method CallStoreProdByParmaters for {storedProcedueName}  {ex.Message}");
             }
-
+            await Task.CompletedTask;
             return retList;
 
         }
-        public async Task<T> JsonDesObject<T>(string sqlConnectionStr,string model, string storedProcedueName, IList<StoredParValuesModel> storedParValues) where T : new()
+        public async Task<T> JsonDesObject<T>(string sqlConnectionStr, string model, string storedProcedueName, IList<StoredParValuesModel> storedParValues) where T : new()
         {
-            
+
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
@@ -1270,7 +1274,7 @@ namespace AlanoClubInventory.SqlServices
                                     //var jSonObj = JObject.Parse(json);
                                     //var str = jSonObj[model]?.ToString();
                                     var retJson = JsonConvert.DeserializeObject<T>(json);
-                                    
+
                                     return retJson;
                                 }
 
@@ -1297,7 +1301,7 @@ namespace AlanoClubInventory.SqlServices
             return default(T);
 
         }
-        public async Task UpDateInsertWithParma(string sqlConnectionStr,string storedProcedueName, IList<StoredParValuesModel> storedParValues)
+        public async Task UpDateInsertWithParma(string sqlConnectionStr, string storedProcedueName, IList<StoredParValuesModel> storedParValues)
         {
 
             try
@@ -1314,9 +1318,9 @@ namespace AlanoClubInventory.SqlServices
                             sqlCmd.Parameters.Add(new SqlParameter(item.ParmaName, item.ParmaValue));
                         }
 
-                        sqlCmd.ExecuteNonQuery ();
+                        sqlCmd.ExecuteNonQueryAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                         await sqlCmd.Connection.CloseAsync();
-                        
+
 
 
 
@@ -1332,11 +1336,350 @@ namespace AlanoClubInventory.SqlServices
                 throw new Exception($"Error Method CallStoreProdByParmaters for {storedProcedueName}  {ex.Message}");
             }
 
-           
+            await Task.CompletedTask;
 
         }
+
+        public async Task<bool> CheckMemberID(string sqlConnectionStr, string storedProcedueName, int memberID)
+        {
+            bool memberExists = false;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
+                {
+                    await sqlConnection.OpenAsync();
+                    using (SqlCommand sqlCmd = new SqlCommand(storedProcedueName, sqlConnection))
+                    {
+                        sqlCmd.CommandTimeout = 180;
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaMemberID, memberID));
+                        using (SqlDataReader reader = await sqlCmd.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                await reader.ReadAsync();
+
+                                if (!(reader.IsDBNull(0)))
+                                {
+
+                                    memberExists = true;
+
+
+                                }
+                            }
+                            await reader.CloseAsync();
+
+                        }
+
+
+
+
+
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error Method CheckMemberID for {storedProcedueName} for memnber id {memberID}  {ex.Message}");
+            }
+            return memberExists;
+        }
+
+        public async Task DeleteByID(string sqlConnectionStr, int id, string storedProcedueName)
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
+                {
+                    await sqlConnection.OpenAsync();
+                    using (SqlCommand sqlCmd = new SqlCommand(storedProcedueName, sqlConnection))
+                    {
+                        sqlCmd.CommandTimeout = 180;
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaID, id));
+
+
+                        await sqlCmd.ExecuteNonQueryAsync();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DeleteByID for {storedProcedueName} for delete id {id} message: {ex.Message}");
+
+            }
+        }
+        public IList<T> GetACProductsListNonAsc<T>(string sqlConnectionStr, string storedProcedueName)
+        {
+            //ALanoClubUtilites.ShowMessageBox("Connection to database established successfully.", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+            IList<T> retList = new List<T>();
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCmd = new SqlCommand(storedProcedueName, sqlConnection))
+                    {
+                        sqlCmd.CommandTimeout = 180;
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        using (SqlDataReader reader = sqlCmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+
+
+                                if (reader.Read())
+                                {
+
+                                    if (!(reader.IsDBNull(0)))
+                                    {
+                                        //SqlDataAdapter adapter = new SqlDataAdapter();
+                                        //  DataTable dataTable = new DataTable();
+                                        //dataTable.Load(reader);
+
+                                        // Convert DataTable to JSON
+                                        // string cat = JsonConvert.SerializeObject(dataTable);
+                                        // categories = JsonConvert.DeserializeObject<IList<CategoryModel>>(cat).ToList();
+
+                                        string json = reader.GetString(0);
+                                        retList = JsonConvert.DeserializeObject<IList<T>>(json).ToList();
+                                    }
+
+
+                                }
+                            }
+                            reader.Close();
+
+                        }
+
+
+
+
+
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Error Method GetACProductsList<T> for {storedProcedueName} {typeof(T)} {ex.Message}");
+            }
+            return retList;
+        }
+
+        public int GetMaxID(string sqlConnectionStr, string storedProcedueName)
+        {
+            int retid = 0;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
+                {
+                    sqlConnection.OpenAsync();
+                    using (SqlCommand sqlCmd = new SqlCommand(storedProcedueName, sqlConnection))
+                    {
+                        sqlCmd.CommandTimeout = 180;
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        using (SqlDataReader reader = sqlCmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+
+                                if (!(reader.IsDBNull(0)))
+                                {
+
+                                    retid = reader.GetInt32(0);
+
+
+                                }
+                            }
+                            reader.Close();
+
+                        }
+
+
+
+
+
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error Method GetMaxID for {storedProcedueName}  {ex.Message}");
+            }
+            return retid;
+        }
+
+        public async Task AddSig(string sqlConnectionStr, int recnumber, byte[] sig, string storedProcedueName)
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
+                {
+                    await sqlConnection.OpenAsync();
+                    using (SqlCommand sqlCmd = new SqlCommand(storedProcedueName, sqlConnection))
+                    {
+                        sqlCmd.CommandTimeout = 180;
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaReceiptNumber, recnumber));
+                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaReceiptSignature, sig));
+
+
+                        await sqlCmd.ExecuteNonQueryAsync();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"AddSig for {storedProcedueName} for recnumber {recnumber} message: {ex.Message}");
+
+            }
+        }
+        public async Task<int> LogVolHrs(string sqlConnectionStr, string storedProcedueName)
+        {
+
+            //ALanoClubUtilites.ShowMessageBox("Connection to database established successfully.", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+            int retid = 0;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
+                {
+                    sqlConnection.OpenAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+                    using (SqlCommand sqlCmd = new SqlCommand(storedProcedueName, sqlConnection))
+                    {
+                        sqlCmd.CommandTimeout = 180;
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaID, Utilites.ALanoClubUtilites.UserVolHrsID));
+                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaUserID, LoginUserModel.LoginInstance.ID));
+                        sqlCmd.Parameters.Add(new SqlParameter(SqlConstProp.SPParmaDate, DateTime.Now));
+                        using (SqlDataReader reader = await sqlCmd.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+
+
+                                if (reader.ReadAsync().ConfigureAwait(false).GetAwaiter().GetResult())
+                                {
+
+                                    if (!(reader.IsDBNull(0)))
+                                    {
+                                        retid = reader.GetInt32(0);
+                                    }
+                                }
+
+                            }
+                            reader.CloseAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+
+
+                        }
+
+
+                    }
+                }
+
+            }
+
+
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Error Method LogVolHrs for {storedProcedueName}  {ex.Message}");
+            }
+            return retid;
+        }
+        public async Task AddItemStoreProd(string sqlConnectionStr, string storedProcedueName, string spParma, string spValue)
+        {
+
+            //ALanoClubUtilites.ShowMessageBox("Connection to database established successfully.", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+            int retid = 0;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionStr))
+                {
+                    sqlConnection.OpenAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+                    using (SqlCommand sqlCmd = new SqlCommand(storedProcedueName, sqlConnection))
+                    {
+                        sqlCmd.CommandTimeout = 180;
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+                        sqlCmd.Parameters.Add(new SqlParameter(spParma, spValue));
+                        await sqlCmd.ExecuteReaderAsync();
+
+
+                    }
+                }
+
+            }
+
+
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Error Method AddItemStoreProd for {storedProcedueName} for parma {spParma} value {spValue} {ex.Message}");
+            }
+
+        }
+        public async Task<IList<string>> GetAlanoClubDataBaseNames(string sqlConnectionStr,string retDbNames=null)
+        {
+            IList<string> dbNames = new List<string>();
+
+            try
+            {
+                using (var conn = new SqlConnection(sqlConnectionStr))
+                {
+                    await conn.OpenAsync();
+
+                    using (var cmd = new SqlCommand(SqlConstProp.QueryGetDatabaseNames, conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+
+                        while (await reader.ReadAsync())
+                        {
+                            var dName = reader["DatabaseName"].ToString();
+
+                            dbNames.Add(dName);
+                        }
+                        if((dbNames != null) && (dbNames.Count > 0))
+                        {
+                            if(!(string.IsNullOrWhiteSpace(retDbNames)))
+                                return dbNames.Where(p => p.ToLower().StartsWith(retDbNames.ToLower())).ToList();
+
+                        }
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Error GetAlanoClubDataBaseNames {ex.Message}");
+            }
+            return dbNames;
+
+        }
+        public void Dispose()
+        {
+
+
+            // Suppress finalization to avoid calling the finalizer if already disposed
+            GC.SuppressFinalize(this);
+        }
+
+
     }
 }
+
 //  GetDailyInventoryByMonth<AlanoCLubDailyTillTapeModel>(SqlConnectionStr, Scmd.SqlConstProp.SPGetAlanoCLubReportItemsSoldByMonth, ReportSDate.Year);
 
 

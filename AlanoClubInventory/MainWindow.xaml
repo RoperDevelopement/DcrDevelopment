@@ -5,65 +5,145 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-
+    xmlns:vm="clr-namespace:AlanoClubInventory.Utilites"
         xmlns:local="clr-namespace:AlanoClubInventory"
         mc:Ignorable="d"
                      Background="{DynamicResource ControlFillColorDefault}"
         
-                  
-        Title="Home Alano Club Inventory Mangement" Height="450" Width="800" WindowStyle="ThreeDBorderWindow" VerticalAlignment="Center" HorizontalAlignment="Center" WindowStartupLocation="CenterScreen"
-                   
+         
+        Title="{Binding HomeTitle}" Height="450" Width="800" WindowStyle="ThreeDBorderWindow" VerticalAlignment="Center" HorizontalAlignment="Center" WindowStartupLocation="CenterScreen"
+              ShowsNavigationUI="True"
+                   Icon="/Resources/Images/acicon.ico"
           >
-    
+
     <NavigationWindow.Content>
         
-        <Page>
+            <Page x:Name="MainPageWindow">
             
-            <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand" >
-                <Menu DockPanel.Dock="Top">
-                <MenuItem Header="File">
-                        <MenuItem Header="Exit" Click="Exit" Cursor="Hand"/>
-                </MenuItem>
-                    <MenuItem Header="Daily Till">
-                        <MenuItem Header="Receipts"  Click="DailyRecpts" Cursor="Hand"/>
-                    </MenuItem>
-                    <MenuItem Header="Prices">
-                        <MenuItem Header="Club Prices" Click="AddEditProductPrices" Cursor="Hand"/>
-                    </MenuItem>
-                <MenuItem Header="Inventory">
-                        <MenuItem Header="Categories" Click="AddEditDeleteCategories" Cursor="Hand"/>
-                        <MenuItem Header="Bar Items Products" Click="AddEditDeleteInventory" Cursor="Hand"/>
-                        <MenuItem Header="UpDate Inventory" Click="UpDateInventory" Cursor="Hand"/>
+                <DockPanel  Background="{DynamicResource MenuItems}"  Cursor="Hand" 
+                       >
+                    <Menu DockPanel.Dock="Top"  Visibility="{Binding UserIsLoggingIn, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <MenuItem Header="File" Cursor="Hand">
+                            <MenuItem Header="Exit" Click="Exit" Cursor="Hand"/>
+                        </MenuItem>
+                    <MenuItem Header="Daily Till" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <MenuItem Header="Receipts"  Click="DailyRecpts" Cursor="Hand"/>
+                        </MenuItem>
+                    <MenuItem Header="Prices" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <MenuItem Header="Club Prices" Click="AddEditProductPrices" Cursor="Hand" />
+                        </MenuItem>
+                    <MenuItem Header="Inventory" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <MenuItem Header="Categories" Click="AddEditDeleteCategories" Cursor="Hand"/>
+                            <MenuItem Header="Bar Items Products" Click="AddEditDeleteInventory" Cursor="Hand"/>
+                            <MenuItem Header="UpDate Inventory" Click="UpDateInventory" Cursor="Hand"/>
 
-                        <MenuItem Header="Other Products" Click="AddEditDeleteOtherProducts" Cursor="Hand"/>
+                            <MenuItem Header="Other Products" Click="AddEditDeleteOtherProducts" Cursor="Hand"/>
 
 
-                    </MenuItem>
-                    <MenuItem Header="Reports">
-                        <MenuItem Header="Alano CLub Stwert Reports" Click="AlanoCLubReports"/>
-                        <MenuItem Header="Inventory Report" Click="CurrentInv" Cursor="Hand"/>
-                        <MenuItem Header="Profit Loss BarItems Report" Click="ProfitLossPage" Cursor="Hand"/>
-                        <MenuItem Header="Graph Report" Click="AlanoClubDashBoard" Cursor="Hand"/>
+                        </MenuItem>
+                        <MenuItem Header="Reports">
+                        <MenuItem Header="Alano CLub Stwert Reports" Click="AlanoCLubReports" Cursor="Hand"/>
+                        <MenuItem Header="Inventory Report" Click="CurrentInv" Cursor="Hand" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" />
+                            <MenuItem Header="Profit Loss BarItems Report" Click="ProfitLossPage" Cursor="Hand"/>
+                            <MenuItem Header="Graph Report" Click="AlanoClubDashBoard" Cursor="Hand"/>
+
+                        </MenuItem>
+                    
+                    <MenuItem Header="Members">
+                        <MenuItem Header="Add/Edit Members" Click="Members" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
+                                  Cursor="Hand"/>
+                        <MenuItem Header="Print Members List" Click="MembersReportPage" Cursor="Hand"/>
+                        <MenuItem Header="Send Members Emails" Click="ClickSendACMembersEmailsPage" Cursor="Hand"/>
                         
+
+
+
+                    </MenuItem>
+                    <MenuItem Header="Alano CLub Receipts">
+                        <MenuItem Header="Receipts" Click="MembersPayDues" Cursor="Hand"/>
+
+                    </MenuItem>
+                    <MenuItem Header="Users" >
+                        <MenuItem Header="Add/Edit Users" Click="AddEditUsers" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" Cursor="Hand"/>
+                        <MenuItem Header="Change Password" Click="ChangePassword" Cursor="Hand"/>
+                        <MenuItem Header="Print-Lookup-Edit Volunteer Hrs" Click="ClickPrintVolunteerHrs" Cursor="Hand"/>
+                        
+
+
+                    </MenuItem>
+                    <MenuItem Header="DataBase"  Cursor="Hand" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <MenuItem Header="DataBase Maintenance" Click="ClickDBMaintenance" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" Cursor="Hand"/>
+                        <MenuItem Header="Change DataBase" Click="ClickChangeDatabasePage" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}" Cursor="Hand"/>
+                        
+
+                    </MenuItem>
+                    
+                    <MenuItem Header="Logut" Click="ClickLogout" Cursor="Hand">
+
+
                     </MenuItem>
 
 
-                </Menu>
-            <!-- Your page content goes here -->
+               
+
+                <MenuItem Header="About" Click="ClickAboutWindow" Cursor="Hand">
+
+
+                        </MenuItem>
+
+
+                    </Menu>
+                    <!-- Your page content goes here -->
 
 
 
-                <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
-                <StackPanel DockPanel.Dock="Top" Background="GhostWhite"  Margin="0,0,0,5">
-                    <TextBlock Text="Alano Club Inventory Till Register" FontSize="15"
-              VerticalAlignment="Top" HorizontalAlignment="Center"  Foreground="Black"/>
-                    <Image Source="/Resources/Images/480782709_1440388930358317_178499286582280879_n.jpg"  Stretch="Uniform"/>
-                </StackPanel>
+
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2" >
+                        <StackPanel DockPanel.Dock="Top" Background="#00BFFF"  Margin="0,0,0,5" Orientation="Vertical" DataContext="{Binding AclInfor}">
+
+                            <TextBlock Text="Alano Club Inventory Till Register" FontSize="15"
+              VerticalAlignment="Top" HorizontalAlignment="Center"  Foreground="Black" Margin="0,0,0,5" FontWeight="ExtraBold"/>
+                            <TextBlock Text="{Binding ClubName}" FontWeight="Bold" FontSize="16" Margin="0,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding ClubAddress}" Margin="0,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
+
+                            <TextBlock Text="{Binding ClubPOBox}" TextWrapping="Wrap" Margin="0,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
+                            <TextBlock Text="{Binding ClubCity}" Margin="0,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
 
 
 
-            </DockPanel>
+                            <TextBlock Text="{Binding ClubPhone}" Margin="0,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
+                            <TextBlock Text="{Binding ClubEmail}" Margin="0,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12"/>
+
+                            <TextBlock Margin="0,0,0,5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12">
+    <Hyperlink NavigateUri="{Binding FacebookLink}" RequestNavigate="Hyperlink_RequestNavigate">
+       Facebook Page
+    </Hyperlink>
+                            </TextBlock>
+                        <Image Source="/Resources/Images/butteac.png"  Stretch="Fill" 
+                               Width="500" Height="500" Margin="0,10,10,10"/>
+                        <Button  Background="Gray"  Content="Login" Click="Button_Click"
+                 x:Name="BtnLogin"
+Foreground="White" BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+               Cursor="Hand" Margin="0,10,10,0" Width="150"/>
+                        <Button    Content="Cancel" Click="Exit"
+                 
+Foreground="White" BorderBrush="DarkBlue"  BorderThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+               Cursor="Hand" Margin="0,10,10,0" Background="Red" x:Name="ButCancel" Width="150"/>
+                    </StackPanel>
+                    
+                </Border>
+
+                    
+               
+                    
+          
+
+
+                    </DockPanel>
+            
+             
         </Page>
+            
     </NavigationWindow.Content>
 
 </NavigationWindow>

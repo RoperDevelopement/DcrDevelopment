@@ -34,10 +34,12 @@ namespace AlanoClubInventory.ViewModels
         private InventoryModel selectedItem;
         public InventoryViewModel()
         {
+            GetSqlConnectionStr();
             GetCategories();
             Price = "0.0";
             TotalOnHand = "0";
             CurrentID = 0;
+            
         }
 
         private string SqlConnectionStr { get; set; }
@@ -225,13 +227,17 @@ namespace AlanoClubInventory.ViewModels
                 //  addCategory.Execute(true);
             }
         }
+        private async void GetSqlConnectionStr()
+        {
+            //var conStr = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
+            SqlConnectionStr = Utilites.ALanoClubUtilites.GetSqlConnectionStrings(Utilites.ALanoClubUtilites.AlanoClubDatabaseName);
+        }
         private async void GetCategories()
         {
             try
             {
                 ItemsList.Clear();
-                var conStr = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
-                SqlConnectionStr = conStr.AlanoClubSqlServer;
+              
                 var currentCat = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetCategoriesBarItems(SqlConnectionStr, SqlServices.SqlConstProp.SPGetCategoriesBarItems);
                 if ((currentCat != null) && (currentCat.Count > 0))
                 {

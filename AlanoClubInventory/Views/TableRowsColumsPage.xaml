@@ -1,0 +1,41 @@
+﻿<Window x:Class="AlanoClubInventory.Views.TableRowsColumsPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AlanoClubInventory.Views"
+        mc:Ignorable="d"
+        Title="Table Rows Colums" Height="450" Width="800"
+        Background="{StaticResource ResourceKey=ControlFillColorDefault}">
+    <Grid>
+        <TextBlock Text="Table Rows Columns Page" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   FontSize="12"/>
+        <StackPanel Orientation="Vertical" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="10">
+            <TextBlock Text="Number Rows" 
+                       FontSize="10" 
+                       TextAlignment="Center"/>
+            <TextBox x:Name="NumberRows" Margin="5"></TextBox>
+            <TextBlock Text="Number Columns" 
+           FontSize="10" 
+           TextAlignment="Center"/>
+            <TextBox x:Name="NumberColums"></TextBox>
+           
+            <CheckBox x:Name="TableHasHeaders"  Content="Table Has Headers" Cursor="Hand" Margin="5" FontSize="10" IsChecked="True" Unchecked="TableHasHeaders_UnChecked" Checked="TableHasHeaders_Checked"></CheckBox>
+            <!-- Additional UI elements can be added here -->
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Bottom" 
+                    Margin="10">
+            <Button Content="Create Table" Width="75" Margin="5"
+                    Background="Ivory"  Cursor="Hand"  Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" Click="Button_Click"/>
+            <Button Content="Cancel" Width="75" Margin="5"
+                    Background="Red"  Cursor="Hand"  Foreground="Black"  BorderBrush="DarkBlue"  BorderThickness="2" Click="Button_Click_1"/>
+        </StackPanel>
+    </Grid>
+</Window>

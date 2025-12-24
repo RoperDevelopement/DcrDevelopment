@@ -126,6 +126,7 @@ namespace AlanoClubInventory.Views
 
             var txt = sender as TextBox;
             txt.Background = Brushes.AliceBlue;
+            txt.Text = string.Empty;
         }
 
         private void TextBox_LostFocus_2(object sender, RoutedEventArgs e)
@@ -134,9 +135,10 @@ namespace AlanoClubInventory.Views
             txt.Background = Brushes.White;
         }
 
-        private void TShort_LostFocus_1(object sender, RoutedEventArgs e)
+        private async void OnFoucs(object sender, RoutedEventArgs e)
         {
-
+           
+            
         }
         private async void DepsopitLostFocous(object sender, RoutedEventArgs e)
         {
@@ -144,7 +146,8 @@ namespace AlanoClubInventory.Views
             var cd = await Utilites.ALanoClubUtilites.ConvertToFloat(txt.Text);
             if (cd < 0)
             {
-                Utilites.ALanoClubUtilites.ShowMessageBox("Please enter valid amount for Club Deposit", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+             //   Utilites.ALanoClubUtilites.ShowMessageBox("Please enter valid amount for Club Deposit", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                txt.Text = "0.00";
                 return;
             }
             txt.Background = Brushes.White;
@@ -157,7 +160,8 @@ namespace AlanoClubInventory.Views
             var tr = await Utilites.ALanoClubUtilites.ConvertToFloat(txt.Text);
             if (tr < 0)
             {
-                Utilites.ALanoClubUtilites.ShowMessageBox("Please enter valid amount for Total Till Receipts", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              //  Utilites.ALanoClubUtilites.ShowMessageBox("Please enter valid amount for Total Till Receipts", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                txt.Text = "0.00";
                 return;
             }
             txt.Background = Brushes.White;
@@ -234,6 +238,6 @@ namespace AlanoClubInventory.Views
             this.NavigationService.Navigate(dailyTillReceiptsPage);
         }
 
-
+        
     }
 }

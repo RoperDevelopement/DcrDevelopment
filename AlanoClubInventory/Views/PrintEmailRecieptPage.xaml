@@ -1,0 +1,73 @@
+﻿<Page x:Class="AlanoClubInventory.Views.PrintEmailRecieptPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AlanoClubInventory.Views"
+       xmlns:vm="clr-namespace:AlanoClubInventory.Utilites"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PrintEmailRecieptPage">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+              HorizontalScrollBarVisibility="Auto"
+              Padding="10">
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0"  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" >
+
+                <TextBlock x:Name="textBlock" Margin="0,10,0,0" TextWrapping="Wrap" Text="Alano CLub Print Reciept"  Padding="10"  HorizontalAlignment="Center"  FontSize="14" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Text="Customer's Email Address:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14"/>
+                <TextBox Text="{Binding EmailAddress, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="6"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+               Width="1000">
+                <RichTextBox  Name="ReportRichTextBox" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0"   vm:RichTextBoxHelper.BoundDocument="{Binding ReportContent}"
+                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <!-- <FlowDocument>
+              <Paragraph>
+                  <Run Text="{Binding ReportContent}"/>
+              </Paragraph>
+          </FlowDocument>
+          -->
+                </RichTextBox>
+            </StackPanel>
+            <Border BorderBrush="BlanchedAlmond"  BorderThickness="1" CornerRadius="2" Grid.Row="12" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel  Grid.Row="13" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+
+
+                    <Button Content="Print Receipt" Margin="5"  Command="{Binding PrintRec}" BorderBrush="DarkBlue"  BorderThickness="2"
+Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Aqua"/>
+                    <Button Content="Email Receipt" Margin="5" Command="{Binding EmailRec}" BorderBrush="DarkBlue"  BorderThickness="2"
+Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Coral"/>
+                    <Button Content="Print and Email Receipt" Margin="5" Command="{Binding PrintEmailRec}" BorderBrush="DarkBlue"  BorderThickness="2"
+Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Gray"/>
+                    <Button Content="Cancel" Margin="5" Click="Button_Click"  BorderBrush="DarkBlue"  BorderThickness="2"
+Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Red"/>
+
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>

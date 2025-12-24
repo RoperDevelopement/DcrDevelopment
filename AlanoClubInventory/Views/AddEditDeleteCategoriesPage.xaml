@@ -9,7 +9,7 @@
         xmlns:vm="clr-namespace:AlanoClubInventory.ViewModels"
        d:DataContext="{d:DesignInstance Type=vm:AddEditDeleteCategoriesViewModel}"
         Background="{DynamicResource ControlFillColorDefault}"
-      
+        KeepAlive="False"
       Title="Add Edit Delete Categories">
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Auto"
@@ -29,31 +29,13 @@
                     <ColumnDefinition Width="*"/>
                     <!-- Fills remaining space -->
                 </Grid.ColumnDefinitions>
-            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Vertical" Grid.Row="0" Grid.Column="0">
-                <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand" >
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                <DockPanel Background="{DynamicResource MenuItems}"  Cursor="Hand" VerticalAlignment="Top"  HorizontalAlignment="Left">
                     <Menu BorderBrush="DarkBlue" >
 
-                        <MenuItem Header="Prices"  Click="Prices" FontSize="12">
-                            <MenuItem Header="Club Prices"  Click="Prices" FontSize="12" Cursor="Hand"/>
-                        </MenuItem>
-                        <MenuItem Header="Inventory"   FontSize="12">
-                            <MenuItem Header="Bar Items"  Click="InventoryPage" Cursor="Hand"/>
-                            <MenuItem Header="UpDate Inventory"  Click="UpDateInventory" Cursor="Hand"/>
-                            <MenuItem Header="Other Products"  Click="OtherProd" FontSize="12" Cursor="Hand"/>
-                            <MenuItem Header="Reload Page"  Click="Categories" FontSize="12" Cursor="Hand" />
-                        </MenuItem>
-                        <MenuItem Header="Prices">
-                            <MenuItem Header="Club Prices" Click="AddEditProductPrices" Cursor="Hand"/>
-                            <MenuItem Header="Receipts"  Click="DailyRecpts" Cursor="Hand"/>
-                        </MenuItem>
-                        <MenuItem Header="Till"  Click="Till"  FontSize="12" Cursor="Hand">
-                            <MenuItem Header="Daily Till Sales" Click="Till" FontSize="12" Cursor="Hand"/>
-                        </MenuItem>
-                        <MenuItem Header="Reports"    FontSize="12">
-                            <MenuItem Header="Stwert Reports"  Click="Reports"  FontSize="12"/>
-                        </MenuItem>
+                       
 
-                        <MenuItem Header="Go Back"  Click="GoBack"  FontSize="12"/>
+                        <MenuItem Header="Exit"  Click="GoBack"  FontSize="12"/>
                     </Menu>
 
                 </DockPanel>

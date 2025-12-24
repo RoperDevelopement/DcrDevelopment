@@ -42,12 +42,16 @@ namespace AlanoClubInventory.ViewModels
         }
 
         private IList<CategoryModel> CurrentCat { get; set; }
-
+        
+        private async void GetSqlConnectionStr()
+        {
+            //var conStr = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
+            SqlConnectionStr = Utilites.ALanoClubUtilites.GetSqlConnectionStrings(Utilites.ALanoClubUtilites.AlanoClubDatabaseName);
+        }
         private async void GetCategories()
         {
             Categories.Clear();
-            var conStr = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
-            SqlConnectionStr = conStr.AlanoClubSqlServer;
+            GetSqlConnectionStr();
             CurrentCat = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetCategories(SqlConnectionStr, SqlServices.SqlConstProp.SPGetCategories);
             if ((CurrentCat != null) && (CurrentCat.Count > 0))
             {

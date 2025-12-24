@@ -346,12 +346,8 @@ namespace AlanoClubInventory.ViewModels
         private async void GetConnectionStr()
         {
 
-            ReadJsonFile readJson = new ReadJsonFile();
-            var appSettings = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
-            if (appSettings != null)
-            {
-                SqlConnectionStr = appSettings.AlanoClubSqlServer;
-            }
+            SqlConnectionStr = Utilites.ALanoClubUtilites.GetSqlConnectionStrings(Utilites.ALanoClubUtilites.AlanoClubDatabaseName);
+
         }
         private async void RunReportStwert()
         {
@@ -364,6 +360,11 @@ namespace AlanoClubInventory.ViewModels
                 var eDate = ReportEDate;
 
                 IList<AlanoClubReportModel> rep = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetReport(SqlConnectionStr, Scmd.SqlConstProp.SPGetAlanoCLubReport, sDate, eDate);
+                if((rep == null)  || (rep.Count == 0))
+                 {
+                    Utilites.ALanoClubUtilites.ShowMessageBox($"No Data Found for report date {sDate.ToString("MM-dd-yyyy")} - {eDate.ToString("MM-dd-yyyy")}", "No Data", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 IList<AlanoCLubDailyTillTapeModel> tillDep = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetDailyTillReport(SqlConnectionStr, Scmd.SqlConstProp.SPGetAlanoCLubDailyTapeTill, sDate, eDate);
                 ReportModel = await aLanoClubReport.InitReportWithDates(sDate, eDate);
                 var barItems = await aLanoClubReport.GetAsyncBarItems(rep);
@@ -502,7 +503,7 @@ namespace AlanoClubInventory.ViewModels
         {
             if (ReportContent != null)
             {
-                if (PrintHelper.PrintFlowDocument(ReportContent))
+                if (PrintHelper.PrintFlowDocument(ReportContent,5))
                 {
                     IsGeneratingReport = false;
                     if ((isStwertRep) && (UpDateRepDate))

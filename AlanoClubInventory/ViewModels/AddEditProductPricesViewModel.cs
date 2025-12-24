@@ -30,7 +30,9 @@ namespace AlanoClubInventory.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public AddEditProductPricesViewModel()
             {
+            GetSqlConnectionStr();
             GetProducts();
+            
             }
         private int ID { get; set; }
         private string SqlConnectionStr { get; set; }
@@ -133,6 +135,11 @@ namespace AlanoClubInventory.ViewModels
                 OnPropertyChanged(nameof(UpDatePrices));
             }
         }
+        private async void GetSqlConnectionStr()
+        {
+            //var conStr = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
+            SqlConnectionStr = Utilites.ALanoClubUtilites.GetSqlConnectionStrings(Utilites.ALanoClubUtilites.AlanoClubDatabaseName);
+        }
         public ICommand AddNewClubPrice
         {
             get
@@ -190,8 +197,7 @@ namespace AlanoClubInventory.ViewModels
             try
             {
                 Products.Clear();
-                var conStr = readJson.GetJsonData<SqlServerConnectionStrings>(nameof(SqlServerConnectionStrings)).Result;
-                SqlConnectionStr = conStr.AlanoClubSqlServer;
+               
                 var items = await Scmd.AlClubSqlCommands.SqlCmdInstance.GetAlanoCLubProducts(SqlConnectionStr, SqlServices.SqlConstProp.SPGetAlanoCLubProducts);
                 if ((items != null) && (items.Count > 0))
                 {

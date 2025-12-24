@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
@@ -34,15 +35,26 @@ namespace AlanoClubInventory.Reports
                 printDialog.PrintDocument(document.DocumentPaginator, "Report");
             }
         }
-        public static bool PrintFlowDocument(FlowDocument report)
+        public static bool PrintFlowDocument(FlowDocument report,int padding =20)
         {
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
+                report.PageHeight = printDialog.PrintableAreaHeight;
+                report.PageWidth = printDialog.PrintableAreaWidth;
+               // report.ColumnGap = 0;
+                DpiScale dpi = new DpiScale(96, 96);
+
+                report.FontSize = 10;
+               // report.FontFamily = new System.Windows.Media.FontFamily("Segoe UI");
+                report.SetDpi(dpi);
+                report.PagePadding = new Thickness(padding);
+               // report.ColumnWidth = double.PositiveInfinity;
                 // Create a DocumentPaginator from the FlowDocument
                 IDocumentPaginatorSource idpSource = report;
-                printDialog.PrintDocument(idpSource.DocumentPaginator, "Printing FlowDocument");
-              
+                /// printDialog.PrintDocument(idpSource.DocumentPaginator, "Printing FlowDocument");
+                printDialog.PrintDocument(((IDocumentPaginatorSource)report).DocumentPaginator, "My Document");
+
                 return true;
             }
             return false;

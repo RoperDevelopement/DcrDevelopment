@@ -1,0 +1,256 @@
+﻿<Page x:Class="AlanoClubInventory.Views.ReceiptsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AlanoClubInventory.Views" 
+      xmlns:viewmodels="clr-namespace:AlanoClubInventory.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:PayDuesViewModel}"
+       xmlns:vm="clr-namespace:AlanoClubInventory.Utilites" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Member Pay Dues"
+      Background="{DynamicResource ControlFillColorDefault}"
+      xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase">
+
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            
+        </Grid.RowDefinitions>
+        <!--
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+           
+        </Grid.ColumnDefinitions>
+        -->
+
+        <!-- Form Fields -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,0" VerticalAlignment="Top">
+            <TextBlock  Margin="0,10,0,0" TextWrapping="Wrap" Text="Alano  CLub Receipts"  Padding="10"  HorizontalAlignment="Center"  FontSize="14" VerticalAlignment="Center"/>
+            <!--
+            <TextBox Text="{Binding IsMember, 
+                PresentationTraceSources.TraceLevel=High}" />
+            
+            <TextBlock Text="{Binding IsMember, FallbackValue='Binding failed'}" />
+            -->
+
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Source="{Binding ACIconPath}"  Width="150" Height="150"/>
+        </StackPanel>
+  
+        <StackPanel Grid.Row="3" Orientation="Vertical" DataContext="{Binding AcInfo}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="{Binding ClubName}" FontSize="15"/>
+            <TextBlock Text="{Binding ClubAddress}" FontSize="15"/>
+            <TextBlock Text="{Binding ClubPOBox}" FontSize="15"/>
+            <TextBlock Text="{Binding ClubCity}" FontSize="15"/>
+            <TextBlock Text="{Binding ClubPhone}" FontSize="15"/>
+            <TextBlock Text="{Binding ClubEmail}" FontSize="15"/>
+            <TextBlock Text="{Binding FacebookLink}" FontSize="15"/>
+          
+
+        </StackPanel>
+         
+         
+        <StackPanel Grid.Row="4" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox  ItemsSource="{Binding ItemList}"
+ SelectedItem="{Binding SelectedMember, Mode=TwoWay}" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" IsTextSearchCaseSensitive="False" Width="250" Margin="5" IsTextSearchEnabled="True">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Label}" FontSize="12" Margin="5" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Date Recived:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <DatePicker  Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"
+   SelectedDate="{Binding RecepitDate, StringFormat=MM-dd-yyyy}" 
+   DisplayDateStart="2000-01-01" 
+   DisplayDateEnd="2099-12-31"
+   IsTodayHighlighted="True"
+   FirstDayOfWeek="Monday"
+   Background="Lavender"
+   BorderBrush="SlateBlue"
+   BorderThickness="2"
+     
+   />
+        </StackPanel>
+        <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    >
+            <ComboBox  ItemsSource="{Binding ItemListDescPrices}"
+ SelectedItem="{Binding SelectedDescPrices, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" IsTextSearchCaseSensitive="False" Width="350" Margin="5" IsTextSearchEnabled="True">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Label}" FontSize="12" Margin="5" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsMember, Converter={StaticResource BoolToVisibilityConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            
+        <ComboBox  ItemsSource="{Binding  NumberMonths}"
+SelectedItem="{Binding SelectedMonths, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" IsTextSearchCaseSensitive="False" Width="100" Margin="5" IsTextSearchEnabled="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Label}" FontSize="12" Margin="5" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <DataGrid      x:Name="dataGrid"  AutoGenerateColumns="False" HorizontalAlignment="Right" VerticalAlignment="Top" 
+   ItemsSource="{Binding PayDues}" Margin="8" SelectedItem="{Binding SelectedMemberID, Mode=TwoWay}"  
+     GridLinesVisibility="All" SelectionUnit="FullRow"  IsReadOnly="False" CanUserAddRows="True" CanUserSortColumns="True" Padding="10" CanUserDeleteRows="False"  SelectionMode="Extended" Background="DarkSlateBlue" BeginningEdit="dataGrid_BeginningEdit">
+                <DataGrid.RowStyleSelector>
+                    <StyleSelector/>
+                </DataGrid.RowStyleSelector>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="10"/>
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" Visibility="Hidden" Width="SizeToCells"/>
+                    <DataGridTextColumn Header="Quanity" Binding="{Binding Quanity}"  Width="100"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="150">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="TextBox">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="AcceptsReturn" Value="True"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price,StringFormat=C}" Width="100"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat=C}" Width="125" IsReadOnly="True"/>
+
+                    <!-- ComboBox column     
+                    <DataGridComboBoxColumn Header="# Months Dues" 
+                                SelectedItemBinding="{Binding SelectedMonths, UpdateSourceTrigger=PropertyChanged}" 
+                                ItemsSource="{Binding  NumberMonths, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                DisplayMemberPath="Label" 
+                                SelectedValuePath="Value"/>
+                    
+
+                   
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding  DataContext.NumberMonths.Label, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                              SelectedItem="{Binding SelectedMonths, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+
+                    
+
+                    
+                    <DataGridComboBoxColumn Header="Months Pay Dues"
+                                SelectedItemBinding="{Binding SelectedMonths}"
+                                ItemsSource="{Binding NumberMonths}"
+                                />
+                    -->
+
+                    <DataGridTemplateColumn Width="SizeToCells">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Add" Command="{Binding DataContext.AddItem,RelativeSource={RelativeSource AncestorType=DataGrid}}" Background="LightBlue"
+                            CommandParameter="{Binding ElementName=dataGrid}"
+                           Foreground="Black" BorderBrush="DarkBlue"  BorderThickness="2" 
+Cursor="Hand"  />
+                                <!-- ElementName=dataGrid RelativeSource={RelativeSource FindAncestor, AncestorType=Window}-->
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="SizeToCells">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Background="Red"
+                  Command="{Binding DataContext.DeleteItem,RelativeSource={RelativeSource AncestorType=DataGrid}}"
+CommandParameter="{Binding ElementName=dataGrid}"  Foreground="White" BorderBrush="DarkBlue"  BorderThickness="2"
+                Cursor="Hand"/>
+
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Total Amount:" Margin="8" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="TAmount"/>
+            <!--
+            <TextBlock Text="{Binding DuesAmount,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                       VerticalAlignment="Center" HorizontalAlignment="Center" />
+           -->
+        </StackPanel>
+
+        <!-- Signature Area -->
+        <StackPanel Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="{Binding RecBY}" Margin="8"/>
+            <InkCanvas  Background="White" Height="150" Width="350"   x:Name="SignatureCanvas" LostFocus="SaveSig"/>
+        </StackPanel>
+        <!-- Buttons -->
+        <StackPanel Grid.Row="14" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Save Receipt" Background="LightYellow"
+           Command="{Binding SavePrintRec}" CommandParameter="{Binding PayDues}" Foreground="Black" BorderBrush="DarkBlue"  BorderThickness="2"
+            Cursor="Hand" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"   x:Name="BtnAdding"/>
+            
+
+            <Button Content="Save Signature" Margin="5"  Click="SignatureSave" BorderBrush="DarkBlue"  BorderThickness="2"
+Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Content="Clear Signature" Margin="5" Click="ClickClearSig" BorderBrush="DarkBlue"  BorderThickness="2"
+Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Content="Exit" Margin="5" Click="Button_Click"  BorderBrush="DarkBlue"  BorderThickness="2"
+Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Red"/>
+        </StackPanel>
+        <StackPanel Grid.Row="16" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Receipt Number:" Margin="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding RceiptNumber}" Margin="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -122,6 +122,30 @@ namespace AlanoClubInventory.Interfaces
     {
         DateTime? DateInventory {  get; set; }
     }
+    public interface IEmails
+    {
+       string EmailFrom { get; set; }
+        string EmailCC { get; set; }
+        string SmtpServer { get; set; }
+    int Port { get; set; }
+     bool EnableSsl { get; set; }
+      string Password { get; set; }
+    }
+    
+     public interface IMembers
+    {
+        int MemberID { get; set; }
+         string MemberFirstName { get; set; }
+         string MemberLastName { get; set; }
+         string MemberEmail { get; set; }
+         string MemberPhoneNumber { get; set; }
+     //   DateTime MembershipStartDate { get; set; }
+     //    DateTime MembershipEndDate { get; set; }
+     DateTime SobrietyDate { get; set; }
+        bool IsActiveMember { get; set; }
+        bool IsBoardMember { get; set; }
+
+    }
 
 }
 

@@ -30,16 +30,20 @@ namespace AlanoClubInventory.Reports
         {
             Document = new FlowDocument
             {
-                
-                PagePadding = new Thickness(6, 0, 0, 0),
+
+                //  PagePadding = new Thickness(10, 0, 0, 0),
+                PagePadding = new Thickness(50),
                 ColumnWidth = double.PositiveInfinity,
-                FontFamily = new FontFamily("Segoe UI"),
-                FontSize = 15
+                FontFamily = new FontFamily("Arial"),
+             
+                FontSize = 10,
+                //PageHeight = 1056,
+               // PageWidth = 850
 
             };
             Paragraph titleParagraph = new Paragraph();
             titleParagraph.TextAlignment = TextAlignment.Center;
-            titleParagraph.FontSize = 18;
+            titleParagraph.FontSize = 12;
             titleParagraph.FontWeight = FontWeights.Bold;
             titleParagraph.Margin = new Thickness(0, 0, 0, 5);
             //titleParagraph.Foreground = Brushes.DarkBlue;
@@ -49,7 +53,7 @@ namespace AlanoClubInventory.Reports
             titleParagraph.Inlines.Add(titleRun);
             Document.Blocks.Add(titleParagraph);
             titleParagraph.TextAlignment = TextAlignment.Center;
-            titleParagraph.FontSize = 16;
+            titleParagraph.FontSize = 12;
             titleParagraph.FontWeight = FontWeights.Bold;
             titleParagraph.Margin = new Thickness(0, 0, 0, 5);
             titleParagraph.Foreground = Brushes.DarkBlue;
@@ -89,31 +93,32 @@ namespace AlanoClubInventory.Reports
 
             FlowDocTable = new Table
             {
-                CellSpacing = 1, // No spacing between cells
+                CellSpacing = 0, // No spacing between cells
                 BorderThickness = new Thickness(1), // Outer border thickness
                 BorderBrush = Brushes.Gray, // Outer border color
                 FontSize = 12,
-                Margin=new Thickness(5,0,5,0)
+                Margin=new Thickness(0,0,0,0),
                 
+
 
             };
             Document.Blocks.Add(FlowDocTable);
             var header = new TableRow();
             if (mainRep)
             {
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // month
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // pn
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // member items
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // member price
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // Rent
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // Coins
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // Donations
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // Daily Total Other
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // Daily Total Other
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // Daily Total Other
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // Daily Total Other
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // month
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // pn
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // member items
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // member price
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // Rent
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // Coins
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // Donations
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // Daily Total Other
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // Daily Total Other
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // Daily Total Other
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // Daily Total Other
                                                                                           //FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // TotalTotal
-                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(75) }); // Daily Total Other
+                FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(50) }); // Daily Total Other
                 
 
                 //FlowDocTable.Columns.Add(new TableColumn { Width = new GridLength(70) }); // tape
@@ -121,7 +126,7 @@ namespace AlanoClubInventory.Reports
 
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Product")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
@@ -130,14 +135,14 @@ namespace AlanoClubInventory.Reports
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Per Case")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
                 });
-                header.Cells.Add(new TableCell(new Paragraph(new Run("Perchase Price ")))
+                header.Cells.Add(new TableCell(new Paragraph(new Run("Price ")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
 
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
@@ -145,7 +150,7 @@ namespace AlanoClubInventory.Reports
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("In Stock")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
 
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
@@ -153,14 +158,14 @@ namespace AlanoClubInventory.Reports
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Cases")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Cost Per Item")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
 
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
@@ -168,22 +173,22 @@ namespace AlanoClubInventory.Reports
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Total Cost")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
 
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
                 });
-                header.Cells.Add(new TableCell(new Paragraph(new Run("Club Price")))
+                header.Cells.Add(new TableCell(new Paragraph(new Run("Member Price")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Profit Member")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
 
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
@@ -191,7 +196,7 @@ namespace AlanoClubInventory.Reports
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("TP Member")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
 
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
@@ -199,7 +204,7 @@ namespace AlanoClubInventory.Reports
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Non Member Price")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
@@ -210,7 +215,7 @@ namespace AlanoClubInventory.Reports
 
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Profit Non Member")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
 
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
@@ -218,7 +223,7 @@ namespace AlanoClubInventory.Reports
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("TP Non Member")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
 
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
@@ -245,35 +250,35 @@ namespace AlanoClubInventory.Reports
 
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Month")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Total Member Items ")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Total Member Sales")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Total Non-Member Items")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Total Non-Member sales")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
 
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
@@ -281,14 +286,14 @@ namespace AlanoClubInventory.Reports
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Total Items")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)
                 });
                 header.Cells.Add(new TableCell(new Paragraph(new Run("Total Sales")))
                 {
-                    FontWeight = FontWeights.Light,
+                    FontWeight = FontWeights.Regular,
                     BorderThickness = new Thickness(1), // Cell border thickness
                     BorderBrush = Brushes.Gray, // Cell border color
                     Padding = new Thickness(1)

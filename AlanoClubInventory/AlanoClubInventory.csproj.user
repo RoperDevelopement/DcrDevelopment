@@ -1,11 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>L:\EdocsGItHub\AlanoClubInventory\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Views\AboutWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AddEditDeleteCategoriesPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\AddEditProductPricesPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AlanoCLubAddEditUserPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AlanoCLubChangePasswordPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\AlanoCLubChartsPage.xaml.cs">
@@ -17,6 +28,33 @@
     <Compile Update="Views\AlanoClubICurrentnventoryPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AlanoClubLoginPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AlanoCLubDataBaseMaintenancePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AlanoCLubMembersPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AlanoClubMembersReportPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ChangeDatabasePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ErrorLogViewerPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\PrintVolunteerHrsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RibbonDocumentEditorPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SendACMembersEmailsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreateReportPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -26,7 +64,22 @@
     <Compile Update="Views\InvenntoryPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ReceiptsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\PrintEmailRecieptPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ProfitLossPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TableRowsColumsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TestWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\VolunteerHrsPrintPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
