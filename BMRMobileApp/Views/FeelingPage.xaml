@@ -134,7 +134,7 @@
                      ColumnDefinitions="*,Auto,Auto,Auto,Auto"
                       Padding="10"
                        RowSpacing="10"
-                       ColumnSpacing="5" VerticalOptions="Start">
+                       ColumnSpacing="5" VerticalOptions="Start" HorizontalOptions="Start">
                     <Editor Placeholder="Journal or talk about your Emontio  ns..."
                            AutoSize="TextChanges"
                             TextColor="Black"

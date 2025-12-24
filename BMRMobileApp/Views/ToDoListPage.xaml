@@ -29,7 +29,7 @@
                 FontAutoScalingEnabled="True"
                 VerticalOptions="Start"
                 HorizontalOptions="Center"
-                VerticalTextAlignment="Center" Padding="5"/>
+                VerticalTextAlignment="Center" Padding="5" Margin="0,5,5,5"/>
             
             <!--editor for task name and desc-->
                 <Border StrokeShape="RoundRectangle 22" 
@@ -44,20 +44,21 @@
                             TextColor="Black"
                             BackgroundColor="White"
                             PlaceholderColor="Black"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center"
+                           VerticalOptions="Start"
+                           HorizontalOptions="Start"
                            SemanticProperties.Description="Todo Item" SemanticProperties.Hint="Add New Todo Item"
                            Unfocused="TaskNameFocous_Unfocused" 
-                           Margin="5,5,5,5"     />
+                           Margin="5,5,5,5"  
+                                WidthRequest="{OnPlatform Android=300, iOS=250, WinUI=225}"/>
                     
                         <Editor Placeholder="Task Description Notes" Text="{Binding TaskDescription}" x:Name="TaskNameDesc" AutomationId="TaskNameDesc"  
                             AutoSize="TextChanges" Focused="TaskNameFocous_Focused"
                             TextColor="Black"
                             BackgroundColor="White"
                             PlaceholderColor="Black"
-                            WidthRequest="{OnPlatform Android=105, iOS=205, WinUI=225}"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center"
+                            WidthRequest="{OnPlatform Android=300, iOS=205, WinUI=225}"
+                            VerticalOptions="Start"
+                            HorizontalOptions="Start"
                             SemanticProperties.Description="Task Item Description" SemanticProperties.Hint="Task Item Description"
                            Unfocused="TaskNameFocous_Unfocused"
                             Margin="5,5,5,5"/>
